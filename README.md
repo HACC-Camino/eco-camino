@@ -1,5 +1,7 @@
 Team Name: [HACCamino](https://hacc-camino.github.io/)
 
+ECOCamino is a web application designed to help users organize events such as cleanups and workshops, as well as promoting other non-profit organizations around the area. 
+
 - [Anna Campainha](https://github.com/annacampainha)
 - [Daphne Marie Estacio](https://dmtapia.github.io)
 - [Jerome Gallego](https://github.com/alohajerome)
