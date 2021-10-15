@@ -1,0 +1,51 @@
+{
+  "name": "meteor-application-template-react-production",
+  "private": true,
+  "dependencies": {
+    "@babel/runtime": "^7.14.6",
+    "classnames": "^2.3.1",
+    "core-js": "^3.15.1",
+    "cross-env": "^7.0.3",
+    "graphql": "^15.5.1",
+    "meteor-node-stubs": "^1.0.3",
+    "prop-types": "^15.7.2",
+    "react": "^16.14.0",
+    "react-addons-pure-render-mixin": "^15.6.3",
+    "react-dom": "^16.14.0",
+    "react-router": "^5.2.0",
+    "react-router-dom": "^5.2.0",
+    "semantic-ui-css": "^2.4.1",
+    "semantic-ui-react": "^0.88.2",
+    "simpl-schema": "^1.12.0",
+    "sweetalert": "^2.1.2",
+    "uniforms": "^2.6.9",
+    "uniforms-bridge-simple-schema-2": "^2.6.9",
+    "uniforms-semantic": "^2.6.9"
+  },
+  "devDependencies": {
+    "babel-eslint": "^10.1.0",
+    "chai": "^4.3.4",
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.6",
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb": "^18.2.1",
+    "eslint-plugin-import": "^2.23.4",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-meteor": "^7.3.0",
+    "eslint-plugin-react": "^7.24.0",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "eslint-utils": "^2.1.0",
+    "faker": "^4.1.0",
+    "fast-check": "^1.26.0",
+    "puppeteer": "^3.3.0",
+    "sinon": "^9.2.4"
+  },
+  "scripts": {
+    "start": "cross-env METEOR_NO_RELEASE_CHECK=1 meteor --settings ../config/settings.development.json",
+    "lint": "eslint --quiet --ext .jsx --ext .js ./imports",
+    "pretest": "npm run lint",
+    "test": "cross-env METEOR_NO_RELEASE_CHECK=1 TEST_BROWSER_DRIVER=puppeteer meteor test --once --driver-package meteortesting:mocha --port 3100",
+    "test-no-lint": "cross-env METEOR_NO_RELEASE_CHECK=1 TEST_BROWSER_DRIVER=puppeteer meteor test --once --driver-package meteortesting:mocha --port 3100",
+    "test-app": "cross-env METEOR_NO_RELEASE_CHECK=1 TEST_BROWSER_DRIVER=puppeteer meteor test --full-app --once --driver-package meteortesting:mocha --port 3100"
+  }
+}
