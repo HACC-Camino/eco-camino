@@ -1,4 +1,4 @@
-Team Name: Eco Camino
+Team Name: [HACCamino](https://hacc-camino.github.io/)
 
 - [Anna Campainha](https://github.com/annacampainha)
 - [Daphne Marie Estacio](https://dmtapia.github.io)
