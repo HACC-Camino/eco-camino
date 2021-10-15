@@ -7,3 +7,7 @@ ECOCamino is a web application designed to help users organize events such as cl
 - [Jerome Gallego](https://github.com/alohajerome)
 - [Michael Gainey](https://github.com/micgainey)
 - [Timothy Huo](https://github.com/timothyhuo1)
+
+---
+* Template: [Meteor Application Template React Production](https://github.com/ics-software-engineering/meteor-application-template-react-production)
+* By: [ICS Software Engineering](https://github.com/ics-software-engineering)
