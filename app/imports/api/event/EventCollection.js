@@ -21,6 +21,10 @@ class EventCollection extends BaseCollection {
       owner: String,
       email: String,
       description: String,
+      reportLink: {
+        type: String,
+        optional: true,
+      },
       typeOfEvent: {
         type: String,
         allowedValues: eventConditions,
@@ -38,7 +42,7 @@ class EventCollection extends BaseCollection {
    * @return {String} the docID of the new document.
    */
   define({ title, date, location, participates, owner, email,
-           description, typeOfEvent }) {
+           description, typeOfEvent, reportLink }) {
     const docID = this._collection.insert({
       title,
       date,
@@ -48,6 +52,7 @@ class EventCollection extends BaseCollection {
       email,
       description,
       typeOfEvent,
+      reportLink,
     });
     return docID;
   }
@@ -60,7 +65,7 @@ class EventCollection extends BaseCollection {
    * @param condition the new condition (optional).
    */
   update(docID, { title, date, location, participates, owner, email,
-    description, typeOfEvent }) {
+    description, typeOfEvent, reportLink }) {
     const updateData = {};
     if (title) {
       updateData.title = title;
@@ -82,6 +87,9 @@ class EventCollection extends BaseCollection {
     }
     if (typeOfEvent) {
       updateData.typeOfEvent = typeOfEvent;
+    }
+    if (reportLink) {
+      updateData.reportLink = reportLink;
     }
     // if (quantity) { NOTE: 0 is falsy so we need to check if the quantity is a number.
     if (_.isNumber(participates)) {
