@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Col, Container, Row } from 'react-bootstrap';
+import { Card, Col, Container, Image, Row } from 'react-bootstrap';
 
 class UserOrganizations extends React.Component {
 
@@ -10,6 +10,7 @@ class UserOrganizations extends React.Component {
                     <Row>
                         <Col>
                             <img src='../../../../public/images/808cleanups.png' alt='' id='org_photos'/>
+                            <Image src='../../../../public/images/808cleanups.png' alt='' id='org_photos'/>
                         </Col>
                     </Row>
                 </Card>
