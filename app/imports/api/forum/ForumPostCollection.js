@@ -102,8 +102,8 @@ class ForumPostCollection extends BaseCollection {
     return null;
   }
 
-  getForumPostsSortedByDate(username) {
-    return this._collection.find({ owner: username }, { sort: { date: -1 } }).fetch();
+  getForumPostsSortedByDate() {
+    return this._collection.find({ }, { sort: { date: -1 } }).fetch();
   }
 }
 
