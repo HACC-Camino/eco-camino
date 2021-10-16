@@ -14,24 +14,22 @@ class UserEventCollection extends BaseCollection {
       dateJoined: Date,
       owner: String,
       eventID: String,
-      isOwner: Boolean,
     }));
   }
 
-  define({ dateJoined, owner, eventID, isOwner }) {
+  define({ dateJoined, owner, eventID }) {
     const docID = this._collection.insert({
       dateJoined,
       owner,
       eventID,
-      isOwner,
     });
     return docID;
   }
 
-  removeIt(name) {
-    const doc = this.findDoc(name);
-    check(doc, Object);
-    this._collection.remove(doc._id);
+  removeIt(eventIDT) {
+    const doc = this._collection.find({ eventID: eventIDT.eventIDT }).fetch();
+    check(doc[0], Object);
+    this._collection.remove(doc[0]._id);
     return true;
   }
 
@@ -66,8 +64,15 @@ class UserEventCollection extends BaseCollection {
     return null;
   }
 
-  getUserEventDetails(username) {
-    return this._collection.findOne({ owner: username });
+  getUserEvent(username) {
+    return this._collection.find({}, { owner: username }).fetch();
+  }
+
+  getUserInEvent(event, username) {
+    const userEvents = this._collection.find({}, { owner: username }).fetch();
+    console.log(userEvents);
+    console.log(event);
+
   }
 }
 
