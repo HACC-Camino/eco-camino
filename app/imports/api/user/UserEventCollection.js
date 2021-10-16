@@ -1,0 +1,86 @@
+import { Meteor } from 'meteor/meteor';
+import SimpleSchema from 'simpl-schema';
+import { check } from 'meteor/check';
+import BaseCollection from '../base/BaseCollection';
+
+export const userEventPublications = {
+  userEvent: 'UserEvent',
+  userEventCommunity: 'UserEventCommunity',
+};
+
+class UserEventCollection extends BaseCollection {
+  constructor() {
+    super('UserEvent', new SimpleSchema({
+      dateJoined: Date,
+      owner: String,
+      eventID: String,
+    }));
+  }
+
+  define({ dateJoined, owner, eventID }) {
+    const docID = this._collection.insert({
+      dateJoined,
+      owner,
+      eventID,
+    });
+    return docID;
+  }
+
+  removeIt(_id) {
+    const doc = this.findDoc(_id);
+    check(doc, Object);
+    this._collection.remove(doc._id);
+    return true;
+  }
+
+  publish() {
+    if (Meteor.isServer) {
+      const instance = this;
+      Meteor.publish(userEventPublications.userEvent, function publish() {
+        if (this.userId) {
+          const username = Meteor.users.findOne(this.userId).username;
+          return instance._collection.find({ owner: username });
+        }
+        return this.ready();
+      });
+
+      Meteor.publish(userEventPublications.userEventCommunity, function publish() {
+        if (this.userId) {
+          return instance._collection.find();
+        }
+        return this.ready();
+      });
+    }
+  }
+
+  subscribeUserEvent() {
+    if (Meteor.isClient) {
+      return Meteor.subscribe(userEventPublications.userEvent);
+    }
+    return null;
+  }
+
+  subscribeUserEventCommunity() {
+    if (Meteor.isClient) {
+      return Meteor.subscribe(userEventPublications.userEventCommunity);
+    }
+    return null;
+  }
+
+  getUserEvent(username) {
+    return this._collection.find({}, { owner: username }).fetch();
+  }
+
+  getAllUserEvent() {
+    return this._collection.find().fetch();
+  }
+
+  getUserInEvent(event, username) {
+    const userEvents = this._collection.find({}, { owner: username }).fetch();
+    console.log(userEvents);
+    console.log(event);
+
+  }
+}
+
+export const UserEvents = new UserEventCollection();

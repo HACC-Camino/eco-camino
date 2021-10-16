@@ -50,7 +50,7 @@ const EditHandle = ({ event }) => {
 
   return (
   <Container>
-    <Button variant="primary" onClick={handleShow}>
+    <Button variant="danger" onClick={handleShow}>
       Edit
     </Button>
 
