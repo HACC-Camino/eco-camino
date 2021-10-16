@@ -3,7 +3,6 @@ import SimpleSchema from 'simpl-schema';
 import { check } from 'meteor/check';
 import BaseCollection from '../base/BaseCollection';
 
-export const eventConditions = ['Workshop', 'Cleanup'];
 export const eventPublications = {
   event: 'Event',
   eventAdmin: 'EventAdmin',
@@ -19,14 +18,14 @@ class EventCollection extends BaseCollection {
       name: String,
       email: String,
       description: String,
+      startTime: String,
+      endTime: String,
       reportLink: {
         type: String,
         optional: true,
       },
       typeOfEvent: {
         type: String,
-        allowedValues: eventConditions,
-        defaultValue: 'Cleanup',
       },
     }));
   }
@@ -40,7 +39,7 @@ class EventCollection extends BaseCollection {
    * @return {String} the docID of the new document.
    */
   define({ title, date, name, location, owner, email,
-           description, typeOfEvent, reportLink }) {
+           description, startTime, endTime, typeOfEvent, reportLink }) {
     const docID = this._collection.insert({
       title,
       date,
@@ -51,6 +50,8 @@ class EventCollection extends BaseCollection {
       description,
       typeOfEvent,
       reportLink,
+      startTime,
+      endTime,
     });
     return docID;
   }
@@ -63,7 +64,7 @@ class EventCollection extends BaseCollection {
    * @param condition the new condition (optional).
    */
   update(docID, { title, date, name, location, owner, email,
-    description, typeOfEvent, reportLink }) {
+    description, startTime, endTime, typeOfEvent, reportLink }) {
     const updateData = {};
     if (title) {
       updateData.title = title;
@@ -85,6 +86,12 @@ class EventCollection extends BaseCollection {
     }
     if (description) {
       updateData.description = description;
+    }
+    if (startTime) {
+      updateData.startTime = startTime;
+    }
+    if (endTime) {
+      updateData.endTime = endTime;
     }
     if (typeOfEvent) {
       updateData.typeOfEvent = typeOfEvent;
