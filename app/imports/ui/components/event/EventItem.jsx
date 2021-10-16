@@ -1,13 +1,14 @@
 import React from 'react';
 import { Card, Container } from 'react-bootstrap';
 import PropTypes from 'prop-types';
+import EditandDeleteButtons from './EditAndDeleteButtons';
 
-/** Renders a single row in the List Stuff table. See pages/ListStuff.jsx. */
-const EventItem = ({ event }) => (
+/** Renders a single card in the Event list. See pages/Event/Event.jsx. */
+const EventItem = ({ event, username }) => (
       <Container>
         <Card>
           <Card.Body>
-            <Card.Title>{event.title}</Card.Title>
+            <Card.Title>{event.title} ({event.typeOfEvent})</Card.Title>
             <Card.Text>
               Date: {event.date.toLocaleDateString()} from {event.startTime} to {event.endTime}
             </Card.Text>
@@ -16,6 +17,8 @@ const EventItem = ({ event }) => (
             <Card.Text>Contact Info: {event.email}</Card.Text>
             <Card.Text>Description: {event.description}</Card.Text>
           </Card.Body>
+
+          {username === event.owner ? <EditandDeleteButtons event={event}/> : ' '}
         </Card>
       </Container>
   );
@@ -23,7 +26,8 @@ const EventItem = ({ event }) => (
 /** Require a document to be passed to this component. */
 EventItem.propTypes = {
   event: PropTypes.object.isRequired,
+  username: PropTypes.string.isRequired,
 };
 
-/** Wrap this component in withRouter since we use the <Link> React Router element. */
+/** export EventItem */
 export default EventItem;

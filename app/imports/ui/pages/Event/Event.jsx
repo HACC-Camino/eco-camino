@@ -7,8 +7,8 @@ import { Events } from '../../../api/event/EventCollection';
 import EventItem from '../../components/event/EventItem';
 import AddEvent from './AddEvent';
 
-/** Renders a table containing all of the Stuff documents. Use <StuffItem> to render each row. */
-const Event = ({ events, ready }) => (ready ? (
+/** Renders a container containing all of the Events documents. */
+const Event = ({ events, username, ready }) => (ready ? (
   <Container className='py-sm-3'>
     <h2>Event List</h2>
     <Tab.Container id="left-tabs-example" defaultActiveKey="first">
@@ -28,7 +28,7 @@ const Event = ({ events, ready }) => (ready ? (
             <Tab.Pane eventKey="first">
               <CardGroup>
                 <Row xs={1} md={2} className="g-4">
-                  {events.map((event) => <EventItem key={event._id} event={event} />)}
+                  {events.map((event) => <EventItem key={event._id} event={event} username={username} />)}
                 </Row>
               </CardGroup>
             </Tab.Pane>
@@ -46,7 +46,7 @@ const Event = ({ events, ready }) => (ready ? (
   </Spinner>
 );
 
-/** Require an array of Stuff documents in the props. */
+/** Require an array of Event documents in the props. */
 Event.propTypes = {
   events: PropTypes.array.isRequired,
   ready: PropTypes.bool.isRequired,
@@ -62,5 +62,6 @@ export default withTracker(() => {
   return {
     ready,
     events,
+    username,
   };
 })(Event);
