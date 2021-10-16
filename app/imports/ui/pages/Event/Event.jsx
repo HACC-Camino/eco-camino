@@ -5,6 +5,7 @@ import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 import { Events } from '../../../api/event/EventCollection';
 import EventItem from '../../components/event/EventItem';
+import AddEvent from './AddEvent';
 
 /** Renders a table containing all of the Stuff documents. Use <StuffItem> to render each row. */
 const Event = ({ events, ready }) => (ready ? (
@@ -32,7 +33,7 @@ const Event = ({ events, ready }) => (ready ? (
               </CardGroup>
             </Tab.Pane>
             <Tab.Pane eventKey="second">
-              <h1>hi</h1>
+              <AddEvent/>
             </Tab.Pane>
           </Tab.Content>
         </Col>
@@ -58,7 +59,6 @@ export default withTracker(() => {
   const ready = Events.subscribeEventAdmin()
   && username !== undefined;
   const events = Events.getEvenList();
-  console.log(events);
   return {
     ready,
     events,

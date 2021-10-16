@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 
 /** Renders a single row in the List Stuff table. See pages/ListStuff.jsx. */
 const EventItem = ({ event }) => {
-  console.log(event);
   return (
     <Card>
       <Card.Body>

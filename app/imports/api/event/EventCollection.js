@@ -16,6 +16,7 @@ class EventCollection extends BaseCollection {
       date: Date,
       location: String,
       owner: String,
+      name: String,
       email: String,
       description: String,
       reportLink: {
@@ -38,13 +39,14 @@ class EventCollection extends BaseCollection {
    * @param condition the condition of the item.
    * @return {String} the docID of the new document.
    */
-  define({ title, date, location, owner, email,
+  define({ title, date, name, location, owner, email,
            description, typeOfEvent, reportLink }) {
     const docID = this._collection.insert({
       title,
       date,
       location,
       owner,
+      name,
       email,
       description,
       typeOfEvent,
@@ -60,7 +62,7 @@ class EventCollection extends BaseCollection {
    * @param quantity the new quantity (optional).
    * @param condition the new condition (optional).
    */
-  update(docID, { title, date, location, owner, email,
+  update(docID, { title, date, name, location, owner, email,
     description, typeOfEvent, reportLink }) {
     const updateData = {};
     if (title) {
@@ -68,6 +70,9 @@ class EventCollection extends BaseCollection {
     }
     if (date) {
       updateData.date = date;
+    }
+    if (name) {
+      updateData.name = name;
     }
     if (location) {
       updateData.location = location;
