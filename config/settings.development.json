@@ -9,5 +9,9 @@
     { "name": "Bicycle", "quantity": 2, "owner": "john@foo.com", "condition": "poor" },
     { "name": "Banana", "quantity": 2, "owner": "admin@foo.com", "condition": "good" },
     { "name": "Boogie Board", "quantity": 2, "owner": "admin@foo.com", "condition": "excellent" }
+  ],
+
+  "defaultForumPosts": [
+    { "date": "10-15-2021", "type":  "main_post", "title":  "This is a sample title of a forum post", "content":  "This is a sample content.", "tags": ["sample"], "owner": "john@foo.com"}
   ]
 }
