@@ -18,7 +18,7 @@ const AddEvent = () => {
   const [finalEndTime, setFinalEndTime] = useState('');
   const [finalTitle, setFinalTitle] = useState(() => '');
   const [finalLocation, setFinalLocation] = useState(() => '');
-  const [finalOwner, setFinalOwner] = useState(() => '');
+  const [finalName, setFinalName] = useState(() => '');
   const [finalEmail, setFinalEmail] = useState(() => '');
   const [finalDescription, setFinalDescription] = useState(() => '');
   const typeDropdown = [
@@ -32,7 +32,7 @@ const AddEvent = () => {
     const endTime = moment(finalEndTime).format('hh:mm a');
     const title = finalTitle;
     const location = finalLocation;
-    const name = finalOwner;
+    const name = finalName;
     const email = finalEmail;
     const owner = Meteor.user().username;
     const description = finalDescription;
@@ -50,7 +50,7 @@ const AddEvent = () => {
         setFinalEndTime('');
         setFinalTitle('');
         setFinalLocation('');
-        setFinalOwner('');
+        setFinalName('');
         setFinalEmail('');
         setFinalDescription('');
       }
@@ -124,7 +124,7 @@ const AddEvent = () => {
         <Col>
           <Form.Label htmlFor="basic-url">Name</Form.Label>
           <InputGroup className="mb-3">
-            <FormControl placeholder='Name' value={finalOwner} onChange={e => setFinalOwner(e.target.value)} />
+            <FormControl placeholder='Name' value={finalName} onChange={e => setFinalName(e.target.value)} />
           </InputGroup>
         </Col>
         <Col>

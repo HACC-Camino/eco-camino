@@ -29,7 +29,7 @@ export const eventUpdateMethod = new ValidatedMethod({
   mixins: [CallPromiseMixin],
   validate: null,
   run(updateData) {
-    Events.update(updateData.id, updateData);
+    Events.update(updateData._id, updateData);
     return true;
   },
 });
