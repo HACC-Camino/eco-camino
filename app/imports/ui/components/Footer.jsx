@@ -11,8 +11,10 @@ class Footer extends React.Component {
         <footer>
           <Container>
             <Row style={ divStyle }>
-              <Col >
+              <div className='col-lg-8-auto'>
+              <Col>
                 <div className="in-line" style={ rowStyle }>
+                  <Container>
                   <Row>
                       <a href="/"><h5 >Info</h5></a>
                       <a href="/"> <h5>Support</h5></a>
@@ -20,10 +22,15 @@ class Footer extends React.Component {
                   </Row>
                   <Row>
                     <a href="/"><h5>Terms & Conditions</h5></a>
+                  </Row>
+                  <Row>
                     <a href="/"><h5>Privacy Policy</h5></a>
                   </Row>
+                  </Container>
                 </div>
               </Col>
+              </div>
+              <div className='col-lg-8-auto'>
               <Col>
                 <Container>
                   <Row>
@@ -39,7 +46,10 @@ class Footer extends React.Component {
                   </Row>
                 </Container>
               </Col>
+              </div>
+              <div className='col-lg-8-auto'>
               <Col > </Col>
+              </div>
             </Row>
           </Container>
         </footer>
