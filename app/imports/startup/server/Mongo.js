@@ -11,8 +11,7 @@ if (ForumPosts.count() === 0) {
   }
 }
 
-console.log(ForumPosts.getForumPostsSortedByDate('john@foo.com'));
-
+// DELETE THESE LATER
 /** Initialize the database with a default data document. */
 function addData(data) {
   console.log(`  Adding: ${data.name} (${data.owner})`);

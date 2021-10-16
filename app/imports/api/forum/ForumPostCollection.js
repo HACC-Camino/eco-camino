@@ -1,13 +1,12 @@
 import { Meteor } from 'meteor/meteor';
 import SimpleSchema from 'simpl-schema';
 import { check } from 'meteor/check';
-import { Roles } from 'meteor/alanning:roles';
 import BaseCollection from '../base/BaseCollection';
 
 export const forumPostTypes = ['main_post', 'reply'];
 export const forumPostPublications = {
-  forum: 'Forum',
-  forumAdmin: 'ForumAdmin',
+  forumPost: 'ForumPost',
+  forumPostCommunity: 'ForumPostCommunity',
 };
 
 class ForumPostCollection extends BaseCollection {
@@ -74,7 +73,7 @@ class ForumPostCollection extends BaseCollection {
   publish() {
     if (Meteor.isServer) {
       const instance = this;
-      Meteor.publish(forumPostPublications.forum, function publish() {
+      Meteor.publish(forumPostPublications.forumPost, function publish() {
         if (this.userId) {
           const username = Meteor.users.findOne(this.userId).username;
           return instance._collection.find({ owner: username });
@@ -82,25 +81,22 @@ class ForumPostCollection extends BaseCollection {
         return this.ready();
       });
 
-      Meteor.publish(forumPostPublications.forumAdmin, function publish() {
-        if (this.userId && Roles.userIsInRole(this.userId, 'admin')) {
-          return instance._collection.find();
-        }
-        return this.ready();
+      Meteor.publish(forumPostPublications.forumPostCommunity, function publish() {
+        return instance._collection.find();
       });
     }
   }
 
-  subscribeForum() {
+  subscribeForumPost() {
     if (Meteor.isClient) {
-      return Meteor.subscribe(forumPostPublications.forum);
+      return Meteor.subscribe(forumPostPublications.forumPost);
     }
     return null;
   }
 
-  subscribeForumAdmin() {
+  subscribeForumPostCommunity() {
     if (Meteor.isClient) {
-      return Meteor.subscribe(forumPostPublications.forumAdmin);
+      return Meteor.subscribe(forumPostPublications.forumPostCommunity);
     }
     return null;
   }
