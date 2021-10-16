@@ -8,9 +8,11 @@ const EventItem = ({ event }) => (
         <Card>
           <Card.Body>
             <Card.Title>{event.title}</Card.Title>
-            <Card.Text>Date: {event.date.toLocaleDateString()}</Card.Text>
+            <Card.Text>
+              Date: {event.date.toLocaleDateString()} from {event.startTime} to {event.endTime}
+            </Card.Text>
             <Card.Text>Location: {event.location}</Card.Text>
-            <Card.Text>Contact Person: {event.owner}</Card.Text>
+            <Card.Text>Contact Person: {event.name}</Card.Text>
             <Card.Text>Contact Info: {event.email}</Card.Text>
             <Card.Text>Description: {event.description}</Card.Text>
           </Card.Body>
