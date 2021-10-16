@@ -3,55 +3,75 @@ import PropTypes from 'prop-types';
 import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
 import { withRouter, NavLink } from 'react-router-dom';
-import { Menu, Dropdown, Header } from 'semantic-ui-react';
 import { Roles } from 'meteor/alanning:roles';
+import { Navbar, Nav, Dropdown } from 'react-bootstrap';
 
 /** The NavBar appears at the top of every page. Rendered by the App Layout component. */
-class NavBar extends React.Component {
+class NavBar1 extends React.Component {
   render() {
     const menuStyle = { marginBottom: '0px' };
     return (
-      <Menu style={menuStyle} attached="top" borderless inverted>
-        <Menu.Item as={NavLink} activeClassName="" exact to="/">
-          <Header inverted as='h1'>meteor-application-template</Header>
-        </Menu.Item>
-        {this.props.currentUser ? (
-            [<Menu.Item as={NavLink} activeClassName="active" exact to="/add" key='add'>Add Stuff</Menu.Item>,
-              <Menu.Item as={NavLink} activeClassName="active" exact to="/list" key='list'>List Stuff</Menu.Item>]
-        ) : ''}
-        {Roles.userIsInRole(Meteor.userId(), 'admin') ? (
-            <Menu.Item as={NavLink} activeClassName="active" exact to="/admin" key='admin'>Admin</Menu.Item>
-        ) : ''}
-        <Menu.Item position="right">
-          {this.props.currentUser === '' ? (
-            <Dropdown text="Login" pointing="top right" icon={'user'}>
-              <Dropdown.Menu>
-                <Dropdown.Item icon="user" text="Sign In" as={NavLink} exact to="/signin"/>
-                <Dropdown.Item icon="add user" text="Sign Up" as={NavLink} exact to="/signup"/>
-              </Dropdown.Menu>
-            </Dropdown>
-          ) : (
-            <Dropdown text={this.props.currentUser} pointing="top right" icon={'user'}>
-              <Dropdown.Menu>
-                <Dropdown.Item icon="sign out" text="Sign Out" as={NavLink} exact to="/signout"/>
-              </Dropdown.Menu>
-            </Dropdown>
-          )}
-        </Menu.Item>
-      </Menu>
-    );
+        <Navbar bg="primary" variant="dark" expand="lg">
+          <Navbar.Brand href="#"> <img alt=""
+                                       src="/image/camino-logo.png"
+                                       width="30"
+                                       height="30"
+                                       className="d-inline-block align-top"/>{''} EcoCamino
+          </Navbar.Brand>
+          <Nav className="me-auto">
+            {this.props.currentUser ? (
+                [<Nav.Link href="#events" key='events'>Events</Nav.Link>,
+                  <Nav.Link href="#information" key='information'>Information</Nav.Link>,
+                  <Nav.Link href="#forums" key='forums'>Forums</Nav.Link>,
+                  <Nav.Link href="#profile" key='profile'>Profile</Nav.Link>]
+            ) : ''}
+            {Roles.userIsInRole(Meteor.userId(), 'admin') ? (
+                <Nav.Link href="#admin" key='admin'>Admin</Nav.Link>
+            ) : ''}
+          </Nav>
+          <Nav className="justify-content-end">
+            {this.props.currentUser === '' ? (
+                <Dropdown>
+                  <Dropdown.Toggle id="dropdown-button-dark-example1" variant="secondary">
+                    Login
+                  </Dropdown.Toggle>
+
+                  <Dropdown.Menu variant="dark">
+                    <Dropdown.Item href="#/Signin" active>
+                      Sign-in
+                    </Dropdown.Item>
+                    <Dropdown.Item href="#/Signup">Signup</Dropdown.Item>
+                  </Dropdown.Menu>
+                </Dropdown>
+            ) : (
+                <Dropdown>
+                  <Dropdown.Toggle id="dropdown-button-dark-example1" variant="secondary">
+                    Signout
+                  </Dropdown.Toggle>
+
+                  <Dropdown.Menu variant="dark">
+                    <Dropdown.Item href="#/Signout" active>
+                      Signout
+                    </Dropdown.Item>
+                  </Dropdown.Menu>
+                </Dropdown>
+            )}
+          </Nav>
+        </Navbar>
+    )
+        ;
   }
 }
 
 /** Declare the types of all properties. */
-NavBar.propTypes = {
+NavBar1.propTypes = {
   currentUser: PropTypes.string,
 };
 
 /** withTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker */
 const NavBarContainer = withTracker(() => ({
   currentUser: Meteor.user() ? Meteor.user().username : '',
-}))(NavBar);
+}))(NavBar1);
 
 /** Enable ReactRouter for this component. https://reacttraining.com/react-router/web/api/withRouter */
 export default withRouter(NavBarContainer);

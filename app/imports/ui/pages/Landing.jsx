@@ -9,42 +9,44 @@ class Landing extends React.Component {
               <Carousel.Item>
                 <img
                     className="d-block w-100"
-                    height="600"
+                    height="675"
                     src="/images/landing-page/naturetest2.jpg"
                     alt="First slide"
                 />
                 <Carousel.Caption>
-                  <h2>Build a Community</h2>
+                  <h1>Build a Community</h1>
                   <p>Meet with many others who want to also help with the community</p>
                 </Carousel.Caption>
               </Carousel.Item>
               <Carousel.Item>
                 <img
                     className="d-block w-100"
-                    height="600"
+                    height="675"
                     src="/images/landing-page/resized-maskedgirl.jpg"
                     alt="Second slide"
                 />
 
                 <Carousel.Caption>
-                  <h2>Second slide label</h2>
-                  <p>Clean ups</p>
+                  <h1>Host/Attend Events</h1>
+                  <p>Users have the ability to host or attend events that they are interested in</p>
                 </Carousel.Caption>
               </Carousel.Item>
               <Carousel.Item>
                 <img
                     className="d-block w-100"
-                    height="600"
+                    height="675"
                     src="/images/landing-page/naturetest3.jpg"
                     alt="Third slide"
                 />
 
                 <Carousel.Caption>
-                  <h2>Third slide label</h2>
-                  <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+                  <h1>Learn about how to protect our environment</h1>
+                  <p>If you&apos;d like to share your experiences or interesting
+                    facts you can go to the Forums to search through what interests you!</p>
                 </Carousel.Caption>
               </Carousel.Item>
             </Carousel>
+
     );
   }
 }
