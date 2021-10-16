@@ -56,7 +56,7 @@ Event.propTypes = {
 export default withTracker(() => {
   // Get access to Event documents.
   const username = Meteor.user()?.username;
-  const ready = Events.subscribeEventAdmin()
+  const ready = Events.subscribeEventAdmin().ready()
   && username !== undefined;
   const events = Events.getEvenList();
   return {
