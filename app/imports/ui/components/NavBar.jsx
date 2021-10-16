@@ -2,18 +2,17 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
-import { withRouter, NavLink } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import { Roles } from 'meteor/alanning:roles';
 import { Navbar, Nav, Dropdown } from 'react-bootstrap';
 
 /** The NavBar appears at the top of every page. Rendered by the App Layout component. */
 class NavBar1 extends React.Component {
   render() {
-    const menuStyle = { marginBottom: '0px' };
     return (
-        <Navbar bg="primary" variant="dark" expand="lg">
+        <Navbar bg="primary" variant="dark" expand="lg" >
           <Navbar.Brand href="#"> <img alt=""
-                                       src="/image/camino-logo.png"
+                                       src="/images/camino_logo.png"
                                        width="30"
                                        height="30"
                                        className="d-inline-block align-top"/>{''} EcoCamino
