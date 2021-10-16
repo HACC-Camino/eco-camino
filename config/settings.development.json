@@ -18,5 +18,11 @@
     },
     { "title": "How To Care For The Environment While Hiking", "date": "10/10/2021 10:30:00", "location": "Virtual Over Zoom", "owner": "john@foo.com", "name": "John Foo", "email": "john@foo.com", "description": "Learning the do's and don'ts when hiking to protect the habitats.", "typeOfEvent": "Workshop"
     }
+  ],
+  "defaultForumPosts": [
+    { "date": "10-15-2021", "type":  "main_post", "title":  "This is a sample title of a forum post", "content":  "This is a sample content.", "tags": ["sample"], "owner": "john@foo.com" }
+  ],
+  "defaultUsers": [
+    { "dateJoined": "10-15-2021", "firstName": "John", "lastName": "Foo", "bio":  "this is a sample bio", "areaCode": 96818, "owner": "john@foo.com" }
   ]
 }
