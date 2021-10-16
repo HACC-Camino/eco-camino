@@ -1,4 +1,5 @@
 import React from 'react';
+import { Meteor } from 'meteor/meteor';
 import { Card, Container, Row, Col } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import EditandDeleteButtons from './EditAndDeleteButtons';
@@ -6,7 +7,8 @@ import JoinButton from './JoinButton';
 import LeaveButton from './LeaveButton';
 
 /** Renders a single card in the Event list. See pages/Event/Event.jsx. */
-const EventItem = ({ event, username, userEvents }) => {
+const EventItem = ({ event, userEvents }) => {
+  const username = Meteor.user()?.username;
   const userEventsID = userEvents.map(userEvent => userEvent.eventID);
   let check = false;
   let ownerEvent = '';
@@ -44,7 +46,6 @@ const EventItem = ({ event, username, userEvents }) => {
 EventItem.propTypes = {
   event: PropTypes.object.isRequired,
   userEvents: PropTypes.array.isRequired,
-  username: PropTypes.string.isRequired,
 };
 
 /** export EventItem */

@@ -9,7 +9,7 @@ import EventItem from '../../components/event/EventItem';
 import AddEvent from './AddEvent';
 
 /** Renders a container containing all of the Events documents. */
-const Event = ({ events, userEvents, username, ready }) => (ready ? (
+const Event = ({ events, userEvents, ready }) => (ready ? (
   <Container className='py-sm-3'>
     <h2>Event List</h2>
     <Tab.Container id="left-tabs-example" defaultActiveKey="first">
@@ -29,8 +29,7 @@ const Event = ({ events, userEvents, username, ready }) => (ready ? (
             <Tab.Pane eventKey="first">
               <CardGroup>
                 <Row xs={1} md={2} className="g-4">
-                  {events.map((event) => <EventItem key={event._id}
-                                                    username={username} event={event} userEvents={userEvents} />)}
+                  {events.map((event) => <EventItem key={event._id} event={event} userEvents={userEvents} />)}
                 </Row>
               </CardGroup>
             </Tab.Pane>
@@ -53,7 +52,6 @@ Event.propTypes = {
   events: PropTypes.array.isRequired,
   userEvents: PropTypes.array.isRequired,
   ready: PropTypes.bool.isRequired,
-  username: PropTypes.string.isRequired,
 };
 
 /** withTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker */
