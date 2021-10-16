@@ -5,10 +5,10 @@ import swal from 'sweetalert';
 import { userEventRemoveItMethod } from '../../../api/user/UserEventCollection.methods';
 
 /** Renders an Edit and Delete Button */
-const LeaveButton = ({ ownerEvent, check }) => {
+const LeaveButton = ({ ownerID, check }) => {
   const deleteHandle = () => {
-    const eventIDT = ownerEvent;
-    userEventRemoveItMethod.call({ eventIDT },
+    const _id = ownerID;
+    userEventRemoveItMethod.call({ _id },
     error => {
       if (error) {
         swal('Error', error.message, 'error');
@@ -33,7 +33,7 @@ const LeaveButton = ({ ownerEvent, check }) => {
 
 /** Require a document to be passed to this component. */
 LeaveButton.propTypes = {
-  ownerEvent: PropTypes.string.isRequired,
+  ownerID: PropTypes.string.isRequired,
   check: PropTypes.bool.isRequired,
 };
 

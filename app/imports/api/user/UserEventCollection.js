@@ -26,10 +26,10 @@ class UserEventCollection extends BaseCollection {
     return docID;
   }
 
-  removeIt(eventIDT) {
-    const doc = this._collection.find({ eventID: eventIDT.eventIDT }).fetch();
-    check(doc[0], Object);
-    this._collection.remove(doc[0]._id);
+  removeIt(_id) {
+    const doc = this.findDoc(_id);
+    check(doc, Object);
+    this._collection.remove(doc._id);
     return true;
   }
 

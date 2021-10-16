@@ -11,11 +11,11 @@ const EventItem = ({ event, userEvents }) => {
   const username = Meteor.user()?.username;
   const userEventsID = userEvents.map(userEvent => userEvent.eventID);
   let check = false;
-  let ownerEvent = '';
+  let ownerID = '';
   if (userEventsID.includes(event._id)) {
     check = true;
     const eventOne = userEvents.filter(userEvent => userEvent.eventID === event._id);
-    ownerEvent = eventOne[0].eventID;
+    ownerID = eventOne[0]._id;
   }
   return (
     <Container>
@@ -29,12 +29,13 @@ const EventItem = ({ event, userEvents }) => {
           <Card.Text>Contact Person: {event.name}</Card.Text>
           <Card.Text>Contact Info: {event.email}</Card.Text>
           <Card.Text>Description: {event.description}</Card.Text>
+          <Card.Text>Participants: </Card.Text>
         </Card.Body>
         {username === event.owner ? <EditandDeleteButtons event={event}/> :
         <Container>
           <Row>
             <Col><JoinButton event={event} username={username} check={check} /></Col>
-            <Col><LeaveButton ownerEvent={ownerEvent} check={check} /></Col>
+            <Col><LeaveButton check={check} ownerID={ownerID} /></Col>
           </Row>
         </Container>}
       </Card>
