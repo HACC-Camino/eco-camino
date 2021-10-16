@@ -1,9 +1,11 @@
 import { Meteor } from 'meteor/meteor';
 import { Stuffs } from '../../api/stuff/StuffCollection';
 import { ForumPosts } from '../../api/forum/ForumPostCollection';
+import { Users } from '../../api/user/UserCollection';
 
 const collections = [
   ForumPosts,
+  Users,
 ];
 
 collections.forEach(collection => collection.publish());

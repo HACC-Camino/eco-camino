@@ -12,7 +12,7 @@ export const forumPostPublications = {
 class ForumPostCollection extends BaseCollection {
   constructor() {
     super('ForumPost', new SimpleSchema({
-      date: String,
+      date: Date,
       type: {
         type: String,
         allowedValues: forumPostTypes,
@@ -61,6 +61,7 @@ class ForumPostCollection extends BaseCollection {
     if (tags) {
       updateData.tags = tags;
     }
+    this._collection.update(docID, { $set: updateData });
   }
 
   removeIt(name) {
