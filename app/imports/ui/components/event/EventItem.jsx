@@ -1,20 +1,23 @@
 import React from 'react';
-import { Table } from 'semantic-ui-react';
+import { Card } from 'react-bootstrap';
 import PropTypes from 'prop-types';
-import { withRouter } from 'react-router-dom';
 
 /** Renders a single row in the List Stuff table. See pages/ListStuff.jsx. */
-class EventItem extends React.Component {
-  render() {
-    return (
-        <Table.Row>
-          <Table.Cell>{this.props.event.name}</Table.Cell>
-          <Table.Cell>{this.props.event.quantity}</Table.Cell>
-          <Table.Cell>{this.props.event.condition}</Table.Cell>
-        </Table.Row>
-    );
-  }
-}
+const EventItem = ({ event }) => {
+  console.log(event);
+  return (
+    <Card>
+      <Card.Body>
+        <Card.Title>{event.title}</Card.Title>
+        <Card.Text>Date: {event.date.toLocaleDateString()}</Card.Text>
+        <Card.Text>Location: {event.location}</Card.Text>
+        <Card.Text>Contact Person: {event.owner}</Card.Text>
+        <Card.Text>Contact Info: {event.email}</Card.Text>
+        <Card.Text>Description: {event.description}</Card.Text>
+      </Card.Body>
+    </Card>
+  );
+};
 
 /** Require a document to be passed to this component. */
 EventItem.propTypes = {
@@ -22,4 +25,4 @@ EventItem.propTypes = {
 };
 
 /** Wrap this component in withRouter since we use the <Link> React Router element. */
-export default withRouter(EventItem);
+export default EventItem;

@@ -1,8 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import SimpleSchema from 'simpl-schema';
 import { check } from 'meteor/check';
-import { _ } from 'meteor/underscore';
-import { Roles } from 'meteor/alanning:roles';
 import BaseCollection from '../base/BaseCollection';
 
 export const eventConditions = ['Workshop', 'Cleanup'];
@@ -17,7 +15,6 @@ class EventCollection extends BaseCollection {
       title: String,
       date: Date,
       location: String,
-      participates: Number,
       owner: String,
       email: String,
       description: String,
@@ -41,13 +38,12 @@ class EventCollection extends BaseCollection {
    * @param condition the condition of the item.
    * @return {String} the docID of the new document.
    */
-  define({ title, date, location, participates, owner, email,
+  define({ title, date, location, owner, email,
            description, typeOfEvent, reportLink }) {
     const docID = this._collection.insert({
       title,
       date,
       location,
-      participates,
       owner,
       email,
       description,
@@ -64,7 +60,7 @@ class EventCollection extends BaseCollection {
    * @param quantity the new quantity (optional).
    * @param condition the new condition (optional).
    */
-  update(docID, { title, date, location, participates, owner, email,
+  update(docID, { title, date, location, owner, email,
     description, typeOfEvent, reportLink }) {
     const updateData = {};
     if (title) {
@@ -90,10 +86,6 @@ class EventCollection extends BaseCollection {
     }
     if (reportLink) {
       updateData.reportLink = reportLink;
-    }
-    // if (quantity) { NOTE: 0 is falsy so we need to check if the quantity is a number.
-    if (_.isNumber(participates)) {
-      updateData.participates = participates;
     }
     this._collection.update(docID, { $set: updateData });
   }
@@ -129,7 +121,7 @@ class EventCollection extends BaseCollection {
 
       /** This subscription publishes all documents regardless of user, but only if the logged in user is the Admin. */
       Meteor.publish(eventPublications.eventAdmin, function publish() {
-        if (this.userId && Roles.userIsInRole(this.userId, 'admin')) {
+        if (this.userId) {
           return instance._collection.find();
         }
         return this.ready();
@@ -156,6 +148,10 @@ class EventCollection extends BaseCollection {
       return Meteor.subscribe(eventPublications.eventAdmin);
     }
     return null;
+  }
+
+  getEvenList() {
+    return this._collection.find({}, { sort: { date: 1 } }).fetch();
   }
 
 }
