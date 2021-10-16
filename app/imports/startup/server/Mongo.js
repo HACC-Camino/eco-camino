@@ -20,7 +20,6 @@ if (Users.count() === 0) {
   }
 }
 
-console.log(Users.getUserDetails('john@foo.com'));
 // DELETE THESE LATER
 /** Initialize the database with a default data document. */
 function addData(data) {
