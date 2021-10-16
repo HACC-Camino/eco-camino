@@ -5,6 +5,7 @@ import { Container, Row, Col, Form, InputGroup, FormControl, Button } from 'reac
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import swal from 'sweetalert';
+import moment from 'moment';
 import { eventDefineMethod } from '../../../api/event/EventCollection.methods';
 
 // CSS Modules, react-datepicker-cssmodules.css
@@ -13,6 +14,8 @@ import { eventDefineMethod } from '../../../api/event/EventCollection.methods';
 const AddEvent = () => {
   const [finalType, setFinalType] = useState(() => '');
   const [finalDate, setFinalDate] = useState(new Date());
+  const [finalStartTime, setFinalStartTime] = useState('');
+  const [finalEndTime, setFinalEndTime] = useState('');
   const [finalTitle, setFinalTitle] = useState(() => '');
   const [finalLocation, setFinalLocation] = useState(() => '');
   const [finalOwner, setFinalOwner] = useState(() => '');
@@ -23,8 +26,10 @@ const AddEvent = () => {
     { value: 'Cleanup', label: 'Cleanup' },
   ];
   const onSubmit = () => {
-    const type = finalType;
+    const typeOfEvent = finalType.value;
     const date = finalDate;
+    const startTime = moment(finalStartTime).format('hh:mm a');
+    const endTime = moment(finalEndTime).format('hh:mm a');
     const title = finalTitle;
     const location = finalLocation;
     const name = finalOwner;
@@ -32,7 +37,7 @@ const AddEvent = () => {
     const owner = Meteor.user().username;
     const description = finalDescription;
     eventDefineMethod.call({
-      type, date, title, location, name,
+      typeOfEvent, date, startTime, endTime, title, location, name,
       owner, email, description },
     error => {
       if (error) {
@@ -41,14 +46,15 @@ const AddEvent = () => {
         swal('Success', 'Event Added Successfully', 'success');
         setFinalType('');
         setFinalDate(new Date());
+        setFinalStartTime('');
+        setFinalEndTime('');
         setFinalTitle('');
         setFinalLocation('');
         setFinalOwner('');
         setFinalEmail('');
         setFinalDescription('');
       }
-    },
-    );
+    });
   };
   return (
     <Container>
@@ -72,12 +78,40 @@ const AddEvent = () => {
       </Row>
       <Row>
         <Col>
-          <Form.Label htmlFor="basic-url">Date of Event</Form.Label>
-          <DatePicker
+          <Row>
+            <Form.Label htmlFor="basic-url">Date of Event</Form.Label>
+            <DatePicker
           name='Date of Event'
           selected={finalDate}
           onChange={(date) => setFinalDate(date)}
-          />
+          /></Row>
+          <Row>
+            <Col>
+              <Form.Label htmlFor="basic-url">Start Time</Form.Label>
+              <DatePicker
+            selected={finalStartTime}
+            onChange={(date) => setFinalStartTime(date)}
+            showTimeSelect
+            showTimeSelectOnly
+            timeFormat="HH:mm"
+            timeIntervals={15}
+            timeCaption="time"
+            dateFormat="h:mm aa"
+            /></Col>
+            <Col>
+              <Form.Label htmlFor="basic-url">End Time</Form.Label>
+              <DatePicker
+              selected={finalEndTime}
+              onChange={(date) => setFinalEndTime(date)}
+              showTimeSelect
+              showTimeSelectOnly
+              timeFormat="HH:mm"
+              timeIntervals={15}
+              timeCaption="time"
+              dateFormat="h:mm aa"
+              />
+            </Col>
+          </Row>
         </Col>
         <Col>
           <Form.Label htmlFor="basic-url">Location</Form.Label>

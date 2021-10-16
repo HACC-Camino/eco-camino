@@ -12,11 +12,11 @@
   ],
 
   "defaultEvent": [
-    { "title": "Magic Island Cleanup", "date": "10/15/2021 10:30:00", "location": "Magic Island 1201 Ala Moana Blvd Honolulu", "owner": "john@foo.com", "name": "John Foo", "email": "john@foo.com", "description": "Cleaning up Magic Island, park near the harbor side, please bring your own supplies. Thank you!", "typeOfEvent": "Cleanup"
+    { "title": "Magic Island Cleanup", "date": "10/15/2021", "startTime": "10:30 pm", "endTime": "11:30 pm", "location": "Magic Island 1201 Ala Moana Blvd Honolulu", "owner": "john@foo.com", "name": "John Foo", "email": "john@foo.com", "description": "Cleaning up Magic Island, park near the harbor side, please bring your own supplies. Thank you!", "typeOfEvent": "Cleanup"
     },
-    { "title": "Ala Moana Cleanup", "date": "10/20/2021 10:30:00", "location": "Magic Island 1201 Ala Moana Blvd Honolulu", "owner": "john@foo.com", "name": "John Foo", "email": "john@foo.com", "description": "Cleaning up Magic Island, park near the harbor side, please bring your own supplies. Thank you!", "typeOfEvent": "Cleanup"
+    { "title": "Ala Moana Cleanup", "date": "10/20/2021", "startTime": "10:30 pm", "endTime": "11:30 pm", "location": "Magic Island 1201 Ala Moana Blvd Honolulu", "owner": "john@foo.com", "name": "John Foo", "email": "john@foo.com", "description": "Cleaning up Magic Island, park near the harbor side, please bring your own supplies. Thank you!", "typeOfEvent": "Cleanup"
     },
-    { "title": "How To Care For The Environment While Hiking", "date": "10/10/2021 10:30:00", "location": "Virtual Over Zoom", "owner": "john@foo.com", "name": "John Foo", "email": "john@foo.com", "description": "Learning the do's and don'ts when hiking to protect the habitats.", "typeOfEvent": "Workshop"
+    { "title": "How To Care For The Environment While Hiking", "date": "10/10/2021",  "startTime": "10:30 pm", "endTime": "11:30 pm", "location": "Virtual Over Zoom", "owner": "john@foo.com", "name": "John Foo", "email": "john@foo.com", "description": "Learning the do's and don'ts when hiking to protect the habitats.", "typeOfEvent": "Workshop"
     }
   ],
   "defaultForumPosts": [
