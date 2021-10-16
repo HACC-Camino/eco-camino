@@ -29,7 +29,6 @@ const EventItem = ({ event, userEvents }) => {
           <Card.Text>Contact Person: {event.name}</Card.Text>
           <Card.Text>Contact Info: {event.email}</Card.Text>
           <Card.Text>Description: {event.description}</Card.Text>
-          <Card.Text>Participants: </Card.Text>
         </Card.Body>
         {username === event.owner ? <EditandDeleteButtons event={event}/> :
         <Container>
