@@ -47,8 +47,7 @@ const AddEvent = () => {
         setFinalEmail('');
         setFinalDescription('');
       }
-    },
-    );
+    });
   };
   return (
     <Container>
