@@ -45,7 +45,10 @@ class UserEventCollection extends BaseCollection {
       });
 
       Meteor.publish(userEventPublications.userEventCommunity, function publish() {
-        return instance._collection.find();
+        if (this.userId) {
+          return instance._collection.find();
+        }
+        return this.ready();
       });
     }
   }
@@ -66,6 +69,10 @@ class UserEventCollection extends BaseCollection {
 
   getUserEvent(username) {
     return this._collection.find({}, { owner: username }).fetch();
+  }
+
+  getAllUserEvent() {
+    return this._collection.find().fetch();
   }
 
   getUserInEvent(event, username) {
