@@ -1,5 +1,4 @@
 import React from 'react';
-import { Grid } from 'semantic-ui-react';
 import ProfileCard from '../components/profile/ProfileCard';
 import PlannedEvents from '../components/profile/PlannedEvents';
 
@@ -7,22 +6,27 @@ class Profile extends React.Component {
 
     render() {
         return (
+            <div className='container' style={{ paddingTop: '30px' }}>
+                <div className='row row-cols-sm-2' style={{ paddingBottom: '30px' }}>
+                    <div className='col-4'>
+                        <ProfileCard/>
+                    </div>
+                    <div className='col-lg-8-auto'>
+                        <div className='card'>
+                            <h3 className='card-title' style={{ padding: '10px' }}>My Events</h3>
+                            <PlannedEvents/>
+                        </div>
 
-            <div>
-                <Grid padded style={{ height: '100vh' }} centered>
-                    <Grid.Row centered style={{ height: '55%' }} columns={2} >
-                        <Grid.Column width={5}><ProfileCard/></Grid.Column>
-                        <Grid.Column width={5}><PlannedEvents/></Grid.Column>
-                    </Grid.Row>
-                    <Grid.Row centered style={{ height: '55%' }} columns={2} >
-                        <Grid.Column width={5}>
-                            <h1>Joined Orgs</h1>
-                        </Grid.Column>
-                        <Grid.Column width={5}>
-                            <h1>Past Events</h1>
-                        </Grid.Column>
-                    </Grid.Row>
-                </Grid>
+                    </div>
+                </div>
+                <div className='row row-cols-2'>
+                    <div className='col-4'>
+                        <PlannedEvents/>
+                    </div>
+                    <div className='col-8'>
+                        <PlannedEvents/>
+                    </div>
+                </div>
             </div>
         );
     }
