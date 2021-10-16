@@ -46,7 +46,7 @@ class NavBar1 extends React.Component {
             ) : (
                 <Dropdown>
                   <Dropdown.Toggle id="dropdown-button-dark-example1" variant="secondary">
-                    Signout
+                    {this.props.currentUser}
                   </Dropdown.Toggle>
 
                   <Dropdown.Menu variant="dark">
@@ -58,8 +58,7 @@ class NavBar1 extends React.Component {
             )}
           </Nav>
         </Navbar>
-    )
-        ;
+    );
   }
 }
 
