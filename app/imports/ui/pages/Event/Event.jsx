@@ -9,8 +9,8 @@ import AddEvent from './AddEvent';
 
 /** Renders a table containing all of the Stuff documents. Use <StuffItem> to render each row. */
 const Event = ({ events, ready }) => (ready ? (
-  <Container>
-    <h2>Even List</h2>
+  <Container className='py-sm-3'>
+    <h2>Event List</h2>
     <Tab.Container id="left-tabs-example" defaultActiveKey="first">
       <Row>
         <Col sm={3}>
