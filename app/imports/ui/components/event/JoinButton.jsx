@@ -30,10 +30,10 @@ const JoinButton = ({ event, username, check }) => {
   <Container style={{ paddingBottom: '10px' }}>
     {check ?
     <Row>
-      <Col><Button variant="success" onClick={joinHandle} disabled>Join</Button></Col>
+      <Col><Button variant="primary" onClick={joinHandle} disabled>Join</Button></Col>
     </Row> :
     <Row>
-      <Col><Button variant="success" onClick={joinHandle}>Join</Button></Col>
+      <Col><Button variant="primary" onClick={joinHandle}>Join</Button></Col>
     </Row>
     }
   </Container>
