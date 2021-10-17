@@ -105,6 +105,14 @@ class ForumPostCollection extends BaseCollection {
   getForumPostsSortedByDate() {
     return this._collection.find({ }, { sort: { date: -1 } }).fetch();
   }
+
+  getForumPost(postID) {
+    return this._collection.find({ _id: postID }).fetch()[0];
+  }
+
+  getForumPostReplies(postID) {
+    return this._collection.find({ mainThread: postID }).fetch();
+  }
 }
 
 export const ForumPosts = new ForumPostCollection();
