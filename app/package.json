@@ -33,7 +33,6 @@
   "devDependencies": {
     "babel-eslint": "^10.1.0",
     "chai": "^4.3.4",
-    "css-loader": "^6.4.0",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.6",
     "eslint": "^6.8.0",
@@ -47,8 +46,7 @@
     "faker": "^4.1.0",
     "fast-check": "^1.26.0",
     "puppeteer": "^3.3.0",
-    "sinon": "^9.2.4",
-    "style-loader": "^3.3.0"
+    "sinon": "^9.2.4"
   },
   "scripts": {
     "start": "cross-env METEOR_NO_RELEASE_CHECK=1 meteor --settings ../config/settings.development.json",
