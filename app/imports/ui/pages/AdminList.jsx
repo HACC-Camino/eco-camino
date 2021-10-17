@@ -71,7 +71,7 @@ class AdminList extends React.Component {
             <Table.Header fullWidth>
               <Table.Row>
                 <Table.HeaderCell textAlign='center'>
-                  <Header>User List</Header>
+                  <Header>List of Users</Header>
                 </Table.HeaderCell>
               </Table.Row>
             </Table.Header>
