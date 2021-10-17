@@ -2,9 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
 
-const ForumPostRow = ({ mainPost, replies }) => {
-  const numReplies = replies.length;
-  const latestReply = numReplies > 0 ? replies[0] : mainPost;
+const ForumPostRow = ({ propsObject }) => {
+  const mainPost = propsObject.mainPost;
+  const numReplies = propsObject.replies.length;
+  const latestReply = propsObject.latestReply;
 
   const history = useHistory();
   const goToPage = () => {
@@ -27,8 +28,7 @@ const ForumPostRow = ({ mainPost, replies }) => {
 };
 
 ForumPostRow.propTypes = {
-  mainPost: PropTypes.object,
-  replies: PropTypes.array,
+  propsObject: PropTypes.object.isRequired,
 };
 
 export default ForumPostRow;

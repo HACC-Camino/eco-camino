@@ -111,7 +111,7 @@ class ForumPostCollection extends BaseCollection {
   }
 
   getForumPostReplies(postID) {
-    return this._collection.find({ mainThread: postID }).fetch();
+    return this._collection.find({ mainThread: postID }, { sort: { date: -1 } }).fetch();
   }
 }
 

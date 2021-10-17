@@ -16,7 +16,10 @@ const ForumMainPostCard = ({ mainPost, owner }) => (
               <br/>
               Date: {mainPost.date.toLocaleString()}
               <br/>
-              Tags: {mainPost.tags.map(tag => <Badge pill key={tag} bg={'primary'}>{tag}</Badge>)}
+              Tags: {mainPost.tags.map(tag => <Badge
+              className="mx-1 bg-light text-primary"
+              key={tag}
+              pill>{tag}</Badge>)}
             </td>
           </tr>
           </tbody>
