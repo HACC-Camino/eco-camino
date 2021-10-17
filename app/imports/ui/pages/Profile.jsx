@@ -9,8 +9,8 @@ import PastEvents from '../components/profile/PastEvents';
 import { Events } from '../../api/event/EventCollection';
 import { Users } from '../../api/user/UserCollection';
 import { UserEvents } from '../../api/user/UserEventCollection';
-// import UploadPhotoButton from '../components/aws/UploadPhotoButton';
 import UploadPhotoModal from '../components/aws/UploadPhotoModal';
+// import { GetPhoto } from '../components/aws/GetPhoto';
 
 const Profile = ({ filtered_events, ready, userDetail, past_events }) => {
 
@@ -48,9 +48,6 @@ const Profile = ({ filtered_events, ready, userDetail, past_events }) => {
             <Row>
                 <Col><UploadPhotoModal parentCallback={handleCallback}/></Col>
                 <Col>{data}</Col>
-            </Row>
-            <Row>
-                <Col></Col>
             </Row>
         </div>
         ) : (
