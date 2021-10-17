@@ -8,8 +8,9 @@ import PlannedEvents from '../components/profile/PlannedEvents';
 import PastEvents from '../components/profile/PastEvents';
 import { Events } from '../../api/event/EventCollection';
 import { Users } from '../../api/user/UserCollection';
+import { UserEvents } from '../../api/user/UserEventCollection';
 
-const Profile = ({ events, ready, userDetail }) => (ready ? (
+const Profile = ({ filtered_events, ready, userDetail }) => (ready ? (
     <div className='container' style={{ paddingTop: '30px' }}>
         <div className='row row-cols-sm-2' style={{ paddingBottom: '30px' }}>
             <Col sm={4} style={{ paddingBottom: '30px', paddingRight: '30px' }}>
@@ -20,7 +21,7 @@ const Profile = ({ events, ready, userDetail }) => (ready ? (
                 <div className='row' style={{ paddingBottom: '30px' }}>
                     <div className='card'>
                         <h3 className='card-title' style={{ padding: '30px' }}>My Events</h3>
-                        <PlannedEvents/>
+                        <PlannedEvents my_sorted_events_list={filtered_events}/>
                     </div>
                 </div>
 
@@ -42,23 +43,37 @@ const Profile = ({ events, ready, userDetail }) => (ready ? (
 );
 
 Profile.propTypes = {
-    events: PropTypes.array.isRequired,
     userDetail: PropTypes.object,
     ready: PropTypes.bool.isRequired,
+    filtered_events: PropTypes.array,
 };
 
 /** withTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker */
 export default withTracker(() => {
     // Get access to Event documents.
     const username = Meteor.user()?.username;
-    const ready = Events.subscribeEvent().ready()
+    const ready = Events.subscribeEventAdmin().ready()
         && Users.subscribeUser().ready()
+        && UserEvents.subscribeUserEvent().ready()
         && username !== undefined;
     const events = Events.getEvenList();
     const userDetail = Users.getUserDetails(username);
+    const userEvents = UserEvents.getUserEvent(username);
+    const userOwner = Events.getUserEventList(username);
+    const my_event_list = [];
+    userEvents.forEach(userEvent => {
+        const event = events.find(({ _id }) => userEvent.eventID === _id);
+        my_event_list.push(event);
+    });
+    Array.prototype.push.apply(my_event_list, userOwner);
+    const my_sorted_events_list = my_event_list.slice().sort((a, b) => b.date - a.date).reverse();
+    const filtered_events = my_sorted_events_list.filter(new_filtered_events => {
+        const current_date = new Date().getTime();
+        return new_filtered_events.date > current_date;
+    });
     return {
         ready,
-        events,
         userDetail,
+        filtered_events,
     };
 })(Profile);
