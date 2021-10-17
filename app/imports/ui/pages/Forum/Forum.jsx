@@ -6,6 +6,18 @@ import { Col, Container, Nav, Pagination, Row, Spinner, Tab, Table } from 'react
 import { BsChevronDoubleLeft, BsChevronDoubleRight } from 'react-icons/all';
 import { ForumPosts } from '../../../api/forum/ForumPostCollection';
 import ForumPostRow from '../../components/forum/ForumPostRow';
+import { getLatestReply, getReplies } from '../../components/forum/utilities';
+
+const sortDate = (array) => (array.sort((a, b) => new Date(b.lastUpdated) - new Date(a.lastUpdated)));
+
+const getRowProps = (mainPost, replies) => {
+  const result = {};
+  result.mainPost = mainPost;
+  result.replies = replies;
+  result.latestReply = getLatestReply(mainPost, replies);
+  result.lastUpdated = result.latestReply.date;
+  return result;
+};
 
 const Forum = ({ username, ready, forumPosts }) => {
   const [page, setPage] = useState(1);
@@ -17,7 +29,7 @@ const Forum = ({ username, ready, forumPosts }) => {
   const userSubscribedPosts = [];
   userReplies.forEach(reply => {
     const mainPost = forumPosts.find(({ _id }) => _id === reply.mainThread);
-    if (!userReplies.includes(mainPost)) {
+    if (!userSubscribedPosts.includes(mainPost)) {
       userSubscribedPosts.push(mainPost);
     }
   });
@@ -74,9 +86,11 @@ const Forum = ({ username, ready, forumPosts }) => {
     return array.slice(start, end);
   };
 
-  const getReplies = (array, postID) => array.filter(forumPost => forumPost.mainThread === postID);
-
-  const getTabContent = (array) => (
+  const getTabContent = (array, tabNum) => {
+    const arrayProps = [];
+    getRows(array).forEach(element => arrayProps.push(getRowProps(element, getReplies(forumPosts, element._id))));
+    const sortedArrayProps = sortDate(arrayProps);
+    return (
       <div>
         <Table striped hover className="fixed">
           <thead>
@@ -88,17 +102,17 @@ const Forum = ({ username, ready, forumPosts }) => {
           </tr>
           </thead>
           <tbody>
-          {getRows(array).map((post) => <ForumPostRow
-            mainPost={post}
-            key={post._id}
-            replies={getReplies(forumPosts, post._id)}/>)}
+          {sortedArrayProps.map(element => <ForumPostRow
+            propsObject={element}
+            key={`${element.mainPost._id}_${tabNum}`}/>)}
           </tbody>
         </Table>
         <Pagination className="justify-content-center">
           {getPageItems(array)}
         </Pagination>
       </div>
-      );
+    );
+  };
 
   return (ready ?
     <Container className="py-sm-3">
@@ -124,13 +138,13 @@ const Forum = ({ username, ready, forumPosts }) => {
             <Col sm={9}>
               <Tab.Content>
                 <Tab.Pane eventKey="first">
-                  {getTabContent(mainPosts)}
+                  {getTabContent(mainPosts, 'first')}
                 </Tab.Pane>
                 <Tab.Pane eventKey="second">
-                  {getTabContent(userPosts)}
+                  {getTabContent(userPosts, 'second')}
                 </Tab.Pane>
                 <Tab.Pane eventKey="third">
-                  {getTabContent(userSubscribedPosts)}
+                  {getTabContent(userSubscribedPosts, 'third')}
                 </Tab.Pane>
               </Tab.Content>
             </Col>

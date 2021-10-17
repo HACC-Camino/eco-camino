@@ -4,18 +4,15 @@ import { Card, Table } from 'react-bootstrap';
 import ProfilePreviewModal from '../profile/ProfilePreviewModal';
 
 const getCardBodyContent = (replyOwner) => (
-    <Table borderless className="fixed">
-      <tbody>
-        <tr>
-          <td width="75%">{replyOwner.reply.content}</td>
-          <td width="25%">
-            Posted By: <ProfilePreviewModal userDetai={replyOwner.owner}/>
-            <br/>
-            Date: {replyOwner.reply.date.toLocaleString()}
-          </td>
-        </tr>
-      </tbody>
-    </Table>);
+  <tr key={replyOwner.reply._id} className="border-bottom">
+    <td width="75%"><br/>{replyOwner.reply.content}<br/><br/></td>
+    <td width="25%">
+      <br/>
+      Posted By: <ProfilePreviewModal userDetail={replyOwner.owner}/>
+      <br/>
+      Date: {replyOwner.reply.date.toLocaleString()}
+    </td>
+  </tr>);
 
 const ForumRepliesCard = ({ replies, users }) => {
   const replyOwners = [];
@@ -28,7 +25,11 @@ const ForumRepliesCard = ({ replies, users }) => {
     <Card>
       <Card.Header as='h4'>Replies</Card.Header>
       <Card.Body>
-        {replyOwners.map(replyOwner => getCardBodyContent(replyOwner))}
+        <Table borderless className="fixed">
+          <tbody>
+          {replyOwners.map(replyOwner => getCardBodyContent(replyOwner))}
+          </tbody>
+        </Table>
       </Card.Body>
     </Card>
   );

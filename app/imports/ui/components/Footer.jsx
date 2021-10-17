@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Row, Col } from 'react-bootstrap';
+import { Row, Col } from 'react-bootstrap';
 import { BsFacebook, BsTwitter, BsLinkedin } from 'react-icons/bs';
 
 /** The Footer appears at the bottom of every page. Rendered by the App Layout component. */
