@@ -10,13 +10,16 @@ const ForumMainPostCard = ({ mainPost, owner }) => (
         <Table borderless className="fixed">
           <tbody>
           <tr>
-            <td width="75%">{mainPost.content}</td>
-            <td width="25%">
+            <td width="80%">{mainPost.content}</td>
+            <td width="20%">
               Posted By: <ProfilePreviewModal userDetail={owner}/>
               <br/>
               Date: {mainPost.date.toLocaleString()}
               <br/>
-              Tags: {mainPost.tags.map(tag => <Badge pill key={tag} bg={'primary'}>{tag}</Badge>)}
+              Tags: {mainPost.tags.map(tag => <Badge
+              className="mx-1 bg-light text-primary"
+              key={tag}
+              pill>{tag}</Badge>)}
             </td>
           </tr>
           </tbody>

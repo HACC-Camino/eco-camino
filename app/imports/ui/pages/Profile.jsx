@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { withTracker } from 'meteor/react-meteor-data';
 import { Meteor } from 'meteor/meteor';
 import PropTypes from 'prop-types';
@@ -9,43 +9,54 @@ import PastEvents from '../components/profile/PastEvents';
 import { Events } from '../../api/event/EventCollection';
 import { Users } from '../../api/user/UserCollection';
 import { UserEvents } from '../../api/user/UserEventCollection';
-import UploadPhotoButton from '../components/aws/UploadPhotoButton';
+// import UploadPhotoButton from '../components/aws/UploadPhotoButton';
+import UploadPhotoModal from '../components/aws/UploadPhotoModal';
 
-const Profile = ({ filtered_events, ready, userDetail, past_events }) => (ready ? (
-    <div className='container' style={{ paddingTop: '30px' }}>
-        <div className='row row-cols-sm-2' style={{ paddingBottom: '30px' }}>
-            <Col sm={4} style={{ paddingBottom: '30px', paddingRight: '30px' }}>
-                <ProfileCard userDetail={userDetail} />
-            </Col>
+const Profile = ({ filtered_events, ready, userDetail, past_events }) => {
 
-            <Col sm={8}>
-                <div className='row' style={{ paddingBottom: '30px' }}>
-                    <div className='card'>
-                        <h3 className='card-title' style={{ padding: '30px' }}>My Events</h3>
-                        <PlannedEvents my_sorted_events_list={filtered_events}/>
+    // copy this for upload photo modal
+    const [data, setData] = useState(null);
+    const handleCallback = (childData) => {
+        setData(childData);
+    };
+
+    return (ready ? (
+        <div className='container' style={{ paddingTop: '30px' }}>
+            <div className='row row-cols-sm-2' style={{ paddingBottom: '30px' }}>
+                <Col sm={4} style={{ paddingBottom: '30px', paddingRight: '30px' }}>
+                    <ProfileCard userDetail={userDetail} />
+                </Col>
+
+                <Col sm={8}>
+                    <div className='row' style={{ paddingBottom: '30px' }}>
+                        <div className='card'>
+                            <h3 className='card-title' style={{ padding: '30px' }}>My Events</h3>
+                            <PlannedEvents my_sorted_events_list={filtered_events}/>
+                        </div>
                     </div>
-                </div>
 
-                <div className='row'>
-                    <div className='card'>
-                        <h3 className='card-title' style={{ padding: '30px' }}>Past Events</h3>
-                        <PastEvents past_events={past_events}/>
+                    <div className='row'>
+                        <div className='card'>
+                            <h3 className='card-title' style={{ padding: '30px' }}>Past Events</h3>
+                            <PastEvents past_events={past_events}/>
+                        </div>
                     </div>
-                </div>
-            </Col>
+                </Col>
 
+            </div>
+
+            <Row>
+                <Col><UploadPhotoModal parentCallback={handleCallback}/></Col>
+                <Col>{data}</Col>
+            </Row>
         </div>
-
-        <Row>
-            <Col><UploadPhotoButton/></Col>
-        </Row>
-    </div>
-    ) : (
-        <Spinner animation="border" role="status">
-            <span className="visually-hidden">Loading...</span>
-        </Spinner>
-    )
-);
+        ) : (
+            <Spinner animation="border" role="status">
+                <span className="visually-hidden">Loading...</span>
+            </Spinner>
+        )
+    );
+};
 
 Profile.propTypes = {
     userDetail: PropTypes.object,

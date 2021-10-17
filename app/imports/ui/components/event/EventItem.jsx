@@ -17,9 +17,10 @@ const EventItem = ({ event, userEvents }) => {
     const eventOne = userEvents.filter(userEvent => userEvent.eventID === event._id);
     ownerID = eventOne[0]._id;
   }
+  const style = (event.typeOfEvent === 'Cleanup' ? '#ffe7ba' : '#fccfd1');
   return (
     <Container>
-      <Card>
+      <Card style={{ backgroundColor: style }}>
         <Card.Body>
           <Card.Title>{event.title} ({event.typeOfEvent})</Card.Title>
           <Card.Text>
