@@ -18,6 +18,10 @@
     padding: 1px;
 }
 
+#page-container {
+  padding-bottom: 82.75px; /*must be footer height + 30*/
+}
+
 #footer {
     /*position: fixed;*/
     /*padding: 10px 10px 10px 10px;*/
@@ -27,8 +31,8 @@
     /*height: 40px;*/
     background: #78c2ad;
     position: fixed;
-    bottom:0;
-    height: 52.75px;
+    bottom: 0;
+    height: 52.75px; /*don't forget to change page-container height*/
     width: 100%;
     text-align: center;
 }
