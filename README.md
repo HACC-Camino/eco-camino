@@ -1,3 +1,5 @@
+![ci-badge](https://github.com/hot-n-code/ghg-tracker/workflows/hot-n-code-ghg-tracker/badge.svg)
+
 Team Name: [HACCamino](https://hacc-camino.github.io/)
 
 ECOCamino is a web application designed to help users organize events such as cleanups and workshops, report trash or cleanup, as well as promoting other non-profit organizations around the area. 
