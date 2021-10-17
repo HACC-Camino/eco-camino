@@ -8,6 +8,7 @@ import NavBar1 from '../components/NavBar';
 import Footer from '../components/Footer';
 import Landing from '../pages/Landing';
 import Event from '../pages/Event/Event';
+import AddEvent from '../pages/Event/AddEvent';
 import ListStuff from '../pages/ListStuff';
 import ListStuffAdmin from '../pages/ListStuffAdmin';
 import AddStuff from '../pages/AddStuff';
@@ -37,6 +38,7 @@ class App extends React.Component {
               <ProtectedRoute path="/list" component={ListStuff}/>
               <ProtectedRoute path="/add" component={AddStuff}/>
               <ProtectedRoute path="/event" component={Event} />
+              <ProtectedRoute path="/addEvent" component={AddEvent} />
               <Route path="/resources" component={Resources} />
               <ProtectedRoute path="/edit/:_id" component={EditStuff}/>
               <ProtectedRoute path="/forum" component={Forum}/>

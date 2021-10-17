@@ -93,7 +93,7 @@ const AddEvent = () => {
     });
   };
   return (
-    <Container style={{ paddingBottom: '60px' }}>
+    <Container style={{ paddingBottom: '60px', paddingTop: '60px' }}>
       <h2>Add Event</h2>
       <Row>
         <Col>

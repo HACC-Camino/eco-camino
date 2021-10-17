@@ -20,6 +20,7 @@ class NavBar1 extends React.Component {
           <Nav className="me-auto">
             {this.props.currentUser ? (
                 [<Nav.Link href="#event" key='events'>Events</Nav.Link>,
+                  <Nav.Link href="#addEvent" key='addEvent'>Add Events</Nav.Link>,
                   <Nav.Link href="#forum" key='forums'>Forums</Nav.Link>,
                   <Nav.Link href="#profile" key='profile'>Profile</Nav.Link>]
             ) : ''}
