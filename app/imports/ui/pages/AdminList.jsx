@@ -107,7 +107,7 @@ AdminList.propTypes = {
   ready: PropTypes.bool.isRequired,
 };
 export default withTracker(() => {
-  const ready = Users.subscribeUserAdmin().ready();
+  const ready = Users.subscribeUserCommunity().ready();
   const users = Users.find({}, { sort: { lastName: 1 } }).fetch();
   return {
     users,

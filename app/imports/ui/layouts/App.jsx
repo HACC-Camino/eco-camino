@@ -21,8 +21,7 @@ import Resources from '../pages/Resources';
 import 'bootswatch/dist/quartz/bootstrap.min.css';
 import Forum from '../pages/Forum/Forum';
 import ForumPost from '../pages/Forum/ForumPost';
-
-// <AdminProtectedRoute path="/admin-profile" component={AdminList}/>
+import AdminList from '../pages/AdminList';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 class App extends React.Component {
@@ -44,7 +43,7 @@ class App extends React.Component {
               <ProtectedRoute path="/forum" component={Forum}/>
               <ProtectedRoute path="/forum-post/:_id" component={ForumPost}/>
               <AdminProtectedRoute path="/admin" component={ListStuffAdmin}/>
-              <AdminProtectedRoute path="/admin" component={ListStuffAdmin}/>
+              <AdminProtectedRoute path="/admin-list" component={AdminList}/>
               <ProtectedRoute path="/signout" component={Signout}/>
               <Route component={NotFound}/>
             </Switch>

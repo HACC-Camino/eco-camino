@@ -28,6 +28,7 @@ class NavBar1 extends React.Component {
                   <Nav.Link href="#forum" key='forums'>Forums</Nav.Link>,
                   <Nav.Link href="#profile" key='profile'>Dashboard</Nav.Link>,
                   <Nav.Link href="#admin" key='admin'>User List</Nav.Link>,
+                  <Nav.Link href="#admin-list" key='admin-list'>Admin List</Nav.Link>,
                 ]
             ) : ''}
             <Nav.Link href="#resources" key='resources'>Resources</Nav.Link>
