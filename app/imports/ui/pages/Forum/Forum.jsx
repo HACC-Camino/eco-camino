@@ -9,7 +9,7 @@ import ForumPostRow from '../../components/forum/ForumPostRow';
 
 const Forum = ({ username, ready, forumPosts }) => {
   const [page, setPage] = useState(1);
-  const maxRow = 10;
+  const maxRow = 15;
   const mainPosts = forumPosts.filter(forumPost => forumPost.type === 'main_post');
   const userPosts = mainPosts.filter(forumPost => forumPost.owner === username);
   const userReplies = forumPosts.filter(forumPost => forumPost.type === 'reply' && forumPost.owner === username);
@@ -84,7 +84,7 @@ const Forum = ({ username, ready, forumPosts }) => {
             <th width="60%">Title</th>
             <th width="10%">Replies</th>
             <th width="15%">Date Created</th>
-            <th width="15%">Date Updated</th>
+            <th width="15%">Last Reply</th>
           </tr>
           </thead>
           <tbody>
