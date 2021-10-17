@@ -8,6 +8,7 @@ import swal from 'sweetalert';
 import moment from 'moment';
 import { GoogleMap, LoadScript, Marker, InfoWindow } from '@react-google-maps/api';
 import { eventDefineMethod } from '../../../api/event/EventCollection.methods';
+import UploadPhotoModal from '../../components/aws/UploadPhotoModal';
 import '@reach/combobox/styles.css';
 
 const containerStyle = {
@@ -25,6 +26,10 @@ const center = {
 
 const AddEvent = () => {
   // Creating form hooks
+  const [data, setData] = useState(null);
+  const handleCallback = (childData) => {
+    setData(childData);
+  };
   const [finalType, setFinalType] = useState(() => '');
   const [finalDate, setFinalDate] = useState(new Date());
   const [finalStartTime, setFinalStartTime] = useState('');
@@ -104,13 +109,19 @@ const AddEvent = () => {
       <Row>
         <Col>
           <Row>
+            <Col>
             <Form.Label htmlFor="basic-url">Date of Event</Form.Label>
             <DatePicker
           name='Date of Event'
           minDate={moment().toDate()}
           selected={finalDate}
           onChange={(date) => setFinalDate(date)}
-          /></Row>
+          />
+            </Col>
+            <Col>
+              <UploadPhotoModal parentCallback={handleCallback}/>
+            </Col>
+          </Row>
           <Row>
             <Col>
               <Form.Label htmlFor="basic-url">Start Time</Form.Label>
@@ -195,6 +206,7 @@ const AddEvent = () => {
       <Button variant="primary" size="lg" onClick={onSubmit}>
         Submit
       </Button>
+      <Row>{data}</Row>
     </Container>
   );
 };

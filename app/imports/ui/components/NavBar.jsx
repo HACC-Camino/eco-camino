@@ -10,7 +10,7 @@ import { Navbar, Nav, Dropdown } from 'react-bootstrap';
 class NavBar1 extends React.Component {
   render() {
     return (
-        <Navbar bg="primary" variant="dark" expand="lg" >
+        <Navbar bg="primary" variant="dark" expand="lg" className='px-3'>
           <Navbar.Brand href="#"> <img alt=""
                                        src="/images/camino_logo.png"
                                        width="30"
@@ -31,7 +31,7 @@ class NavBar1 extends React.Component {
           <Nav className="justify-content-end">
             {this.props.currentUser === '' ? (
                 <Dropdown>
-                  <Dropdown.Toggle id="dropdown-button-dark-example1" variant="secondary">
+                  <Dropdown.Toggle id="dropdown-button-dark-example1" variant="outline-dark">
                     Login
                   </Dropdown.Toggle>
 
@@ -44,12 +44,12 @@ class NavBar1 extends React.Component {
                 </Dropdown>
             ) : (
                 <Dropdown>
-                  <Dropdown.Toggle id="dropdown-button-dark-example1" variant="secondary">
+                  <Dropdown.Toggle id="dropdown-button-dark-example1" variant="outline-dark">
                     {this.props.currentUser}
                   </Dropdown.Toggle>
 
                   <Dropdown.Menu variant="dark">
-                    <Dropdown.Item href="#/Signout" active>
+                    <Dropdown.Item href="#/Signout" active variant='outline-dark'>
                       Signout
                     </Dropdown.Item>
                   </Dropdown.Menu>
