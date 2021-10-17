@@ -7,11 +7,16 @@ import 'react-datepicker/dist/react-datepicker.css';
 import swal from 'sweetalert';
 import moment from 'moment';
 import { eventDefineMethod } from '../../../api/event/EventCollection.methods';
+import UploadPhotoModal from '../../components/aws/UploadPhotoModal';
 
 // CSS Modules, react-datepicker-cssmodules.css
 // import 'react-datepicker/dist/react-datepicker-cssmodules.css';
 
 const AddEvent = () => {
+  const [data, setData] = useState(null);
+  const handleCallback = (childData) => {
+    setData(childData);
+  };
   const [finalType, setFinalType] = useState(() => '');
   const [finalDate, setFinalDate] = useState(new Date());
   const [finalStartTime, setFinalStartTime] = useState('');
@@ -80,13 +85,19 @@ const AddEvent = () => {
       <Row>
         <Col>
           <Row>
+            <Col>
             <Form.Label htmlFor="basic-url">Date of Event</Form.Label>
             <DatePicker
           name='Date of Event'
           minDate={moment().toDate()}
           selected={finalDate}
           onChange={(date) => setFinalDate(date)}
-          /></Row>
+          />
+            </Col>
+            <Col>
+              <UploadPhotoModal parentCallback={handleCallback}/>
+            </Col>
+          </Row>
           <Row>
             <Col>
               <Form.Label htmlFor="basic-url">Start Time</Form.Label>
@@ -144,6 +155,7 @@ const AddEvent = () => {
       <Button variant="primary" size="sm" onClick={onSubmit}>
         Submit
       </Button>
+      <Row>{data}</Row>
     </Container>
   );
 };
