@@ -20,7 +20,7 @@ class NavBar1 extends React.Component {
           <Nav className="me-auto">
             {this.props.currentUser && Roles.userIsInRole(Meteor.userId(), 'admin') === false ? (
                 [<Nav.Link href="#event" key='events'>Events</Nav.Link>,
-                  <Nav.Link href="#forums" key='forums'>Forums</Nav.Link>,
+                  <Nav.Link href="#forum" key='forums'>Forums</Nav.Link>,
                   <Nav.Link href="#profile" key='profile'>Profile</Nav.Link>]
             ) : ''}
             {this.props.currentUser && Roles.userIsInRole(Meteor.userId(), 'admin') ? (

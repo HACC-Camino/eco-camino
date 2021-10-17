@@ -35,3 +35,4 @@ meteortesting:mocha
 xolvio:cleaner
 dburles:factory
 react-meteor-data
+tracker
