@@ -6,12 +6,25 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import swal from 'sweetalert';
 import moment from 'moment';
+import { GoogleMap, LoadScript, Marker, InfoWindow } from '@react-google-maps/api';
 import { eventDefineMethod } from '../../../api/event/EventCollection.methods';
+import '@reach/combobox/styles.css';
+
+const containerStyle = {
+  width: '600px',
+  height: '500px',
+};
+
+const center = {
+  lat: 21.3069,
+  lng: -157.8583,
+};
 
 // CSS Modules, react-datepicker-cssmodules.css
 // import 'react-datepicker/dist/react-datepicker-cssmodules.css';
 
 const AddEvent = () => {
+  // Creating form hooks
   const [finalType, setFinalType] = useState(() => '');
   const [finalDate, setFinalDate] = useState(new Date());
   const [finalStartTime, setFinalStartTime] = useState('');
@@ -25,6 +38,16 @@ const AddEvent = () => {
     { value: 'Workshop', label: 'Workshop' },
     { value: 'Cleanup', label: 'Cleanup' },
   ];
+  // Google map
+  const [markers, setMarkers] = useState([]);
+  const [selected, setSelected] = useState(null);
+  const onMapClick = React.useCallback((event) => {
+    setMarkers([{ lat: event.latLng.lat(), lng: event.latLng.lng(), time: new Date() }]);
+  }, []);
+  const mapRef = React.useRef();
+  const onMapLoad = React.useCallback((map) => {
+    mapRef.current = map;
+  }, []);
   const onSubmit = () => {
     const typeOfEvent = finalType.value;
     const date = finalDate;
@@ -59,6 +82,7 @@ const AddEvent = () => {
   };
   return (
     <Container>
+      <h2>Add Event</h2>
       <Row>
         <Col>
           <Form.Label htmlFor="basic-url">Title of Your Event</Form.Label>
@@ -141,6 +165,33 @@ const AddEvent = () => {
         <FormControl placeholder='Description'
                      value={finalDescription} onChange={e => setFinalDescription(e.target.value)} />
       </InputGroup>
+        <LoadScript
+        googleMapsApiKey=""
+        >
+          <h2>Location</h2>
+          <GoogleMap
+          mapContainerStyle={containerStyle}
+          center={center}
+          zoom={10}
+          onClick={onMapClick}
+          onLoad={onMapLoad}
+          >
+            {markers.map(marker => <Marker
+            key={marker.time.toISOString()}
+            position={{ lat: marker.lat, lng: marker.lng }}
+            onClick={() => {
+              setSelected(marker);
+            }}/>)}
+
+            {selected ? (<InfoWindow
+            position={{ lat: selected.lat, lng: selected.lng }} onCloseClick={() => { setSelected(null); }}>
+              <div>
+                <h2> Location Of Event </h2>
+              </div>
+            </InfoWindow>) : null }
+          </GoogleMap>
+        </LoadScript>
+      <br />
       <Button variant="primary" size="lg" onClick={onSubmit}>
         Submit
       </Button>
