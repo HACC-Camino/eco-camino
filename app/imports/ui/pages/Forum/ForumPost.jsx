@@ -9,7 +9,7 @@ import ForumMainPostCard from '../../components/forum/ForumMainPostCard';
 import ForumRepliesCard from '../../components/forum/ForumRepliesCard';
 
 const ForumPost = ({ ready, users, mainPost, replies }) => (ready ?
-    <Container className="py-sm-3">
+    <Container className="pt-sm-3" id="page-container">
       <Row className="pb-sm-2">
         <Link to='/forum'><h2>Forums</h2></Link>
       </Row>
@@ -26,7 +26,8 @@ const ForumPost = ({ ready, users, mainPost, replies }) => (ready ?
     </Container>
   : <Spinner animation="border" role="status">
       <span className="visually-hidden">Loading...</span>
-    </Spinner>);
+    </Spinner>
+);
 
 ForumPost.propTypes = {
   ready: PropTypes.bool.isRequired,
