@@ -1,6 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import SimpleSchema from 'simpl-schema';
 import { check } from 'meteor/check';
+import { _ } from 'meteor/underscore';
 import BaseCollection from '../base/BaseCollection';
 
 export const eventPublications = {
@@ -20,6 +21,7 @@ class EventCollection extends BaseCollection {
       description: String,
       startTime: String,
       endTime: String,
+      participants: Number,
       reportLink: {
         type: String,
         optional: true,
@@ -38,7 +40,7 @@ class EventCollection extends BaseCollection {
    * @param condition the condition of the item.
    * @return {String} the docID of the new document.
    */
-  define({ title, date, name, location, owner, email,
+  define({ title, date, name, location, owner, email, participants,
            description, startTime, endTime, typeOfEvent, reportLink }) {
     const docID = this._collection.insert({
       title,
@@ -52,6 +54,7 @@ class EventCollection extends BaseCollection {
       reportLink,
       startTime,
       endTime,
+      participants,
     });
     return docID;
   }
@@ -64,7 +67,7 @@ class EventCollection extends BaseCollection {
    * @param condition the new condition (optional).
    */
   update(docID, { title, date, name, location, owner, email,
-    description, startTime, endTime, typeOfEvent, reportLink }) {
+    description, startTime, endTime, typeOfEvent, reportLink, participants }) {
     const updateData = {};
     if (title) {
       updateData.title = title;
@@ -98,6 +101,9 @@ class EventCollection extends BaseCollection {
     }
     if (reportLink) {
       updateData.reportLink = reportLink;
+    }
+    if (_.isNumber(participants)) {
+      updateData.participants = participants;
     }
     this._collection.update(docID, { $set: updateData });
   }
