@@ -22,6 +22,8 @@ class EventCollection extends BaseCollection {
       startTime: String,
       endTime: String,
       participants: Number,
+      lat: Number,
+      lng: Number,
       reportLink: {
         type: String,
         optional: true,
@@ -40,13 +42,15 @@ class EventCollection extends BaseCollection {
    * @param condition the condition of the item.
    * @return {String} the docID of the new document.
    */
-  define({ title, date, name, location, owner, email, participants,
+  define({ title, date, name, location, owner, lat, lng, email, participants,
            description, startTime, endTime, typeOfEvent, reportLink }) {
     const docID = this._collection.insert({
       title,
       date,
       location,
       owner,
+      lat,
+      lng,
       name,
       email,
       description,
@@ -66,7 +70,7 @@ class EventCollection extends BaseCollection {
    * @param quantity the new quantity (optional).
    * @param condition the new condition (optional).
    */
-  update(docID, { title, date, name, location, owner, email,
+  update(docID, { title, date, name, location, owner, lat, lng, email,
     description, startTime, endTime, typeOfEvent, reportLink, participants }) {
     const updateData = {};
     if (title) {
@@ -104,6 +108,12 @@ class EventCollection extends BaseCollection {
     }
     if (_.isNumber(participants)) {
       updateData.participants = participants;
+    }
+    if (_.isNumber(lat)) {
+      updateData.lat = lat;
+    }
+    if (_.isNumber(lng)) {
+      updateData.lng = lng;
     }
     this._collection.update(docID, { $set: updateData });
   }
