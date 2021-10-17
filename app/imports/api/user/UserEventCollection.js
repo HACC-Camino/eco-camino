@@ -67,19 +67,21 @@ class UserEventCollection extends BaseCollection {
     return null;
   }
 
+  // Get the events that a specific user joined
   getUserEvent(username) {
     return this._collection.find({}, { owner: username }).fetch();
   }
 
+  // Gets the events of all users that joined any event
   getAllUserEvent() {
     return this._collection.find().fetch();
   }
 
-  getUserInEvent(event, username) {
-    const userEvents = this._collection.find({}, { owner: username }).fetch();
-    console.log(userEvents);
-    console.log(event);
-
+  // Gets the EVENTS from a specific user (UserEvent --> Event)
+  getUserJoinedEvent(EventCollection, username) {
+    const userEvents = this.getUserEvent(username);
+    const userEventID = userEvents.map(event => event.eventID);
+    return EventCollection.filter(event => userEventID.includes(event._id));
   }
 }
 

@@ -168,11 +168,29 @@ class EventCollection extends BaseCollection {
     return null;
   }
 
+  // Gets all the events after the current date
   getCurrentEvents() {
     const todayDate = new Date();
     const allEvents = this._collection.find({}, { sort: { date: 1 } }).fetch();
-    const currentEvents = allEvents.filter(event => event.date > todayDate);
-    return currentEvents;
+    return allEvents.filter(event => event.date > todayDate);
+  }
+
+  // Gets all the events that are cleanups
+  getCurrentCleanups() {
+    const currentEvents = this.getCurrentEvents();
+    return currentEvents.filter(event => event.typeOfEvent === 'Cleanup');
+  }
+
+  // Gets all the events that are workshops
+  getCurrentWorkshops() {
+    const currentEvents = this.getCurrentEvents();
+    return currentEvents.filter(event => event.typeOfEvent === 'Workshop');
+  }
+
+  // Gets all the events that are owned by a specific user
+  getCurrentOwnedWorkshops(username) {
+    const currentEvents = this.getCurrentEvents();
+    return currentEvents.filter(event => event.owner === username);
   }
 
   getEvenList() {
