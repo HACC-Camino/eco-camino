@@ -59,7 +59,6 @@ const AddEvent = () => {
     mapRef.current = map;
   }, []);
   const onSubmit = () => {
-    console.log(markers);
     const typeOfEvent = finalType.value;
     const date = finalDate;
     const startTime = moment(finalStartTime).format('hh:mm a');
