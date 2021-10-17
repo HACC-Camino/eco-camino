@@ -1,4 +1,4 @@
-![ci-badge](https://github.com/hot-n-code/ghg-tracker/workflows/hot-n-code-ghg-tracker/badge.svg)
+[![eco-camino](https://github.com/HACC-Camino/eco-camino/actions/workflows/cli.yml/badge.svg)](https://github.com/HACC-Camino/eco-camino/actions/workflows/cli.yml)
 
 Team Name: [HACCamino](https://hacc-camino.github.io/)
 
