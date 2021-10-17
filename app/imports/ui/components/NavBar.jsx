@@ -10,7 +10,7 @@ import { Navbar, Nav, Dropdown } from 'react-bootstrap';
 class NavBar1 extends React.Component {
   render() {
     return (
-        <Navbar bg="dark" variant="dark" expand="lg" >
+        <Navbar bg="primary" variant="dark" expand="lg" >
           <Navbar.Brand href="#"> <img alt=""
                                        src="/images/camino_logo.png"
                                        width="30"
