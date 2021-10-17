@@ -141,7 +141,7 @@ const AddEvent = () => {
         <FormControl placeholder='Description'
                      value={finalDescription} onChange={e => setFinalDescription(e.target.value)} />
       </InputGroup>
-      <Button variant="primary" size="sm" onClick={onSubmit}>
+      <Button variant="primary" size="lg" onClick={onSubmit}>
         Submit
       </Button>
     </Container>
