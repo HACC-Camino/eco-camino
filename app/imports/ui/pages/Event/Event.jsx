@@ -1,6 +1,6 @@
 import React from 'react';
 import { Meteor } from 'meteor/meteor';
-import { Container, Spinner, CardGroup, Row, Tab, Nav, Col } from 'react-bootstrap';
+import { Container, Spinner, CardGroup, Row, Tab, Nav, Col, Tabs } from 'react-bootstrap';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 import { Events } from '../../../api/event/EventCollection';
@@ -9,7 +9,8 @@ import EventItem from '../../components/event/EventItem';
 import AddEvent from './AddEvent';
 
 /** Renders a container containing all of the Events documents. */
-const Event = ({ events, userEvents, ready }) => (ready ? (
+const Event = ({ currentEvents, currentCleanups, currentWorkshops, joinedEvents,
+                 ownedEvents, userEvents, ready }) => (ready ? (
   <Container className='py-sm-3'>
     <h2>Event List</h2>
     <Tab.Container id="left-tabs-example" defaultActiveKey="first">
@@ -27,11 +28,48 @@ const Event = ({ events, userEvents, ready }) => (ready ? (
         <Col sm={9}>
           <Tab.Content>
             <Tab.Pane eventKey="first">
-              <CardGroup>
-                <Row xs={1} md={2} className="g-4">
-                  {events.map((event) => <EventItem key={event._id} event={event} userEvents={userEvents} />)}
-                </Row>
-              </CardGroup>
+              <Tabs defaultActiveKey="All" id="uncontrolled-tab-example" className="mb-3">
+                <Tab eventKey="All" title="All">
+                  <CardGroup>
+                    <Row xs={1} md={2} className="g-4">
+                      {currentEvents.map((event) => <EventItem key={event._id}
+                                                               event={event} userEvents={userEvents} />)}
+                    </Row>
+                  </CardGroup>
+                </Tab>
+                <Tab eventKey="Only Cleanups" title="Only Cleanups">
+                  <CardGroup>
+                    <Row xs={1} md={2} className="g-4">
+                      {currentCleanups.map((event) => <EventItem key={event._id}
+                                                                 event={event} userEvents={userEvents} />)}
+                    </Row>
+                  </CardGroup>
+                </Tab>
+                <Tab eventKey="Only Workshops" title="Only Workshops">
+                  <CardGroup>
+                    <Row xs={1} md={2} className="g-4">
+                      {currentWorkshops.map((event) => <EventItem key={event._id}
+                                                                 event={event} userEvents={userEvents} />)}
+                    </Row>
+                  </CardGroup>
+                </Tab>
+                <Tab eventKey="Owned Events" title="Owned Events">
+                  <CardGroup>
+                    <Row xs={1} md={2} className="g-4">
+                      {ownedEvents.map((event) => <EventItem key={event._id}
+                                                                 event={event} userEvents={userEvents} />)}
+                    </Row>
+                  </CardGroup>
+                </Tab>
+                <Tab eventKey="Joined Events" title="Joined Events">
+                  <CardGroup>
+                    <Row xs={1} md={2} className="g-4">
+                      {joinedEvents.map((event) => <EventItem key={event._id}
+                                                             event={event} userEvents={userEvents} />)}
+                    </Row>
+                  </CardGroup>
+                </Tab>
+              </Tabs>
             </Tab.Pane>
             <Tab.Pane eventKey="second">
               <AddEvent/>
@@ -49,9 +87,13 @@ const Event = ({ events, userEvents, ready }) => (ready ? (
 
 /** Require an array of Event documents in the props. */
 Event.propTypes = {
-  events: PropTypes.array.isRequired,
   userEvents: PropTypes.array.isRequired,
   ready: PropTypes.bool.isRequired,
+  currentEvents: PropTypes.array.isRequired,
+  currentCleanups: PropTypes.array.isRequired,
+  currentWorkshops: PropTypes.array.isRequired,
+  ownedEvents: PropTypes.array.isRequired,
+  joinedEvents: PropTypes.array.isRequired,
 };
 
 /** withTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker */
@@ -61,12 +103,20 @@ export default withTracker(() => {
   const ready = Events.subscribeEventAdmin().ready()
   && UserEvents.subscribeUserEvent()
   && username !== undefined;
-  const events = Events.getEvenList();
+  const currentEvents = Events.getCurrentEvents();
+  const currentCleanups = Events.getCurrentCleanups();
+  const currentWorkshops = Events.getCurrentWorkshops();
+  const ownedEvents = Events.getCurrentOwnedWorkshops(username);
   const userEvents = UserEvents.getUserEvent(username);
+  const joinedEvents = UserEvents.getUserJoinedEvent(currentEvents, username);
   return {
     ready,
-    events,
+    currentEvents,
+    currentCleanups,
+    currentWorkshops,
+    ownedEvents,
     username,
     userEvents,
+    joinedEvents,
   };
 })(Event);

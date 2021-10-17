@@ -34,10 +34,11 @@ const AddEvent = () => {
     const location = finalLocation;
     const name = finalName;
     const email = finalEmail;
+    const participants = 1;
     const owner = Meteor.user().username;
     const description = finalDescription;
     eventDefineMethod.call({
-      typeOfEvent, date, startTime, endTime, title, location, name,
+      typeOfEvent, date, startTime, endTime, participants, title, location, name,
       owner, email, description },
     error => {
       if (error) {
@@ -82,6 +83,7 @@ const AddEvent = () => {
             <Form.Label htmlFor="basic-url">Date of Event</Form.Label>
             <DatePicker
           name='Date of Event'
+          minDate={moment().toDate()}
           selected={finalDate}
           onChange={(date) => setFinalDate(date)}
           /></Row>

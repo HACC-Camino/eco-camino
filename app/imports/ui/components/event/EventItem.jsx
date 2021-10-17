@@ -29,12 +29,13 @@ const EventItem = ({ event, userEvents }) => {
           <Card.Text>Contact Person: {event.name}</Card.Text>
           <Card.Text>Contact Info: {event.email}</Card.Text>
           <Card.Text>Description: {event.description}</Card.Text>
+          <Card.Text>Participants: {event.participants}</Card.Text>
         </Card.Body>
         {username === event.owner ? <EditandDeleteButtons event={event}/> :
         <Container>
           <Row>
             <Col><JoinButton event={event} username={username} check={check} /></Col>
-            <Col><LeaveButton check={check} ownerID={ownerID} /></Col>
+            <Col><LeaveButton event={event} check={check} ownerID={ownerID} /></Col>
           </Row>
         </Container>}
       </Card>

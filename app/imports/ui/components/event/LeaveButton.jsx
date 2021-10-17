@@ -3,11 +3,17 @@ import { Button, Container, Row, Col } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import swal from 'sweetalert';
 import { userEventRemoveItMethod } from '../../../api/user/UserEventCollection.methods';
+import { eventUpdateMethod } from '../../../api/event/EventCollection.methods';
 
 /** Renders an Edit and Delete Button */
-const LeaveButton = ({ ownerID, check }) => {
+const LeaveButton = ({ ownerID, event, check }) => {
   const deleteHandle = () => {
     const _id = ownerID;
+    const updateData = event;
+    updateData.participants = event.participants - 1;
+    eventUpdateMethod.call(updateData, (error) => (error ?
+    swal('Error', error.message, 'error') :
+    swal('Success', 'Data edited successfully', 'success')));
     userEventRemoveItMethod.call({ _id },
     error => {
       if (error) {
@@ -33,6 +39,7 @@ const LeaveButton = ({ ownerID, check }) => {
 
 /** Require a document to be passed to this component. */
 LeaveButton.propTypes = {
+  event: PropTypes.object.isRequired,
   ownerID: PropTypes.string.isRequired,
   check: PropTypes.bool.isRequired,
 };
