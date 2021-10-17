@@ -1,6 +1,6 @@
 import React from 'react';
 import { Meteor } from 'meteor/meteor';
-import { Container, Spinner, CardGroup, Row, Tab, Nav, Col } from 'react-bootstrap';
+import { Container, Spinner, CardGroup, Row, Tab, Nav, Col, Tabs } from 'react-bootstrap';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 import { Events } from '../../../api/event/EventCollection';
@@ -27,11 +27,22 @@ const Event = ({ events, userEvents, ready }) => (ready ? (
         <Col sm={9}>
           <Tab.Content>
             <Tab.Pane eventKey="first">
-              <CardGroup>
-                <Row xs={1} md={2} className="g-4">
-                  {events.map((event) => <EventItem key={event._id} event={event} userEvents={userEvents} />)}
-                </Row>
-              </CardGroup>
+              <Tabs defaultActiveKey="profile" id="uncontrolled-tab-example" className="mb-3">
+                <Tab eventKey="home" title="Home">
+                  <CardGroup>
+                    <Row xs={1} md={2} className="g-4">
+                      {events.map((event) => <EventItem key={event._id} event={event} userEvents={userEvents} />)}
+                    </Row>
+                  </CardGroup>
+                </Tab>
+                <Tab eventKey="profile" title="Profile">
+                  <CardGroup>
+                    <Row xs={1} md={2} className="g-4">
+                      {events.map((event) => <EventItem key={event._id} event={event} userEvents={userEvents} />)}
+                    </Row>
+                  </CardGroup>
+                </Tab>
+              </Tabs>
             </Tab.Pane>
             <Tab.Pane eventKey="second">
               <AddEvent/>
@@ -61,7 +72,7 @@ export default withTracker(() => {
   const ready = Events.subscribeEventAdmin().ready()
   && UserEvents.subscribeUserEvent()
   && username !== undefined;
-  const events = Events.getEvenList();
+  const events = Events.getCurrentEvents();
   const userEvents = UserEvents.getUserEvent(username);
   return {
     ready,

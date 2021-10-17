@@ -168,6 +168,13 @@ class EventCollection extends BaseCollection {
     return null;
   }
 
+  getCurrentEvents() {
+    const todayDate = new Date();
+    const allEvents = this._collection.find({}, { sort: { date: 1 } }).fetch();
+    const currentEvents = allEvents.filter(event => event.date > todayDate);
+    return currentEvents;
+  }
+
   getEvenList() {
     return this._collection.find({}, { sort: { date: 1 } }).fetch();
   }

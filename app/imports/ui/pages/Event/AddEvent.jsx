@@ -83,6 +83,7 @@ const AddEvent = () => {
             <Form.Label htmlFor="basic-url">Date of Event</Form.Label>
             <DatePicker
           name='Date of Event'
+          minDate={moment().toDate()}
           selected={finalDate}
           onChange={(date) => setFinalDate(date)}
           /></Row>
