@@ -57,20 +57,20 @@ class Resources extends React.Component {
           <Row>
             <Col style={textStyle} xs="6" sm="4" >
               <Card text="dark" style={{ width: '30rem' }} className="mb-2">
-                <Card.Img variant="top" src="holder.js/100px180" />
+                <Card.Img variant="top" src="/images/resource-page/hawaiiconservation.jpg" />
                 <Card.Body>
-                  <Card.Title>Card Title</Card.Title>
+                  <Card.Title>Hawaii Conservation Alliance</Card.Title>
                   <Card.Text>
                     Some quick example text to build on the card title and make up the bulk of
                     the cards content.
                   </Card.Text>
-                  <Button variant="primary">Go somewhere</Button>
+                  <Button variant="primary" href="https://www.hawaiiconservation.org/">Learn More</Button>
                 </Card.Body>
               </Card>
             </Col>
             <Col style={textStyle} xs="6" sm="4" >
               <Card text="dark" style={{ width: '30rem' }} className="mb-2">
-                <Card.Img variant="top" src="holder.js/100px180" />
+                <Card.Img variant="top" src="holder.js/100px180"/>
                 <Card.Body>
                   <Card.Title>Card Title</Card.Title>
                   <Card.Text>
