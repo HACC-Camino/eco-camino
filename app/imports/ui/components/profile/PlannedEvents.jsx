@@ -3,7 +3,7 @@ import { Table } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 
 const renderEvents = (my_sorted_events_list, index) => (
-    <tr>
+    <tr key={index}>
         <th>{index}</th>
         <th>{my_sorted_events_list.title}</th>
         <th>{my_sorted_events_list.date.toLocaleDateString()}</th>

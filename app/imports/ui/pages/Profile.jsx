@@ -10,7 +10,7 @@ import { Events } from '../../api/event/EventCollection';
 import { Users } from '../../api/user/UserCollection';
 import { UserEvents } from '../../api/user/UserEventCollection';
 
-const Profile = ({ filtered_events, ready, userDetail }) => (ready ? (
+const Profile = ({ filtered_events, ready, userDetail, past_events }) => (ready ? (
     <div className='container' style={{ paddingTop: '30px' }}>
         <div className='row row-cols-sm-2' style={{ paddingBottom: '30px' }}>
             <Col sm={4} style={{ paddingBottom: '30px', paddingRight: '30px' }}>
@@ -28,7 +28,7 @@ const Profile = ({ filtered_events, ready, userDetail }) => (ready ? (
                 <div className='row'>
                     <div className='card'>
                         <h3 className='card-title' style={{ padding: '30px' }}>Past Events</h3>
-                        <PastEvents/>
+                        <PastEvents past_events={past_events}/>
                     </div>
                 </div>
             </Col>
@@ -46,6 +46,7 @@ Profile.propTypes = {
     userDetail: PropTypes.object,
     ready: PropTypes.bool.isRequired,
     filtered_events: PropTypes.array,
+    past_events: PropTypes.array,
 };
 
 /** withTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker */
@@ -66,14 +67,20 @@ export default withTracker(() => {
         my_event_list.push(event);
     });
     Array.prototype.push.apply(my_event_list, userOwner);
-    const my_sorted_events_list = my_event_list.slice().sort((a, b) => b.date - a.date).reverse();
-    const filtered_events = my_sorted_events_list.filter(new_filtered_events => {
+    const my_sorted_events_list_descending = my_event_list.slice().sort((a, b) => b.date - a.date).reverse();
+    const my_sorted_events_list_ascending = my_event_list.slice().sort((a, b) => b.date - a.date);
+    const filtered_events = my_sorted_events_list_descending.filter(new_filtered_events => {
         const current_date = new Date().getTime();
         return new_filtered_events.date > current_date;
+    });
+    const past_events = my_sorted_events_list_ascending.filter(past_filtered_events => {
+        const current_date = new Date().getTime();
+        return past_filtered_events.date < current_date;
     });
     return {
         ready,
         userDetail,
         filtered_events,
+        past_events,
     };
 })(Profile);
