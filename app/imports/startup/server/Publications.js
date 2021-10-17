@@ -3,11 +3,13 @@ import { Stuffs } from '../../api/stuff/StuffCollection';
 import { Events } from '../../api/event/EventCollection';
 import { ForumPosts } from '../../api/forum/ForumPostCollection';
 import { Users } from '../../api/user/UserCollection';
+import { UserEvents } from '../../api/user/UserEventCollection';
 
 const collections = [
   ForumPosts,
   Users,
   Events,
+  UserEvents,
 ];
 
 collections.forEach(collection => collection.publish());

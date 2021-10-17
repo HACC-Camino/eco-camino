@@ -21,8 +21,8 @@ const EditandDeleteButtons = ({ event }) => {
   return (
     <Container style={{ paddingBottom: '10px' }}>
       <Row>
-        <Col><Button variant="danger" onClick={deleteHandle}>Delete</Button></Col>
         <Col><EditHandle event={event} /></Col>
+        <Col><Button variant="primary" onClick={deleteHandle}>Delete</Button></Col>
       </Row>
     </Container>
   );

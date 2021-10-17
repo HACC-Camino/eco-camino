@@ -4,11 +4,12 @@ import { Container, Spinner, CardGroup, Row, Tab, Nav, Col } from 'react-bootstr
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 import { Events } from '../../../api/event/EventCollection';
+import { UserEvents } from '../../../api/user/UserEventCollection';
 import EventItem from '../../components/event/EventItem';
 import AddEvent from './AddEvent';
 
 /** Renders a container containing all of the Events documents. */
-const Event = ({ events, username, ready }) => (ready ? (
+const Event = ({ events, userEvents, ready }) => (ready ? (
   <Container className='py-sm-3'>
     <h2>Event List</h2>
     <Tab.Container id="left-tabs-example" defaultActiveKey="first">
@@ -28,7 +29,7 @@ const Event = ({ events, username, ready }) => (ready ? (
             <Tab.Pane eventKey="first">
               <CardGroup>
                 <Row xs={1} md={2} className="g-4">
-                  {events.map((event) => <EventItem key={event._id} event={event} username={username} />)}
+                  {events.map((event) => <EventItem key={event._id} event={event} userEvents={userEvents} />)}
                 </Row>
               </CardGroup>
             </Tab.Pane>
@@ -49,6 +50,7 @@ const Event = ({ events, username, ready }) => (ready ? (
 /** Require an array of Event documents in the props. */
 Event.propTypes = {
   events: PropTypes.array.isRequired,
+  userEvents: PropTypes.array.isRequired,
   ready: PropTypes.bool.isRequired,
 };
 
@@ -57,11 +59,14 @@ export default withTracker(() => {
   // Get access to Event documents.
   const username = Meteor.user()?.username;
   const ready = Events.subscribeEventAdmin().ready()
+  && UserEvents.subscribeUserEvent()
   && username !== undefined;
   const events = Events.getEvenList();
+  const userEvents = UserEvents.getUserEvent(username);
   return {
     ready,
     events,
     username,
+    userEvents,
   };
 })(Event);
