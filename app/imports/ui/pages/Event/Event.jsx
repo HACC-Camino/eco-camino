@@ -33,7 +33,7 @@ const Event = ({ currentEvents, currentCleanups, currentWorkshops, joinedEvents,
                 <Tab eventKey="All" title="All" style={{ paddingBottom: '60px' }}>
                   <CardGroup>
                     <Row style={{ width: '100%' }}>
-                      <DisplayMap eventList={currentEvents} />
+                      <DisplayMap eventList={currentEvents} userEvents={userEvents} />
                     </Row>
                     <Row xs={1} md={2} className="g-4">
                       {currentEvents.map((event) => <EventItem key={event._id}

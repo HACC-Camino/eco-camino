@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
-import { Container, Spinner, CardGroup, Row, Tab, Nav, Col, Tabs, InputGroup, FormControl } from 'react-bootstrap';
+import { Container } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import { GoogleMap, LoadScript, Marker, InfoWindow } from '@react-google-maps/api';
+import mapStyle from './mapStyle';
+import EventItem from '../event/EventItem';
 
 const containerStyle = {
   width: '100%',
@@ -13,15 +15,15 @@ const center = {
   lng: -158.0000,
 };
 
+const options = {
+  styles: mapStyle,
+};
+
 /** Renders a container containing all of the Events documents. */
-const DisplayMap = ({ eventList }) => {
-  const filter = eventList.map(({ lat, lng }) => ({ lat, lng }));
-  const [markers, setMarkers] = useState(filter);
-  console.log(markers);
+const DisplayMap = ({ eventList, userEvents }) => {
+  const cleanUps = eventList.filter(event => event.typeOfEvent === 'Cleanup');
+  const workshops = eventList.filter(event => event.typeOfEvent === 'Workshop');
   const [selected, setSelected] = useState(null);
-  // const onMapClick = React.useCallback((event) => {
-  //   setMarkers([{ lat: event.latLng.lat(), lng: event.latLng.lng() }]);
-  // }, []);
   const mapRef = React.useRef();
   const onMapLoad = React.useCallback((map) => {
     mapRef.current = map;
@@ -35,11 +37,27 @@ const DisplayMap = ({ eventList }) => {
       mapContainerStyle={containerStyle}
       center={center}
       zoom={10}
+      options={options}
       onLoad={onMapLoad}
       >
-        {markers.map(marker => <Marker
+        {cleanUps.map(marker => <Marker
         key={marker.lat + marker.lng}
         position={{ lat: marker.lat, lng: marker.lng }}
+        icon={{
+          url: '/images/greenM.png',
+          scale: 2,
+        }}
+        onClick={() => {
+          setSelected(marker);
+        }}/>)}
+
+        {workshops.map(marker => <Marker
+        key={marker.lat + marker.lng}
+        position={{ lat: marker.lat, lng: marker.lng }}
+        icon={{
+          url: '/images/orangeM.png',
+          scale: 2,
+        }}
         onClick={() => {
           setSelected(marker);
         }}/>)}
@@ -47,7 +65,8 @@ const DisplayMap = ({ eventList }) => {
         {selected ? (<InfoWindow
         position={{ lat: selected.lat, lng: selected.lng }} onCloseClick={() => { setSelected(null); }}>
           <div>
-            <h4> Location Of Event </h4>
+            <EventItem key={selected._id}
+                       event={selected} userEvents={userEvents} />
           </div>
         </InfoWindow>) : null }
       </GoogleMap>
@@ -59,6 +78,7 @@ const DisplayMap = ({ eventList }) => {
 /** Require an array of Event documents in the props. */
 DisplayMap.propTypes = {
   eventList: PropTypes.array.isRequired,
+  userEvents: PropTypes.array.isRequired,
 };
 
 /** withTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker */

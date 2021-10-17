@@ -10,6 +10,7 @@ import { GoogleMap, LoadScript, Marker, InfoWindow } from '@react-google-maps/ap
 import { eventDefineMethod } from '../../../api/event/EventCollection.methods';
 // import UploadPhotoModal from '../../components/aws/UploadPhotoModal';
 import '@reach/combobox/styles.css';
+import mapStyle from '../../components/map/mapStyle';
 
 const containerStyle = {
   width: '100%',
@@ -19,6 +20,10 @@ const containerStyle = {
 const center = {
   lat: 21.500,
   lng: -158.0000,
+};
+
+const options = {
+  styles: mapStyle,
 };
 
 // CSS Modules, react-datepicker-cssmodules.css
@@ -189,6 +194,7 @@ const AddEvent = () => {
           zoom={10}
           onClick={onMapClick}
           onLoad={onMapLoad}
+          options={options}
           >
             {markers.map(marker => <Marker
             key={marker.time.toISOString()}
