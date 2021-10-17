@@ -10,8 +10,8 @@ const ForumMainPostCard = ({ mainPost, owner }) => (
         <Table borderless className="fixed">
           <tbody>
           <tr>
-            <td width="75%">{mainPost.content}</td>
-            <td width="25%">
+            <td width="80%">{mainPost.content}</td>
+            <td width="20%">
               Posted By: <ProfilePreviewModal userDetail={owner}/>
               <br/>
               Date: {mainPost.date.toLocaleString()}

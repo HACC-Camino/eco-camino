@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import AWS from 'aws-sdk';
 import PropTypes from 'prop-types';
 import Button from 'react-bootstrap/Button';
-import { Container, FormControl, FormGroup, FormLabel, InputGroup, ProgressBar } from 'react-bootstrap';
+import { Container, Form, FormGroup, FormLabel, InputGroup, ProgressBar } from 'react-bootstrap';
 
 const BUCKET_NAME = 'eco-camino-main';
 const REGION_NAME = 'us-west-1';
@@ -78,8 +78,8 @@ const UploadPhotoButton = ({ parentCallback2 }) => {
          <FormGroup>
             <FormLabel>Upload image</FormLabel>
             <InputGroup className='mb-3'>
-               <FormControl type='file' onChange={handleFileInput}/>
-               <Button onClick={() => validateImage(selectedFile)}> Upload </Button>
+               <Form.Control size='md' type='file' onChange={handleFileInput}/>
+               <Button size='md' onClick={() => validateImage(selectedFile)}> Upload </Button>
             </InputGroup>
             <ProgressBar animated now={progress}/>
          </FormGroup>

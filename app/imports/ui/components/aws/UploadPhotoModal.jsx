@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Button, Modal } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import UploadPhotoButton from './UploadPhotoButton';
+import { BsXLg } from 'react-icons/all';
 
 const UploadPhotoModal = ({ parentCallback }) => {
     const [show, setShow] = useState(false);
@@ -21,8 +22,9 @@ const UploadPhotoModal = ({ parentCallback }) => {
                 show={show}
                 onHide={handleClose}
             >
-                <Modal.Header closeButton>
+                <Modal.Header>
                     <Modal.Title>Upload Photo</Modal.Title>
+                    <BsXLg style={{ cursor: 'pointer' }} onClick={handleClose}/>
                 </Modal.Header>
                 <Modal.Body>
                     <UploadPhotoButton parentCallback2={handleCallback}/>

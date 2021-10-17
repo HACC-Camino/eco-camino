@@ -95,8 +95,8 @@ const Forum = ({ username, ready, forumPosts }) => {
         <Table striped hover className="fixed">
           <thead>
           <tr>
-            <th width="60%">Title</th>
-            <th width="10%">Replies</th>
+            <th width="64%">Title</th>
+            <th width="6%">Replies</th>
             <th width="15%">Date Created</th>
             <th width="15%">Last Reply</th>
           </tr>

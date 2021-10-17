@@ -5,12 +5,13 @@ import ProfilePreviewModal from '../profile/ProfilePreviewModal';
 
 const getCardBodyContent = (replyOwner) => (
   <tr key={replyOwner.reply._id} className="border-bottom">
-    <td width="75%"><br/>{replyOwner.reply.content}<br/><br/></td>
-    <td width="25%">
+    <td width="80%"><br/>{replyOwner.reply.content}<br/><br/></td>
+    <td width="20%">
       <br/>
       Posted By: <ProfilePreviewModal userDetail={replyOwner.owner}/>
       <br/>
       Date: {replyOwner.reply.date.toLocaleString()}
+      <br/><br/>
     </td>
   </tr>);
 
