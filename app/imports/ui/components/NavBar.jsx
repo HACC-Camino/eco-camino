@@ -18,13 +18,17 @@ class NavBar1 extends React.Component {
                                        className="d-inline-block align-top"/>{''} EcoCamino
           </Navbar.Brand>
           <Nav className="me-auto">
-            {this.props.currentUser ? (
+            {this.props.currentUser && Roles.userIsInRole(Meteor.userId(), 'admin') === false ? (
                 [<Nav.Link href="#event" key='events'>Events</Nav.Link>,
                   <Nav.Link href="#forum" key='forums'>Forums</Nav.Link>,
                   <Nav.Link href="#profile" key='profile'>Profile</Nav.Link>]
             ) : ''}
-            {Roles.userIsInRole(Meteor.userId(), 'admin') ? (
-                <Nav.Link href="#admin" key='admin'>Admin</Nav.Link>
+            {this.props.currentUser && Roles.userIsInRole(Meteor.userId(), 'admin') ? (
+                [<Nav.Link href="#event" key='events'>Events</Nav.Link>,
+                  <Nav.Link href="#forum" key='forums'>Forums</Nav.Link>,
+                  <Nav.Link href="#profile" key='profile'>Dashboard</Nav.Link>,
+                  <Nav.Link href="#admin-list" key='admin-list'>Admin List</Nav.Link>,
+                ]
             ) : ''}
             <Nav.Link href="#resources" key='resources'>Resources</Nav.Link>
           </Nav>
