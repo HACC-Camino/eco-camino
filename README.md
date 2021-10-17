@@ -1,5 +1,3 @@
-[![eco-camino](https://github.com/HACC-Camino/eco-camino/actions/workflows/cli.yml/badge.svg)](https://github.com/HACC-Camino/eco-camino/actions/workflows/cli.yml)
-
 Team Name: [HACCamino](https://hacc-camino.github.io/)
 
 ECOCamino is a web application designed to help users organize events such as cleanups and workshops, report trash or cleanup, as well as promoting other non-profit organizations around the area. 
