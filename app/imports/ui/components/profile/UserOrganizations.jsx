@@ -1,7 +1,7 @@
 import React from 'react';
 import { Card, Col, Container, Image, Row } from 'react-bootstrap';
 
-const UserOrganizations = props => (
+const UserOrganizations = () => (
     <Container>
         <Card>
             <Row>
