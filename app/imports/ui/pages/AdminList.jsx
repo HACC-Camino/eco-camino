@@ -3,9 +3,9 @@ import { Loader, Table, Container, Input, Header, Divider } from 'semantic-ui-re
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 import SmartDataTable from 'react-smart-data-table';
-import { Users } from '../../../api/user/UserCollection';
+import { Users } from '../../api/user/UserCollection';
 import 'react-smart-data-table/dist/react-smart-data-table.css';
-import DeleteUser from '../../components/admin-users-page/DeleteUser';
+// import DeleteUser from '../../components/admin-users-page/DeleteUser';
 
 // Renders a table containing all of the users profiles. Use <User> to render each row.
 class AdminList extends React.Component {
