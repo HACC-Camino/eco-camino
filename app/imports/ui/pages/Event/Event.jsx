@@ -7,6 +7,7 @@ import { Events } from '../../../api/event/EventCollection';
 import { UserEvents } from '../../../api/user/UserEventCollection';
 import EventItem from '../../components/event/EventItem';
 import AddEvent from './AddEvent';
+import DisplayMap from '../../components/map/DisplayMap';
 
 /** Renders a container containing all of the Events documents. */
 const Event = ({ currentEvents, currentCleanups, currentWorkshops, joinedEvents,
@@ -29,23 +30,32 @@ const Event = ({ currentEvents, currentCleanups, currentWorkshops, joinedEvents,
           <Tab.Content>
             <Tab.Pane eventKey="first">
               <Tabs defaultActiveKey="All" id="uncontrolled-tab-example" className="mb-3">
-                <Tab eventKey="All" title="All">
+                <Tab eventKey="All" title="All" style={{ paddingBottom: '60px' }}>
                   <CardGroup>
+                    <Row style={{ width: '100%' }}>
+                      <DisplayMap eventList={currentEvents} userEvents={userEvents} />
+                    </Row>
                     <Row xs={1} md={2} className="g-4">
                       {currentEvents.map((event) => <EventItem key={event._id}
                                                                event={event} userEvents={userEvents} />)}
                     </Row>
                   </CardGroup>
                 </Tab>
-                <Tab eventKey="Only Cleanups" title="Only Cleanups">
+                <Tab eventKey="Only Cleanups" title="Only Cleanups" style={{ paddingBottom: '60px' }}>
                   <CardGroup>
+                    <Row style={{ width: '100%' }}>
+                      <DisplayMap eventList={currentCleanups} userEvents={userEvents} />
+                    </Row>
                     <Row xs={1} md={2} className="g-4">
                       {currentCleanups.map((event) => <EventItem key={event._id}
                                                                  event={event} userEvents={userEvents} />)}
                     </Row>
                   </CardGroup>
                 </Tab>
-                <Tab eventKey="Only Workshops" title="Only Workshops">
+                <Tab eventKey="Only Workshops" title="Only Workshops" style={{ paddingBottom: '60px' }}>
+                  <Row style={{ width: '100%' }}>
+                    <DisplayMap eventList={currentWorkshops} userEvents={userEvents} />
+                  </Row>
                   <CardGroup>
                     <Row xs={1} md={2} className="g-4">
                       {currentWorkshops.map((event) => <EventItem key={event._id}
@@ -53,7 +63,10 @@ const Event = ({ currentEvents, currentCleanups, currentWorkshops, joinedEvents,
                     </Row>
                   </CardGroup>
                 </Tab>
-                <Tab eventKey="Owned Events" title="Owned Events">
+                <Tab eventKey="Owned Events" title="Owned Events" style={{ paddingBottom: '60px' }}>
+                  <Row style={{ width: '100%' }}>
+                    <DisplayMap eventList={ownedEvents} userEvents={userEvents} />
+                  </Row>
                   <CardGroup>
                     <Row xs={1} md={2} className="g-4">
                       {ownedEvents.map((event) => <EventItem key={event._id}
@@ -61,7 +74,10 @@ const Event = ({ currentEvents, currentCleanups, currentWorkshops, joinedEvents,
                     </Row>
                   </CardGroup>
                 </Tab>
-                <Tab eventKey="Joined Events" title="Joined Events">
+                <Tab eventKey="Joined Events" title="Joined Events" style={{ paddingBottom: '60px' }}>
+                  <Row style={{ width: '100%' }}>
+                    <DisplayMap eventList={joinedEvents} userEvents={userEvents} />
+                  </Row>
                   <CardGroup>
                     <Row xs={1} md={2} className="g-4">
                       {joinedEvents.map((event) => <EventItem key={event._id}
