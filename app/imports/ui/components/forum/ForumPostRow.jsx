@@ -1,12 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { useHistory } from 'react-router-dom';
 
 const ForumPostRow = ({ mainPost, replies }) => {
   const numReplies = replies.length;
   const latestReply = numReplies > 0 ? replies[0] : mainPost;
 
+  const history = useHistory();
+  const goToPage = () => {
+    const pageLink = `/forum-post/${mainPost._id}`;
+    history.push(pageLink);
+  };
+
   return (
-    <tr>
+    <tr onClick={goToPage} style={{ cursor: 'pointer' }}>
       <td>{mainPost.title}</td>
       <td>{numReplies}</td>
       <td>
