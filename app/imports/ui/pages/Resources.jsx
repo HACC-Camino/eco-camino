@@ -12,7 +12,7 @@ class Resources extends React.Component {
           </Row>
           <Row className="pb-sm-2">
               <Col style={textStyle} xs="6" sm="4" >
-                <Card text="light" style={{ width: '18 rem' }} className="mb-2">
+                <Card text="dark" style={{ width: '18 rem' }} className="mb-2">
                   <Card.Header>Tip #2</Card.Header>
                   <Card.Body>
                     <Card.Title>Ways to save water</Card.Title>
@@ -25,7 +25,7 @@ class Resources extends React.Component {
                 </Card>
               </Col>
               <Col style={textStyle} xs="6" sm="4">
-                <Card text="light" style={{ width: '18 rem' }} className="mb-2">
+                <Card text="dark" style={{ width: '18 rem' }} className="mb-2">
                   <Card.Header>Tip #2</Card.Header>
                   <Card.Body>
                     <Card.Title>Learn about growing your own plants</Card.Title>
@@ -38,7 +38,7 @@ class Resources extends React.Component {
                 </Card>
               </Col>
               <Col style={textStyle} sm="4">
-                <Card text="light" style={{ width: '18 rem' }} className="mb-2">
+                <Card text="dark" style={{ width: '18 rem' }} className="mb-2">
                   <Card.Header>Tip #3</Card.Header>
                   <Card.Body>
                     <Card.Title>Reduce, Reuse, Recycle!</Card.Title>
@@ -56,7 +56,7 @@ class Resources extends React.Component {
         </Row>
           <Row>
             <Col style={textStyle} xs="6" sm="4" >
-              <Card style={{ width: '30rem' }} className="mb-2">
+              <Card text="dark" style={{ width: '30rem' }} className="mb-2">
                 <Card.Img variant="top" src="holder.js/100px180" />
                 <Card.Body>
                   <Card.Title>Card Title</Card.Title>
@@ -69,7 +69,7 @@ class Resources extends React.Component {
               </Card>
             </Col>
             <Col style={textStyle} xs="6" sm="4" >
-              <Card style={{ width: '30rem' }} className="mb-2">
+              <Card text="dark" style={{ width: '30rem' }} className="mb-2">
                 <Card.Img variant="top" src="holder.js/100px180" />
                 <Card.Body>
                   <Card.Title>Card Title</Card.Title>
@@ -81,7 +81,7 @@ class Resources extends React.Component {
                 </Card.Body>
               </Card></Col>
             <Col style={textStyle} sm="4" >
-              <Card style={{ width: '30rem' }} className="mb-2">
+              <Card text="dark" style={{ width: '30rem' }} className="mb-2">
                 <Card.Img variant="top" src="holder.js/100px180" />
                 <Card.Body>
                   <Card.Title>Card Title</Card.Title>
