@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Card, Table } from 'react-bootstrap';
 import ProfilePreviewModal from '../profile/ProfilePreviewModal';
+import CustomPagination from '../CustomPagination';
 
 const getCardBodyContent = (replyOwner) => (
   <tr key={replyOwner.reply._id} className="border-bottom">
@@ -16,6 +17,12 @@ const getCardBodyContent = (replyOwner) => (
   </tr>);
 
 const ForumRepliesCard = ({ replies, users }) => {
+  const [rows, setRows] = useState([]);
+  const handlePageCallback = (childRows) => {
+    setRows(childRows);
+  };
+
+  const maxRow = 10;
   const replyOwners = [];
   replies.forEach(reply => {
       const owner = users.find(user => user.owner === reply.owner);
@@ -28,10 +35,17 @@ const ForumRepliesCard = ({ replies, users }) => {
       <Card.Body>
         <Table borderless className="fixed">
           <tbody>
-          {replyOwners.map(replyOwner => getCardBodyContent(replyOwner))}
+          {rows.map(replyOwner => getCardBodyContent(replyOwner))}
           </tbody>
         </Table>
       </Card.Body>
+      <Card.Footer>
+        <CustomPagination
+          arrayObjects={replyOwners}
+          maxRows={maxRow}
+          parentCallback={handlePageCallback}
+        />
+      </Card.Footer>
     </Card>
   );
 };
