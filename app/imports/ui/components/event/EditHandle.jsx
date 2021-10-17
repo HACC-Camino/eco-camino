@@ -37,6 +37,7 @@ const EditHandle = ({ event }) => {
       const endTime = moment(finalEndTime).format('hh:mm a');
       updateData.startTime = startTime;
       updateData.endTime = endTime;
+      updateData.participants = event.participants;
       updateData.title = finalTitle;
       updateData.location = finalLocation;
       updateData.name = finalName;

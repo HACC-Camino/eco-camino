@@ -17,6 +17,7 @@ import Signin from '../pages/Signin';
 import Signup from '../pages/Signup';
 import Signout from '../pages/Signout';
 import Profile from '../pages/Profile';
+import Resources from '../pages/Resources';
 import 'bootswatch/dist/quartz/bootstrap.min.css';
 import Forum from '../pages/Forum/Forum';
 import ForumPost from '../pages/Forum/ForumPost';
@@ -36,6 +37,7 @@ class App extends React.Component {
               <ProtectedRoute path="/list" component={ListStuff}/>
               <ProtectedRoute path="/add" component={AddStuff}/>
               <ProtectedRoute path="/event" component={Event} />
+              <Route path="/resources" component={Resources} />
               <ProtectedRoute path="/edit/:_id" component={EditStuff}/>
               <ProtectedRoute path="/forum" component={Forum}/>
               <ProtectedRoute path="/forum-post/:_id" component={ForumPost}/>
