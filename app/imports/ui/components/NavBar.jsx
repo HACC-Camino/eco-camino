@@ -28,7 +28,7 @@ class NavBar1 extends React.Component {
                 [<Nav.Link activeClassName='active' href="#event" key='events'>Events</Nav.Link>,
                   <Nav.Link activeClassName='active' href="#forum" key='forums'>Forums</Nav.Link>,
                   <Nav.Link activeClassName='active' href="#profile" key='profile'>Dashboard</Nav.Link>,
-                    <Nav.Link activeClassName='active' href="#admin" key='admin'>User List</Nav.Link>,
+                  <Nav.Link activeClassName='active' href="#admin" key='admin'>User List</Nav.Link>,
                 ]
             ) : ''}
           </Nav>
