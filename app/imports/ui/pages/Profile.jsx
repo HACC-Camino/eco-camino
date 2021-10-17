@@ -9,7 +9,8 @@ import PastEvents from '../components/profile/PastEvents';
 import { Events } from '../../api/event/EventCollection';
 import { Users } from '../../api/user/UserCollection';
 import { UserEvents } from '../../api/user/UserEventCollection';
-import UploadPhotoButton from '../components/aws/UploadPhotoButton';
+// import UploadPhotoButton from '../components/aws/UploadPhotoButton';
+import UploadPhotoModal from '../components/aws/UploadPhotoModal';
 
 const Profile = ({ filtered_events, ready, userDetail, past_events }) => (ready ? (
     <div className='container' style={{ paddingTop: '30px' }}>
@@ -37,7 +38,7 @@ const Profile = ({ filtered_events, ready, userDetail, past_events }) => (ready 
         </div>
 
         <Row>
-            <Col><UploadPhotoButton/></Col>
+            <Col><UploadPhotoModal/></Col>
         </Row>
     </div>
     ) : (
