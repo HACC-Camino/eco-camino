@@ -6,17 +6,35 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import swal from 'sweetalert';
 import moment from 'moment';
+import { GoogleMap, LoadScript, Marker, InfoWindow } from '@react-google-maps/api';
 import { eventDefineMethod } from '../../../api/event/EventCollection.methods';
-import UploadPhotoModal from '../../components/aws/UploadPhotoModal';
+// import UploadPhotoModal from '../../components/aws/UploadPhotoModal';
+import '@reach/combobox/styles.css';
+import mapStyle from '../../components/map/mapStyle';
+
+const containerStyle = {
+  width: '100%',
+  height: '500px',
+};
+
+const center = {
+  lat: 21.500,
+  lng: -158.0000,
+};
+
+const options = {
+  styles: mapStyle,
+};
 
 // CSS Modules, react-datepicker-cssmodules.css
 // import 'react-datepicker/dist/react-datepicker-cssmodules.css';
 
 const AddEvent = () => {
-  const [data, setData] = useState(null);
-  const handleCallback = (childData) => {
-    setData(childData);
-  };
+  // Creating form hooks
+  // const [data, setData] = useState(null);
+  // const handleCallback = (childData) => {
+  //   setData(childData);
+  // };
   const [finalType, setFinalType] = useState(() => '');
   const [finalDate, setFinalDate] = useState(new Date());
   const [finalStartTime, setFinalStartTime] = useState('');
@@ -30,7 +48,18 @@ const AddEvent = () => {
     { value: 'Workshop', label: 'Workshop' },
     { value: 'Cleanup', label: 'Cleanup' },
   ];
+  // Google map
+  const [markers, setMarkers] = useState([]);
+  const [selected, setSelected] = useState(null);
+  const onMapClick = React.useCallback((event) => {
+    setMarkers([{ time: new Date(), lat: event.latLng.lat(), lng: event.latLng.lng() }]);
+  }, []);
+  const mapRef = React.useRef();
+  const onMapLoad = React.useCallback((map) => {
+    mapRef.current = map;
+  }, []);
   const onSubmit = () => {
+    console.log(markers);
     const typeOfEvent = finalType.value;
     const date = finalDate;
     const startTime = moment(finalStartTime).format('hh:mm a');
@@ -40,11 +69,13 @@ const AddEvent = () => {
     const name = finalName;
     const email = finalEmail;
     const participants = 1;
+    const lat = markers[0].lat;
+    const lng = markers[0].lng;
     const owner = Meteor.user().username;
     const description = finalDescription;
     eventDefineMethod.call({
       typeOfEvent, date, startTime, endTime, participants, title, location, name,
-      owner, email, description },
+      owner, lat, lng, email, description },
     error => {
       if (error) {
         swal('Error', error.message, 'error');
@@ -63,7 +94,8 @@ const AddEvent = () => {
     });
   };
   return (
-    <Container>
+    <Container style={{ paddingBottom: '60px' }}>
+      <h2>Add Event</h2>
       <Row>
         <Col>
           <Form.Label htmlFor="basic-url">Title of Your Event</Form.Label>
@@ -94,23 +126,22 @@ const AddEvent = () => {
           onChange={(date) => setFinalDate(date)}
           />
             </Col>
-            <Col>
-              <UploadPhotoModal parentCallback={handleCallback}/>
-            </Col>
           </Row>
+        </Col>
+        <Col>
           <Row>
             <Col>
               <Form.Label htmlFor="basic-url">Start Time</Form.Label>
               <DatePicker
-            selected={finalStartTime}
-            onChange={(date) => setFinalStartTime(date)}
-            showTimeSelect
-            showTimeSelectOnly
-            timeFormat="HH:mm"
-            timeIntervals={15}
-            timeCaption="time"
-            dateFormat="h:mm aa"
-            /></Col>
+              selected={finalStartTime}
+              onChange={(date) => setFinalStartTime(date)}
+              showTimeSelect
+              showTimeSelectOnly
+              timeFormat="HH:mm"
+              timeIntervals={15}
+              timeCaption="time"
+              dateFormat="h:mm aa"
+              /></Col>
             <Col>
               <Form.Label htmlFor="basic-url">End Time</Form.Label>
               <DatePicker
@@ -126,13 +157,8 @@ const AddEvent = () => {
             </Col>
           </Row>
         </Col>
-        <Col>
-          <Form.Label htmlFor="basic-url">Location</Form.Label>
-          <InputGroup className="mb-3">
-            <FormControl placeholder='Title' value={finalLocation} onChange={e => setFinalLocation(e.target.value)} />
-          </InputGroup>
-        </Col>
       </Row>
+      <br />
       <Row>
         <Col>
           <Form.Label htmlFor="basic-url">Name</Form.Label>
@@ -152,10 +178,43 @@ const AddEvent = () => {
         <FormControl placeholder='Description'
                      value={finalDescription} onChange={e => setFinalDescription(e.target.value)} />
       </InputGroup>
-      <Button variant="primary" size="sm" onClick={onSubmit}>
+        <LoadScript
+        googleMapsApiKey=""
+        >
+          <h2>Location</h2>
+          <Col>
+            <InputGroup className="mb-3">
+              <FormControl placeholder='Address'
+                           value={finalLocation} onChange={e => setFinalLocation(e.target.value)} />
+            </InputGroup>
+          </Col>
+          <GoogleMap
+          mapContainerStyle={containerStyle}
+          center={center}
+          zoom={10}
+          onClick={onMapClick}
+          onLoad={onMapLoad}
+          options={options}
+          >
+            {markers.map(marker => <Marker
+            key={marker.time.toISOString()}
+            position={{ lat: marker.lat, lng: marker.lng }}
+            onClick={() => {
+              setSelected(marker);
+            }}/>)}
+
+            {selected ? (<InfoWindow
+            position={{ lat: selected.lat, lng: selected.lng }} onCloseClick={() => { setSelected(null); }}>
+              <div>
+                <h4> Location Of Event </h4>
+              </div>
+            </InfoWindow>) : null }
+          </GoogleMap>
+        </LoadScript>
+      <br />
+      <Button variant="primary" size="lg" onClick={onSubmit}>
         Submit
       </Button>
-      <Row>{data}</Row>
     </Container>
   );
 };

@@ -9,8 +9,8 @@ import PastEvents from '../components/profile/PastEvents';
 import { Events } from '../../api/event/EventCollection';
 import { Users } from '../../api/user/UserCollection';
 import { UserEvents } from '../../api/user/UserEventCollection';
-// import UploadPhotoButton from '../components/aws/UploadPhotoButton';
 import UploadPhotoModal from '../components/aws/UploadPhotoModal';
+// import { GetPhoto } from '../components/aws/GetPhoto';
 
 const Profile = ({ filtered_events, ready, userDetail, past_events }) => {
 
@@ -93,6 +93,7 @@ export default withTracker(() => {
         const current_date = new Date().getTime();
         return past_filtered_events.date < current_date;
     });
+    // console.log(GetPhoto({ photoAWSKey: '7qlRjzZMtEIUfbw62mSL5r1bC.jpg' }));
     return {
         ready,
         userDetail,

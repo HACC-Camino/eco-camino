@@ -51,7 +51,7 @@ const EditHandle = ({ event }) => {
 
   return (
   <Container>
-    <Button variant="danger" onClick={handleShow}>
+    <Button variant="primary" onClick={handleShow}>
       Edit
     </Button>
 
