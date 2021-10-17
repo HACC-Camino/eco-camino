@@ -2,13 +2,14 @@ import React from 'react';
 import { withTracker } from 'meteor/react-meteor-data';
 import { Meteor } from 'meteor/meteor';
 import PropTypes from 'prop-types';
-import { Col, Spinner } from 'react-bootstrap';
+import { Col, Row, Spinner } from 'react-bootstrap';
 import ProfileCard from '../components/profile/ProfileCard';
 import PlannedEvents from '../components/profile/PlannedEvents';
 import PastEvents from '../components/profile/PastEvents';
 import { Events } from '../../api/event/EventCollection';
 import { Users } from '../../api/user/UserCollection';
 import { UserEvents } from '../../api/user/UserEventCollection';
+import UploadPhotoButton from '../components/aws/UploadPhotoButton';
 
 const Profile = ({ filtered_events, ready, userDetail, past_events }) => (ready ? (
     <div className='container' style={{ paddingTop: '30px' }}>
@@ -34,6 +35,10 @@ const Profile = ({ filtered_events, ready, userDetail, past_events }) => (ready 
             </Col>
 
         </div>
+
+        <Row>
+            <Col><UploadPhotoButton/></Col>
+        </Row>
     </div>
     ) : (
         <Spinner animation="border" role="status">

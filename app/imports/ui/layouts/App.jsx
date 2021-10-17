@@ -18,7 +18,7 @@ import Signup from '../pages/Signup';
 import Signout from '../pages/Signout';
 import Profile from '../pages/Profile';
 import Resources from '../pages/Resources';
-import 'bootswatch/dist/quartz/bootstrap.min.css';
+import 'bootswatch/dist/minty/bootstrap.min.css';
 import Forum from '../pages/Forum/Forum';
 import ForumPost from '../pages/Forum/ForumPost';
 
