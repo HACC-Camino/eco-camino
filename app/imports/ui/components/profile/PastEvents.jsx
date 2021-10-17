@@ -1,7 +1,16 @@
 import React from 'react';
 import { Table } from 'react-bootstrap';
+import PropTypes from 'prop-types';
 
-const PastEvents = props => (
+const renderPastEvents = (past_events, index) => (
+  <tr key={index}>
+      <th>{index}</th>
+      <th>{past_events.title}</th>
+      <th>{past_events.date.toLocaleDateString()}</th>
+  </tr>
+);
+
+const PastEvents = ({ past_events }) => (
     <div className='container-lg'>
         <Table className='table' bordered responsive striped hover>
             <thead>
@@ -11,29 +20,15 @@ const PastEvents = props => (
                 <th>Time</th>
             </tr>
             </thead>
-            <tbody>
-            <tr>
-                <td>1</td>
-                <td>Beach Cleanup (Ala Moana)</td>
-                <td>October 28 2021 9:00 AM</td>
-            </tr>
-            </tbody>
-            <tbody>
-            <tr>
-                <td>2</td>
-                <td>Forest Cleanup (Aiea)</td>
-                <td>November 3 2021 9:00 AM</td>
-            </tr>
-            </tbody>
-            <tbody>
-            <tr>
-                <td>3</td>
-                <td>Park Cleanup (Ala Moana)</td>
-                <td>November 15 2021 9:00 AM</td>
-            </tr>
+            <tbody key={past_events.id}>
+                {past_events.map(renderPastEvents)}
             </tbody>
         </Table>
     </div>
 );
+
+PastEvents.propTypes = {
+    past_events: PropTypes.array,
+};
 
 export default PastEvents;

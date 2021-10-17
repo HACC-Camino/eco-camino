@@ -197,6 +197,10 @@ class EventCollection extends BaseCollection {
     return this._collection.find({}, { sort: { date: 1 } }).fetch();
   }
 
+  getUserEventList(username) {
+    return this._collection.find({ owner: username }).fetch();
+  }
+
 }
 
 /**
