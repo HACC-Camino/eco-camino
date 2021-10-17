@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import AWS from 'aws-sdk';
+import PropTypes from 'prop-types';
 import Button from 'react-bootstrap/Button';
 import { Container, FormControl, FormGroup, FormLabel, InputGroup, ProgressBar } from 'react-bootstrap';
 
@@ -16,10 +17,7 @@ const my_s3_bucket = new AWS.S3({
    region: REGION_NAME,
 });
 
-// eslint-disable-next-line import/no-mutable-exports
-export let key = '';
-
-const UploadPhotoButton = () => {
+const UploadPhotoButton = ({ parentCallback2 }) => {
    const [selectedFile, setSelectedFile] = useState(null);
    const [progress, setProgress] = useState(0);
 
@@ -50,8 +48,6 @@ const UploadPhotoButton = () => {
          ACL: 'public-read',
       };
 
-      key = filename;
-
       my_s3_bucket.putObject(params).on('httpUploadProgress', (evt) => {
          setProgress(Math.round((evt.loaded / evt.total) * 100));
       }).send((err) => {
@@ -61,6 +57,8 @@ const UploadPhotoButton = () => {
          // console.log(file);
          // console.log(makeId(25));
       });
+
+      parentCallback2(filename);
    };
 
    function validateImage(file) {
@@ -87,6 +85,10 @@ const UploadPhotoButton = () => {
          </FormGroup>
       </Container>
    );
+};
+
+UploadPhotoButton.propTypes = {
+   parentCallback2: PropTypes.func.isRequired,
 };
 
 export default UploadPhotoButton;
