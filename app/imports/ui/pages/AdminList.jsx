@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import SmartDataTable from 'react-smart-data-table';
 import { Users } from '../../api/user/UserCollection';
 import 'react-smart-data-table/dist/react-smart-data-table.css';
-// import DeleteUser from '../../components/admin/DeleteUser';
+import DeleteUser from '../components/admin/DeleteUser';
 
 // Renders a table containing all of the users profiles. Use <User> to render each row.
 class AdminList extends React.Component {
@@ -25,11 +25,10 @@ class AdminList extends React.Component {
 
   getColumns(users) {
     const data = {};
-    data._id = users._id;
-    data.user_image = users.image;
-    data.name = users.name;
-    data.email = users.email;
-    data.goal = users.goal;
+    data.firstName = users.firstName;
+    data.lastName = users.lastName;
+    data.dateJoined = users.dateJoined;
+    data.areaCode = users.areaCode;
     return data;
   }
 
@@ -47,14 +46,14 @@ class AdminList extends React.Component {
       _id: {
         invisible: true,
       },
-      // delete: {
-      //   text: ' ',
-      //   sortable: false,
-      //   filterable: false,
-      //   transform: (value, index, row) => <div>
-      //   <DeleteUser userID={row._id}/>
-      //   </div>,
-      // },
+      delete: {
+        text: ' ',
+        sortable: false,
+        filterable: false,
+        transform: (value, index, row) => <div>
+        <DeleteUser userID={row._id}/>
+        </div>,
+      },
     };
     return (
         <Container id="profileList-page">
