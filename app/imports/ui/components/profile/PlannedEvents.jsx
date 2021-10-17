@@ -1,7 +1,16 @@
 import React from 'react';
 import { Table } from 'react-bootstrap';
+import PropTypes from 'prop-types';
 
-const PlannedEvents = () => (
+const renderEvents = (my_sorted_events_list, index) => (
+    <tr key={index}>
+        <th>{index}</th>
+        <th>{my_sorted_events_list.title}</th>
+        <th>{my_sorted_events_list.date.toLocaleDateString()}</th>
+    </tr>
+);
+
+const PlannedEvents = ({ my_sorted_events_list }) => (
     <div className='container-lg'>
         <Table className='table' bordered responsive striped hover>
             <thead>
@@ -12,28 +21,14 @@ const PlannedEvents = () => (
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <td>1</td>
-                <td>Beach Cleanup (Ala Moana)</td>
-                <td>October 28 2021 9:00 AM</td>
-            </tr>
-            </tbody>
-            <tbody>
-            <tr>
-                <td>2</td>
-                <td>Forest Cleanup (Aiea)</td>
-                <td>November 3 2021 9:00 AM</td>
-            </tr>
-            </tbody>
-            <tbody>
-            <tr>
-                <td>3</td>
-                <td>Park Cleanup (Ala Moana)</td>
-                <td>November 15 2021 9:00 AM</td>
-            </tr>
+                {my_sorted_events_list.map(renderEvents)}
             </tbody>
         </Table>
     </div>
 );
+
+PlannedEvents.propTypes = {
+    my_sorted_events_list: PropTypes.array,
+};
 
 export default PlannedEvents;

@@ -23,6 +23,7 @@
     { "date": "10-15-2021", "type":  "main_post", "title":  "This is a sample title of a forum post", "content":  "This is a sample content.", "tags": ["sample"], "owner": "john@foo.com" }
   ],
   "defaultUsers": [
-    { "dateJoined": "10-15-2021", "firstName": "John", "lastName": "Foo", "bio":  "this is a sample bio", "areaCode": 96818, "owner": "john@foo.com" }
+    { "dateJoined": "10-15-2021", "firstName": "John", "lastName": "Foo", "bio":  "this is a sample bio", "areaCode": 96818, "owner": "john@foo.com" },
+    { "dateJoined": "10-15-2021", "firstName": "Admin", "lastName": "Foo", "bio":  "this is a sample bio", "areaCode": 96818, "owner": "admin@foo.com" }
   ]
 }
