@@ -11,6 +11,8 @@ import { Users } from '../../api/user/UserCollection';
 import { UserEvents } from '../../api/user/UserEventCollection';
 // import UploadPhotoButton from '../components/aws/UploadPhotoButton';
 import UploadPhotoModal from '../components/aws/UploadPhotoModal';
+import GetPhoto from '../components/aws/GetPhoto';
+import {GetPhoto1} from "../components/aws/GetPhoto1";
 
 const Profile = ({ filtered_events, ready, userDetail, past_events }) => {
 
@@ -48,6 +50,9 @@ const Profile = ({ filtered_events, ready, userDetail, past_events }) => {
             <Row>
                 <Col><UploadPhotoModal parentCallback={handleCallback}/></Col>
                 <Col>{data}</Col>
+            </Row>
+            <Row>
+                <Col></Col>
             </Row>
         </div>
         ) : (
@@ -93,6 +98,7 @@ export default withTracker(() => {
         const current_date = new Date().getTime();
         return past_filtered_events.date < current_date;
     });
+    // console.log(GetPhoto1({ photoAWSKey: '7qlRjzZMtEIUfbw62mSL5r1bC.jpg' }));
     return {
         ready,
         userDetail,

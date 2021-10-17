@@ -15,7 +15,7 @@ const myBucket = new AWS.S3({
 
 // this component will take a collection and try to take in the key from data.key
 // and return a link to the photo to be used in an image tag.
-const GetPhoto = ({ data }) => {
+export const GetPhoto1 = (data) => {
     let imageKey;
     if (data === undefined) {
         imageKey = null;
@@ -36,9 +36,3 @@ const GetPhoto = ({ data }) => {
 
     return isThereAPhoto(imageKey);
 };
-
-GetPhoto.propTypes = {
-    data: PropTypes.object.isRequired,
-};
-
-export default GetPhoto;
