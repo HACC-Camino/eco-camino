@@ -17,3 +17,25 @@
 .h6 {
     padding: 1px;
 }
+
+#footer {
+    /*position: fixed;*/
+    /*padding: 10px 10px 10px 10px;*/
+    /*bottom: 0;*/
+    /*width: 100%;*/
+    /*!* Height of the footer*!*/
+    /*height: 40px;*/
+    background: #78c2ad;
+    position: fixed;
+    bottom:0;
+    height: 52.75px;
+    width: 100%;
+    text-align: center;
+}
+.rows {
+    text-align: center;
+}
+
+.columns {
+    text-align: center;
+}
