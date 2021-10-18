@@ -136,16 +136,15 @@ export default withTracker(() => {
   const username = Meteor.user()?.username;
   const ready = Events.subscribeEventAdmin().ready()
   && UserEvents.subscribeUserEvent().ready()
-  && Reports.subscribeReportAdmin()
+  && Reports.subscribeReportAdmin().ready()
   && username !== undefined;
+  const reports = Reports.getReportList();
   const currentEvents = Events.getCurrentEvents();
   const currentCleanups = Events.getCurrentCleanups();
   const currentWorkshops = Events.getCurrentWorkshops();
   const ownedEvents = Events.getCurrentOwnedWorkshops(username);
   const userEvents = UserEvents.getUserEvent(username);
   const joinedEvents = UserEvents.getUserJoinedEvent(currentEvents, username);
-  const reports = Reports.getReportList();
-  console.log(reports);
   return {
     ready,
     currentEvents,

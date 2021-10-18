@@ -22,7 +22,6 @@ const options = {
 
 /** Renders a container containing all of the Events documents. */
 const DisplayMap = ({ eventList, userEvents, reports }) => {
-  console.log(reports);
   const cleanUps = eventList.filter(event => event.typeOfEvent === 'Cleanup');
   const workshops = eventList.filter(event => event.typeOfEvent === 'Workshop');
   const [selected, setSelected] = useState(null);
@@ -77,10 +76,11 @@ const DisplayMap = ({ eventList, userEvents, reports }) => {
         }}/>)}
 
         {selectedReport ? (<InfoWindow
-        position={{ lat: selected.lat, lng: selected.lng }} onCloseClick={() => { setSelected(null); }}>
+        position={{ lat: selectedReport.lat, lng: selectedReport.lng }}
+        onCloseClick={() => { setSelectedReport(null); }}>
           <div>
-            <ReportItem key={selected._id}
-                       event={selected} userEvents={userEvents} />
+            <ReportItem key={selectedReport._id}
+                        report={selectedReport} />
           </div>
         </InfoWindow>) : null }
         {selected ? (<InfoWindow

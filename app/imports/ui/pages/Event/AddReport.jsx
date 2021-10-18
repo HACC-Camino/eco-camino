@@ -52,7 +52,7 @@ const AddReport = () => {
     const lat = markers[0].lat;
     const lng = markers[0].lng;
     const accessKey = 'here';
-    const owner = Meteor.user().username;
+    const owner = Meteor.user()?.username;
     const description = finalDescription;
     reportDefineMethod.call({
       date, title, location,

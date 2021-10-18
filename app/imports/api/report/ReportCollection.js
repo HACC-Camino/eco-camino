@@ -50,8 +50,8 @@ class ReportCollection extends BaseCollection {
    * @param { String | Object } name A document or docID in this collection.
    * @returns true
    */
-  removeIt(name) {
-    const doc = this.findDoc(name);
+  removeIt(_id) {
+    const doc = this.findDoc(_id);
     check(doc, Object);
     this._collection.remove(doc._id);
     return true;
