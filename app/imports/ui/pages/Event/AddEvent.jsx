@@ -175,7 +175,8 @@ const AddEvent = () => {
       <Form.Label htmlFor="basic-url">Description of Event</Form.Label>
       <InputGroup className="mb-3">
         <FormControl placeholder='Description'
-                     value={finalDescription} onChange={e => setFinalDescription(e.target.value)} />
+                     value={finalDescription} as="textarea"
+                     rows={5} onChange={e => setFinalDescription(e.target.value)} />
       </InputGroup>
         <LoadScript
         googleMapsApiKey="AIzaSyAH_N3x9evBavZrOJAb2RWdBquCoonshcE"
