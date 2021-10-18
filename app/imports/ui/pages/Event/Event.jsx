@@ -5,12 +5,13 @@ import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 import { Events } from '../../../api/event/EventCollection';
 import { UserEvents } from '../../../api/user/UserEventCollection';
+import { Reports } from '../../../api/report/ReportCollection';
 import EventItem from '../../components/event/EventItem';
 import DisplayMap from '../../components/map/DisplayMap';
 
 /** Renders a container containing all of the Events documents. */
 const Event = ({ currentEvents, currentCleanups, currentWorkshops, joinedEvents,
-                 ownedEvents, userEvents, ready }) => {
+                 ownedEvents, userEvents, reports, ready }) => {
   if (ready) {
     const [mark, setMark] = useState(currentEvents);
     const first = () => {
@@ -55,7 +56,7 @@ const Event = ({ currentEvents, currentCleanups, currentWorkshops, joinedEvents,
           <Col sm={9}>
             <Tab.Content>
               <Row style={{ width: '100%' }}>
-                <DisplayMap eventList={mark} userEvents={userEvents} />
+                <DisplayMap eventList={mark} reports={reports} userEvents={userEvents} />
               </Row>
               <Tab.Pane eventKey="first" style={{ paddingBottom: '60px' }}>
                 <h2>All Events</h2>
@@ -126,6 +127,7 @@ Event.propTypes = {
   currentWorkshops: PropTypes.array.isRequired,
   ownedEvents: PropTypes.array.isRequired,
   joinedEvents: PropTypes.array.isRequired,
+  reports: PropTypes.array.isRequired,
 };
 
 /** withTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker */
@@ -133,7 +135,7 @@ export default withTracker(() => {
   // Get access to Event documents.
   const username = Meteor.user()?.username;
   const ready = Events.subscribeEventAdmin().ready()
-  && UserEvents.subscribeUserEvent()
+  && UserEvents.subscribeUserEvent().ready()
   && username !== undefined;
   const currentEvents = Events.getCurrentEvents();
   const currentCleanups = Events.getCurrentCleanups();
@@ -141,6 +143,8 @@ export default withTracker(() => {
   const ownedEvents = Events.getCurrentOwnedWorkshops(username);
   const userEvents = UserEvents.getUserEvent(username);
   const joinedEvents = UserEvents.getUserJoinedEvent(currentEvents, username);
+  const reports = Reports.getReportList();
+  console.log(reports);
   return {
     ready,
     currentEvents,
@@ -150,5 +154,6 @@ export default withTracker(() => {
     username,
     userEvents,
     joinedEvents,
+    reports,
   };
 })(Event);
