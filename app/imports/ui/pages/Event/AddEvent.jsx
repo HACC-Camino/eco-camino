@@ -59,7 +59,6 @@ const AddEvent = () => {
     mapRef.current = map;
   }, []);
   const onSubmit = () => {
-    console.log(markers);
     const typeOfEvent = finalType.value;
     const date = finalDate;
     const startTime = moment(finalStartTime).format('hh:mm a');
@@ -94,7 +93,7 @@ const AddEvent = () => {
     });
   };
   return (
-    <Container style={{ paddingBottom: '60px' }}>
+    <Container style={{ paddingBottom: '60px', paddingTop: '60px' }}>
       <h2>Add Event</h2>
       <Row>
         <Col>
@@ -179,15 +178,16 @@ const AddEvent = () => {
                      value={finalDescription} onChange={e => setFinalDescription(e.target.value)} />
       </InputGroup>
         <LoadScript
-        googleMapsApiKey=""
+        googleMapsApiKey="AIzaSyAH_N3x9evBavZrOJAb2RWdBquCoonshcE"
         >
           <h2>Location</h2>
           <Col>
             <InputGroup className="mb-3">
-              <FormControl placeholder='Address'
+              <FormControl placeholder='Address of Event'
                            value={finalLocation} onChange={e => setFinalLocation(e.target.value)} />
             </InputGroup>
           </Col>
+          <p>Please Place a Marker For Where Your Event Will Be Held</p>
           <GoogleMap
           mapContainerStyle={containerStyle}
           center={center}
