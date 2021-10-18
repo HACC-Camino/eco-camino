@@ -57,7 +57,7 @@ class AdminList extends React.Component {
       },
     };
     return (
-        <Container id="profileList-page">
+        <Container id="page-container">
           <Divider hidden/>
           <Input
               list='filter'
