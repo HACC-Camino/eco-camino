@@ -21,7 +21,7 @@ export const userUpdateMethod = new ValidatedMethod({
   mixins: [CallPromiseMixin],
   validate: null,
   run(updateData) {
-    Users.update(updateData.id, updateData);
+    Users.update(updateData._id, updateData);
     return true;
   },
 });

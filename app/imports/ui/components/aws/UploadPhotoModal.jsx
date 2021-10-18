@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Button, Modal } from 'react-bootstrap';
 import PropTypes from 'prop-types';
-import UploadPhotoButton from './UploadPhotoButton';
 import { BsXLg } from 'react-icons/all';
+import UploadPhotoButton from './UploadPhotoButton';
 
 const UploadPhotoModal = ({ parentCallback }) => {
     const [show, setShow] = useState(false);

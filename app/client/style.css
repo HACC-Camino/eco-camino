@@ -19,7 +19,14 @@
 }
 
 #page-container {
+  max-height: calc(100vh - 82.75px); /*must be 100vh - padding-bottom*/
   padding-bottom: 82.75px; /*must be footer height + 30*/
+  min-width: 100%;
+  padding-left: 80px;
+  padding-right: 80px;
+  margin-left: 0;
+  margin-right: 0;
+  overflow: auto;
 }
 
 #footer {
@@ -43,3 +50,13 @@
 .columns {
     text-align: center;
 }
+
+/*.hawaiiConserve {
+  padding: 100px;
+}*/
+
+.cards {
+  padding: 60px;
+  height: 50rem;
+}
+

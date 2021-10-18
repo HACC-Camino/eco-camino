@@ -19,7 +19,7 @@ export const GetPhoto = (data) => {
     if (data === undefined) {
         imageKey = null;
     } else {
-        imageKey = data.photoAWSKey;
+        imageKey = data;
     }
 
     function isThereAPhoto(key) {
