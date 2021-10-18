@@ -1,8 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link, Redirect } from 'react-router-dom';
-import { Container, Form, Grid, Header, Message, Segment } from 'semantic-ui-react';
+import { Grid, Header, Message, Segment } from 'semantic-ui-react';
+// import swal from 'sweetalert';
+import { Col, InputGroup, Row, FormControl, Form, Container } from 'react-bootstrap';
 import { Accounts } from 'meteor/accounts-base';
+// import { userDefineMethod } from '../../api/user/UserCollection.methods';
 
 /**
  * Signup component is similar to signin component, but we create a new user instead.
@@ -22,11 +25,23 @@ class Signup extends React.Component {
   /** Handle Signup submission. Create user account and a profile entry, then redirect to the home page. */
   submit = () => {
     const { email, password } = this.state;
+    // const dateJoined = new Date();
     Accounts.createUser({ email, username: email, password }, (err) => {
       if (err) {
         this.setState({ error: err.reason });
       } else {
         this.setState({ error: '', redirectToReferer: true });
+        // userDefineMethod.call({ firstName, lastName, bio, areaCode, dateJoined, owner: email },
+        //     (error) => {
+        //       if (error) {
+        //         swal('Error', error.message, 'error');
+        //         // console.error(error.message);
+        //       } else {
+        //         swal('Success', 'Item added successfully', 'success');
+        //         // formRef.reset();
+        //         // console.log('Success');
+        //       }
+        //     });
       }
     });
   }
@@ -39,7 +54,18 @@ class Signup extends React.Component {
       return <Redirect to={from}/>;
     }
     return (
-      <Container>
+      <Container style={{ paddingBottom: '60px' }}>
+        <h2>Register your account</h2>
+        <Row>
+          <Col>
+            <Form.Label htmlFor="basic-url">
+              First Name
+            </Form.Label>
+            <InputGroup className="mb-3">
+              <FormControl placeholder='FirstName' value="firstName" onChange={this.handleChange} />
+            </InputGroup>
+          </Col>
+        </Row>
         <Grid textAlign="center" verticalAlign="middle" centered columns={2}>
           <Grid.Column>
             <Header as="h2" textAlign="center">
