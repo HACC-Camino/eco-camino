@@ -33,7 +33,7 @@ const DisplayMap = ({ eventList, userEvents, reports }) => {
   return (
   <Container className='py-sm-3'>
     <LoadScript
-    googleMapsApiKey=""
+    googleMapsApiKey="AIzaSyAH_N3x9evBavZrOJAb2RWdBquCoonshcE"
     >
       <GoogleMap
       mapContainerStyle={containerStyle}

@@ -178,7 +178,7 @@ const AddEvent = () => {
                      value={finalDescription} onChange={e => setFinalDescription(e.target.value)} />
       </InputGroup>
         <LoadScript
-        googleMapsApiKey=""
+        googleMapsApiKey="AIzaSyAH_N3x9evBavZrOJAb2RWdBquCoonshcE"
         >
           <h2>Location</h2>
           <Col>
