@@ -1,8 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link, Redirect } from 'react-router-dom';
-import { Container, Form, Grid, Header, Message, Segment } from 'semantic-ui-react';
+// import { Link, Redirect } from 'react-router-dom';
+// import { Container, Form, Grid, Header, Message, Segment } from 'semantic-ui-react';
 import { Accounts } from 'meteor/accounts-base';
+import { Container, Col, Form, FormControl, InputGroup, Row, Button } from 'react-bootstrap';
+// import Select from 'react-select';
+// import DatePicker from 'react-datepicker';
+// import moment from 'moment';
+// import { GoogleMap, InfoWindow, LoadScript, Marker } from '@react-google-maps/api';
 
 /**
  * Signup component is similar to signin component, but we create a new user instead.
@@ -33,56 +38,57 @@ class Signup extends React.Component {
 
   /** Display the signup form. Redirect to add page after successful registration and login. */
   render() {
-    const { from } = this.props.location.state || { from: { pathname: '/add' } };
-    // if correct authentication, redirect to from: page instead of signup screen
-    if (this.state.redirectToReferer) {
-      return <Redirect to={from}/>;
-    }
+    // const { from } = this.props.location.state || { from: { pathname: '/add' } };
+    // // if correct authentication, redirect to from: page instead of signup screen
+    // if (this.state.redirectToReferer) {
+    //   return <Redirect to={from}/>;
+    // }
     return (
-      <Container>
-        <Grid textAlign="center" verticalAlign="middle" centered columns={2}>
-          <Grid.Column>
-            <Header as="h2" textAlign="center">
-              Register your account
-            </Header>
-            <Form onSubmit={this.submit}>
-              <Segment stacked>
-                <Form.Input
-                  label="Email"
-                  icon="user"
-                  iconPosition="left"
-                  name="email"
-                  type="email"
-                  placeholder="E-mail address"
-                  onChange={this.handleChange}
-                />
-                <Form.Input
-                  label="Password"
-                  icon="lock"
-                  iconPosition="left"
-                  name="password"
-                  placeholder="Password"
-                  type="password"
-                  onChange={this.handleChange}
-                />
-                <Form.Button content="Submit"/>
-              </Segment>
-            </Form>
-            <Message>
-              Already have an account? Login <Link to="/signin">here</Link>
-            </Message>
-            {this.state.error === '' ? (
-              ''
-            ) : (
-              <Message
-                error
-                header="Registration was not successful"
-                content={this.state.error}
-              />
-            )}
-          </Grid.Column>
-        </Grid>
-      </Container>
+        <Container style={{ paddingBottom: '60px', paddingTop: '60px' }}>
+          <h2>Sign Up</h2>
+          <Row>
+            <Col>
+              <Form.Label htmlFor="basic-url">First Name</Form.Label>
+              <InputGroup className="mb-3">
+                <FormControl placeholder='First' />
+              </InputGroup>
+            </Col>
+            <Col>
+              <Form.Label htmlFor="basic-url">Last Name</Form.Label>
+              <InputGroup className="mb-3">
+                <FormControl placeholder='Last' />
+              </InputGroup>
+            </Col>
+            <Row>
+              <Form.Label htmlFor="basic-url">E-Mail</Form.Label>
+              <InputGroup className="mb-3">
+                <FormControl placeholder='e-mail' />
+              </InputGroup>
+            </Row>
+            <Row>
+              <Form.Label htmlFor="basic-url">Password</Form.Label>
+              <InputGroup className="mb-3">
+                <FormControl placeholder='Password' />
+              </InputGroup>
+            </Row>
+            <Row>
+              <Form.Label htmlFor="basic-url">Zip Code</Form.Label>
+              <InputGroup className="mb-3">
+                <FormControl placeholder='Zip Code' />
+              </InputGroup>
+            </Row>
+            <Row>
+              <Form.Label htmlFor="basic-url">Bio</Form.Label>
+              <InputGroup className="mb-3">
+                <FormControl placeholder='Tell us about yourself..' />
+              </InputGroup>
+            </Row>
+          </Row>
+          <br />
+          <Button variant="primary" size="lg">
+            Sign Up
+          </Button>
+        </Container>
     );
   }
 }
