@@ -29,7 +29,7 @@ class AdminList extends React.Component {
     data.firstName = users.firstName;
     data.lastName = users.lastName;
     data.dateJoined = users.dateJoined;
-    data.areaCode = users.areaCode;
+    data.zipCode = users.zipCode;
     return data;
   }
 

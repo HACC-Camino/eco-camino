@@ -29,7 +29,7 @@ const Signup = () => {
       if (err) {
         swal('Error', err.message, 'error');
       } else {
-        userDefineMethod.call({ firstName, lastName, bio, areaCode: zipCode, dateJoined, owner: email },
+        userDefineMethod.call({ firstName, lastName, bio, zipCode, dateJoined, owner: email },
             (error) => {
               if (error) {
                 swal('Error', error.message, 'error');

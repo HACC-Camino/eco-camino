@@ -20,7 +20,7 @@ class UserCollection extends BaseCollection {
       firstName: String,
       lastName: String,
       bio: String,
-      areaCode: Number,
+      zipCode: Number,
       points: {
         type: Number,
         defaultValue: 0,
@@ -30,20 +30,20 @@ class UserCollection extends BaseCollection {
     }));
   }
 
-  define({ dateJoined, photoAWSKey, firstName, lastName, bio, areaCode, owner }) {
+  define({ dateJoined, photoAWSKey, firstName, lastName, bio, zipCode, owner }) {
     const docID = this._collection.insert({
       dateJoined,
       photoAWSKey,
       firstName,
       lastName,
       bio,
-      areaCode,
+      zipCode,
       owner,
     });
     return docID;
   }
 
-  update(docID, { photoAWSKey, firstName, lastName, bio, areaCode }) {
+  update(docID, { photoAWSKey, firstName, lastName, bio, zipCode }) {
     const updateData = {};
     if (photoAWSKey) {
       updateData.photoAWSKey = photoAWSKey;
@@ -57,8 +57,8 @@ class UserCollection extends BaseCollection {
     if (bio) {
       updateData.bio = bio;
     }
-    if (_.isNumber(areaCode)) {
-      updateData.areaCode = areaCode;
+    if (_.isNumber(zipCode)) {
+      updateData.zipCode = zipCode;
     }
     this._collection.update(docID, { $set: updateData });
   }
