@@ -10,7 +10,6 @@ const ForumPostRow = ({ propsObject }) => {
   const history = useHistory();
   const goToPage = () => {
     const pageLink = `post/${mainPost._id}`;
-    //window.location.reload();
     history.push(pageLink);
   };
 

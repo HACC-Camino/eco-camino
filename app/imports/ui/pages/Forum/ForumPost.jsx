@@ -13,7 +13,7 @@ const ForumPost = ({ username, ready, users, mainPost, replies }) => (ready ?
     <Container id="page-container">
       <Row className="pb-sm-2">
         <Col className="float-start">
-          <Link to='/forum'><h2>Forums</h2></Link>
+          <Link to='/forum/home'><h2>Forums</h2></Link>
         </Col>
       </Row>
       <Row className="pb-sm-2">

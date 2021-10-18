@@ -24,6 +24,7 @@ import 'bootswatch/dist/minty/bootstrap.min.css';
 import Forum from '../pages/Forum/Forum';
 import ForumPost from '../pages/Forum/ForumPost';
 import AdminList from '../pages/AdminList';
+import CreateForumPost from '../pages/Forum/CreateForumPost';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 class App extends React.Component {
@@ -46,6 +47,7 @@ class App extends React.Component {
               <ProtectedRoute path="/edit/:_id" component={EditStuff}/>
               <ProtectedRoute path="/forum/home" component={Forum}/>
               <ProtectedRoute path="/forum/post/:_id" component={ForumPost}/>
+              <ProtectedRoute path="/forum/create" component={CreateForumPost}/>
               <AdminProtectedRoute path="/admin" component={ListStuffAdmin}/>
               <AdminProtectedRoute path="/admin-list" component={AdminList}/>
               <ProtectedRoute path="/signout" component={Signout}/>

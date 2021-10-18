@@ -20,7 +20,7 @@ class NavBar1 extends React.Component {
           <Nav className="me-auto">
             {this.props.currentUser && Roles.userIsInRole(Meteor.userId(), 'admin') === false ? (
                 [<Nav.Link href="#profile" key='profile'>Profile</Nav.Link>,
-                  <NavDropdown key='eventdropdown' title='Events' id="nav-dropdown">
+                  <NavDropdown key='eventDropdown' title='Events' id="nav-dropdown">
                     <NavDropdown.Item href="#event"
                                       eventKey='events'
                                       style={{ borderRadius: 0 }}>
@@ -32,7 +32,18 @@ class NavBar1 extends React.Component {
                       Add Events
                     </NavDropdown.Item>
                   </NavDropdown>,
-                  <Nav.Link href="#forum/home" key='forums'>Forums</Nav.Link>,
+                  <NavDropdown key='forumDropdown' title='Forum' id="nav-dropdown">
+                    <NavDropdown.Item href="#forum/home"
+                                      eventKey='forum'
+                                      style={{ borderRadius: 0 }}>
+                      View Forums
+                    </NavDropdown.Item>
+                    <NavDropdown.Item href="#forum/create"
+                                      eventKey='forum-create'
+                                      style={{ borderRadius: 0 }}>
+                      Create Forum Post
+                    </NavDropdown.Item>
+                  </NavDropdown>,
                   <Nav.Link href="#addReport" key='addReport'>Report Trash/Assistance</Nav.Link>,
                   ]
             ) : ''}
