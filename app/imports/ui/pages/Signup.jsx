@@ -46,7 +46,7 @@ const Signup = () => {
 
   /** Display the signup form. Redirect to add page after successful registration and login. */
     return (
-        <Container style={{ paddingBottom: '60px', paddingTop: '60px' }}>
+        <Container id="page-container">
           <h2>Sign Up</h2>
           <Row>
             <Col>
@@ -61,31 +61,31 @@ const Signup = () => {
                 <FormControl placeholder='Last' onChange={ e => setLastName(e.target.value) }/>
               </InputGroup>
             </Col>
-            <Row>
-              <Form.Label htmlFor="basic-url">E-Mail</Form.Label>
-              <InputGroup className="mb-3">
-                <FormControl placeholder='e-mail' onChange={ e => setEmail(e.target.value) }/>
-              </InputGroup>
-            </Row>
-            <Row>
-              <Form.Label htmlFor="basic-url">Password</Form.Label>
-              <InputGroup className="mb-3">
-                <FormControl placeholder='Password' type="password" onChange={ e => setPassword(e.target.value)} />
-              </InputGroup>
-            </Row>
-            <Row>
-              <Form.Label htmlFor="basic-url">Zip Code</Form.Label>
-              <InputGroup className="mb-3">
-                <FormControl placeholder='Zip Code' type="number" onChange={ e => setZipCode(e.target.value)} />
-              </InputGroup>
-            </Row>
-            <Row>
-              <Form.Label htmlFor="basic-url">Bio</Form.Label>
-              <InputGroup className="mb-3">
-                <FormControl placeholder='Tell us about yourself..' as="textarea"
-                             rows={5} onChange={ e => setBio(e.target.value)} />
-              </InputGroup>
-            </Row>
+          </Row>
+          <Row>
+            <Form.Label htmlFor="basic-url">E-Mail</Form.Label>
+            <InputGroup className="mb-3">
+              <FormControl placeholder='e-mail' onChange={ e => setEmail(e.target.value) }/>
+            </InputGroup>
+          </Row>
+          <Row>
+            <Form.Label htmlFor="basic-url">Password</Form.Label>
+            <InputGroup className="mb-3">
+              <FormControl placeholder='Password' type="password" onChange={ e => setPassword(e.target.value)} />
+            </InputGroup>
+          </Row>
+          <Row>
+            <Form.Label htmlFor="basic-url">Zip Code</Form.Label>
+            <InputGroup className="mb-3">
+              <FormControl placeholder='Zip Code' type="number" onChange={ e => setZipCode(e.target.value)} />
+            </InputGroup>
+          </Row>
+          <Row>
+            <Form.Label htmlFor="basic-url">Bio</Form.Label>
+            <InputGroup className="mb-3">
+              <FormControl placeholder='Tell us about yourself..' as="textarea"
+                           rows={5} onChange={ e => setBio(e.target.value)} />
+            </InputGroup>
           </Row>
           <br />
           <Button variant="primary" size="lg" onClick={submit}>

@@ -10,7 +10,7 @@ import ForumMainPostCard from '../../components/forum/ForumMainPostCard';
 import ForumRepliesCard from '../../components/forum/ForumRepliesCard';
 
 const ForumPost = ({ username, ready, users, mainPost, replies }) => (ready ?
-    <Container className="pt-sm-3" id="page-container">
+    <Container id="page-container">
       <Row className="pb-sm-2">
         <Col className="float-start">
           <Link to='/forum'><h2>Forums</h2></Link>

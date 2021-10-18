@@ -74,7 +74,7 @@ const Forum = ({ username, ready, forumPosts }) => {
   };
 
   return (ready ?
-    <Container className="pt-sm-3" id="page-container">
+    <Container id="page-container">
       <Row className="pb-sm-2">
         <h2>Forums</h2>
       </Row>
