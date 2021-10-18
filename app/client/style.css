@@ -51,6 +51,12 @@
     text-align: center;
 }
 
+/*.hawaiiConserve {
+  padding: 100px;
+}*/
 
-.hawaiiConserve {
+.cards {
+  padding: 60px;
+  height: 50rem;
 }
+
