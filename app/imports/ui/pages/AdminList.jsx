@@ -6,6 +6,7 @@ import SmartDataTable from 'react-smart-data-table';
 import { Users } from '../../api/user/UserCollection';
 import 'react-smart-data-table/dist/react-smart-data-table.css';
 import DeleteUser from '../components/admin/DeleteUser';
+// import EditandDeleteButtons from '../components/event/EditAndDeleteButtons';
 
 // Renders a table containing all of the users profiles. Use <User> to render each row.
 class AdminList extends React.Component {
