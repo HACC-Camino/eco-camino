@@ -9,6 +9,7 @@ import Footer from '../components/Footer';
 import Landing from '../pages/Landing';
 import Event from '../pages/Event/Event';
 import AddEvent from '../pages/Event/AddEvent';
+import AddReport from '../pages/Event/AddReport';
 import ListStuff from '../pages/ListStuff';
 import ListStuffAdmin from '../pages/ListStuffAdmin';
 import AddStuff from '../pages/AddStuff';
@@ -40,6 +41,7 @@ class App extends React.Component {
               <ProtectedRoute path="/add" component={AddStuff}/>
               <ProtectedRoute path="/event" component={Event} />
               <ProtectedRoute path="/addEvent" component={AddEvent} />
+              <ProtectedRoute path="/addReport" component={AddReport} />
               <Route path="/resources" component={Resources} />
               <ProtectedRoute path="/edit/:_id" component={EditStuff}/>
               <ProtectedRoute path="/forum" component={Forum}/>
