@@ -58,7 +58,7 @@ class UserCollection extends BaseCollection {
       updateData.bio = bio;
     }
     if (_.isNumber(areaCode)) {
-      updateData.photoAWSKey = photoAWSKey;
+      updateData.areaCode = areaCode;
     }
     this._collection.update(docID, { $set: updateData });
   }

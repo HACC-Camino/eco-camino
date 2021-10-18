@@ -19,7 +19,7 @@ export const GetPhoto = (data) => {
     if (data === undefined) {
         imageKey = null;
     } else {
-        imageKey = data.photoAWSKey;
+        imageKey = data;
     }
 
     function isThereAPhoto(key) {
@@ -32,6 +32,7 @@ export const GetPhoto = (data) => {
         };
         return myBucket.getSignedUrl('getObject', params);
     }
-
+    // console.log(data);
+    console.log(imageKey)
     return isThereAPhoto(imageKey);
 };
