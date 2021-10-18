@@ -6,7 +6,7 @@ import swal from 'sweetalert';
 import { useHistory } from 'react-router-dom';
 import { forumPostRemoveItMethod } from '../../../api/forum/ForumPostCollection.methods';
 
-const DeleteForumPost = ({ mainPostID, show, repliesID }) => {
+const DeleteForumPostModal = ({ mainPostID, show, repliesID }) => {
   const [modalOpen, setModalOpen] = useState(false);
 
   const handleModalClose = () => setModalOpen(false);
@@ -75,10 +75,10 @@ const DeleteForumPost = ({ mainPostID, show, repliesID }) => {
  : null);
 };
 
-DeleteForumPost.propTypes = {
+DeleteForumPostModal.propTypes = {
   mainPostID: PropTypes.string,
   show: PropTypes.bool,
   repliesID: PropTypes.array,
 };
 
-export default DeleteForumPost;
+export default DeleteForumPostModal;

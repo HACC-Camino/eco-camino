@@ -22,7 +22,7 @@ const ForumPost = ({ username, ready, users, mainPost, replies }) => (ready ?
             mainPost={mainPost}
             owner={users.find(user => user.owner === mainPost.owner)}
             repliesID={replies.map(reply => reply._id)}
-            currrentUser={username}
+            currentUser={username}
           />
         </Col>
       </Row>

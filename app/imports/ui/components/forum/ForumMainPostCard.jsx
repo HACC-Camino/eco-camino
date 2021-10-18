@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Badge, Button, Card, Col, Row, Table } from 'react-bootstrap';
 import ProfilePreviewModal from '../profile/ProfilePreviewModal';
-import DeleteForumPost from './DeleteForumPost';
+import DeleteForumPostModal from './DeleteForumPostModal';
 
-const ForumMainPostCard = ({ mainPost, owner, currrentUser, repliesID }) => (
+const ForumMainPostCard = ({ mainPost, owner, currentUser, repliesID }) => (
     <Card>
       <Card.Header as='h4'>
         <Row>
@@ -13,9 +13,9 @@ const ForumMainPostCard = ({ mainPost, owner, currrentUser, repliesID }) => (
           </Col>
           <Col style={{ textAlign: 'right' }}>
             <Button variant="outline-primary" className="mx-1">Edit</Button>
-            <DeleteForumPost
+            <DeleteForumPostModal
               mainPostID={mainPost._id}
-              show={owner.owner === currrentUser}
+              show={owner.owner === currentUser}
               repliesID={repliesID}
             />
           </Col>
@@ -46,7 +46,7 @@ const ForumMainPostCard = ({ mainPost, owner, currrentUser, repliesID }) => (
 ForumMainPostCard.propTypes = {
   mainPost: PropTypes.object,
   owner: PropTypes.object,
-  currrentUser: PropTypes.string,
+  currentUser: PropTypes.string,
   repliesID: PropTypes.array,
 };
 
