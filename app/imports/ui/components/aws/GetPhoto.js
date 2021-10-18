@@ -32,7 +32,6 @@ export const GetPhoto = (data) => {
         };
         return myBucket.getSignedUrl('getObject', params);
     }
-    // console.log(data);
-    console.log(imageKey)
+
     return isThereAPhoto(imageKey);
 };
