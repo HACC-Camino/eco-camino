@@ -1,11 +1,26 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Badge, Card, Table } from 'react-bootstrap';
+import { Badge, Button, Card, Col, Row, Table } from 'react-bootstrap';
 import ProfilePreviewModal from '../profile/ProfilePreviewModal';
+import DeleteForumPost from './DeleteForumPost';
 
-const ForumMainPostCard = ({ mainPost, owner }) => (
+const ForumMainPostCard = ({ mainPost, owner, currrentUser, repliesID }) => (
     <Card>
-      <Card.Header as='h4'>{mainPost.title}</Card.Header>
+      <Card.Header as='h4'>
+        <Row>
+          <Col className="align-middle">
+            {mainPost.title}
+          </Col>
+          <Col style={{ textAlign: 'right' }}>
+            <Button variant="outline-primary" className="mx-1">Edit</Button>
+            <DeleteForumPost
+              mainPostID={mainPost._id}
+              show={owner.owner === currrentUser}
+              repliesID={repliesID}
+            />
+          </Col>
+        </Row>
+      </Card.Header>
       <Card.Body>
         <Table borderless className="fixed">
           <tbody>
@@ -31,6 +46,8 @@ const ForumMainPostCard = ({ mainPost, owner }) => (
 ForumMainPostCard.propTypes = {
   mainPost: PropTypes.object,
   owner: PropTypes.object,
+  currrentUser: PropTypes.string,
+  repliesID: PropTypes.array,
 };
 
 export default ForumMainPostCard;
