@@ -183,10 +183,11 @@ const AddEvent = () => {
           <h2>Location</h2>
           <Col>
             <InputGroup className="mb-3">
-              <FormControl placeholder='Address'
+              <FormControl placeholder='Address of Event'
                            value={finalLocation} onChange={e => setFinalLocation(e.target.value)} />
             </InputGroup>
           </Col>
+          <p>Please Place a Marker For Where Your Event Will Be Held</p>
           <GoogleMap
           mapContainerStyle={containerStyle}
           center={center}
