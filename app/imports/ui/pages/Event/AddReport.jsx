@@ -5,7 +5,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import swal from 'sweetalert';
 import { GoogleMap, LoadScript, Marker, InfoWindow } from '@react-google-maps/api';
 import { reportDefineMethod } from '../../../api/report/ReportCollection.methods';
-// import UploadPhotoModal from '../../components/aws/UploadPhotoModal';
+import UploadPhotoModal from '../../components/aws/UploadPhotoModal';
 import '@reach/combobox/styles.css';
 import mapStyle from '../../components/map/mapStyle';
 
@@ -28,10 +28,10 @@ const options = {
 
 const AddReport = () => {
   // Creating form hooks
-  // const [data, setData] = useState(null);
-  // const handleCallback = (childData) => {
-  //   setData(childData);
-  // };
+  const [data, setData] = useState(null);
+  const handleCallback = (childData) => {
+    setData(childData);
+  };
   const [finalTitle, setFinalTitle] = useState(() => '');
   const [finalLocation, setFinalLocation] = useState(() => '');
   const [finalDescription, setFinalDescription] = useState(() => '');
@@ -51,7 +51,7 @@ const AddReport = () => {
     const location = finalLocation;
     const lat = markers[0].lat;
     const lng = markers[0].lng;
-    const accessKey = 'here';
+    const accessKey = data;
     const owner = Meteor.user()?.username;
     const description = finalDescription;
     reportDefineMethod.call({
@@ -118,6 +118,11 @@ const AddReport = () => {
             </InfoWindow>) : null }
           </GoogleMap>
         </LoadScript>
+      <br />
+      <Row>
+        <p>Please Upload a Picture of the Trash/Needed Assistance</p>
+        <UploadPhotoModal parentCallback={handleCallback}/>
+      </Row>
       <br />
       <Button variant="primary" size="lg" onClick={onSubmit}>
         Submit
