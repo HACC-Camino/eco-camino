@@ -24,7 +24,7 @@ if (ForumPosts.count() === 0) {
         reply.type = 'reply';
         reply.mainThread = mainPost._id;
         reply.title = mainPost.title;
-        reply.content = faker.lorem.paragraph(faker.datatype.number({ max: 5 }));
+        reply.content = faker.lorem.paragraph(faker.datatype.number({ max: 5 })) || '';
         reply.owner = 'john@foo.com';
         ForumPosts.define(reply);
       }
