@@ -1,9 +1,7 @@
 import React from 'react';
 import Card from 'react-bootstrap/Card';
-import Button from 'react-bootstrap/Button';
 import PropTypes from 'prop-types';
 import { Col, Row } from 'react-bootstrap';
-import EditProfileForm from './EditProfileForm';
 import EditProfileModal from './EditProfileModal';
 import { GetPhoto } from '../aws/GetPhoto';
 

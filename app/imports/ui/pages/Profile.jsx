@@ -1,26 +1,27 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { withTracker } from 'meteor/react-meteor-data';
 import { Meteor } from 'meteor/meteor';
 import PropTypes from 'prop-types';
-import { Col, Row, Spinner } from 'react-bootstrap';
+import { Col, Spinner } from 'react-bootstrap';
 import ProfileCard from '../components/profile/ProfileCard';
 import PlannedEvents from '../components/profile/PlannedEvents';
 import PastEvents from '../components/profile/PastEvents';
 import { Events } from '../../api/event/EventCollection';
 import { Users } from '../../api/user/UserCollection';
 import { UserEvents } from '../../api/user/UserEventCollection';
-import UploadPhotoModal from '../components/aws/UploadPhotoModal';
+// import UploadPhotoModal from '../components/aws/UploadPhotoModal';
 // import { GetPhoto } from '../components/aws/GetPhoto';
 
-const Profile = ({ filtered_events, ready, userDetail, past_events }) => {
+const Profile = ({ filtered_events, ready, userDetail, past_events }) =>
 
-    // copy this for upload photo modal
-    const [data, setData] = useState(null);
-    const handleCallback = (childData) => {
-        setData(childData);
-    };
+    // // copy this for upload photo modal
+    // const [data, setData] = useState(null);
+    // const handleCallback = (childData) => {
+    //     setData(childData);
+    // };
 
-    return (ready ? (
+    // eslint-disable-next-line implicit-arrow-linebreak
+     (ready ? (
         <div className='container' style={{ paddingTop: '30px' }}>
             <div className='row row-cols-sm-2' style={{ paddingBottom: '30px' }}>
                 <Col sm={4} style={{ paddingBottom: '30px', paddingRight: '30px' }}>
@@ -45,10 +46,10 @@ const Profile = ({ filtered_events, ready, userDetail, past_events }) => {
 
             </div>
 
-            <Row>
-                <Col><UploadPhotoModal parentCallback={handleCallback}/></Col>
-                <Col>{data}</Col>
-            </Row>
+            {/* <Row> */}
+            {/*    <Col><UploadPhotoModal parentCallback={handleCallback}/></Col> */}
+            {/*    <Col>{data}</Col> */}
+            {/* </Row> */}
         </div>
         ) : (
             <Spinner animation="border" role="status">
@@ -56,8 +57,6 @@ const Profile = ({ filtered_events, ready, userDetail, past_events }) => {
             </Spinner>
         )
     );
-};
-
 Profile.propTypes = {
     userDetail: PropTypes.object,
     ready: PropTypes.bool.isRequired,

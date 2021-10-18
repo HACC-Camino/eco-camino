@@ -3,7 +3,6 @@ import { Button, Container, Form, Modal } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import { BsXLg } from 'react-icons/all';
 import swal from 'sweetalert';
-import EditProfileForm from './EditProfileForm';
 import UploadPhotoButton from '../aws/UploadPhotoButton';
 import { userUpdateMethod } from '../../../api/user/UserCollection.methods';
 

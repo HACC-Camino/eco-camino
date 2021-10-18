@@ -85,7 +85,7 @@ class Resources extends React.Component {
               <Card text="dark" className="mb-2 cards">
                 <Card.Img variant="top" src="/images/resource-page/trees2_629x661.jpg" />
                 <Card.Body>
-                  <Card.Title>Trees For Honolulu's Future</Card.Title>
+                  <Card.Title>Trees For Honolulu&apos;s Future</Card.Title>
                   <Card.Text>
                     A foundation that strives to inform locals and residents to help create and
                     protect new trees as it can preserve and enhance our quality of life, especially in the face
