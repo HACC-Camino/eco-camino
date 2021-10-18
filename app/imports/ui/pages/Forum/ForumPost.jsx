@@ -28,7 +28,11 @@ const ForumPost = ({ username, ready, users, mainPost, replies }) => (ready ?
       </Row>
       <Row>
         <Col sm={12}>
-          <ForumRepliesCard replies={replies} users={users}/>
+          <ForumRepliesCard
+            replies={replies}
+            users={users}
+            currentUser={username}
+          />
         </Col>
       </Row>
     </Container>

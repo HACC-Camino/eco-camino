@@ -26,10 +26,11 @@ const DeleteForumPostModal = ({ mainPostID, show, repliesID }) => {
       if (error) {
         swal('Error', error.message, 'error');
       } else {
-        goToPage();
-        swal('Success', 'Post Deleted Successfully', 'success');
-        // eslint-disable-next-line no-undef
-        window.location.reload();
+        swal('Success', 'Post Deleted Successfully', 'success').then(() => {
+          goToPage();
+          // eslint-disable-next-line no-undef
+          window.location.reload();
+        });
       }
     });
   };
