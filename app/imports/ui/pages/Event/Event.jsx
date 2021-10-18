@@ -14,20 +14,26 @@ const Event = ({ currentEvents, currentCleanups, currentWorkshops, joinedEvents,
                  ownedEvents, userEvents, reports, ready }) => {
   if (ready) {
     const [mark, setMark] = useState(currentEvents);
+    const [rmark, setRmark] = useState(reports);
     const first = () => {
       setMark(currentEvents);
+      setRmark(reports);
     };
     const second = () => {
       setMark(currentCleanups);
+      setRmark([]);
     };
     const third = () => {
       setMark(currentWorkshops);
+      setRmark([]);
     };
     const fourth = () => {
       setMark(ownedEvents);
+      setRmark([]);
     };
     const fifth = () => {
       setMark(joinedEvents);
+      setRmark([]);
     };
     return (
     <Container className='py-sm-3'>
@@ -56,7 +62,7 @@ const Event = ({ currentEvents, currentCleanups, currentWorkshops, joinedEvents,
           <Col sm={9}>
             <Tab.Content>
               <Row style={{ width: '100%' }}>
-                <DisplayMap eventList={mark} reports={reports} userEvents={userEvents} />
+                <DisplayMap eventList={mark} reports={rmark} userEvents={userEvents} />
               </Row>
               <Tab.Pane eventKey="first" style={{ paddingBottom: '60px' }}>
                 <h2>All Events</h2>
