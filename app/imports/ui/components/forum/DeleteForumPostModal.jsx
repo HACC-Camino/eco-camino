@@ -14,7 +14,7 @@ const DeleteForumPostModal = ({ mainPostID, show, repliesID }) => {
 
   const history = useHistory();
   const goToPage = () => {
-    const pageLink = '/forum';
+    const pageLink = '/forum/home';
     history.push(pageLink);
   };
 

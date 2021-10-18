@@ -44,8 +44,8 @@ class App extends React.Component {
               <ProtectedRoute path="/addReport" component={AddReport} />
               <Route path="/resources" component={Resources} />
               <ProtectedRoute path="/edit/:_id" component={EditStuff}/>
-              <ProtectedRoute path="/forum" component={Forum}/>
-              <ProtectedRoute path="/forum-post/:_id" component={ForumPost}/>
+              <ProtectedRoute path="/forum/home" component={Forum}/>
+              <ProtectedRoute path="/forum/post/:_id" component={ForumPost}/>
               <AdminProtectedRoute path="/admin" component={ListStuffAdmin}/>
               <AdminProtectedRoute path="/admin-list" component={AdminList}/>
               <ProtectedRoute path="/signout" component={Signout}/>

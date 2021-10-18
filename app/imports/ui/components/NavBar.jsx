@@ -32,15 +32,26 @@ class NavBar1 extends React.Component {
                       Add Events
                     </NavDropdown.Item>
                   </NavDropdown>,
-                  <Nav.Link href="#forum" key='forums'>Forums</Nav.Link>,
+                  <Nav.Link href="#forum/home" key='forums'>Forums</Nav.Link>,
                   <Nav.Link href="#addReport" key='addReport'>Report Trash/Assistance</Nav.Link>,
                   ]
             ) : ''}
             {this.props.currentUser && Roles.userIsInRole(Meteor.userId(), 'admin') ? (
                 [<Nav.Link href="#profile" key='profile'>Dashboard</Nav.Link>,
                   <Nav.Link href="#admin-list" key='admin-list'>Admin List</Nav.Link>,
-                  <Nav.Link href="#event" key='events'>Events</Nav.Link>,
-                  <Nav.Link href="#forum" key='forums'>Forums</Nav.Link>,
+                  <NavDropdown key='eventdropdown' title='Events' id="nav-dropdown">
+                    <NavDropdown.Item href="#event"
+                                      eventKey='events'
+                                      style={{ borderRadius: 0 }}>
+                      View Events
+                    </NavDropdown.Item>
+                    <NavDropdown.Item href="#addEvent"
+                                      eventKey='addEvent'
+                                      style={{ borderRadius: 0 }}>
+                      Add Events
+                    </NavDropdown.Item>
+                  </NavDropdown>,
+                  <Nav.Link href="#forum/home" key='forums'>Forums</Nav.Link>,
                 ]
             ) : ''}
             <Nav.Link href="#resources" key='resources'>Resources</Nav.Link>
