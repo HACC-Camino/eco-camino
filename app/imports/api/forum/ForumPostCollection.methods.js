@@ -21,7 +21,7 @@ export const forumPostUpdateMethod = new ValidatedMethod({
   mixins: [CallPromiseMixin],
   validate: null,
   run(updateData) {
-    ForumPosts.update(updateData.id, updateData);
+    ForumPosts.update(updateData._id, updateData);
     return true;
   },
 });
