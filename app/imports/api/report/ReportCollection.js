@@ -106,7 +106,7 @@ class ReportCollection extends BaseCollection {
   }
 
   getReportList() {
-    return this._collection.find().fetch();
+    return this._collection.find({}, { sort: { date: 1 } }).fetch();
   }
 
 }

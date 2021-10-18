@@ -136,6 +136,7 @@ export default withTracker(() => {
   const username = Meteor.user()?.username;
   const ready = Events.subscribeEventAdmin().ready()
   && UserEvents.subscribeUserEvent().ready()
+  && Reports.subscribeReportAdmin()
   && username !== undefined;
   const currentEvents = Events.getCurrentEvents();
   const currentCleanups = Events.getCurrentCleanups();
