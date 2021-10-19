@@ -69,7 +69,7 @@ const AddReport = () => {
     });
   };
   return (
-    <Container style={{ paddingBottom: '60px', paddingTop: '60px' }}>
+    <Container id="page-container">
       <h2>Report Trash/Assistance</h2>
       <Row>
         <Col>

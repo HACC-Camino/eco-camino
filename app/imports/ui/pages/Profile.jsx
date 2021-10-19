@@ -2,7 +2,7 @@ import React from 'react';
 import { withTracker } from 'meteor/react-meteor-data';
 import { Meteor } from 'meteor/meteor';
 import PropTypes from 'prop-types';
-import { Col, Spinner } from 'react-bootstrap';
+import { Col, Container, Row, Spinner } from 'react-bootstrap';
 import ProfileCard from '../components/profile/ProfileCard';
 import PlannedEvents from '../components/profile/PlannedEvents';
 import PastEvents from '../components/profile/PastEvents';
@@ -22,8 +22,8 @@ const Profile = ({ filtered_events, ready, userDetail, past_events }) =>
 
     // eslint-disable-next-line implicit-arrow-linebreak
      (ready ? (
-        <div className='container' style={{ paddingTop: '30px' }}>
-            <div className='row row-cols-sm-2' style={{ paddingBottom: '30px' }}>
+        <Container id="page-container">
+            <Row>
                 <Col sm={4} style={{ paddingBottom: '30px', paddingRight: '30px' }}>
                     <ProfileCard userDetail={userDetail} />
                 </Col>
@@ -44,13 +44,13 @@ const Profile = ({ filtered_events, ready, userDetail, past_events }) =>
                     </div>
                 </Col>
 
-            </div>
+            </Row>
 
             {/* <Row> */}
             {/*    <Col><UploadPhotoModal parentCallback={handleCallback}/></Col> */}
             {/*    <Col>{data}</Col> */}
             {/* </Row> */}
-        </div>
+        </Container>
         ) : (
             <Spinner animation="border" role="status">
                 <span className="visually-hidden">Loading...</span>

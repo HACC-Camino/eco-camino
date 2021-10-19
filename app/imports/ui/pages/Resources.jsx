@@ -6,7 +6,7 @@ const textStyle = { textAlign: 'center' };
 class Resources extends React.Component {
   render() {
     return (
-        <Container className="py-sm-3" >
+        <Container id="page-container">
           <Row className="py-sm-3">
             <h1 style={textStyle}>Resources</h1>
           </Row>
