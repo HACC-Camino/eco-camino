@@ -16,10 +16,10 @@ const containerStyle = {
   height: '500px',
 };
 
-const center = {
-  lat: 21.500,
-  lng: -158.0000,
-};
+// const center = {
+//   lat: 21.500,
+//   lng: -158.0000,
+// };
 
 const options = {
   styles: mapStyle,
@@ -33,6 +33,44 @@ const libraries = ['places'];
 // import 'react-datepicker/dist/react-datepicker-cssmodules.css';
 
 const AddReport = () => {
+  const [center, setCenter] = useState({ lat: 21.500, lng: -158.0000 });
+  const [zoom, setZoom] = useState(10);
+  const panTo = (lat, lng) => {
+    setCenter({ lat: lat, lng: lng });
+    setZoom(14);
+  };
+  const Search = () => {
+    const { ready, value, suggestions: { status, data }, setValue, clearSuggestions } = usePlacesAutocomplete({
+      requestOptions: {
+        location: { lat: () => 21.500, lng: () => -158.0000 },
+        radius: 200 * 1000,
+      },
+    });
+
+    return (
+    <div className={'search'}>
+      <Combobox onSelect={async (address) => {
+        setValue(address, false);
+        clearSuggestions();
+        const results = await getGeocode({ address });
+        const { lat, lng } = await getLatLng(results[0]);
+        panTo(lat, lng);
+      }
+      } >
+        <ComboboxInput value={value} onChange={(e) => {
+          setValue(e.target.value);
+        }}
+                       disabled={!ready}
+                       placeholder='Search Location'
+        />
+        <ComboboxPopover>
+          { status === 'OK' && data.map(({ description }) => <ComboboxOption
+          key={description} value={description} />)}
+        </ComboboxPopover>
+      </Combobox>
+    </div>
+    );
+  };
   // Loading Google Maps
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: 'AIzaSyAH_N3x9evBavZrOJAb2RWdBquCoonshcE',
@@ -47,10 +85,6 @@ const AddReport = () => {
   const mapRef = React.useRef();
   const onMapLoad = React.useCallback((map) => {
     mapRef.current = map;
-  }, []);
-  const panTo = React.useCallback(({ lat, lng }) => {
-    mapRef.current.panTo({ lat, lng });
-    mapRef.current.setZoom(14);
   }, []);
   // Image Hosting Methods
   const [data, setData] = useState(null);
@@ -115,7 +149,7 @@ const AddReport = () => {
     { isLoaded ? <GoogleMap
     mapContainerStyle={containerStyle}
     center={center}
-    zoom={10}
+    zoom={zoom}
     onClick={onMapClick}
     onLoad={onMapLoad}
     options={options}
@@ -146,41 +180,5 @@ const AddReport = () => {
   </Container>
   );
 };
-
-function Search(panTo) {
-  const { ready, value, suggestions: { status, data }, setValue, clearSuggestions } = usePlacesAutocomplete({
-    requestOptions: {
-      location: { lat: () => 21.500, lng: () => -158.0000 },
-      radius: 200 * 1000,
-    },
-  });
-
-  return (
-  <div className={'search'}>
-    <Combobox onSelect={async (address) => {
-      setValue(address, false);
-      clearSuggestions();
-      try {
-       const results = await getGeocode({ address });
-       const { lat, lng } = await getLatLng(results[0]);
-        panTo({ lat, lng });
-      } catch (error) {
-        console.log('error!');
-      }
-    }
-    } >
-      <ComboboxInput value={value} onChange={(e) => {
-        setValue(e.target.value);
-      }}
-                     disabled={!ready}
-                     placeholder='Enter An Address'
-      />
-      <ComboboxPopover>
-        { status === 'OK' && data.map(({ id, description }) => <ComboboxOption key={id} value={description} />)}
-      </ComboboxPopover>
-    </Combobox>
-  </div>
-  );
-}
 
 export default (AddReport);
