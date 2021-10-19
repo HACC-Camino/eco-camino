@@ -24,7 +24,7 @@ ddp-rate-limiter@1.1.0
 ddp-server@2.5.0
 didericis:callpromise-mixin@0.0.1
 diff-sequence@1.1.1
-dynamic-import@0.7.1
+dynamic-import@0.7.2
 ecmascript@0.15.3
 ecmascript-runtime@0.8.0
 ecmascript-runtime-client@0.12.1
