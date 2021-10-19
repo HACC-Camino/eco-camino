@@ -8,8 +8,6 @@ import { reportDefineMethod } from '../../../api/report/ReportCollection.methods
 import UploadPhotoModal from '../../components/aws/UploadPhotoModal';
 import '@reach/combobox/styles.css';
 import mapStyle from '../../components/map/mapStyle';
-import usePlacesAutocomplete, { getGeocode, getLatLng } from 'use-places-autocomplete';
-import { Combobox, ComboboxInput, ComboboxPopover, ComboboxList, ComboboxOption } from '@reach/combobox';
 
 const containerStyle = {
   width: '100%',
@@ -98,7 +96,6 @@ const AddReport = () => {
             </InputGroup>
           </Col>
           <p>Please Place a Marker For Where You Found The Trash/Needed Assistance</p>
-          <Search />
           <GoogleMap
           mapContainerStyle={containerStyle}
           center={center}
@@ -134,22 +131,5 @@ const AddReport = () => {
     </Container>
   );
 };
-
-function Search() {
-  const {ready, value, suggestions: { status, data }, setValue, clearSuggestion } = usePlacesAutocomplete({
-    requestOptions: {
-      location: { lat: () => 21.500, lng: () => -158.0000 },
-      radius: 200 * 1000,
-    },
-  });
-
-  return (
-  <Combobox onSelect={(address) => { console.log(address);}} >
-    <ComboboxInput value={value} onChange={(e) => {
-      setValue(e.target.value);
-    }} />
-    </Combobox>
-  );
-}
 
 export default (AddReport);
