@@ -20,10 +20,13 @@ const options = {
   styles: mapStyle,
 };
 
+const libraries = ['places'];
+
 /** Renders a container containing all of the Events documents. */
 const DisplayMap = ({ eventList, userEvents, reports }) => {
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: 'AIzaSyAH_N3x9evBavZrOJAb2RWdBquCoonshcE',
+    libraries,
   });
   const cleanUps = eventList.filter(event => event.typeOfEvent === 'Cleanup');
   const workshops = eventList.filter(event => event.typeOfEvent === 'Workshop');
