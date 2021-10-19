@@ -1,8 +1,17 @@
 import React from 'react';
+import { BsFacebook, BsTwitter, BsLinkedin, BsInstagram } from 'react-icons/bs';
+import { OverlayTrigger, Popover } from 'react-bootstrap';
 
 /** The Footer appears at the bottom of every page. Rendered by the App Layout component. */
 class Footer extends React.Component {
   render() {
+    const popover = (
+        <Popover>
+          <Popover.Content>
+            Hey there, I am under construction!
+          </Popover.Content>
+        </Popover>
+    );
     return (
         <div className="footer-dark">
             <footer>
@@ -31,10 +40,42 @@ class Footer extends React.Component {
                               Created by 5 Computer Science students at the University of Hawaii at Manoa.</p>
                         </div>
                         <div className="col item social">
-                            <a href="#"><i className="icon ion-social-facebook"/></a>
-                            <a href="#"><i className="icon ion-social-twitter"/></a>
-                            <a href="#"><i className="icon ion-social-snapchat"/></a>
-                            <a href="#"><i className="icon ion-social-instagram"/></a>
+                          <OverlayTrigger
+                              trigger='hover'
+                              placement="top"
+                              overlay={popover}
+                          >
+                            <a>
+                              <BsFacebook size="30px"/>
+                            </a>
+                          </OverlayTrigger>
+                          <OverlayTrigger
+                              trigger="hover"
+                              placement="top"
+                              overlay={popover}
+                          >
+                            <a>
+                              <BsTwitter size="30px"/>
+                            </a>
+                          </OverlayTrigger>
+                          <OverlayTrigger
+                              trigger="hover"
+                              placement="top"
+                              overlay={popover}
+                          >
+                            <a>
+                              <BsLinkedin size="30px" />
+                            </a>
+                          </OverlayTrigger>
+                          <OverlayTrigger
+                              trigger="hover"
+                              placement="top"
+                              overlay={popover}
+                          >
+                            <a>
+                              <BsInstagram size="30px"/>
+                            </a>
+                          </OverlayTrigger>
                         </div>
                     </div>
                     <p className="copyright">ECOCamino © 2021</p>
