@@ -38,8 +38,10 @@ const EventItem = ({ event, userEvents }) => {
           </div>
           : ' '}
         </Card.Body>
-        {((username === event.owner || username === 'admin@foo.com') &&
-            !(username === event.owner && username === 'admin@foo.com'))
+        {username === 'admin@foo.com' ?
+        'hi'
+        : ' '}
+        {(username === event.owner || username === 'admin@foo.com')
             ? <EditandDeleteButtons event={event}/> :
         <Container>
           <Row>

@@ -183,7 +183,7 @@ class EventCollection extends BaseCollection {
     return null;
   }
 
-  // Gets all the events after the current date
+  // Gets all the approved events after the current date
   getCurrentEvents() {
     const todayDate = new Date();
     const allEvents = this._collection.find({ status: 'approved' }, { sort: { date: 1 } }).fetch();
@@ -194,6 +194,13 @@ class EventCollection extends BaseCollection {
   getAllEvents() {
     const todayDate = new Date();
     const allEvents = this._collection.find({}, { sort: { date: 1 } }).fetch();
+    return allEvents.filter(event => event.date > todayDate);
+  }
+
+  // Gets all the pending events after the current date
+  getAllPendingEvents() {
+    const todayDate = new Date();
+    const allEvents = this._collection.find({ status: 'pending' }, { sort: { date: 1 } }).fetch();
     return allEvents.filter(event => event.date > todayDate);
   }
 

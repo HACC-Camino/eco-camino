@@ -51,6 +51,11 @@ class NavBar1 extends React.Component {
                 [<Nav.Link href="#profile" key='profile'>Dashboard</Nav.Link>,
                   <Nav.Link href="#admin-list" key='admin-list'>Admin List</Nav.Link>,
                   <NavDropdown key='eventdropdown' title='Events' id="nav-dropdown">
+                    <NavDropdown.Item href="#approvalEvent"
+                                      eventKey='approvalEvent'
+                                      style={{ borderRadius: 0 }}>
+                      Approve Events
+                    </NavDropdown.Item>
                     <NavDropdown.Item href="#event"
                                       eventKey='events'
                                       style={{ borderRadius: 0 }}>
