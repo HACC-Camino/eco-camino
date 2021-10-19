@@ -41,7 +41,7 @@ class Footer extends React.Component {
                         </div>
                         <div className="col item social">
                           <OverlayTrigger
-                              trigger='hover'
+                              trigger={['hover', 'focus']}
                               placement="top"
                               overlay={popover}
                           >
