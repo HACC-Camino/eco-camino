@@ -4,6 +4,7 @@ import { Card, Container } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import DeleteButton from './DeleteButton';
 import { GetPhoto } from '../aws/GetPhoto';
+import ConvertEvent from './ConvertEvent';
 
 /** Renders a single card in the Event list. See pages/Event/Event.jsx. */
 const ReportItem = ({ report }) => {
@@ -20,6 +21,7 @@ const ReportItem = ({ report }) => {
           <br/>
           <br/>
           {username === report.owner ? <DeleteButton report={report} /> : ''}
+          <ConvertEvent report={report} />
         </Card.Body>
       </Card>
     </Container>
