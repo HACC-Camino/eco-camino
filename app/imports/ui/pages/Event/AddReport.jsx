@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
-import { Container, Spinner } from 'react-bootstrap';
+import { Meteor } from 'meteor/meteor';
+import { Container, Row, Col, Form, InputGroup, FormControl, Button, Spinner } from 'react-bootstrap';
 import 'react-datepicker/dist/react-datepicker.css';
+import swal from 'sweetalert';
 import { GoogleMap, useLoadScript, Marker, InfoWindow } from '@react-google-maps/api';
 import usePlacesAutocomplete, { getGeocode } from 'use-places-autocomplete';
 import { Combobox, ComboboxInput, ComboboxPopover, ComboboxOption } from '@reach/combobox';
+import { reportDefineMethod } from '../../../api/report/ReportCollection.methods';
+import UploadPhotoModal from '../../components/aws/UploadPhotoModal';
 import '@reach/combobox/styles.css';
 import mapStyle from '../../components/map/mapStyle';
 
@@ -29,12 +33,12 @@ const libraries = ['places'];
 // import 'react-datepicker/dist/react-datepicker-cssmodules.css';
 
 const AddReport = () => {
-  // Creating form hooks
+  // Loading Google Maps
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: 'AIzaSyAH_N3x9evBavZrOJAb2RWdBquCoonshcE',
     libraries,
   });
-  // Google map
+  // Google Map Hooks
   const [markers, setMarkers] = useState([]);
   const [selected, setSelected] = useState(null);
   const onMapClick = React.useCallback((report) => {
@@ -44,8 +48,63 @@ const AddReport = () => {
   const onMapLoad = React.useCallback((map) => {
     mapRef.current = map;
   }, []);
+  // Image Hosting Methods
+  const [data, setData] = useState(null);
+  const handleCallback = (childData) => {
+    setData(childData);
+  };
+  // Form Hooks
+  const [finalTitle, setFinalTitle] = useState(() => '');
+  const [finalLocation, setFinalLocation] = useState(() => '');
+  const [finalDescription, setFinalDescription] = useState(() => '');
+  // On Submit
+  const onSubmit = () => {
+    const date = new Date();
+    const title = finalTitle;
+    const location = finalLocation;
+    const lat = markers[0].lat;
+    const lng = markers[0].lng;
+    const accessKey = data;
+    const owner = Meteor.user()?.username;
+    const description = finalDescription;
+    reportDefineMethod.call({
+      date, title, location,
+      owner, lat, lng, accessKey, description },
+    error => {
+      if (error) {
+        swal('Error', error.message, 'error');
+      } else {
+        swal('Success', 'Report Added Successfully', 'success');
+        setFinalTitle('');
+        setFinalLocation('');
+        setFinalDescription('');
+      }
+    });
+  };
   return (
   <Container id="page-container">
+    <h2>Report Trash/Assistance</h2>
+    <Row>
+      <Col>
+        <Form.Label htmlFor="basic-url">Title of Your Report</Form.Label>
+        <InputGroup className="mb-3">
+          <FormControl placeholder='Title' value={finalTitle} onChange={e => setFinalTitle(e.target.value)} />
+        </InputGroup>
+      </Col>
+    </Row>
+      <Form.Label htmlFor="basic-url">Description of Your Report</Form.Label>
+      <InputGroup className="mb-3">
+        <FormControl placeholder='Description'
+                     value={finalDescription} as="textarea"
+                     rows={5} onChange={e => setFinalDescription(e.target.value)} />
+      </InputGroup>
+    <h2>Location</h2>
+    <Col>
+      <InputGroup className="mb-3">
+        <FormControl placeholder='Address of the Trash/Needed Assistance'
+                     value={finalLocation} onChange={e => setFinalLocation(e.target.value)} />
+      </InputGroup>
+    </Col>
     <p>Please Place a Marker For Where You Found The Trash/Needed Assistance</p>
     {loadError ? <div>error</div> : ''}
     { isLoaded ? <Search /> : ''}
@@ -71,6 +130,15 @@ const AddReport = () => {
         </div>
       </InfoWindow>) : null }
     </GoogleMap> : <Spinner />}
+    <br />
+    <Row>
+      <p>Please Upload a Picture of the Trash/Needed Assistance</p>
+      <UploadPhotoModal parentCallback={handleCallback}/>
+    </Row>
+    <br />
+    <Button variant="primary" size="lg" onClick={onSubmit}>
+      Submit
+    </Button>
   </Container>
   );
 };
