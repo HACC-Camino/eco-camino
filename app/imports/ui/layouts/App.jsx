@@ -24,9 +24,7 @@ import AdminList from '../pages/AdminList';
 import CreateForumPost from '../pages/Forum/CreateForumPost';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
-class App extends React.Component {
-  render() {
-    return (
+const App = () => (
         <Router>
           <div>
             <NavBar1/>
@@ -51,8 +49,6 @@ class App extends React.Component {
           </div>
         </Router>
     );
-  }
-}
 
 /**
  * ProtectedRoute (see React Router v4 sample)
