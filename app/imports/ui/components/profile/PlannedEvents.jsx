@@ -3,10 +3,10 @@ import { Table } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 
 const renderEvents = (my_sorted_events_list, index) => (
-    <tr key={index}>
-        <th>{index}</th>
-        <th>{my_sorted_events_list.title}</th>
-        <th>{my_sorted_events_list.date.toLocaleDateString()}</th>
+    <tr className='d-flex' key={index}>
+        <th className='col-2'>{index}</th>
+        <th className='col-7'>{my_sorted_events_list.title}</th>
+        <th className='col-3'>{my_sorted_events_list.date.toLocaleDateString()}</th>
     </tr>
 );
 
@@ -14,10 +14,10 @@ const PlannedEvents = ({ my_sorted_events_list }) => (
     <div className='container-lg'>
         <Table className='table' bordered responsive striped hover>
             <thead>
-            <tr>
-                <th>#</th>
-                <th>Event</th>
-                <th>Time</th>
+            <tr className='d-flex'>
+                <th className='col-2'>#</th>
+                <th className='col-7'>Event</th>
+                <th className='col-3'>Time</th>
             </tr>
             </thead>
             <tbody>

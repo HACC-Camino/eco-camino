@@ -9,10 +9,8 @@ import PastEvents from '../components/profile/PastEvents';
 import { Events } from '../../api/event/EventCollection';
 import { Users } from '../../api/user/UserCollection';
 import { UserEvents } from '../../api/user/UserEventCollection';
-// import UploadPhotoModal from '../components/aws/UploadPhotoModal';
-// import { GetPhoto } from '../components/aws/GetPhoto';
 
-const Profile = ({ filtered_events, ready, userDetail, past_events }) =>
+const Profile = ({ filtered_events, ready, userDetail, past_events, eventIds }) =>
 
     // // copy this for upload photo modal
     // const [data, setData] = useState(null);
@@ -21,47 +19,49 @@ const Profile = ({ filtered_events, ready, userDetail, past_events }) =>
     // };
 
     // eslint-disable-next-line implicit-arrow-linebreak
-     (ready ? (
-        <Container style={{ paddingTop: '30px' }}>
-            <Row>
-                <Col sm={4} style={{ paddingBottom: '30px', paddingRight: '30px' }}>
-                    <ProfileCard userDetail={userDetail} />
-                </Col>
+ (ready ? (
+    <Container style={{ paddingTop: '30px' }}>
+        <Row>
+            <Col sm={4} style={{ paddingBottom: '30px', paddingRight: '30px' }}>
+                <ProfileCard userDetail={userDetail} eventIds={eventIds}/>
+            </Col>
 
-                <Col sm={8}>
-                    <div className='row' style={{ paddingBottom: '30px' }}>
-                        <div className='card'>
-                            <h3 className='card-title' style={{ padding: '30px' }}>My Events</h3>
-                            <PlannedEvents my_sorted_events_list={filtered_events}/>
-                        </div>
+            <Col sm={8}>
+                <div className='row' style={{ paddingBottom: '30px' }}>
+                    <div className='card'>
+                        <h3 className='card-title' style={{ padding: '30px' }}>My Events</h3>
+                        <PlannedEvents my_sorted_events_list={filtered_events}/>
                     </div>
+                </div>
 
-                    <div className='row'>
-                        <div className='card'>
-                            <h3 className='card-title' style={{ padding: '30px' }}>Past Events</h3>
-                            <PastEvents past_events={past_events}/>
-                        </div>
+                <div className='row'>
+                    <div className='card'>
+                        <h3 className='card-title' style={{ padding: '30px' }}>Past Events</h3>
+                        <PastEvents past_events={past_events}/>
                     </div>
-                </Col>
+                </div>
+            </Col>
 
-            </Row>
+        </Row>
 
-            {/* <Row> */}
-            {/*    <Col><UploadPhotoModal parentCallback={handleCallback}/></Col> */}
-            {/*    <Col>{data}</Col> */}
-            {/* </Row> */}
-        </Container>
-        ) : (
-            <Spinner animation="border" role="status">
-                <span className="visually-hidden">Loading...</span>
-            </Spinner>
-        )
-    );
+        {/* <Row> */}
+        {/*    <Col><UploadPhotoModal parentCallback={handleCallback}/></Col> */}
+        {/*    <Col>{data}</Col> */}
+        {/* </Row> */}
+    </Container>
+    ) : (
+        <Spinner animation="border" role="status">
+            <span className="visually-hidden">Loading...</span>
+        </Spinner>
+    )
+ );
+
 Profile.propTypes = {
     userDetail: PropTypes.object,
     ready: PropTypes.bool.isRequired,
     filtered_events: PropTypes.array,
     past_events: PropTypes.array,
+    eventIds: PropTypes.array,
 };
 
 /** withTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker */
@@ -93,10 +93,12 @@ export default withTracker(() => {
         return past_filtered_events.date < current_date;
     });
     // console.log(GetPhoto({ photoAWSKey: '7qlRjzZMtEIUfbw62mSL5r1bC.jpg' }));
+    const eventIds = Events.getEventIdList();
     return {
         ready,
         userDetail,
         filtered_events,
         past_events,
+        eventIds,
     };
 })(Profile);
