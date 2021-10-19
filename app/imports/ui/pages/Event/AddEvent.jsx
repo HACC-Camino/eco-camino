@@ -8,7 +8,6 @@ import swal from 'sweetalert';
 import moment from 'moment';
 import { GoogleMap, LoadScript, Marker, InfoWindow } from '@react-google-maps/api';
 import { eventDefineMethod } from '../../../api/event/EventCollection.methods';
-// import UploadPhotoModal from '../../components/aws/UploadPhotoModal';
 import '@reach/combobox/styles.css';
 import mapStyle from '../../components/map/mapStyle';
 
@@ -30,11 +29,6 @@ const options = {
 // import 'react-datepicker/dist/react-datepicker-cssmodules.css';
 
 const AddEvent = () => {
-  // Creating form hooks
-  // const [data, setData] = useState(null);
-  // const handleCallback = (childData) => {
-  //   setData(childData);
-  // };
   const [finalType, setFinalType] = useState(() => '');
   const [finalDate, setFinalDate] = useState(new Date());
   const [finalStartTime, setFinalStartTime] = useState('');
