@@ -10,6 +10,7 @@ import Landing from '../pages/Landing';
 import Event from '../pages/Event/Event';
 import AddEvent from '../pages/Event/AddEvent';
 import AddReport from '../pages/Event/AddReport';
+import AdminApprovalEvent from '../pages/Event/AdminApprovalEvent';
 import NotFound from '../pages/NotFound';
 import Signin from '../pages/Signin';
 import Signup from '../pages/Signup';
@@ -42,6 +43,7 @@ class App extends React.Component {
               <ProtectedRoute path="/forum/post/:_id" component={ForumPost}/>
               <ProtectedRoute path="/forum/create" component={CreateForumPost}/>
               <AdminProtectedRoute path="/admin-list" component={AdminList}/>
+              <AdminProtectedRoute path="/approvalEvent" component={AdminApprovalEvent}/>
               <ProtectedRoute path="/signout" component={Signout}/>
               <Route component={NotFound}/>
             </Switch>

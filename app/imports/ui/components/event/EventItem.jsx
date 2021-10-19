@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import EditandDeleteButtons from './EditAndDeleteButtons';
 import JoinButton from './JoinButton';
 import LeaveButton from './LeaveButton';
+import AdminApprovalButton from './AdminApprovalButton';
 
 /** Renders a single card in the Event list. See pages/Event/Event.jsx. */
 const EventItem = ({ event, userEvents }) => {
@@ -22,7 +23,13 @@ const EventItem = ({ event, userEvents }) => {
     <Container>
       <Card style={{ backgroundColor: style }}>
         <Card.Body>
-          <Card.Title>{event.title} ({event.typeOfEvent})</Card.Title>
+          <Card.Title>{event.title} ({event.typeOfEvent})
+            {username === 'admin@foo.com' ?
+            <div>
+              <AdminApprovalButton event={event} />
+            </div>
+            : ' '}
+          </Card.Title>
           <Card.Text>
             Date: {event.date.toLocaleDateString()} from {event.startTime} to {event.endTime}
           </Card.Text>
@@ -31,9 +38,14 @@ const EventItem = ({ event, userEvents }) => {
           <Card.Text>Contact Info: {event.email}</Card.Text>
           <Card.Text>Description: {event.description}</Card.Text>
           <Card.Text>Participants: {event.participants}</Card.Text>
+          {username === event.owner ?
+          <div style={{ color: 'red' }}>
+            <Card.Text>Status: {event.status}</Card.Text>
+            <Card.Text>Feedback: {event.feedback}</Card.Text>
+          </div>
+          : ' '}
         </Card.Body>
-        {((username === event.owner || username === 'admin@foo.com') &&
-            !(username === event.owner && username === 'admin@foo.com'))
+        {(username === event.owner || username === 'admin@foo.com')
             ? <EditandDeleteButtons event={event}/> :
         <Container>
           <Row>
