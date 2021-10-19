@@ -4,7 +4,7 @@ import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
 import { withRouter } from 'react-router-dom';
 import { Roles } from 'meteor/alanning:roles';
-import { Navbar, Nav, Dropdown, NavDropdown } from 'react-bootstrap';
+import { Navbar, Nav, Dropdown } from 'react-bootstrap';
 
 /** The NavBar appears at the top of every page. Rendered by the App Layout component. */
 class NavBar1 extends React.Component {
@@ -19,28 +19,17 @@ class NavBar1 extends React.Component {
           </Navbar.Brand>
           <Nav className="me-auto">
             {this.props.currentUser && Roles.userIsInRole(Meteor.userId(), 'admin') === false ? (
-                [<Nav.Link href="#profile" key='profile'>Profile</Nav.Link>,
-                  <NavDropdown key='eventdropdown' title='Events' id="nav-dropdown">
-                    <NavDropdown.Item href="#event"
-                                      eventKey='events'
-                                      style={{ borderRadius: 0 }}>
-                      View Events
-                    </NavDropdown.Item>
-                    <NavDropdown.Item href="#addEvent"
-                                      eventKey='addEvent'
-                                      style={{ borderRadius: 0 }}>
-                      Add Events
-                    </NavDropdown.Item>
-                  </NavDropdown>,
-                  <Nav.Link href="#forum" key='forums'>Forums</Nav.Link>,
+                [<Nav.Link href="#event" key='events'>Events</Nav.Link>,
+                  <Nav.Link href="#addEvent" key='addEvent'>Add Events</Nav.Link>,
                   <Nav.Link href="#addReport" key='addReport'>Report Trash/Assistance</Nav.Link>,
-                  ]
+                  <Nav.Link href="#forum" key='forums'>Forums</Nav.Link>,
+                  <Nav.Link href="#profile" key='profile'>Profile</Nav.Link>]
             ) : ''}
             {this.props.currentUser && Roles.userIsInRole(Meteor.userId(), 'admin') ? (
-                [<Nav.Link href="#profile" key='profile'>Dashboard</Nav.Link>,
-                  <Nav.Link href="#admin-list" key='admin-list'>Admin List</Nav.Link>,
-                  <Nav.Link href="#event" key='events'>Events</Nav.Link>,
+                [<Nav.Link href="#event" key='events'>Events</Nav.Link>,
                   <Nav.Link href="#forum" key='forums'>Forums</Nav.Link>,
+                  <Nav.Link href="#profile" key='profile'>Dashboard</Nav.Link>,
+                  <Nav.Link href="#admin-list" key='admin-list'>Admin List</Nav.Link>,
                 ]
             ) : ''}
             <Nav.Link href="#resources" key='resources'>Resources</Nav.Link>

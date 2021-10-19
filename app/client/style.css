@@ -24,10 +24,11 @@
 }
 
 #page-container {
-  /*must be footer height + 30*/
-  min-height: 75vh;
+  padding-bottom: 82.75px; /*must be footer height + 30*/
+  min-height: 80vh;
   min-width: 100%;
-  padding: 25px 100px;
+  padding-left: 80px;
+  padding-right: 80px;
   margin-left: 0;
   margin-right: 0;
 }

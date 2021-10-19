@@ -16,7 +16,7 @@ const EditProfileModal = ({ userDetail }) => {
     const [firstName, setFirstName] = useState(userDetail.firstName);
     const [lastName, setLastName] = useState(userDetail.lastName);
     const [bio, setBio] = useState(userDetail.bio);
-    const [zipCode, setZipCode] = useState(userDetail.zipCode);
+    const [areaCode, setAreaCode] = useState(userDetail.areaCode);
     // const [photoAWSKey, setPhotoAWSKey] = useState(userDetail.photoAWSKey);
 
     const [data, setData] = useState(null);
@@ -30,7 +30,7 @@ const EditProfileModal = ({ userDetail }) => {
         updateData.firstName = firstName;
         updateData.lastName = lastName;
         updateData.bio = bio;
-        updateData.zipCode = zipCode;
+        updateData.areaCode = areaCode;
         updateData.photoAWSKey = data;
         userUpdateMethod.call(updateData, (error) => (error ?
             swal('Error', error.message, 'error') :
@@ -72,13 +72,13 @@ const EditProfileModal = ({ userDetail }) => {
                                     onChange={e => setLastName(e.target.value)}/>
                             </Form.Group>
 
-                            <Form.Group className='mb-3' controlId='formZipCode'>
-                                <Form.Label>Zip Code</Form.Label>
+                            <Form.Group className='mb-3' controlId='formAreaCode'>
+                                <Form.Label>Area Code</Form.Label>
                                 <Form.Control
                                     type='text'
-                                    placeholder={zipCode}
-                                    value={zipCode}
-                                    onChange={e => setZipCode(e.target.value)}/>
+                                    placeholder={areaCode}
+                                    value={areaCode}
+                                    onChange={e => setAreaCode(e.target.value)}/>
                             </Form.Group>
 
                             <Form.Group className='mb-3' controlId='formBio'>

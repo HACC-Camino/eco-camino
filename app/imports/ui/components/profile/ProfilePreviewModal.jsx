@@ -32,7 +32,7 @@ const ProfilePreviewModal = ({ userDetail }) => {
             <Card.Body>
               <Card.Title as='h3'>{userDetail.firstName} {userDetail.lastName}</Card.Title>
               <Card.Text>
-                Zip Code: {userDetail.zipCode}
+                Area Code: {userDetail.areaCode}
                 <br/>
                 Points Earned: {userDetail.points}
               </Card.Text>

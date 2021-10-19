@@ -20,7 +20,7 @@ const ProfileCard = ({ userDetail }) => {
                 <Card.Title as='h3'>{userDetail.firstName} {userDetail.lastName}</Card.Title>
                 <Card.Subtitle as='h6'>Joined Date: {userDetail.dateJoined.toLocaleDateString()}</Card.Subtitle>
                 <Row>
-                    <Col><h6>Zip Code: {userDetail.zipCode}</h6></Col>
+                    <Col><h6>AreaCode: {userDetail.areaCode}</h6></Col>
                     <Col><h6>Points Earned: {userDetail.points}</h6></Col>
                 </Row>
                 <Card.Text>
