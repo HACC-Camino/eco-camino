@@ -12,10 +12,19 @@ const maxFakers = {
 const today = new Date();
 
 if (Users.count() === 0) {
-  if (Meteor.settings.defaultUsers) {
-    Meteor.settings.defaultUsers.map(forumPosts => Users.define(forumPosts));
-    console.log(`UserCollection: ${Users.count()}`);
-  }
+   const users = Meteor.users.find({}).fetch();
+   users.forEach(user => {
+     const userInfo = {};
+     userInfo.dateJoined = faker.date.recent();
+     userInfo.photoAWSKey = 'default-photo.png';
+     userInfo.firstName = faker.name.firstName();
+     userInfo.lastName = faker.name.lastName();
+     userInfo.bio = faker.lorem.paragraph(faker.datatype.number({ min: 1, max: 5 })) || '';
+     userInfo.zipCode = faker.address.zipCodeByState('hi').substring(0, 5);
+     userInfo.owner = user.username;
+     Users.define(userInfo);
+   });
+   console.log(`User Collection: ${Users.count()}`);
 }
 
 if (Events.count() === 0) {
