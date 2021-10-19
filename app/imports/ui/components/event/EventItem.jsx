@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import EditandDeleteButtons from './EditAndDeleteButtons';
 import JoinButton from './JoinButton';
 import LeaveButton from './LeaveButton';
+import AdminApprovalButton from './AdminApprovalButton';
 
 /** Renders a single card in the Event list. See pages/Event/Event.jsx. */
 const EventItem = ({ event, userEvents }) => {
@@ -22,7 +23,13 @@ const EventItem = ({ event, userEvents }) => {
     <Container>
       <Card style={{ backgroundColor: style }}>
         <Card.Body>
-          <Card.Title>{event.title} ({event.typeOfEvent})</Card.Title>
+          <Card.Title>{event.title} ({event.typeOfEvent})
+            {username === 'admin@foo.com' ?
+            <div>
+              <AdminApprovalButton event={event} />
+            </div>
+            : ' '}
+          </Card.Title>
           <Card.Text>
             Date: {event.date.toLocaleDateString()} from {event.startTime} to {event.endTime}
           </Card.Text>
@@ -38,9 +45,6 @@ const EventItem = ({ event, userEvents }) => {
           </div>
           : ' '}
         </Card.Body>
-        {username === 'admin@foo.com' ?
-        'hi'
-        : ' '}
         {(username === event.owner || username === 'admin@foo.com')
             ? <EditandDeleteButtons event={event}/> :
         <Container>
