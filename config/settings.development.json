@@ -5,11 +5,14 @@
   ],
 
   "defaultEvent": [
-    { "title": "Magic Island Cleanup", "date": "10/15/2021", "startTime": "10:30 pm", "endTime": "11:30 pm", "location": "Magic Island 1201 Ala Moana Blvd Honolulu", "participants": 1, "owner": "john@foo.com", "lat": 21.364907375706697, "lng": -157.8618922247979, "name": "John Foo", "email": "john@foo.com", "description": "Cleaning up Magic Island, park near the harbor side, please bring your own supplies. Thank you!", "typeOfEvent": "Cleanup"
+    { "title": "Magic Island Cleanup", "date": "10/15/2021", "startTime": "10:30 pm", "endTime": "11:30 pm", "location": "Magic Island 1201 Ala Moana Blvd Honolulu", "participants": 1, "owner": "john@foo.com", "lat": 21.364907375706697, "lng": -157.8618922247979, "name": "John Foo", "email": "john@foo.com", "description": "Cleaning up Magic Island, park near the harbor side, please bring your own supplies. Thank you!", "typeOfEvent": "Cleanup",
+      "status": "approved", "feedback": "none"
     },
-    { "title": "Ala Moana Cleanup", "date": "10/20/2021", "startTime": "10:30 pm", "endTime": "11:30 pm", "location": "Magic Island 1201 Ala Moana Blvd Honolulu", "participants": 1, "owner": "john@foo.com", "lat": 21.31899566027989, "lng": -157.83087087305813, "name": "John Foo", "email": "john@foo.com", "description": "Cleaning up Magic Island, park near the harbor side, please bring your own supplies. Thank you!", "typeOfEvent": "Cleanup"
+    { "title": "Ala Moana Cleanup", "date": "10/20/2021", "startTime": "10:30 pm", "endTime": "11:30 pm", "location": "Magic Island 1201 Ala Moana Blvd Honolulu", "participants": 1, "owner": "john@foo.com", "lat": 21.31899566027989, "lng": -157.83087087305813, "name": "John Foo", "email": "john@foo.com", "description": "Cleaning up Magic Island, park near the harbor side, please bring your own supplies. Thank you!", "typeOfEvent": "Cleanup",
+      "status": "approved", "feedback": "none"
     },
-    { "title": "How To Care For The Environment While Hiking", "date": "10/10/2021",  "startTime": "10:30 pm", "endTime": "11:30 pm", "location": "Virtual Over Zoom", "participants": 1, "owner": "john@foo.com", "lat": 21.364907375706697, "lng": -157.83087087305813, "name": "John Foo", "email": "john@foo.com", "description": "Learning the do's and don'ts when hiking to protect the habitats.", "typeOfEvent": "Workshop"
+    { "title": "How To Care For The Environment While Hiking", "date": "10/10/2021",  "startTime": "10:30 pm", "endTime": "11:30 pm", "location": "Virtual Over Zoom", "participants": 1, "owner": "john@foo.com", "lat": 21.364907375706697, "lng": -157.83087087305813, "name": "John Foo", "email": "john@foo.com", "description": "Learning the do's and don'ts when hiking to protect the habitats.", "typeOfEvent": "Workshop",
+      "status": "approved", "feedback": "none"
     }
   ]
 }

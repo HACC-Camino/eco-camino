@@ -24,10 +24,8 @@ class EventCollection extends BaseCollection {
       participants: Number,
       lat: Number,
       lng: Number,
-      reportLink: {
-        type: String,
-        optional: true,
-      },
+      status: String,
+      feedback: String,
       typeOfEvent: {
         type: String,
       },
@@ -43,7 +41,7 @@ class EventCollection extends BaseCollection {
    * @return {String} the docID of the new document.
    */
   define({ title, date, name, location, owner, lat, lng, email, participants,
-           description, startTime, endTime, typeOfEvent, reportLink }) {
+           description, startTime, endTime, typeOfEvent, status, feedback }) {
     const docID = this._collection.insert({
       title,
       date,
@@ -55,7 +53,8 @@ class EventCollection extends BaseCollection {
       email,
       description,
       typeOfEvent,
-      reportLink,
+      status,
+      feedback,
       startTime,
       endTime,
       participants,
@@ -71,7 +70,7 @@ class EventCollection extends BaseCollection {
    * @param condition the new condition (optional).
    */
   update(docID, { title, date, name, location, owner, lat, lng, email,
-    description, startTime, endTime, typeOfEvent, reportLink, participants }) {
+    description, startTime, endTime, typeOfEvent, reportLink, participants, status, feedback }) {
     const updateData = {};
     if (title) {
       updateData.title = title;
@@ -105,6 +104,12 @@ class EventCollection extends BaseCollection {
     }
     if (reportLink) {
       updateData.reportLink = reportLink;
+    }
+    if (status) {
+      updateData.status = status;
+    }
+    if (feedback) {
+      updateData.feedback = feedback;
     }
     if (_.isNumber(participants)) {
       updateData.participants = participants;
@@ -181,6 +186,13 @@ class EventCollection extends BaseCollection {
   // Gets all the events after the current date
   getCurrentEvents() {
     const todayDate = new Date();
+    const allEvents = this._collection.find({ status: 'approved' }, { sort: { date: 1 } }).fetch();
+    return allEvents.filter(event => event.date > todayDate);
+  }
+
+  // Gets all the events after the current date
+  getAllEvents() {
+    const todayDate = new Date();
     const allEvents = this._collection.find({}, { sort: { date: 1 } }).fetch();
     return allEvents.filter(event => event.date > todayDate);
   }
@@ -199,7 +211,7 @@ class EventCollection extends BaseCollection {
 
   // Gets all the events that are owned by a specific user
   getCurrentOwnedWorkshops(username) {
-    const currentEvents = this.getCurrentEvents();
+    const currentEvents = this.getAllEvents();
     return currentEvents.filter(event => event.owner === username);
   }
 

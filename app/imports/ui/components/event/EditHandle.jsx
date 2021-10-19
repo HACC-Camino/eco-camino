@@ -43,6 +43,8 @@ const EditHandle = ({ event }) => {
       updateData.name = finalName;
       updateData.email = finalEmail;
       updateData.description = finalDescription;
+      updateData.feedback = event.feedback;
+      updateData.status = event.status;
       eventUpdateMethod.call(updateData, (error) => (error ?
       swal('Error', error.message, 'error') :
       swal('Success', 'Data edited successfully', 'success').then(handleClose)));

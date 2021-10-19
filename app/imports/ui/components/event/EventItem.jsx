@@ -31,6 +31,12 @@ const EventItem = ({ event, userEvents }) => {
           <Card.Text>Contact Info: {event.email}</Card.Text>
           <Card.Text>Description: {event.description}</Card.Text>
           <Card.Text>Participants: {event.participants}</Card.Text>
+          {username === event.owner ?
+          <div style={{ color: 'red' }}>
+            <Card.Text>Status: {event.status}</Card.Text>
+            <Card.Text>Feedback: {event.feedback}</Card.Text>
+          </div>
+          : ' '}
         </Card.Body>
         {((username === event.owner || username === 'admin@foo.com') &&
             !(username === event.owner && username === 'admin@foo.com'))
