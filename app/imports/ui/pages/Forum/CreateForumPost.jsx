@@ -28,7 +28,7 @@ const CreateForumPost = () => {
           if (error) {
             swal('Error', error.message, 'error');
           } else {
-            swal('Success', 'Event Added Successfully', 'success');
+            swal('Success', 'Post Created Successfully', 'success');
             goToPage(result);
           }
         });
