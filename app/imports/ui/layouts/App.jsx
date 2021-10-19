@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Meteor } from 'meteor/meteor';
 import 'semantic-ui-css/semantic.css';
 import { Roles } from 'meteor/alanning:roles';
-import { HashRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
+import { HashRouter as Router, Route, Switch, Redirect, useLocation } from 'react-router-dom';
 import NavBar1 from '../components/NavBar';
 import Footer from '../components/Footer';
 import Landing from '../pages/Landing';
@@ -22,33 +22,36 @@ import Forum from '../pages/Forum/Forum';
 import ForumPost from '../pages/Forum/ForumPost';
 import AdminList from '../pages/AdminList';
 import CreateForumPost from '../pages/Forum/CreateForumPost';
+// import ToastNotification from '../components/ToastNotification';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
-const App = () => (
-        <Router>
-          <div>
-            <NavBar1/>
-            <Switch>
-              <Route exact path="/" component={Landing}/>
-              <Route path="/signin" component={Signin}/>
-              <Route path="/signup" component={Signup}/>
-              <ProtectedRoute path="/profile" component={Profile}/>
-              <ProtectedRoute path="/event" component={Event} />
-              <ProtectedRoute path="/addEvent" component={AddEvent} />
-              <ProtectedRoute path="/addReport" component={AddReport} />
-              <Route path="/resources" component={Resources} />
-              <ProtectedRoute path="/forum/home" component={Forum}/>
-              <ProtectedRoute path="/forum/post/:_id" component={ForumPost}/>
-              <ProtectedRoute path="/forum/create" component={CreateForumPost}/>
-              <AdminProtectedRoute path="/admin-list" component={AdminList}/>
-              <AdminProtectedRoute path="/approvalEvent" component={AdminApprovalEvent}/>
-              <ProtectedRoute path="/signout" component={Signout}/>
-              <Route component={NotFound}/>
-            </Switch>
-            <Footer/>
-          </div>
-        </Router>
-    );
+const App = () => {
+  return (
+  <Router>
+    <div>
+      <NavBar1/>
+      <Switch>
+        <Route exact path="/" component={Landing}/>
+        <Route path="/signin" component={Signin}/>
+        <Route path="/signup" component={Signup}/>
+        <ProtectedRoute path="/profile" component={Profile}/>
+        <ProtectedRoute path="/event" component={Event}/>
+        <ProtectedRoute path="/addEvent" component={AddEvent}/>
+        <ProtectedRoute path="/addReport" component={AddReport}/>
+        <Route path="/resources" component={Resources}/>
+        <ProtectedRoute path="/forum/home" component={Forum}/>
+        <ProtectedRoute path="/forum/post/:_id" component={ForumPost}/>
+        <ProtectedRoute path="/forum/create" component={CreateForumPost}/>
+        <AdminProtectedRoute path="/admin-list" component={AdminList}/>
+        <AdminProtectedRoute path="/approvalEvent" component={AdminApprovalEvent}/>
+        <ProtectedRoute path="/signout" component={Signout}/>
+        <Route component={NotFound}/>
+      </Switch>
+      {/* <ToastNotification show={true} message={'this kinda works'}/> */}
+      <Footer/>
+    </div>
+  </Router>);
+};
 
 /**
  * ProtectedRoute (see React Router v4 sample)
