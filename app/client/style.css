@@ -27,6 +27,10 @@
   height: 200px;
 }
 
+.search {
+  width: 100%;
+}
+
 #page-container {
   /*must be footer height + 30*/
   min-height: 75vh;

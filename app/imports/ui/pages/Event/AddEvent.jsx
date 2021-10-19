@@ -6,7 +6,9 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import swal from 'sweetalert';
 import moment from 'moment';
-import { GoogleMap, LoadScript, Marker, InfoWindow } from '@react-google-maps/api';
+import { GoogleMap, Marker, InfoWindow, useLoadScript } from '@react-google-maps/api';
+import usePlacesAutocomplete, { getGeocode, getLatLng } from 'use-places-autocomplete';
+import { Combobox, ComboboxInput, ComboboxOption, ComboboxPopover } from '@reach/combobox';
 import { eventDefineMethod } from '../../../api/event/EventCollection.methods';
 import '@reach/combobox/styles.css';
 import mapStyle from '../../components/map/mapStyle';
@@ -16,19 +18,62 @@ const containerStyle = {
   height: '500px',
 };
 
-const center = {
-  lat: 21.500,
-  lng: -158.0000,
-};
-
 const options = {
   styles: mapStyle,
+  disableDefaultUI: true,
+  zoomControl: true,
 };
+
+const libraries = ['places'];
 
 // CSS Modules, react-datepicker-cssmodules.css
 // import 'react-datepicker/dist/react-datepicker-cssmodules.css';
 
 const AddEvent = () => {
+  const [center, setCenter] = useState({ lat: 21.500, lng: -158.0000 });
+  const [zoom, setZoom] = useState(10);
+  const panTo = (lat, lng) => {
+    setCenter({ lat: lat, lng: lng });
+    setZoom(14);
+  };
+  const Search = () => {
+    const { ready, value, suggestions: { status, data }, setValue, clearSuggestions } = usePlacesAutocomplete({
+      requestOptions: {
+        location: { lat: () => 21.500, lng: () => -158.0000 },
+        radius: 200 * 1000,
+      },
+    });
+
+    return (
+    <div className={'search'}>
+      <Combobox onSelect={async (address) => {
+        setValue(address, false);
+        clearSuggestions();
+        const results = await getGeocode({ address });
+        const { lat, lng } = await getLatLng(results[0]);
+        panTo(lat, lng);
+      }
+      } >
+        <ComboboxInput value={value} onChange={(e) => {
+          setValue(e.target.value);
+        }}
+                       disabled={!ready}
+                       placeholder='Search Location'
+        />
+        <ComboboxPopover>
+          { status === 'OK' && data.map(({ description }) => <ComboboxOption
+          key={description} value={description} />)}
+        </ComboboxPopover>
+      </Combobox>
+    </div>
+    );
+  };
+  // Loading Google Maps
+  const { isLoaded } = useLoadScript({
+    googleMapsApiKey: 'AIzaSyAH_N3x9evBavZrOJAb2RWdBquCoonshcE',
+    libraries,
+  });
+  // Form Hooks
   const [finalType, setFinalType] = useState(() => '');
   const [finalDate, setFinalDate] = useState(new Date());
   const [finalStartTime, setFinalStartTime] = useState('');
@@ -172,9 +217,6 @@ const AddEvent = () => {
                      value={finalDescription} as="textarea"
                      rows={5} onChange={e => setFinalDescription(e.target.value)} />
       </InputGroup>
-        <LoadScript
-        googleMapsApiKey="AIzaSyAH_N3x9evBavZrOJAb2RWdBquCoonshcE"
-        >
           <h2>Location</h2>
           <Col>
             <InputGroup className="mb-3">
@@ -183,30 +225,34 @@ const AddEvent = () => {
             </InputGroup>
           </Col>
           <p>Please Place a Marker For Where Your Event Will Be Held</p>
-          <GoogleMap
-          mapContainerStyle={containerStyle}
-          center={center}
-          zoom={10}
-          onClick={onMapClick}
-          onLoad={onMapLoad}
-          options={options}
-          >
-            {markers.map(marker => <Marker
-            key={marker.time.toISOString()}
-            position={{ lat: marker.lat, lng: marker.lng }}
-            onClick={() => {
-              setSelected(marker);
-            }}/>)}
-
-            {selected ? (<InfoWindow
-            position={{ lat: selected.lat, lng: selected.lng }} onCloseClick={() => { setSelected(null); }}>
-              <div>
-                <h4> Location Of Event </h4>
-              </div>
-            </InfoWindow>) : null }
-          </GoogleMap>
-        </LoadScript>
       <br />
+      { isLoaded ?
+      <div>
+        <Search />
+        <GoogleMap
+        mapContainerStyle={containerStyle}
+        center={center}
+        zoom={zoom}
+        onClick={onMapClick}
+        onLoad={onMapLoad}
+        options={options}
+        >
+          {markers.map(marker => <Marker
+          key={marker.time.toISOString()}
+          position={{ lat: marker.lat, lng: marker.lng }}
+          onClick={() => {
+            setSelected(marker);
+          }}/>)}
+
+          {selected ? (<InfoWindow
+          position={{ lat: selected.lat, lng: selected.lng }} onCloseClick={() => { setSelected(null); }}>
+            <div>
+              <h4> Location Of Event </h4>
+            </div>
+          </InfoWindow>) : null }
+        </GoogleMap>
+      </div>
+      : ' '}
       <Button variant="primary" size="lg" onClick={onSubmit}>
         Submit
       </Button>

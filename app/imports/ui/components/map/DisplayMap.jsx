@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { Container } from 'react-bootstrap';
+import { Container, Spinner } from 'react-bootstrap';
 import PropTypes from 'prop-types';
-import { GoogleMap, LoadScript, Marker, InfoWindow } from '@react-google-maps/api';
+import { GoogleMap, Marker, InfoWindow, useLoadScript } from '@react-google-maps/api';
 import mapStyle from './mapStyle';
 import EventItem from '../event/EventItem';
 import ReportItem from '../report/ReportItem';
@@ -20,8 +20,14 @@ const options = {
   styles: mapStyle,
 };
 
+const libraries = ['places'];
+
 /** Renders a container containing all of the Events documents. */
 const DisplayMap = ({ eventList, userEvents, reports }) => {
+  const { isLoaded } = useLoadScript({
+    googleMapsApiKey: 'AIzaSyAH_N3x9evBavZrOJAb2RWdBquCoonshcE',
+    libraries,
+  });
   const cleanUps = eventList.filter(event => event.typeOfEvent === 'Cleanup');
   const workshops = eventList.filter(event => event.typeOfEvent === 'Workshop');
   const [selected, setSelected] = useState(null);
@@ -31,10 +37,8 @@ const DisplayMap = ({ eventList, userEvents, reports }) => {
     mapRef.current = map;
   }, []);
   return (
-  <Container className='py-sm-3'>
-    <LoadScript
-    googleMapsApiKey="AIzaSyAH_N3x9evBavZrOJAb2RWdBquCoonshcE"
-    >
+    <Container className='py-sm-3'>
+      { isLoaded ?
       <GoogleMap
       mapContainerStyle={containerStyle}
       center={center}
@@ -91,8 +95,8 @@ const DisplayMap = ({ eventList, userEvents, reports }) => {
           </div>
         </InfoWindow>) : null }
       </GoogleMap>
-    </LoadScript>
-  </Container>
+      : <Spinner />}
+    </Container>
   );
 };
 
