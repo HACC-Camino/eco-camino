@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { Card, Table } from 'react-bootstrap';
+import { Card, Col, Row, Table } from 'react-bootstrap';
 import { BsPencilSquare } from 'react-icons/all';
 import ProfilePreviewModal from '../profile/ProfilePreviewModal';
 import CustomPagination from '../CustomPagination';
 import DeleteReplyModal from './DeleteReplyModal';
+import ReplyToPostModal from './ReplyToPostModal';
 
 const getCardBodyContent = (replyOwner, currentUser) => (
   <tr key={replyOwner.reply._id} className="border-bottom">
@@ -26,7 +27,7 @@ const getCardBodyContent = (replyOwner, currentUser) => (
     </td>
   </tr>);
 
-const ForumRepliesCard = ({ replies, users, currentUser }) => {
+const ForumRepliesCard = ({ mainPost, replies, users, currentUser }) => {
   const [rows, setRows] = useState([]);
   const handlePageCallback = (childRows) => {
     setRows(childRows);
@@ -41,7 +42,16 @@ const ForumRepliesCard = ({ replies, users, currentUser }) => {
 
   return (
     <Card>
-      <Card.Header as='h4'>Replies</Card.Header>
+      <Card.Header as='h4'>
+        <Row>
+          <Col className="align-middle">
+            Replies
+          </Col>
+          <Col style={{ textAlign: 'right' }}>
+            <ReplyToPostModal mainPost={mainPost} currentUser={currentUser}/>
+          </Col>
+        </Row>
+      </Card.Header>
       <Card.Body>
         <Table borderless className="fixed">
           <tbody>
@@ -61,6 +71,7 @@ const ForumRepliesCard = ({ replies, users, currentUser }) => {
 };
 
 ForumRepliesCard.propTypes = {
+  mainPost: PropTypes.object,
   replies: PropTypes.array,
   users: PropTypes.array,
   currentUser: PropTypes.string,

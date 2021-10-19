@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Table } from 'react-bootstrap';
 import PropTypes from 'prop-types';
+import CustomPagination from '../CustomPagination';
 
 const renderPastEvents = (past_events, index) => (
   <tr key={index}>
@@ -10,22 +11,31 @@ const renderPastEvents = (past_events, index) => (
   </tr>
 );
 
-const PastEvents = ({ past_events }) => (
-    <div className='container-lg'>
-        <Table className='table' bordered responsive striped hover>
-            <thead>
-            <tr>
-                <th>#</th>
-                <th>Event</th>
-                <th>Time</th>
-            </tr>
-            </thead>
-            <tbody key={past_events.id}>
-                {past_events.map(renderPastEvents)}
-            </tbody>
-        </Table>
-    </div>
-);
+const PastEvents = ({ past_events }) => {
+    const maxRow = 5;
+    const [rows, setRows] = useState(past_events.slice(0, maxRow));
+    const handlePageCallback = (childRows) => {
+        setRows(childRows);
+    };
+    // max rows per page.
+    return (
+        <div className='container-lg'>
+            <Table className='table' bordered responsive striped hover>
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Event</th>
+                    <th>Time</th>
+                </tr>
+                </thead>
+                <tbody key={rows.id}>
+                {rows.map(renderPastEvents)}
+                </tbody>
+            </Table>
+            <CustomPagination maxRows={maxRow} arrayObjects={past_events} parentCallback={handlePageCallback}/>
+        </div>
+    );
+};
 
 PastEvents.propTypes = {
     past_events: PropTypes.array,

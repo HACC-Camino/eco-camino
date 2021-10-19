@@ -10,10 +10,6 @@ import Landing from '../pages/Landing';
 import Event from '../pages/Event/Event';
 import AddEvent from '../pages/Event/AddEvent';
 import AddReport from '../pages/Event/AddReport';
-import ListStuff from '../pages/ListStuff';
-import ListStuffAdmin from '../pages/ListStuffAdmin';
-import AddStuff from '../pages/AddStuff';
-import EditStuff from '../pages/EditStuff';
 import NotFound from '../pages/NotFound';
 import Signin from '../pages/Signin';
 import Signup from '../pages/Signup';
@@ -24,6 +20,7 @@ import 'bootswatch/dist/minty/bootstrap.min.css';
 import Forum from '../pages/Forum/Forum';
 import ForumPost from '../pages/Forum/ForumPost';
 import AdminList from '../pages/AdminList';
+import CreateForumPost from '../pages/Forum/CreateForumPost';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 class App extends React.Component {
@@ -37,16 +34,13 @@ class App extends React.Component {
               <Route path="/signin" component={Signin}/>
               <Route path="/signup" component={Signup}/>
               <ProtectedRoute path="/profile" component={Profile}/>
-              <ProtectedRoute path="/list" component={ListStuff}/>
-              <ProtectedRoute path="/add" component={AddStuff}/>
               <ProtectedRoute path="/event" component={Event} />
               <ProtectedRoute path="/addEvent" component={AddEvent} />
               <ProtectedRoute path="/addReport" component={AddReport} />
               <Route path="/resources" component={Resources} />
-              <ProtectedRoute path="/edit/:_id" component={EditStuff}/>
-              <ProtectedRoute path="/forum" component={Forum}/>
-              <ProtectedRoute path="/forum-post/:_id" component={ForumPost}/>
-              <AdminProtectedRoute path="/admin" component={ListStuffAdmin}/>
+              <ProtectedRoute path="/forum/home" component={Forum}/>
+              <ProtectedRoute path="/forum/post/:_id" component={ForumPost}/>
+              <ProtectedRoute path="/forum/create" component={CreateForumPost}/>
               <AdminProtectedRoute path="/admin-list" component={AdminList}/>
               <ProtectedRoute path="/signout" component={Signout}/>
               <Route component={NotFound}/>

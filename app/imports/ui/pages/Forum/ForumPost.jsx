@@ -13,7 +13,7 @@ const ForumPost = ({ username, ready, users, mainPost, replies }) => (ready ?
     <Container id="page-container">
       <Row className="pb-sm-2">
         <Col className="float-start">
-          <Link to='/forum'><h2>Forums</h2></Link>
+          <Link to='/forum/home'><h2>Forums</h2></Link>
         </Col>
       </Row>
       <Row className="pb-sm-2">
@@ -29,6 +29,7 @@ const ForumPost = ({ username, ready, users, mainPost, replies }) => (ready ?
       <Row>
         <Col sm={12}>
           <ForumRepliesCard
+            mainPost={mainPost}
             replies={replies}
             users={users}
             currentUser={username}

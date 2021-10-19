@@ -22,7 +22,7 @@ const Profile = ({ filtered_events, ready, userDetail, past_events }) =>
 
     // eslint-disable-next-line implicit-arrow-linebreak
      (ready ? (
-        <Container id="page-container">
+        <Container style={{ paddingTop: '30px' }}>
             <Row>
                 <Col sm={4} style={{ paddingBottom: '30px', paddingRight: '30px' }}>
                     <ProfileCard userDetail={userDetail} />

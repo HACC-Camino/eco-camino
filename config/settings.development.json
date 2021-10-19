@@ -4,13 +4,6 @@
     { "email": "john@foo.com", "password": "changeme" }
   ],
 
-  "defaultData": [
-    { "name": "Basket", "quantity": 3, "owner": "john@foo.com", "condition": "excellent" },
-    { "name": "Bicycle", "quantity": 2, "owner": "john@foo.com", "condition": "poor" },
-    { "name": "Banana", "quantity": 2, "owner": "admin@foo.com", "condition": "good" },
-    { "name": "Boogie Board", "quantity": 2, "owner": "admin@foo.com", "condition": "excellent" }
-  ],
-
   "defaultEvent": [
     { "title": "Magic Island Cleanup", "date": "10/15/2021", "startTime": "10:30 pm", "endTime": "11:30 pm", "location": "Magic Island 1201 Ala Moana Blvd Honolulu", "participants": 1, "owner": "john@foo.com", "lat": 21.364907375706697, "lng": -157.8618922247979, "name": "John Foo", "email": "john@foo.com", "description": "Cleaning up Magic Island, park near the harbor side, please bring your own supplies. Thank you!", "typeOfEvent": "Cleanup"
     },
