@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Badge, Button, Card, Col, Row, Table } from 'react-bootstrap';
+import { Badge, Card, Col, Row, Table } from 'react-bootstrap';
 import ProfilePreviewModal from '../profile/ProfilePreviewModal';
 import DeleteForumPostModal from './DeleteForumPostModal';
+import EditForumPostModal from './EditForumPostModal';
 
 const ForumMainPostCard = ({ mainPost, owner, currentUser, repliesID }) => (
     <Card>
@@ -12,7 +13,7 @@ const ForumMainPostCard = ({ mainPost, owner, currentUser, repliesID }) => (
             {mainPost.title}
           </Col>
           <Col style={{ textAlign: 'right' }}>
-            <Button variant="outline-primary" className="mx-1">Edit</Button>
+            <EditForumPostModal post={mainPost} show={owner.owner === currentUser}/>
             <DeleteForumPostModal
               mainPostID={mainPost._id}
               show={owner.owner === currentUser}

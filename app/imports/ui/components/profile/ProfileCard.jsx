@@ -4,8 +4,9 @@ import PropTypes from 'prop-types';
 import { Col, Row } from 'react-bootstrap';
 import EditProfileModal from './EditProfileModal';
 import { GetPhoto } from '../aws/GetPhoto';
+import VerifyCode from './VerifyCode';
 
-const ProfileCard = ({ userDetail }) => {
+const ProfileCard = ({ userDetail, eventIds }) => {
 
     if (userDetail.photoAWSKey === null) {
         // eslint-disable-next-line no-param-reassign
@@ -26,7 +27,14 @@ const ProfileCard = ({ userDetail }) => {
                 <Card.Text>
                     {userDetail.bio}
                 </Card.Text>
-                <EditProfileModal userDetail={userDetail}/>
+                <Row>
+                    <Col>
+                        <EditProfileModal userDetail={userDetail}/>
+                    </Col>
+                    <Col>
+                        <VerifyCode userDetail={userDetail} eventIds={eventIds}/>
+                    </Col>
+                </Row>
             </Card.Body>
         </Card>
     );
@@ -34,6 +42,7 @@ const ProfileCard = ({ userDetail }) => {
 
 ProfileCard.propTypes = {
     userDetail: PropTypes.object,
+    eventIds: PropTypes.array,
 };
 
 export default ProfileCard;

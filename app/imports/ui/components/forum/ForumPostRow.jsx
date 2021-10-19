@@ -14,17 +14,17 @@ const ForumPostRow = ({ propsObject }) => {
   };
 
   return (
-    <tr onClick={goToPage} style={{ cursor: 'pointer' }}>
-      <td>{mainPost.title}</td>
-      <td>{numReplies}</td>
-      <td>
-        <p className="text-muted">{mainPost.date.toLocaleDateString()}
+    <tr className="d-flex" onClick={goToPage} style={{ cursor: 'pointer' }}>
+      <td className="col-7">{mainPost.title}</td>
+      <td className="col-1">{numReplies}</td>
+      <td className="col-2" >
+        <p className="text-muted overflow-hidden">{mainPost.date.toLocaleDateString()}
           <br/>
           {mainPost.owner}
         </p>
       </td>
-      <td>
-        <p className="text-muted">{latestReply.date.toLocaleDateString()}
+      <td className="col-2">
+        <p className="text-muted overflow-hidden text-">{latestReply.date.toLocaleDateString()}
           <br/>
           {latestReply.owner}
         </p>

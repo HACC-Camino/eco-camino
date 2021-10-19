@@ -10,7 +10,12 @@ const ReplyToPostModal = ({ mainPost }) => {
   const [content, setContent] = useState('');
   const [modalOpen, setModalOpen] = useState(false);
 
-  const handleModalClose = () => setModalOpen(false);
+  const handleModalClose = () => {
+    setContent('');
+    setModalOpen(false);
+    // eslint-disable-next-line no-undef
+    window.location.reload();
+  };
   const handleModalOpen = () => setModalOpen(true);
 
   const handleSubmit = () => {
@@ -26,8 +31,7 @@ const ReplyToPostModal = ({ mainPost }) => {
             swal('Error', error.message, 'error');
           } else {
             swal('Success', 'Reply Sent Successfully', 'success');
-            // eslint-disable-next-line no-undef
-            window.location.reload();
+            handleModalClose();
           }
         });
     }
@@ -105,7 +109,7 @@ const ReplyToPostModal = ({ mainPost }) => {
                 </Card.Body>
               </Card>
             </Col>
-            </Row>
+          </Row>
         </Modal.Body>
         <Modal.Footer style={{ paddingTop: 15, paddingBottom: 15 }}>
           <Button

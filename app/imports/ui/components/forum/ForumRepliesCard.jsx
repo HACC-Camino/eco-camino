@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Card, Col, Row, Table } from 'react-bootstrap';
-import { BsPencilSquare } from 'react-icons/all';
 import ProfilePreviewModal from '../profile/ProfilePreviewModal';
 import CustomPagination from '../CustomPagination';
 import DeleteReplyModal from './DeleteReplyModal';
 import ReplyToPostModal from './ReplyToPostModal';
+import EditForumPostModal from './EditForumPostModal';
 
 const getCardBodyContent = (replyOwner, currentUser) => (
   <tr key={replyOwner.reply._id} className="border-bottom">
@@ -21,7 +21,7 @@ const getCardBodyContent = (replyOwner, currentUser) => (
       <br/>
       Date: {replyOwner.reply.date.toLocaleString()}
       <br/>
-      <BsPencilSquare style={{ cursor: 'pointer', color: '#78c2ad' }}/>
+      <EditForumPostModal post={replyOwner.reply} show={replyOwner.owner.owner === currentUser}/>
       <DeleteReplyModal replyID={replyOwner.reply._id} show={replyOwner.owner.owner === currentUser}/>
       <br/>
     </td>

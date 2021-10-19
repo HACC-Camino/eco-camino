@@ -30,13 +30,13 @@ const ForumPageTab = ({ originalArray, allForumPosts }) => {
 
   return (
     <div>
-      <Table responsive striped hover className="fixed">
+      <Table responsive striped hover>
         <thead>
-        <tr>
-          <th width="64%">Title</th>
-          <th width="6%">Replies</th>
-          <th width="15%">Date Created</th>
-          <th width="15%">Last Reply</th>
+        <tr className="d-flex">
+          <th className="col-7">Title</th>
+          <th className="col-1">Replies</th>
+          <th className="col-2">Date Created</th>
+          <th className="col-2">Last Reply</th>
         </tr>
         </thead>
         <tbody>

@@ -40,8 +40,8 @@ const EditProfileModal = ({ userDetail }) => {
     };
 
     return (
-        <>
-            <Button onClick={() => setShow(true)}>Edit Profile</Button>
+        <Container className='mb-3'>
+            <Button onClick={() => setShow(true)} >Edit Profile</Button>
             <Modal
                 size='md'
                 show={show}
@@ -96,7 +96,7 @@ const EditProfileModal = ({ userDetail }) => {
                 </Modal.Body>
             </Modal>
 
-        </>
+        </Container>
     );
 };
 
