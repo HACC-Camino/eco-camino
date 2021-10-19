@@ -47,11 +47,8 @@ class ForumPostCollection extends BaseCollection {
     return docID;
   }
 
-  update(docID, { mainThread, title, content, tags }) {
+  update(docID, { title, content, tags }) {
     const updateData = {};
-    if (mainThread) {
-      updateData.mainThread = mainThread;
-    }
     if (title) {
       updateData.title = title;
     }

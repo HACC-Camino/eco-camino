@@ -29,6 +29,9 @@ const CreateForumPost = () => {
             swal('Error', error.message, 'error');
           } else {
             swal('Success', 'Post Created Successfully', 'success');
+            setTitle('');
+            setContent('');
+            setTagList('');
             goToPage(result);
           }
         });

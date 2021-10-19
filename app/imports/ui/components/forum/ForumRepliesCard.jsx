@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Card, Col, Row, Table } from 'react-bootstrap';
-import { BsPencilSquare } from 'react-icons/all';
 import ProfilePreviewModal from '../profile/ProfilePreviewModal';
 import CustomPagination from '../CustomPagination';
 import DeleteReplyModal from './DeleteReplyModal';
