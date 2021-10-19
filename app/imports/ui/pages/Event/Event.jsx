@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Meteor } from 'meteor/meteor';
 import { Container, Spinner, CardGroup, Row, Tab, Nav, Col } from 'react-bootstrap';
 import { withTracker } from 'meteor/react-meteor-data';
@@ -13,28 +13,6 @@ import DisplayMap from '../../components/map/DisplayMap';
 const Event = ({ currentEvents, currentCleanups, currentWorkshops, joinedEvents,
                  ownedEvents, userEvents, reports, ready }) => {
   if (ready) {
-    const [mark, setMark] = useState(currentEvents);
-    const [rmark, setRmark] = useState(reports);
-    const first = () => {
-      setMark(currentEvents);
-      setRmark(reports);
-    };
-    const second = () => {
-      setMark(currentCleanups);
-      setRmark([]);
-    };
-    const third = () => {
-      setMark(currentWorkshops);
-      setRmark([]);
-    };
-    const fourth = () => {
-      setMark(ownedEvents);
-      setRmark([]);
-    };
-    const fifth = () => {
-      setMark(joinedEvents);
-      setRmark([]);
-    };
     return (
     <Container id="page-container">
       <h2>Event List</h2>
@@ -43,29 +21,27 @@ const Event = ({ currentEvents, currentCleanups, currentWorkshops, joinedEvents,
           <Col sm={3}>
             <Nav variant="pills" className="flex-column">
               <Nav.Item>
-                <Nav.Link eventKey="first" onClick={first}>All Events</Nav.Link>
+                <Nav.Link eventKey="first">All Events</Nav.Link>
               </Nav.Item>
               <Nav.Item>
-                <Nav.Link eventKey="second" onClick={second}>Only Cleanups</Nav.Link>
+                <Nav.Link eventKey="second">Only Cleanups</Nav.Link>
               </Nav.Item>
               <Nav.Item>
-                <Nav.Link eventKey="third" onClick={third}>Only Workshops</Nav.Link>
+                <Nav.Link eventKey="third">Only Workshops</Nav.Link>
               </Nav.Item>
               <Nav.Item>
-                <Nav.Link eventKey="fourth" onClick={fourth}>Owned Events</Nav.Link>
+                <Nav.Link eventKey="fourth">Owned Events</Nav.Link>
               </Nav.Item>
               <Nav.Item>
-                <Nav.Link eventKey="fifth" onClick={fifth}>Joined Events</Nav.Link>
+                <Nav.Link eventKey="fifth">Joined Events</Nav.Link>
               </Nav.Item>
             </Nav>
           </Col>
           <Col sm={9}>
             <Tab.Content>
-              <Row style={{ width: '100%' }}>
-                <DisplayMap eventList={mark} reports={rmark} userEvents={userEvents} />
-              </Row>
               <Tab.Pane eventKey="first" style={{ paddingBottom: '60px' }}>
                 <h2>All Events</h2>
+                <DisplayMap eventList={currentEvents} reports={reports} userEvents={userEvents} />
                 <CardGroup>
                   <Row xs={1} md={2} className="g-4">
                     {currentEvents.map((event) => <EventItem key={event._id}
