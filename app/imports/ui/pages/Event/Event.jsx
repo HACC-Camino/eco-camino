@@ -36,7 +36,7 @@ const Event = ({ currentEvents, currentCleanups, currentWorkshops, joinedEvents,
       setRmark([]);
     };
     return (
-    <Container className='py-sm-3'>
+    <Container id="page-container">
       <h2>Event List</h2>
       <Tab.Container id="left-tabs-example" defaultActiveKey="first">
         <Row>

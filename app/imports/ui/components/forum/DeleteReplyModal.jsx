@@ -1,48 +1,38 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Button, Modal } from 'react-bootstrap';
-import { BsXLg } from 'react-icons/all';
+import { BsTrash, BsXLg } from 'react-icons/all';
 import swal from 'sweetalert';
-import { useHistory } from 'react-router-dom';
 import { forumPostRemoveItMethod } from '../../../api/forum/ForumPostCollection.methods';
 
-const DeleteForumPost = ({ mainPostID, show, repliesID }) => {
+const DeleteReplyModal = ({ show, replyID }) => {
   const [modalOpen, setModalOpen] = useState(false);
 
   const handleModalClose = () => setModalOpen(false);
   const handleModalOpen = () => setModalOpen(true);
 
-  const history = useHistory();
-  const goToPage = () => {
-    const pageLink = '/forum';
-    history.push(pageLink);
-  };
-
   const handleDelete = () => {
-    repliesID.forEach(replyID => forumPostRemoveItMethod.call({ _id: replyID },
-      (error2 => (error2 ? swal('Error', error2.message, 'error') : null))));
-    forumPostRemoveItMethod.call({ _id: mainPostID },
-      error => {
+    forumPostRemoveItMethod.call({ _id: replyID },
+      (error) => {
       if (error) {
         swal('Error', error.message, 'error');
       } else {
-        goToPage();
-        swal('Success', 'Post Deleted Successfully', 'success');
-        // eslint-disable-next-line no-undef
-        window.location.reload();
+        swal('Success', 'Reply Deleted Successfully', 'success').then(() => {
+          handleModalClose();
+          // eslint-disable-next-line no-undef
+          window.location.reload();
+        });
       }
     });
   };
 
   return (show ?
     <>
-      <Button
-        variant="outline-danger"
-        className="ml-1"
+      <BsTrash
+        style={{ cursor: 'pointer', color: '#ff7851' }}
+        className="mx-2"
         onClick={handleModalOpen}
-      >
-        Delete
-      </Button>
+      />
       <Modal
         show={modalOpen}
         onHide={handleModalClose}
@@ -52,7 +42,7 @@ const DeleteForumPost = ({ mainPostID, show, repliesID }) => {
           <BsXLg style={{ cursor: 'pointer' }} onClick={handleModalClose}/>
         </Modal.Header>
         <Modal.Body>
-          Are you sure you wanna delete this post (and the replies)?
+          Are you sure you wanna delete this reply?
         </Modal.Body>
         <Modal.Footer style={{ paddingTop: 15, paddingBottom: 15 }}>
           <Button
@@ -72,13 +62,12 @@ const DeleteForumPost = ({ mainPostID, show, repliesID }) => {
         </Modal.Footer>
       </Modal>
     </>
- : null);
+    : null);
 };
 
-DeleteForumPost.propTypes = {
-  mainPostID: PropTypes.string,
+DeleteReplyModal.propTypes = {
+  replyID: PropTypes.string,
   show: PropTypes.bool,
-  repliesID: PropTypes.array,
 };
 
-export default DeleteForumPost;
+export default DeleteReplyModal;

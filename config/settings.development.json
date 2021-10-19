@@ -42,7 +42,7 @@
   ],
 
   "defaultUsers": [
-    { "dateJoined": "10-15-2021", "photoAWSKey": "default-photo.png", "firstName": "John", "lastName": "Foo", "bio":  "this is a sample bio", "areaCode": 96818, "owner": "john@foo.com" },
-    { "dateJoined": "10-15-2021", "photoAWSKey": "default-photo.png", "firstName": "Admin", "lastName": "Foo", "bio":  "this is a sample bio", "areaCode": 96818, "owner": "admin@foo.com" }
+    { "dateJoined": "10-15-2021", "photoAWSKey": "default-photo.png", "firstName": "John", "lastName": "Foo", "bio":  "this is a sample bio", "zipCode": 96818, "owner": "john@foo.com" },
+    { "dateJoined": "10-15-2021", "photoAWSKey": "default-photo.png", "firstName": "Admin", "lastName": "Foo", "bio":  "this is a sample bio", "zipCode": 96818, "owner": "admin@foo.com" }
   ]
 }
