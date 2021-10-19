@@ -1,6 +1,5 @@
 import { Meteor } from 'meteor/meteor';
 import faker from 'faker';
-import { Stuffs } from '../../api/stuff/StuffCollection.js';
 import { Events } from '../../api/event/EventCollection';
 import { ForumPosts } from '../../api/forum/ForumPostCollection';
 import { Users } from '../../api/user/UserCollection';
@@ -19,7 +18,6 @@ if (Users.count() === 0) {
   }
 }
 
-/** Initialize the collection if empty. */
 if (Events.count() === 0) {
   if (Meteor.settings.defaultEvent) {
     console.log('Creating default events.');
@@ -63,20 +61,5 @@ if (ForumPosts.count() === 0) {
       }
     });
     console.log(`ForumPostCollection with replies: ${ForumPosts.count()}`);
-  }
-}
-
-// DELETE THESE LATER
-/** Initialize the database with a default data document. */
-function addData(data) {
-  console.log(`  Adding: ${data.name} (${data.owner})`);
-  Stuffs.define(data);
-}
-
-/** Initialize the collection if empty. */
-if (Stuffs.count() === 0) {
-  if (Meteor.settings.defaultData) {
-    console.log('Creating default data.');
-    Meteor.settings.defaultData.map(data => addData(data));
   }
 }
