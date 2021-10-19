@@ -6,10 +6,12 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import swal from 'sweetalert';
 import moment from 'moment';
-import { GoogleMap, LoadScript, Marker, InfoWindow } from '@react-google-maps/api';
+import { GoogleMap, Marker, InfoWindow, useLoadScript } from '@react-google-maps/api';
+import usePlacesAutocomplete, { getGeocode } from 'use-places-autocomplete';
 import { eventDefineMethod } from '../../../api/event/EventCollection.methods';
 import '@reach/combobox/styles.css';
 import mapStyle from '../../components/map/mapStyle';
+import { Combobox, ComboboxInput, ComboboxOption, ComboboxPopover } from '@reach/combobox';
 
 const containerStyle = {
   width: '100%',
@@ -25,10 +27,17 @@ const options = {
   styles: mapStyle,
 };
 
+const libraries = ['places'];
+
 // CSS Modules, react-datepicker-cssmodules.css
 // import 'react-datepicker/dist/react-datepicker-cssmodules.css';
 
 const AddEvent = () => {
+  const { isLoaded } = useLoadScript({
+    googleMapsApiKey: 'AIzaSyAH_N3x9evBavZrOJAb2RWdBquCoonshcE',
+    libraries,
+  });
+  // d
   const [finalType, setFinalType] = useState(() => '');
   const [finalDate, setFinalDate] = useState(new Date());
   const [finalStartTime, setFinalStartTime] = useState('');
@@ -172,9 +181,6 @@ const AddEvent = () => {
                      value={finalDescription} as="textarea"
                      rows={5} onChange={e => setFinalDescription(e.target.value)} />
       </InputGroup>
-         <LoadScript
-         googleMapsApiKey="AIzaSyAH_N3x9evBavZrOJAb2RWdBquCoonshcE"
-         >
           <h2>Location</h2>
           <Col>
             <InputGroup className="mb-3">
@@ -183,35 +189,73 @@ const AddEvent = () => {
             </InputGroup>
           </Col>
           <p>Please Place a Marker For Where Your Event Will Be Held</p>
-          <GoogleMap
-          mapContainerStyle={containerStyle}
-          center={center}
-          zoom={10}
-          onClick={onMapClick}
-          onLoad={onMapLoad}
-          options={options}
-          >
-            {markers.map(marker => <Marker
-            key={marker.time.toISOString()}
-            position={{ lat: marker.lat, lng: marker.lng }}
-            onClick={() => {
-              setSelected(marker);
-            }}/>)}
-
-            {selected ? (<InfoWindow
-            position={{ lat: selected.lat, lng: selected.lng }} onCloseClick={() => { setSelected(null); }}>
-              <div>
-                <h4> Location Of Event </h4>
-              </div>
-            </InfoWindow>) : null }
-          </GoogleMap>
-         </LoadScript>
       <br />
+      { isLoaded ?
+      <div>
+        <Search />
+        <GoogleMap
+        mapContainerStyle={containerStyle}
+        center={center}
+        zoom={10}
+        onClick={onMapClick}
+        onLoad={onMapLoad}
+        options={options}
+        >
+          {markers.map(marker => <Marker
+          key={marker.time.toISOString()}
+          position={{ lat: marker.lat, lng: marker.lng }}
+          onClick={() => {
+            setSelected(marker);
+          }}/>)}
+
+          {selected ? (<InfoWindow
+          position={{ lat: selected.lat, lng: selected.lng }} onCloseClick={() => { setSelected(null); }}>
+            <div>
+              <h4> Location Of Event </h4>
+            </div>
+          </InfoWindow>) : null }
+        </GoogleMap>
+      </div>
+      : ' '}
       <Button variant="primary" size="lg" onClick={onSubmit}>
         Submit
       </Button>
     </Container>
   );
 };
+
+function Search() {
+  const { ready, value, suggestions: { status, data }, setValue, clearSuggestions } = usePlacesAutocomplete({
+    requestOptions: {
+      location: { lat: () => 21.500, lng: () => -158.0000 },
+      radius: 200 * 1000,
+    },
+  });
+
+  return (
+  <div className={'search'}>
+    <Combobox onSelect={async (address) => {
+      try {
+        const results = await getGeocode({ address });
+        console.log(results[0]);
+      } catch (error) {
+        console.log('error!');
+      }
+      console.log(address);
+    }
+    } >
+      <ComboboxInput value={value} onChange={(e) => {
+        setValue(e.target.value);
+      }}
+                     disabled={!ready}
+                     placeholder='Enter An Address'
+      />
+      <ComboboxPopover>
+        { status === 'OK' && data.map(({ id, description }) => <ComboboxOption key={id} value={description} />)}
+      </ComboboxPopover>
+    </Combobox>
+  </div>
+  );
+}
 
 export default (AddEvent);
