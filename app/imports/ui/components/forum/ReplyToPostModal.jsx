@@ -3,7 +3,7 @@ import { Badge, Button, Card, Col, Form, Modal, Row, Table } from 'react-bootstr
 import { BsXLg } from 'react-icons/all';
 import PropTypes from 'prop-types';
 
-const ReplyToPostModal = ({ mainPost, currentUser }) => {
+const ReplyToPostModal = ({ mainPost }) => {
   const [content, setContent] = useState('');
   const [modalOpen, setModalOpen] = useState(false);
 

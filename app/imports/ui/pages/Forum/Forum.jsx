@@ -1,12 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
-import { Col, Container, Nav, Row, Spinner, Tab, Table } from 'react-bootstrap';
+import { Col, Container, Nav, Row, Spinner, Tab } from 'react-bootstrap';
 import { ForumPosts } from '../../../api/forum/ForumPostCollection';
-import ForumPostRow from '../../components/forum/ForumPostRow';
-import { getLatestReply, getReplies } from '../../components/forum/utilities';
-import CustomPagination from '../../components/CustomPagination';
 import ForumPageTab from '../../components/forum/ForumPageTab';
 
 const Forum = ({ username, ready, forumPosts }) => {
