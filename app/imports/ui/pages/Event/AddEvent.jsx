@@ -172,40 +172,40 @@ const AddEvent = () => {
                      value={finalDescription} as="textarea"
                      rows={5} onChange={e => setFinalDescription(e.target.value)} />
       </InputGroup>
-        <LoadScript
-        googleMapsApiKey="AIzaSyAH_N3x9evBavZrOJAb2RWdBquCoonshcE"
-        >
-          <h2>Location</h2>
-          <Col>
-            <InputGroup className="mb-3">
-              <FormControl placeholder='Address of Event'
-                           value={finalLocation} onChange={e => setFinalLocation(e.target.value)} />
-            </InputGroup>
-          </Col>
-          <p>Please Place a Marker For Where Your Event Will Be Held</p>
-          <GoogleMap
-          mapContainerStyle={containerStyle}
-          center={center}
-          zoom={10}
-          onClick={onMapClick}
-          onLoad={onMapLoad}
-          options={options}
-          >
-            {markers.map(marker => <Marker
-            key={marker.time.toISOString()}
-            position={{ lat: marker.lat, lng: marker.lng }}
-            onClick={() => {
-              setSelected(marker);
-            }}/>)}
+        {/* <LoadScript */}
+        {/* googleMapsApiKey="AIzaSyAH_N3x9evBavZrOJAb2RWdBquCoonshcE" */}
+        {/* > */}
+        {/*  <h2>Location</h2> */}
+        {/*  <Col> */}
+        {/*    <InputGroup className="mb-3"> */}
+        {/*      <FormControl placeholder='Address of Event' */}
+        {/*                   value={finalLocation} onChange={e => setFinalLocation(e.target.value)} /> */}
+        {/*    </InputGroup> */}
+        {/*  </Col> */}
+        {/*  <p>Please Place a Marker For Where Your Event Will Be Held</p> */}
+        {/*  <GoogleMap */}
+        {/*  mapContainerStyle={containerStyle} */}
+        {/*  center={center} */}
+        {/*  zoom={10} */}
+        {/*  onClick={onMapClick} */}
+        {/*  onLoad={onMapLoad} */}
+        {/*  options={options} */}
+        {/*  > */}
+        {/*    {markers.map(marker => <Marker */}
+        {/*    key={marker.time.toISOString()} */}
+        {/*    position={{ lat: marker.lat, lng: marker.lng }} */}
+        {/*    onClick={() => { */}
+        {/*      setSelected(marker); */}
+        {/*    }}/>)} */}
 
-            {selected ? (<InfoWindow
-            position={{ lat: selected.lat, lng: selected.lng }} onCloseClick={() => { setSelected(null); }}>
-              <div>
-                <h4> Location Of Event </h4>
-              </div>
-            </InfoWindow>) : null }
-          </GoogleMap>
-        </LoadScript>
+        {/*    {selected ? (<InfoWindow */}
+        {/*    position={{ lat: selected.lat, lng: selected.lng }} onCloseClick={() => { setSelected(null); }}> */}
+        {/*      <div> */}
+        {/*        <h4> Location Of Event </h4> */}
+        {/*      </div> */}
+        {/*    </InfoWindow>) : null } */}
+        {/*  </GoogleMap> */}
+        {/* </LoadScript> */}
       <br />
       <Button variant="primary" size="lg" onClick={onSubmit}>
         Submit

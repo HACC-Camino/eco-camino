@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { Meteor } from 'meteor/meteor';
-import { Container, Row, Col, Form, InputGroup, FormControl, Button } from 'react-bootstrap';
+import { Container, Row, Col, Form, InputGroup, FormControl, Button, Spinner } from 'react-bootstrap';
 import 'react-datepicker/dist/react-datepicker.css';
 import swal from 'sweetalert';
-import { GoogleMap, LoadScript, Marker, InfoWindow } from '@react-google-maps/api';
+import { GoogleMap, useLoadScript, Marker, InfoWindow } from '@react-google-maps/api';
+import usePlacesAutocomplete, { getGeocode, getLatLng } from 'use-places-autocomplete';
+import { Combobox, ComboboxInput, ComboboxPopover, ComboboxList, ComboboxOption } from '@reach/combobox';
 import { reportDefineMethod } from '../../../api/report/ReportCollection.methods';
 import UploadPhotoModal from '../../components/aws/UploadPhotoModal';
 import '@reach/combobox/styles.css';
@@ -21,7 +23,11 @@ const center = {
 
 const options = {
   styles: mapStyle,
+  disableDefaultUI: true,
+  zoomControl: true,
 };
+
+const libraries = ['places'];
 
 // CSS Modules, react-datepicker-cssmodules.css
 // import 'react-datepicker/dist/react-datepicker-cssmodules.css';
@@ -32,6 +38,10 @@ const AddReport = () => {
   const handleCallback = (childData) => {
     setData(childData);
   };
+  const { isLoaded, loadError } = useLoadScript({
+    googleMapsApiKey: 'AIzaSyAH_N3x9evBavZrOJAb2RWdBquCoonshcE',
+    libraries,
+  });
   const [finalTitle, setFinalTitle] = useState(() => '');
   const [finalLocation, setFinalLocation] = useState(() => '');
   const [finalDescription, setFinalDescription] = useState(() => '');
@@ -69,67 +79,91 @@ const AddReport = () => {
     });
   };
   return (
-    <Container id="page-container">
-      <h2>Report Trash/Assistance</h2>
-      <Row>
-        <Col>
-          <Form.Label htmlFor="basic-url">Title of Your Report</Form.Label>
-          <InputGroup className="mb-3">
-            <FormControl placeholder='Title' value={finalTitle} onChange={e => setFinalTitle(e.target.value)} />
-          </InputGroup>
-        </Col>
-      </Row>
-      <Form.Label htmlFor="basic-url">Description of Your Report</Form.Label>
+  <Container id="page-container">
+    <h2>Report Trash/Assistance</h2>
+    <Row>
+      <Col>
+        <Form.Label htmlFor="basic-url">Title of Your Report</Form.Label>
+        <InputGroup className="mb-3">
+          <FormControl placeholder='Title' value={finalTitle} onChange={e => setFinalTitle(e.target.value)} />
+        </InputGroup>
+      </Col>
+    </Row>
+    <Form.Label htmlFor="basic-url">Description of Your Report</Form.Label>
+    <InputGroup className="mb-3">
+      <FormControl placeholder='Description'
+                   value={finalDescription} as="textarea"
+                   rows={5} onChange={e => setFinalDescription(e.target.value)} />
+    </InputGroup>
+    <h2>Location</h2>
+    <Col>
       <InputGroup className="mb-3">
-        <FormControl placeholder='Description'
-                     value={finalDescription} as="textarea"
-                     rows={5} onChange={e => setFinalDescription(e.target.value)} />
+        <FormControl placeholder='Address of the Trash/Needed Assistance'
+                     value={finalLocation} onChange={e => setFinalLocation(e.target.value)} />
       </InputGroup>
-        <LoadScript
-        googleMapsApiKey="AIzaSyAH_N3x9evBavZrOJAb2RWdBquCoonshcE"
-        >
-          <h2>Location</h2>
-          <Col>
-            <InputGroup className="mb-3">
-              <FormControl placeholder='Address of the Trash/Needed Assistance'
-                           value={finalLocation} onChange={e => setFinalLocation(e.target.value)} />
-            </InputGroup>
-          </Col>
-          <p>Please Place a Marker For Where You Found The Trash/Needed Assistance</p>
-          <GoogleMap
-          mapContainerStyle={containerStyle}
-          center={center}
-          zoom={10}
-          onClick={onMapClick}
-          onLoad={onMapLoad}
-          options={options}
-          >
-            {markers.map(marker => <Marker
-            key={marker.time.toISOString()}
-            position={{ lat: marker.lat, lng: marker.lng }}
-            onClick={() => {
-              setSelected(marker);
-            }}/>)}
+    </Col>
+    <p>Please Place a Marker For Where You Found The Trash/Needed Assistance</p>
+    <Search />
 
-            {selected ? (<InfoWindow
-            position={{ lat: selected.lat, lng: selected.lng }} onCloseClick={() => { setSelected(null); }}>
-              <div>
-                <h4> Location Of Trash/Needed Assistance </h4>
-              </div>
-            </InfoWindow>) : null }
-          </GoogleMap>
-        </LoadScript>
-      <br />
-      <Row>
-        <p>Please Upload a Picture of the Trash/Needed Assistance</p>
-        <UploadPhotoModal parentCallback={handleCallback}/>
-      </Row>
-      <br />
-      <Button variant="primary" size="lg" onClick={onSubmit}>
-        Submit
-      </Button>
-    </Container>
+    {loadError ? <div>error</div> : ''}
+    { isLoaded ? <GoogleMap
+    mapContainerStyle={containerStyle}
+    center={center}
+    zoom={10}
+    onClick={onMapClick}
+    onLoad={onMapLoad}
+    options={options}
+    >
+      {markers.map(marker => <Marker
+      key={marker.time.toISOString()}
+      position={{ lat: marker.lat, lng: marker.lng }}
+      onClick={() => {
+        setSelected(marker);
+      }}/>)}
+
+      {selected ? (<InfoWindow
+      position={{ lat: selected.lat, lng: selected.lng }} onCloseClick={() => { setSelected(null); }}>
+        <div>
+          <h4> Location Of Trash/Needed Assistance </h4>
+        </div>
+      </InfoWindow>) : null }
+    </GoogleMap> : <Spinner />}
+    <br />
+    <Row>
+      <p>Please Upload a Picture of the Trash/Needed Assistance</p>
+      <UploadPhotoModal parentCallback={handleCallback}/>
+    </Row>
+    <br />
+    <Button variant="primary" size="lg" onClick={onSubmit}>
+      Submit
+    </Button>
+  </Container>
   );
 };
+
+function Search() {
+  const { ready, value, suggestions: { status, data }, setValue, clearSuggestions } = usePlacesAutocomplete({
+    requestOptions: {
+      location: { lat: () => 21.500, lng: () => -158.0000 },
+      radius: 200 * 1000,
+    },
+  });
+
+  return (
+  <div className={'search'}>
+    <Combobox onSelect={(address) => { console.log(address); }} >
+      <ComboboxInput value={value} onChange={(e) => {
+        setValue(e.target.value);
+      }}
+                     disable={!ready}
+                     placeholder='Enter An Address'
+      />
+      <ComboboxPopover>
+        { status === 'OK' && data.map(({ id, description }) => <ComboboxOption key={id} value={description} />)}
+      </ComboboxPopover>
+    </Combobox>
+  </div>
+  );
+}
 
 export default (AddReport);
