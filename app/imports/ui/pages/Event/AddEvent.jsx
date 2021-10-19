@@ -7,24 +7,21 @@ import 'react-datepicker/dist/react-datepicker.css';
 import swal from 'sweetalert';
 import moment from 'moment';
 import { GoogleMap, Marker, InfoWindow, useLoadScript } from '@react-google-maps/api';
-import usePlacesAutocomplete, { getGeocode } from 'use-places-autocomplete';
+import usePlacesAutocomplete, { getGeocode, getLatLng } from 'use-places-autocomplete';
+import { Combobox, ComboboxInput, ComboboxOption, ComboboxPopover } from '@reach/combobox';
 import { eventDefineMethod } from '../../../api/event/EventCollection.methods';
 import '@reach/combobox/styles.css';
 import mapStyle from '../../components/map/mapStyle';
-import { Combobox, ComboboxInput, ComboboxOption, ComboboxPopover } from '@reach/combobox';
 
 const containerStyle = {
   width: '100%',
   height: '500px',
 };
 
-const center = {
-  lat: 21.500,
-  lng: -158.0000,
-};
-
 const options = {
   styles: mapStyle,
+  disableDefaultUI: true,
+  zoomControl: true,
 };
 
 const libraries = ['places'];
@@ -33,11 +30,50 @@ const libraries = ['places'];
 // import 'react-datepicker/dist/react-datepicker-cssmodules.css';
 
 const AddEvent = () => {
+  const [center, setCenter] = useState({ lat: 21.500, lng: -158.0000 });
+  const [zoom, setZoom] = useState(10);
+  const panTo = (lat, lng) => {
+    setCenter({ lat: lat, lng: lng });
+    setZoom(14);
+  };
+  const Search = () => {
+    const { ready, value, suggestions: { status, data }, setValue, clearSuggestions } = usePlacesAutocomplete({
+      requestOptions: {
+        location: { lat: () => 21.500, lng: () => -158.0000 },
+        radius: 200 * 1000,
+      },
+    });
+
+    return (
+    <div className={'search'}>
+      <Combobox onSelect={async (address) => {
+        setValue(address, false);
+        clearSuggestions();
+        const results = await getGeocode({ address });
+        const { lat, lng } = await getLatLng(results[0]);
+        panTo(lat, lng);
+      }
+      } >
+        <ComboboxInput value={value} onChange={(e) => {
+          setValue(e.target.value);
+        }}
+                       disabled={!ready}
+                       placeholder='Search Location'
+        />
+        <ComboboxPopover>
+          { status === 'OK' && data.map(({ description }) => <ComboboxOption
+          key={description} value={description} />)}
+        </ComboboxPopover>
+      </Combobox>
+    </div>
+    );
+  };
+  // Loading Google Maps
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: 'AIzaSyAH_N3x9evBavZrOJAb2RWdBquCoonshcE',
     libraries,
   });
-  // d
+  // Form Hooks
   const [finalType, setFinalType] = useState(() => '');
   const [finalDate, setFinalDate] = useState(new Date());
   const [finalStartTime, setFinalStartTime] = useState('');
@@ -196,7 +232,7 @@ const AddEvent = () => {
         <GoogleMap
         mapContainerStyle={containerStyle}
         center={center}
-        zoom={10}
+        zoom={zoom}
         onClick={onMapClick}
         onLoad={onMapLoad}
         options={options}
@@ -223,39 +259,5 @@ const AddEvent = () => {
     </Container>
   );
 };
-
-function Search() {
-  const { ready, value, suggestions: { status, data }, setValue, clearSuggestions } = usePlacesAutocomplete({
-    requestOptions: {
-      location: { lat: () => 21.500, lng: () => -158.0000 },
-      radius: 200 * 1000,
-    },
-  });
-
-  return (
-  <div className={'search'}>
-    <Combobox onSelect={async (address) => {
-      try {
-        const results = await getGeocode({ address });
-        console.log(results[0]);
-      } catch (error) {
-        console.log('error!');
-      }
-      console.log(address);
-    }
-    } >
-      <ComboboxInput value={value} onChange={(e) => {
-        setValue(e.target.value);
-      }}
-                     disabled={!ready}
-                     placeholder='Enter An Address'
-      />
-      <ComboboxPopover>
-        { status === 'OK' && data.map(({ id, description }) => <ComboboxOption key={id} value={description} />)}
-      </ComboboxPopover>
-    </Combobox>
-  </div>
-  );
-}
 
 export default (AddEvent);
