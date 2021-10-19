@@ -88,7 +88,7 @@ class NavBar1 extends React.Component {
                   </Dropdown.Toggle>
 
                   <Dropdown.Menu variant="dark">
-                    <Dropdown.Item href="#/Signout" active variant='outline-dark'>
+                    <Dropdown.Item href="#/" active variant='outline-dark'>
                       Signout
                     </Dropdown.Item>
                   </Dropdown.Menu>
