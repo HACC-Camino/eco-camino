@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
 import { Meteor } from 'meteor/meteor';
-import { Container, Row, Col, Form, InputGroup, FormControl, Button } from 'react-bootstrap';
+import { Container, Row, Col, Form, InputGroup, FormControl, Button, Spinner } from 'react-bootstrap';
 import 'react-datepicker/dist/react-datepicker.css';
 import swal from 'sweetalert';
-import { GoogleMap, LoadScript, Marker, InfoWindow } from '@react-google-maps/api';
+import { GoogleMap, useLoadScript, Marker, InfoWindow } from '@react-google-maps/api';
+import usePlacesAutocomplete, { getGeocode, getLatLng } from 'use-places-autocomplete';
+import { Combobox, ComboboxInput, ComboboxPopover, ComboboxList, ComboboxOption } from '@reach/combobox';
 import { reportDefineMethod } from '../../../api/report/ReportCollection.methods';
 import UploadPhotoModal from '../../components/aws/UploadPhotoModal';
 import '@reach/combobox/styles.css';
 import mapStyle from '../../components/map/mapStyle';
-import usePlacesAutocomplete, { getGeocode, getLatLng } from 'use-places-autocomplete';
-import { Combobox, ComboboxInput, ComboboxPopover, ComboboxList, ComboboxOption } from '@reach/combobox';
 
 const containerStyle = {
   width: '100%',
@@ -23,7 +23,11 @@ const center = {
 
 const options = {
   styles: mapStyle,
+  disableDefaultUI: true,
+  zoomControl: true,
 };
+
+const libraries = ['places'];
 
 // CSS Modules, react-datepicker-cssmodules.css
 // import 'react-datepicker/dist/react-datepicker-cssmodules.css';
@@ -34,6 +38,10 @@ const AddReport = () => {
   const handleCallback = (childData) => {
     setData(childData);
   };
+  const { isLoaded, loadError } = useLoadScript({
+    googleMapsApiKey: 'AIzaSyAH_N3x9evBavZrOJAb2RWdBquCoonshcE',
+    libraries,
+  });
   const [finalTitle, setFinalTitle] = useState(() => '');
   const [finalLocation, setFinalLocation] = useState(() => '');
   const [finalDescription, setFinalDescription] = useState(() => '');
@@ -87,9 +95,6 @@ const AddReport = () => {
                      value={finalDescription} as="textarea"
                      rows={5} onChange={e => setFinalDescription(e.target.value)} />
       </InputGroup>
-        <LoadScript
-        googleMapsApiKey="AIzaSyAH_N3x9evBavZrOJAb2RWdBquCoonshcE"
-        >
           <h2>Location</h2>
           <Col>
             <InputGroup className="mb-3">
@@ -99,29 +104,30 @@ const AddReport = () => {
           </Col>
           <p>Please Place a Marker For Where You Found The Trash/Needed Assistance</p>
           <Search />
-          <GoogleMap
-          mapContainerStyle={containerStyle}
-          center={center}
-          zoom={10}
-          onClick={onMapClick}
-          onLoad={onMapLoad}
-          options={options}
-          >
-            {markers.map(marker => <Marker
-            key={marker.time.toISOString()}
-            position={{ lat: marker.lat, lng: marker.lng }}
-            onClick={() => {
-              setSelected(marker);
-            }}/>)}
 
-            {selected ? (<InfoWindow
-            position={{ lat: selected.lat, lng: selected.lng }} onCloseClick={() => { setSelected(null); }}>
-              <div>
-                <h4> Location Of Trash/Needed Assistance </h4>
-              </div>
-            </InfoWindow>) : null }
-          </GoogleMap>
-        </LoadScript>
+      {loadError ? <div>error</div> : ''}
+      { isLoaded ? <GoogleMap
+      mapContainerStyle={containerStyle}
+      center={center}
+      zoom={10}
+      onClick={onMapClick}
+      onLoad={onMapLoad}
+      options={options}
+      >
+        {markers.map(marker => <Marker
+        key={marker.time.toISOString()}
+        position={{ lat: marker.lat, lng: marker.lng }}
+        onClick={() => {
+          setSelected(marker);
+        }}/>)}
+
+        {selected ? (<InfoWindow
+        position={{ lat: selected.lat, lng: selected.lng }} onCloseClick={() => { setSelected(null); }}>
+          <div>
+            <h4> Location Of Trash/Needed Assistance </h4>
+          </div>
+        </InfoWindow>) : null }
+      </GoogleMap> : <Spinner />}
       <br />
       <Row>
         <p>Please Upload a Picture of the Trash/Needed Assistance</p>
@@ -136,7 +142,7 @@ const AddReport = () => {
 };
 
 function Search() {
-  const {ready, value, suggestions: { status, data }, setValue, clearSuggestion } = usePlacesAutocomplete({
+  const { ready, value, suggestions: { status, data }, setValue, clearSuggestions } = usePlacesAutocomplete({
     requestOptions: {
       location: { lat: () => 21.500, lng: () => -158.0000 },
       radius: 200 * 1000,
@@ -144,11 +150,19 @@ function Search() {
   });
 
   return (
-  <Combobox onSelect={(address) => { console.log(address);}} >
-    <ComboboxInput value={value} onChange={(e) => {
-      setValue(e.target.value);
-    }} />
+  <div className={'search'}>
+    <Combobox onSelect={(address) => { console.log(address); }} >
+      <ComboboxInput value={value} onChange={(e) => {
+        setValue(e.target.value);
+      }}
+                     disable={!ready}
+                     placeholder='Enter An Address'
+      />
+      <ComboboxPopover>
+        { status === 'OK' && data.map(({ id, description }) => <ComboboxOption key={id} value={description} />)}
+      </ComboboxPopover>
     </Combobox>
+  </div>
   );
 }
 
