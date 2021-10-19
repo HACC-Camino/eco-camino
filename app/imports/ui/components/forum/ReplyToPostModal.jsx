@@ -14,8 +14,6 @@ const ReplyToPostModal = ({ mainPost, mainPostOwner, currentUser }) => {
   const handleModalClose = () => {
     setContent('');
     setModalOpen(false);
-    // eslint-disable-next-line no-undef
-    window.location.reload();
   };
   const handleModalOpen = () => setModalOpen(true);
 
@@ -37,6 +35,8 @@ const ReplyToPostModal = ({ mainPost, mainPostOwner, currentUser }) => {
           } else {
             swal('Success', 'Reply Sent Successfully', 'success').then(() => {
               handleModalClose();
+              // eslint-disable-next-line no-undef
+              window.location.reload();
             });
           }
         });

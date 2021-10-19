@@ -17,10 +17,6 @@ const EditForumPostModal = ({ post, show }) => {
     setContent(post.content);
     setTagList(post.tags.join(', '));
     setModalOpen(false);
-    if (typeString === 'Reply') {
-      // eslint-disable-next-line no-undef
-      window.location.reload();
-    }
   };
   const handleModalOpen = () => setModalOpen(true);
 
@@ -33,6 +29,10 @@ const EditForumPostModal = ({ post, show }) => {
         } else {
           swal('Success', `${typeString} Updated Successfully`, 'success');
           handleModalClose();
+          if (typeString === 'Reply') {
+            // eslint-disable-next-line no-undef
+            window.location.reload();
+          }
         }
       });
   };
