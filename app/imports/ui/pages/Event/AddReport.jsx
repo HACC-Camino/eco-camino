@@ -104,7 +104,6 @@ const AddReport = () => {
     </Col>
     <p>Please Place a Marker For Where You Found The Trash/Needed Assistance</p>
     <Search />
-
     {loadError ? <div>error</div> : ''}
     { isLoaded ? <GoogleMap
     mapContainerStyle={containerStyle}
@@ -151,11 +150,20 @@ function Search() {
 
   return (
   <div className={'search'}>
-    <Combobox onSelect={(address) => { console.log(address); }} >
+    <Combobox onSelect={async (address) => {
+      try {
+       const results = await getGeocode({ address });
+       console.log(results[0]);
+      } catch (error) {
+        console.log('error!');
+      }
+      console.log(address);
+    }
+    } >
       <ComboboxInput value={value} onChange={(e) => {
         setValue(e.target.value);
       }}
-                     disable={!ready}
+                     disabled={!ready}
                      placeholder='Enter An Address'
       />
       <ComboboxPopover>
