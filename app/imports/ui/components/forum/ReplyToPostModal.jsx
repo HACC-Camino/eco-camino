@@ -5,8 +5,9 @@ import PropTypes from 'prop-types';
 import { Meteor } from 'meteor/meteor';
 import swal from 'sweetalert';
 import { forumPostDefineMethod } from '../../../api/forum/ForumPostCollection.methods';
+import { userUpdateMethod } from '../../../api/user/UserCollection.methods';
 
-const ReplyToPostModal = ({ mainPost }) => {
+const ReplyToPostModal = ({ mainPost, mainPostOwner, currentUser }) => {
   const [content, setContent] = useState('');
   const [modalOpen, setModalOpen] = useState(false);
 
@@ -25,13 +26,18 @@ const ReplyToPostModal = ({ mainPost }) => {
       const mainThread = mainPost._id;
       const title = `Re: ${mainPost.title}`;
       const owner = Meteor.user().username;
+      if (mainPostOwner._id !== currentUser._id) {
+        userUpdateMethod.call({ _id: mainPostOwner._id, points: mainPostOwner.points + 2 });
+        userUpdateMethod.call({ _id: currentUser._id, points: currentUser.points + 0.5 });
+      }
       forumPostDefineMethod.call({ date, type, title, content, owner, mainThread },
         (error) => {
           if (error) {
             swal('Error', error.message, 'error');
           } else {
-            swal('Success', 'Reply Sent Successfully', 'success');
-            handleModalClose();
+            swal('Success', 'Reply Sent Successfully', 'success').then(() => {
+              handleModalClose();
+            });
           }
         });
     }
@@ -132,8 +138,9 @@ const ReplyToPostModal = ({ mainPost }) => {
 };
 
 ReplyToPostModal.propTypes = {
-  mainPost: PropTypes.object,
-  currentUser: PropTypes.string,
+  mainPost: PropTypes.object.isRequired,
+  mainPostOwner: PropTypes.object.isRequired,
+  currentUser: PropTypes.object.isRequired,
 };
 
 export default ReplyToPostModal;

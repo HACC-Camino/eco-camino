@@ -48,14 +48,17 @@ const ForumRepliesCard = ({ mainPost, replies, users, currentUser }) => {
             Replies
           </Col>
           <Col style={{ textAlign: 'right' }}>
-            <ReplyToPostModal mainPost={mainPost} currentUser={currentUser}/>
+            <ReplyToPostModal
+              mainPost={mainPost}
+              mainPostOwner={users.find(user => user.owner === mainPost.owner)}
+              currentUser={currentUser}/>
           </Col>
         </Row>
       </Card.Header>
       <Card.Body>
         <Table borderless className="fixed">
           <tbody>
-          {rows.map(replyOwner => getCardBodyContent(replyOwner, currentUser))}
+          {rows.map(replyOwner => getCardBodyContent(replyOwner, currentUser.owner))}
           </tbody>
         </Table>
       </Card.Body>
@@ -71,10 +74,11 @@ const ForumRepliesCard = ({ mainPost, replies, users, currentUser }) => {
 };
 
 ForumRepliesCard.propTypes = {
-  mainPost: PropTypes.object,
-  replies: PropTypes.array,
-  users: PropTypes.array,
-  currentUser: PropTypes.string,
+  mainPost: PropTypes.object.isRequired,
+  mainPostOwner: PropTypes.object.isRequired,
+  replies: PropTypes.array.isRequired,
+  users: PropTypes.array.isRequired,
+  currentUser: PropTypes.object.isRequired,
 };
 
 export default ForumRepliesCard;

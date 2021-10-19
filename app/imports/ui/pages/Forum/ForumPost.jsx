@@ -30,9 +30,10 @@ const ForumPost = ({ username, ready, users, mainPost, replies }) => (ready ?
         <Col sm={12}>
           <ForumRepliesCard
             mainPost={mainPost}
+            mainPostOwner={users.find(user => user.owner === mainPost.owner)}
             replies={replies}
             users={users}
-            currentUser={username}
+            currentUser={users.find(user => user.owner === username)}
           />
         </Col>
       </Row>
