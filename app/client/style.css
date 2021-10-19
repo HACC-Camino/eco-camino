@@ -10,6 +10,10 @@
 
 }
 
+.imageDark {
+  filter: brightness(50%);
+}
+
 .org-image {
     border-radius: 50%;
 }
