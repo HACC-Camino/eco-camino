@@ -57,14 +57,14 @@ const DeleteForumPostModal = ({ mainPostID, show, repliesID }) => {
         </Modal.Body>
         <Modal.Footer style={{ paddingTop: 15, paddingBottom: 15 }}>
           <Button
-            variant="outline-danger"
+            variant="danger"
             className="mx-1"
             onClick={handleDelete}
           >
             Delete
           </Button>
           <Button
-            variant="outline-dark"
+            variant="dark"
             className="ml-1"
             onClick={handleModalClose}
           >

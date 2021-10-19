@@ -29,6 +29,7 @@ const ForumPost = ({ username, ready, users, mainPost, replies }) => (ready ?
       <Row>
         <Col sm={12}>
           <ForumRepliesCard
+            mainPost={mainPost}
             replies={replies}
             users={users}
             currentUser={username}
