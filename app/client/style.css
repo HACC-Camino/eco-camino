@@ -162,3 +162,8 @@
     margin-bottom:0;
 }
 
+#landing-container {
+  padding: 0;
+  margin: 0;
+  min-width: 100%;
+}

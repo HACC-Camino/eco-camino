@@ -1,10 +1,15 @@
 import React from 'react';
 import Carousel from 'react-bootstrap/Carousel';
+import { Card, Col, Container, Row } from 'react-bootstrap';
+import Button from 'react-bootstrap/Button';
 
+const textStyle = { textAlign: 'center' };
 /** A simple static component to render some text for the landing page. */
 class Landing extends React.Component {
   render() {
     return (
+        <Container className="p0 m0" id="landing-container">
+          <Row className="p0 m0">
             <Carousel fade >
               <Carousel.Item>
                 <img
@@ -60,7 +65,49 @@ class Landing extends React.Component {
                 </Carousel.Caption>
               </Carousel.Item>
             </Carousel>
-
+          </Row>
+          <Row className="pb-sm-3">
+            <Col style={textStyle} xs="6" sm="4" >
+              <Card text="dark" className="mb-2">
+                <Card.Header>Tip #2</Card.Header>
+                <Card.Body>
+                  <Card.Title>Ways to save water</Card.Title>
+                  <Card.Text>
+                    A recommended website about how to save our limited supply of water all around the world.
+                  </Card.Text>
+                  {/* eslint-disable-next-line max-len */}
+                  <Button variant="success" href="https://friendsoftheearth.uk/sustainable-living/13-best-ways-save-water">Learn More</Button>
+                </Card.Body>
+              </Card>
+            </Col>
+            <Col style={textStyle} xs="6" sm="4">
+              <Card text="dark" className="mb-2">
+                <Card.Header>Tip #2</Card.Header>
+                <Card.Body>
+                  <Card.Title>Learn about growing your own plants</Card.Title>
+                  <Card.Text>
+                    Instead of going to the grocery store to buy some vegetables, why not grow them in your backyard?
+                  </Card.Text>
+                  {/* eslint-disable-next-line max-len */}
+                  <Button variant="success" href="https://blog.backtotheroots.com/2020/12/21/grow-your-own-food/">Learn More</Button>
+                </Card.Body>
+              </Card>
+            </Col>
+            <Col style={textStyle} xs="6" sm="4">
+              <Card text="dark" className="mb-2 ">
+                <Card.Header>Tip #3</Card.Header>
+                <Card.Body>
+                  <Card.Title>Reduce, Reuse, Recycle!</Card.Title>
+                  <Card.Text>
+                    {/* eslint-disable-next-line max-len */}
+                    A simple but effective practice to help save our already decline world that everyone should have knowledge of.
+                  </Card.Text>
+                  <Button variant="success" href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Learn More</Button>
+                </Card.Body>
+              </Card>
+            </Col>
+        </Row>
+        </Container>
     );
   }
 }
