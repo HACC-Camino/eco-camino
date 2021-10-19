@@ -4,7 +4,7 @@ import { Container, Row, Col, Form, InputGroup, FormControl, Button, Spinner } f
 import 'react-datepicker/dist/react-datepicker.css';
 import swal from 'sweetalert';
 import { GoogleMap, useLoadScript, Marker, InfoWindow } from '@react-google-maps/api';
-import usePlacesAutocomplete, { getGeocode } from 'use-places-autocomplete';
+import usePlacesAutocomplete, { getGeocode, getLatLng } from 'use-places-autocomplete';
 import { Combobox, ComboboxInput, ComboboxPopover, ComboboxOption } from '@reach/combobox';
 import { reportDefineMethod } from '../../../api/report/ReportCollection.methods';
 import UploadPhotoModal from '../../components/aws/UploadPhotoModal';
@@ -47,6 +47,10 @@ const AddReport = () => {
   const mapRef = React.useRef();
   const onMapLoad = React.useCallback((map) => {
     mapRef.current = map;
+  }, []);
+  const panTo = React.useCallback(({ lat, lng }) => {
+    mapRef.current.panTo({ lat, lng });
+    mapRef.current.setZoom(14);
   }, []);
   // Image Hosting Methods
   const [data, setData] = useState(null);
@@ -107,7 +111,7 @@ const AddReport = () => {
     </Col>
     <p>Please Place a Marker For Where You Found The Trash/Needed Assistance</p>
     {loadError ? <div>error</div> : ''}
-    { isLoaded ? <Search /> : ''}
+    { isLoaded ? <Search panTo={panTo}/> : ''}
     { isLoaded ? <GoogleMap
     mapContainerStyle={containerStyle}
     center={center}
@@ -143,7 +147,7 @@ const AddReport = () => {
   );
 };
 
-function Search() {
+function Search(panTo) {
   const { ready, value, suggestions: { status, data }, setValue, clearSuggestions } = usePlacesAutocomplete({
     requestOptions: {
       location: { lat: () => 21.500, lng: () => -158.0000 },
@@ -154,13 +158,15 @@ function Search() {
   return (
   <div className={'search'}>
     <Combobox onSelect={async (address) => {
+      setValue(address, false);
+      clearSuggestions();
       try {
        const results = await getGeocode({ address });
-       console.log(results[0]);
+       const { lat, lng } = await getLatLng(results[0]);
+        panTo({ lat, lng });
       } catch (error) {
         console.log('error!');
       }
-      console.log(address);
     }
     } >
       <ComboboxInput value={value} onChange={(e) => {
