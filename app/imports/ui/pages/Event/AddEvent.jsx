@@ -110,10 +110,12 @@ const AddEvent = () => {
     const lat = markers[0].lat;
     const lng = markers[0].lng;
     const owner = Meteor.user().username;
+    const status = 'pending';
+    const feedback = 'pending';
     const description = finalDescription;
     eventDefineMethod.call({
       typeOfEvent, date, startTime, endTime, participants, title, location, name,
-      owner, lat, lng, email, description },
+      owner, lat, lng, email, description, status, feedback },
     error => {
       if (error) {
         swal('Error', error.message, 'error');
