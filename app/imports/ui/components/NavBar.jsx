@@ -11,7 +11,7 @@ class NavBar1 extends React.Component {
   render() {
     return (
         <Navbar bg="primary" variant="dark" expand="lg" className='px-3'>
-          <Navbar.Brand href="#profile"> <img alt=""
+          <Navbar.Brand href="#"> <img alt=""
                                        src="/images/camino_logo.png"
                                        width="30"
                                        height="30"
