@@ -211,6 +211,11 @@ class EventCollection extends BaseCollection {
     return this._collection.find({ owner: username }).fetch();
   }
 
+  // returns all event id's.
+  getEventIdList() {
+    return this._collection.find({}).fetch().map(event => event._id);
+  }
+
 }
 
 /**

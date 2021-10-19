@@ -4,10 +4,10 @@ import PropTypes from 'prop-types';
 import CustomPagination from '../CustomPagination';
 
 const renderPastEvents = (past_events, index) => (
-  <tr key={index}>
-      <th>{index}</th>
-      <th>{past_events.title}</th>
-      <th>{past_events.date.toLocaleDateString()}</th>
+  <tr className='d-flex' key={index}>
+      <th className='col-2'>{index}</th>
+      <th className='col-7'>{past_events.title}</th>
+      <th className='col-3'>{past_events.date.toLocaleDateString()}</th>
   </tr>
 );
 
@@ -22,10 +22,10 @@ const PastEvents = ({ past_events }) => {
         <div className='container-lg'>
             <Table className='table' bordered responsive striped hover>
                 <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Event</th>
-                    <th>Time</th>
+                <tr className='d-flex'>
+                    <th className='col-2'>#</th>
+                    <th className='col-7'>Event</th>
+                    <th className='col-3'>Time</th>
                 </tr>
                 </thead>
                 <tbody key={rows.id}>

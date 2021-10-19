@@ -27,6 +27,12 @@ class UserCollection extends BaseCollection {
         optional: true,
       },
       owner: String,
+      usedCodes: {
+        type: Array,
+        optional: true,
+        defaultValue: [],
+      },
+      'usedCodes.$': { type: String },
     }));
   }
 
@@ -43,7 +49,7 @@ class UserCollection extends BaseCollection {
     return docID;
   }
 
-  update(docID, { photoAWSKey, firstName, lastName, bio, zipCode }) {
+  update(docID, { photoAWSKey, firstName, lastName, bio, zipCode, points, usedCodes }) {
     const updateData = {};
     if (photoAWSKey) {
       updateData.photoAWSKey = photoAWSKey;
@@ -59,6 +65,12 @@ class UserCollection extends BaseCollection {
     }
     if (_.isNumber(zipCode)) {
       updateData.zipCode = zipCode;
+    }
+    if (points) {
+      updateData.points = points;
+    }
+    if (usedCodes) {
+      updateData.usedCodes = usedCodes;
     }
     this._collection.update(docID, { $set: updateData });
   }
