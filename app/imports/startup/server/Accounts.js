@@ -1,6 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import { Accounts } from 'meteor/accounts-base';
 import { Roles } from 'meteor/alanning:roles';
+import faker from 'faker';
 
 /* eslint-disable no-console */
 
@@ -22,6 +23,12 @@ if (Meteor.users.find().count() === 0) {
   if (Meteor.settings.defaultAccounts) {
     console.log('Creating the default user(s)');
     Meteor.settings.defaultAccounts.map(({ email, password, role }) => createUser(email, password, role));
+    for (let iter = 0; iter < 10; iter++) {
+      const user = {};
+      user.email = faker.internet.email();
+      user.password = 'changeme';
+      createUser(user.email, user.password);
+    }
   } else {
     console.log('Cannot initialize the database!  Please invoke meteor with a settings file.');
   }

@@ -6,16 +6,27 @@ import { Users } from '../../api/user/UserCollection';
 
 /* eslint-disable no-console */
 const maxFakers = {
-  forumPosts: 10,
+  forumPosts: 24,
 };
 
 const today = new Date();
 
+const users = Meteor.users.find({}).fetch();
+const userEmails = users.map(user => user.username);
+
 if (Users.count() === 0) {
-  if (Meteor.settings.defaultUsers) {
-    Meteor.settings.defaultUsers.map(forumPosts => Users.define(forumPosts));
-    console.log(`UserCollection: ${Users.count()}`);
-  }
+   users.forEach(user => {
+     const userInfo = {};
+     userInfo.dateJoined = faker.date.recent();
+     userInfo.photoAWSKey = 'default-photo.png';
+     userInfo.firstName = faker.name.firstName();
+     userInfo.lastName = faker.name.lastName();
+     userInfo.bio = faker.lorem.paragraph(faker.datatype.number({ min: 1, max: 5 })) || '';
+     userInfo.zipCode = faker.address.zipCodeByState('hi').substring(0, 5);
+     userInfo.owner = user.username;
+     Users.define(userInfo);
+   });
+   console.log(`User Collection: ${Users.count()}`);
 }
 
 if (Events.count() === 0) {
@@ -29,9 +40,8 @@ if (ForumPosts.count() === 0) {
   if (Meteor.settings.defaultForumPosts) {
     // for more realistic sample forums, add them on 'settings.development.json'
     Meteor.settings.defaultForumPosts.map(forumPosts => ForumPosts.define(forumPosts));
-    console.log(`ForumPostCollection: ${ForumPosts.count()}`);
 
-    // for fake sample forums
+    // for faker sample forums
     for (let iter = 0; iter < maxFakers.forumPosts; iter++) {
       const post = {};
       post.date = faker.date.recent();
@@ -39,11 +49,11 @@ if (ForumPosts.count() === 0) {
       post.title = faker.lorem.sentence().replace(/\.$/, '');
       post.content = faker.lorem.paragraph(faker.datatype.number({ min: 1, max: 10 })) || '';
       post.tags = faker.lorem.words(faker.datatype.number({ max: 5 })).split(' ');
-      post.owner = faker.random.arrayElement(['admin@foo.com', 'john@foo.com']);
+      post.owner = faker.random.arrayElement(userEmails);
       ForumPosts.define(post);
     }
 
-    // for fake replies on forums
+    // for faker replies on forums
     const mainPosts = ForumPosts.getForumPostsSortedByDate();
     console.log(`ForumPostCollection: ${ForumPosts.count()}`);
 
@@ -56,7 +66,7 @@ if (ForumPosts.count() === 0) {
         reply.mainThread = mainPost._id;
         reply.title = `Re: ${mainPost.title}`;
         reply.content = faker.lorem.paragraph(faker.datatype.number({ min: 1, max: 5 })) || '';
-        reply.owner = faker.random.arrayElement(['admin@foo.com', 'john@foo.com']);
+        reply.owner = faker.random.arrayElement(userEmails);
         ForumPosts.define(reply);
       }
     });

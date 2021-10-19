@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import { Badge, Button, Card, Col, Form, Modal, Row, Table } from 'react-bootstrap';
 import { BsXLg } from 'react-icons/all';
 import PropTypes from 'prop-types';
+import { Meteor } from 'meteor/meteor';
+import swal from 'sweetalert';
+import { forumPostDefineMethod } from '../../../api/forum/ForumPostCollection.methods';
 
 const ReplyToPostModal = ({ mainPost }) => {
   const [content, setContent] = useState('');
@@ -12,7 +15,21 @@ const ReplyToPostModal = ({ mainPost }) => {
 
   const handleSubmit = () => {
     if (content !== '') {
-      console.log(content);
+      const date = new Date();
+      const type = 'reply';
+      const mainThread = mainPost._id;
+      const title = `Re: ${mainPost.title}`;
+      const owner = Meteor.user().username;
+      forumPostDefineMethod.call({ date, type, title, content, owner, mainThread },
+        (error) => {
+          if (error) {
+            swal('Error', error.message, 'error');
+          } else {
+            swal('Success', 'Reply Sent Successfully', 'success');
+            // eslint-disable-next-line no-undef
+            window.location.reload();
+          }
+        });
     }
   };
 

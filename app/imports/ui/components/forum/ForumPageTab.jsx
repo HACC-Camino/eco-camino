@@ -18,22 +18,19 @@ const getRowProps = (mainPost, replies) => {
 
 const maxRow = 10;
 
-const getInitialRows = (array) => array.slice(0, maxRow);
-
 const ForumPageTab = ({ originalArray, allForumPosts }) => {
-  const [rows, setRows] = useState([]);
+  const [rows, setRows] = useState(originalArray.slice(0, maxRow));
   const handlePageCallback = (childRows) => {
     setRows(childRows);
   };
 
   const arrayProps = [];
-  const pageRows = rows.length === 0 ? getInitialRows(originalArray) : rows;
-  pageRows.forEach(element => arrayProps.push(getRowProps(element, getReplies(allForumPosts, element._id))));
+  rows.forEach(element => arrayProps.push(getRowProps(element, getReplies(allForumPosts, element._id))));
   const sortedArrayProps = sortDate(arrayProps);
 
   return (
     <div>
-      <Table striped hover className="fixed">
+      <Table responsive striped hover className="fixed">
         <thead>
         <tr>
           <th width="64%">Title</th>

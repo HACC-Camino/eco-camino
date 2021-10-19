@@ -18,10 +18,16 @@ const ForumPostRow = ({ propsObject }) => {
       <td>{mainPost.title}</td>
       <td>{numReplies}</td>
       <td>
-        {`${mainPost.date.toLocaleDateString()}\n ${mainPost.owner}`}
+        <p className="text-muted">{mainPost.date.toLocaleDateString()}
+          <br/>
+          {mainPost.owner}
+        </p>
       </td>
       <td>
-        {`${latestReply.date.toLocaleDateString()}\n ${latestReply.owner}`}
+        <p className="text-muted">{latestReply.date.toLocaleDateString()}
+          <br/>
+          {latestReply.owner}
+        </p>
       </td>
     </tr>
   );
