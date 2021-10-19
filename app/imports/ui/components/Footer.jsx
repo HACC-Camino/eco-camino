@@ -6,7 +6,7 @@ import { OverlayTrigger, Popover } from 'react-bootstrap';
 class Footer extends React.Component {
   render() {
     const popover = (
-        <Popover>
+        <Popover id="popover-basic">
           <Popover.Content>
             Hey there, I am under construction!
           </Popover.Content>
@@ -50,7 +50,7 @@ class Footer extends React.Component {
                             </a>
                           </OverlayTrigger>
                           <OverlayTrigger
-                              trigger="hover"
+                              trigger={['hover', 'focus']}
                               placement="top"
                               overlay={popover}
                           >
@@ -59,7 +59,7 @@ class Footer extends React.Component {
                             </a>
                           </OverlayTrigger>
                           <OverlayTrigger
-                              trigger="hover"
+                              trigger={['hover', 'focus']}
                               placement="top"
                               overlay={popover}
                           >
@@ -68,7 +68,7 @@ class Footer extends React.Component {
                             </a>
                           </OverlayTrigger>
                           <OverlayTrigger
-                              trigger="hover"
+                              trigger={['hover', 'focus']}
                               placement="top"
                               overlay={popover}
                           >
