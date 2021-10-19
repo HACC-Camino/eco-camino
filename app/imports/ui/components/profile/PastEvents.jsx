@@ -12,12 +12,12 @@ const renderPastEvents = (past_events, index) => (
 );
 
 const PastEvents = ({ past_events }) => {
-    const [rows, setRows] = useState([]);
+    const maxRow = 5;
+    const [rows, setRows] = useState(past_events.slice(0, maxRow));
     const handlePageCallback = (childRows) => {
         setRows(childRows);
     };
     // max rows per page.
-    const maxRow = 5;
     return (
         <div className='container-lg'>
             <Table className='table' bordered responsive striped hover>
