@@ -39,18 +39,10 @@ const ConvertEvent = ({ report }) => {
     definitionData.status = 'pending';
     definitionData.feedback = 'pending';
     const _id = report._id;
-    reportRemoveItMethod.call({ _id },
-    error => {
-      if (error) {
-        swal('Error', error.message, 'error');
-      } else {
-        swal('Success', 'Report Deleted Successfully', 'success');
-      }
-    });
     eventDefineMethod.call(definitionData, (error) => (error ?
     swal('Error', error.message, 'error') :
     swal('Success', 'Added Event Successfully', 'success').then(handleClose)));
-
+    reportRemoveItMethod.call({ _id });
   };
 
   return (
