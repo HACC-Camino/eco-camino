@@ -22,7 +22,7 @@ import Forum from '../pages/Forum/Forum';
 import ForumPost from '../pages/Forum/ForumPost';
 import AdminList from '../pages/AdminList';
 import CreateForumPost from '../pages/Forum/CreateForumPost';
-// import ToastNotification from '../components/ToastNotification';
+import ToastNotification from '../components/ToastNotification';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 const App = () => (
@@ -46,7 +46,7 @@ const App = () => (
         <ProtectedRoute path="/signout" component={Signout}/>
         <Route component={NotFound}/>
       </Switch>
-       {/*<ToastNotification show={true} message={'this kinda works'} page={'app'}/>*/}
+       <ToastNotification page={'app'}/>
       <Footer/>
     </div>
   </Router>);

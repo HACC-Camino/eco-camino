@@ -10,6 +10,7 @@ export const notificationDefineMethod = new ValidatedMethod({
   run(definitionData) {
     if (Meteor.isServer) {
       const docID = Notifications.define(definitionData);
+      console.log(docID);
       return docID;
     }
     return '';

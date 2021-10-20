@@ -11,7 +11,7 @@ export const collectionTypes = ['event', 'forum', 'report'];
 
 class NotificationCollection extends BaseCollection {
   constructor() {
-    super('Notification', new SimpleSchema({
+    super('Notifications', new SimpleSchema({
       dateCreated: Date,
       message: String,
       collectionType: {
