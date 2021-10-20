@@ -30,13 +30,14 @@ class NotificationCollection extends BaseCollection {
     }));
   }
 
-  define({ dateCreated, message, collectionType, seen, forumID }) {
+  define({ dateCreated, message, collectionType, seen, forumID, owner }) {
     const docID = this._collection.insert({
       dateCreated,
       message,
       collectionType,
       seen,
       forumID,
+      owner,
     });
     return docID;
   }
