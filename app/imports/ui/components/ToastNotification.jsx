@@ -59,7 +59,7 @@ const ToastNotification = ({ page }) => {
                             <small className="text-muted">{new Date().toLocaleTimeString()}</small>
                         </Toast.Header>
                         <Toast.Body>{message}</Toast.Body>
-                        <Link to={'/events'} replace>Click here to go to Events.</Link>
+                        <Link to={'/event'} replace style={{ padding: 10 }}>Click here to go to Events.</Link>
                     </Toast>
                 );
             }
@@ -78,7 +78,7 @@ const ToastNotification = ({ page }) => {
                         </Toast.Header>
                         <Toast.Body>
                             <h6>{message}</h6>
-                            <Link to={hrefForForum} replace>Click here to go to post.</Link>
+                            <Link to={hrefForForum} replace style={{ padding: 10 }}>Click here to go to post.</Link>
                         </Toast.Body>
                     </Toast>
                 );
@@ -108,7 +108,7 @@ const ToastNotification = ({ page }) => {
                         </Toast.Header>
                         <Toast.Body>
                             <h6>{message}</h6>
-                            <Link to={hrefForForum}>Link to Forum</Link>
+                            <Link to={hrefForForum} style={{ padding: 10 }}>Link to Forum</Link>
                         </Toast.Body>
                     </Toast>
                 );

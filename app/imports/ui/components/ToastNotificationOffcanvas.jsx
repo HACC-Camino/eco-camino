@@ -19,7 +19,7 @@ const ToastNotificationOffcanvas = ({ notifications, ready }) => {
                         <small className="text-muted">{new Date().toLocaleTimeString()}</small>
                     </Toast.Header>
                     <Toast.Body>{notifications.message}</Toast.Body>
-                    <Link to={'/events'} replace>Click here to go to Events.</Link>
+                    <Link to={'/event'} replace style={{ padding: 10 }}>Click here to go to Events.</Link>
                 </Toast>
             );
         }
@@ -33,7 +33,7 @@ const ToastNotificationOffcanvas = ({ notifications, ready }) => {
                     </Toast.Header>
                     <Toast.Body>
                         <h6>{notifications.message}</h6>
-                        <Link to={hrefForForum}>Link to Forum</Link>
+                        <Link to={hrefForForum} style={{ padding: 10 }}>Link to Forum</Link>
                     </Toast.Body>
                 </Toast>
             );
