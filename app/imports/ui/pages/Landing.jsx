@@ -1,7 +1,7 @@
 import React from 'react';
 import Carousel from 'react-bootstrap/Carousel';
 import { Card, Col, Container, Row } from 'react-bootstrap';
-import Button from 'react-bootstrap/Button';
+import { BsCalendar2EventFill, MdForum, MdReportGmailerrorred } from 'react-icons/all';
 
 const textStyle = { textAlign: 'center' };
 /** A simple static component to render some text for the landing page. */
@@ -27,7 +27,7 @@ class Landing extends React.Component {
                 <img
                     className="d-block w-100 imageDark"
                     height="675"
-                    src="/images/landing-page/resized-maskedgirl.jpg"
+                    src="/images/landing-page/naturetest5.jpg"
                     alt="Second slide"
                 />
 
@@ -66,43 +66,46 @@ class Landing extends React.Component {
               </Carousel.Item>
             </Carousel>
           </Row>
-          <Row className="pb-sm-3">
+          <Row className="pt-md-4">
             <Col style={textStyle} xs="6" sm="4" >
-              <Card text="dark" className="mb-2">
-                <Card.Header>Tip #2</Card.Header>
+              <Card text="dark" className="card text-white bg-secondary mb-2">
                 <Card.Body>
-                  <Card.Title>Ways to save water</Card.Title>
-                  <Card.Text>
-                    A recommended website about how to save our limited supply of water all around the world.
-                  </Card.Text>
-                  {/* eslint-disable-next-line max-len */}
-                  <Button variant="success" href="https://friendsoftheearth.uk/sustainable-living/13-best-ways-save-water">Learn More</Button>
-                </Card.Body>
-              </Card>
-            </Col>
-            <Col style={textStyle} xs="6" sm="4">
-              <Card text="dark" className="mb-2">
-                <Card.Header>Tip #2</Card.Header>
-                <Card.Body>
-                  <Card.Title>Learn about growing your own plants</Card.Title>
-                  <Card.Text>
-                    Instead of going to the grocery store to buy some vegetables, why not grow them in your backyard?
-                  </Card.Text>
-                  {/* eslint-disable-next-line max-len */}
-                  <Button variant="success" href="https://blog.backtotheroots.com/2020/12/21/grow-your-own-food/">Learn More</Button>
-                </Card.Body>
-              </Card>
-            </Col>
-            <Col style={textStyle} xs="6" sm="4">
-              <Card text="dark" className="mb-2 ">
-                <Card.Header>Tip #3</Card.Header>
-                <Card.Body>
-                  <Card.Title>Reduce, Reuse, Recycle!</Card.Title>
+                  <Card.Title>Events</Card.Title>
+                  <a>
+                    <BsCalendar2EventFill size="50px"/>
+                  </a>
                   <Card.Text>
                     {/* eslint-disable-next-line max-len */}
-                    A simple but effective practice to help save our already decline world that everyone should have knowledge of.
+                   Users can create and attend events such as workshops or cleanups. Users who want to create events will need to wait for approval by an administrator.
                   </Card.Text>
-                  <Button variant="success" href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Learn More</Button>
+                </Card.Body>
+              </Card>
+            </Col>
+            <Col style={textStyle} xs="6" sm="4">
+              <Card text="dark" className="card text-white bg-secondary mb-2">
+                <Card.Body>
+                  <Card.Title>Forums</Card.Title>
+                  <a>
+                    <MdForum size="50px"/>
+                  </a>
+                  <Card.Text>
+                    {/* eslint-disable-next-line max-len */}
+                    Users can create and reply to posts from many others who have the same questions or answers about our environment. Forums will always be well monitored.
+                  </Card.Text>
+                </Card.Body>
+              </Card>
+            </Col>
+            <Col style={textStyle} xs="6" sm="4">
+              <Card text="dark" className="card text-white bg-secondary mb-2">
+                <Card.Body>
+                  <Card.Title>Report System</Card.Title>
+                  <a>
+                    <MdReportGmailerrorred size="50px"/>
+                  </a>
+                  <Card.Text>
+                    {/* eslint-disable-next-line max-len */}
+                    Users can report spotted trash and request assistance using our Report page. Users have the ability to also upload pictures of Trash that needs to be picked up.
+                  </Card.Text>
                 </Card.Body>
               </Card>
             </Col>

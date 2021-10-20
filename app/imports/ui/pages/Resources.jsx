@@ -13,7 +13,7 @@ class Resources extends React.Component {
           <Row className="pb-sm-3">
               <Col style={textStyle} xs="6" sm="4" >
                 <Card text="dark" className="mb-2">
-                  <Card.Header>Tip #2</Card.Header>
+                  <Card.Header>Tip #1</Card.Header>
                   <Card.Body>
                     <Card.Title>Ways to save water</Card.Title>
                     <Card.Text>
