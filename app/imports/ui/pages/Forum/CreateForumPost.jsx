@@ -69,7 +69,7 @@ const CreateForumPost = () => {
           </Row>
           <Row>
             <Form.Group className='mb-3' controlId='formTagList'>
-              <Form.Label>Title</Form.Label>
+              <Form.Label>Tags</Form.Label>
               <Form.Control
                 type='text'
                 placeholder='Tags'
