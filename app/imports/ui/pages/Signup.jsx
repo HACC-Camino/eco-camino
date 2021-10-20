@@ -29,7 +29,8 @@ const Signup = () => {
       if (err) {
         swal('Error', err.message, 'error');
       } else {
-        userDefineMethod.call({ firstName, lastName, bio, zipCode, dateJoined, owner: email },
+        // eslint-disable-next-line max-len
+        userDefineMethod.call({ firstName, lastName, bio, zipCode, dateJoined, owner: email, photoAWSKey: 'default-photo.png' },
             (error) => {
               if (error) {
                 swal('Error', error.message, 'error');

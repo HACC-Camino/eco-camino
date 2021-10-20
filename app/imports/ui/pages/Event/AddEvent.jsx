@@ -16,6 +16,7 @@ import mapStyle from '../../components/map/mapStyle';
 const containerStyle = {
   width: '100%',
   height: '500px',
+  marginTop: '10px',
 };
 
 const options = {
@@ -25,9 +26,6 @@ const options = {
 };
 
 const libraries = ['places'];
-
-// CSS Modules, react-datepicker-cssmodules.css
-// import 'react-datepicker/dist/react-datepicker-cssmodules.css';
 
 const AddEvent = () => {
   const [center, setCenter] = useState({ lat: 21.500, lng: -158.0000 });
@@ -54,7 +52,7 @@ const AddEvent = () => {
         panTo(lat, lng);
       }
       } >
-        <ComboboxInput value={value} onChange={(e) => {
+        <ComboboxInput id='datePicker' value={value} onChange={(e) => {
           setValue(e.target.value);
         }}
                        disabled={!ready}
@@ -75,7 +73,7 @@ const AddEvent = () => {
   });
   // Form Hooks
   const [finalType, setFinalType] = useState(() => '');
-  const [finalDate, setFinalDate] = useState(new Date());
+  const [finalDate, setFinalDate] = useState(new Date(moment().locale('en').add(2, 'd').format('MMM DD, YYYY HH:MM')));
   const [finalStartTime, setFinalStartTime] = useState('');
   const [finalEndTime, setFinalEndTime] = useState('');
   const [finalTitle, setFinalTitle] = useState(() => '');
@@ -161,7 +159,8 @@ const AddEvent = () => {
             <Form.Label htmlFor="basic-url">Date of Event</Form.Label>
             <DatePicker
           name='Date of Event'
-          minDate={moment().toDate()}
+          id='datePicker'
+          minDate={new Date(moment().locale('en').add(2, 'd').format('MMM DD, YYYY HH:MM'))}
           selected={finalDate}
           onChange={(date) => setFinalDate(date)}
           />
@@ -173,6 +172,7 @@ const AddEvent = () => {
             <Col>
               <Form.Label htmlFor="basic-url">Start Time</Form.Label>
               <DatePicker
+              id='datePicker'
               selected={finalStartTime}
               onChange={(date) => setFinalStartTime(date)}
               showTimeSelect
@@ -185,6 +185,7 @@ const AddEvent = () => {
             <Col>
               <Form.Label htmlFor="basic-url">End Time</Form.Label>
               <DatePicker
+              id='datePicker'
               selected={finalEndTime}
               onChange={(date) => setFinalEndTime(date)}
               showTimeSelect
@@ -221,13 +222,13 @@ const AddEvent = () => {
       </InputGroup>
           <h2>Location</h2>
           <Col>
+            <Form.Label htmlFor="basic-url">Address of Event</Form.Label>
             <InputGroup className="mb-3">
               <FormControl placeholder='Address of Event'
                            value={finalLocation} onChange={e => setFinalLocation(e.target.value)} />
             </InputGroup>
           </Col>
           <p>Please Place a Marker For Where Your Event Will Be Held</p>
-      <br />
       { isLoaded ?
       <div>
         <Search />
