@@ -1,10 +1,15 @@
 import React from 'react';
 import Carousel from 'react-bootstrap/Carousel';
+import { Card, Col, Container, Row } from 'react-bootstrap';
+import { BsCalendar2EventFill, MdForum, MdReportGmailerrorred } from 'react-icons/all';
 
+const textStyle = { textAlign: 'center' };
 /** A simple static component to render some text for the landing page. */
 class Landing extends React.Component {
   render() {
     return (
+        <Container className="p0 m0" id="landing-container">
+          <Row className="p0 m0">
             <Carousel fade >
               <Carousel.Item>
                 <img
@@ -22,7 +27,7 @@ class Landing extends React.Component {
                 <img
                     className="d-block w-100 imageDark"
                     height="675"
-                    src="/images/landing-page/resized-maskedgirl.jpg"
+                    src="/images/landing-page/naturetest5.jpg"
                     alt="Second slide"
                 />
 
@@ -60,7 +65,52 @@ class Landing extends React.Component {
                 </Carousel.Caption>
               </Carousel.Item>
             </Carousel>
-
+          </Row>
+          <Row className="pt-md-4">
+            <Col style={textStyle} xs="6" sm="4" >
+              <Card text="dark" className="card text-white bg-secondary mb-2">
+                <Card.Body>
+                  <Card.Title>Events</Card.Title>
+                  <a>
+                    <BsCalendar2EventFill size="50px"/>
+                  </a>
+                  <Card.Text>
+                    {/* eslint-disable-next-line max-len */}
+                   Users can create and attend events such as workshops or cleanups. Users who want to create events will need to wait for approval by an administrator.
+                  </Card.Text>
+                </Card.Body>
+              </Card>
+            </Col>
+            <Col style={textStyle} xs="6" sm="4">
+              <Card text="dark" className="card text-white bg-secondary mb-2">
+                <Card.Body>
+                  <Card.Title>Forums</Card.Title>
+                  <a>
+                    <MdForum size="50px"/>
+                  </a>
+                  <Card.Text>
+                    {/* eslint-disable-next-line max-len */}
+                    Users can create and reply to posts from many others who have the same questions or answers about our environment. Forums will always be well monitored.
+                  </Card.Text>
+                </Card.Body>
+              </Card>
+            </Col>
+            <Col style={textStyle} xs="6" sm="4">
+              <Card text="dark" className="card text-white bg-secondary mb-2">
+                <Card.Body>
+                  <Card.Title>Report System</Card.Title>
+                  <a>
+                    <MdReportGmailerrorred size="50px"/>
+                  </a>
+                  <Card.Text>
+                    {/* eslint-disable-next-line max-len */}
+                    Users can report spotted trash and request assistance using our Report page. Users have the ability to also upload pictures of Trash that needs to be picked up.
+                  </Card.Text>
+                </Card.Body>
+              </Card>
+            </Col>
+        </Row>
+        </Container>
     );
   }
 }

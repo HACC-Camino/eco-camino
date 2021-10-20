@@ -6,10 +6,14 @@ import swal from 'sweetalert';
 import { GoogleMap, useLoadScript, Marker, InfoWindow } from '@react-google-maps/api';
 import usePlacesAutocomplete, { getGeocode, getLatLng } from 'use-places-autocomplete';
 import { Combobox, ComboboxInput, ComboboxPopover, ComboboxOption } from '@reach/combobox';
+import PropTypes from 'prop-types';
+import { withTracker } from 'meteor/react-meteor-data';
 import { reportDefineMethod } from '../../../api/report/ReportCollection.methods';
 import UploadPhotoModal from '../../components/aws/UploadPhotoModal';
 import '@reach/combobox/styles.css';
 import mapStyle from '../../components/map/mapStyle';
+import { Users } from '../../../api/user/UserCollection';
+import { userUpdateMethod } from '../../../api/user/UserCollection.methods';
 
 const containerStyle = {
   width: '100%',
@@ -24,8 +28,10 @@ const options = {
 };
 
 const libraries = ['places'];
+// CSS Modules, react-datepicker-cssmodules.css
+// import 'react-datepicker/dist/react-datepicker-cssmodules.css';
 
-const AddReport = () => {
+const AddReport = ({ ready1, currentUser }) => {
   const [center, setCenter] = useState({ lat: 21.500, lng: -158.0000 });
   const [zoom, setZoom] = useState(10);
   const panTo = (lat, lng) => {
@@ -98,6 +104,14 @@ const AddReport = () => {
     const accessKey = data;
     const owner = Meteor.user()?.username;
     const description = finalDescription;
+    let updateData = {};
+    updateData = currentUser;
+    updateData.points = currentUser.points + 3;
+    if (ready1) {
+      userUpdateMethod.call(updateData, (error) => (error ?
+          swal('Error', error.message, 'error') :
+          swal('Success', 'Data edited successfully', 'success')));
+    }
     reportDefineMethod.call({
       date, title, location,
       owner, lat, lng, accessKey, description },
@@ -175,4 +189,19 @@ const AddReport = () => {
   );
 };
 
-export default (AddReport);
+AddReport.propTypes = {
+  currentUser: PropTypes.object,
+  ready1: PropTypes.bool,
+};
+
+export default withTracker(() => {
+  const username = Meteor.user()?.username;
+  const ready1 = Users.subscribeUser().ready();
+  const currentUser = Users.getUserDetails(username);
+  console.log(currentUser);
+  console.log(username);
+  return {
+    currentUser,
+    ready1,
+  };
+})(AddReport);
