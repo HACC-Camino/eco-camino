@@ -45,13 +45,6 @@ const AdminApprovalButton = ({ event }) => {
       <Modal.Body>
         <Row>
         <Col>
-          <Form.Label htmlFor="basic-url">Feedback</Form.Label>
-          <InputGroup className="mb-3">
-            <FormControl placeholder='feedback'
-                         value={feedback} onChange={e => setFeedback(e.target.value)} as="textarea" rows={5}/>
-          </InputGroup>
-        </Col>
-        <Col>
           <Form.Label htmlFor="basic-url">Status Of Event</Form.Label>
           <Select
           options={typeDropdown}
@@ -60,6 +53,15 @@ const AdminApprovalButton = ({ event }) => {
           defaultValue={status}
           />
         </Col>
+        </Row>
+        <Row>
+          <Col>
+            <Form.Label htmlFor="basic-url">Feedback</Form.Label>
+            <InputGroup className="mb-3">
+              <FormControl placeholder='feedback'
+                           value={feedback} onChange={e => setFeedback(e.target.value)} as="textarea" rows={5}/>
+            </InputGroup>
+          </Col>
         </Row>
 </Modal.Body>
       <Modal.Footer>
