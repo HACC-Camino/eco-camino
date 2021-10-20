@@ -61,17 +61,6 @@ if (ForumPosts.count() === 0) {
       reply.content = faker.lorem.paragraph(faker.datatype.number({ min: 1, max: 5 })) || '';
       reply.owner = faker.random.arrayElement(userEmails);
       if (mainPost.owner !== reply.owner) {
-        // notify owner about reply
-        const message = `Someone replied to your post: ${mainPost.title}! Click here to see what they said.`;
-        Notifications.define({
-          dateCreated: reply.date,
-          message: message,
-          collectionType: 'forum',
-          seen: false,
-          forumID: mainPost._id,
-          owner: mainPost.owner,
-        });
-
         // get mainpost owner obj, give 2
         const mainPostOwner = Users.getUserDetails(mainPost.owner);
         Users.update(mainPostOwner._id, { points: mainPostOwner.points + 2 });
@@ -79,6 +68,7 @@ if (ForumPosts.count() === 0) {
         const currentUser = Users.getUserDetails(reply.owner);
         Users.update(currentUser._id, { points: currentUser.points + 0.5 });
       }
+      reply.mainPost = mainPost;
       ForumPosts.define(reply);
     }
   });

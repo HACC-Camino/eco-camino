@@ -26,7 +26,7 @@ const ReplyToPostModal = ({ mainPost, mainPostOwner, currentUser }) => {
       const mainThread = mainPost._id;
       const title = `Re: ${mainPost.title}`;
       const owner = Meteor.user().username;
-      forumPostDefineMethod.call({ date, type, title, content, owner, mainThread },
+      forumPostDefineMethod.call({ date, type, title, content, owner, mainThread, mainPost },
         (error) => {
           if (error) {
             swal('Error', error.message, 'error');
@@ -39,19 +39,6 @@ const ReplyToPostModal = ({ mainPost, mainPostOwner, currentUser }) => {
                 // send notification to owner
               }
               // put in line 38
-              const message = `Someone replied to your post: ${mainPost.title}! Click here to see what they said.`;
-              notificationDefineMethod.call({
-                dateCreated: date,
-                message: message,
-                collectionType: 'forum',
-                seen: false,
-                forumID: mainPost._id,
-                owner: mainPost.owner,
-              }, (err) => {
-                if (err) {
-                  console.log(err);
-                }
-              });
             });
           }
         });

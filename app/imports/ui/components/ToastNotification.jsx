@@ -2,8 +2,6 @@ import React, { useState } from 'react';
 import { Toast } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import { Notifications } from '../../api/notification/NotificationCollection';
-import {Events} from "../../api/event/EventCollection";
-import {ForumPosts} from "../../api/forum/ForumPostCollection";
 
 const seconds = 7;
 const secToMs = 1000;
@@ -29,23 +27,23 @@ const ToastNotification = ({ page }) => {
       // console.log(doc);
       if (doc.dateCreated > current_date) {
         setShowToast(true);
-          console.log(doc);
+        console.log(doc);
       }
     },
   });
 
-    let count = 0;
-    Events.subscribe();
-    const cursor2 = Events.find({});
-    console.log(cursor2.fetch())
-    cursor2.observeChanges({
-        added(id, event) {
-            count += 1;
-            console.log('this event was added');
-            console.log(event);
-            console.log(count);
-        },
-    });
+    // let count = 0;
+    // Events.subscribe();
+    // const cursor2 = Events.find({});
+    // console.log(cursor2.fetch())
+    // cursor2.observeChanges({
+    //     added(id, event) {
+    //         count += 1;
+    //         console.log('this event was added');
+    //         console.log(event);
+    //         console.log(count);
+    //     },
+    // });
 
   const hrefForForum = `/forum/post/${forumId}`;
 

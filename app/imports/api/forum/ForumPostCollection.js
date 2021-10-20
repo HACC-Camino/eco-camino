@@ -2,6 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import SimpleSchema from 'simpl-schema';
 import { check } from 'meteor/check';
 import BaseCollection from '../base/BaseCollection';
+import { Notifications } from '../notification/NotificationCollection';
 
 export const forumPostTypes = ['main_post', 'reply'];
 export const forumPostPublications = {
@@ -34,7 +35,7 @@ class ForumPostCollection extends BaseCollection {
     }));
   }
 
-  define({ date, type, mainThread, title, content, tags, owner }) {
+  define({ date, type, mainThread, title, content, tags, owner, mainPost }) {
     const docID = this._collection.insert({
       date,
       type,
@@ -44,6 +45,17 @@ class ForumPostCollection extends BaseCollection {
       tags,
       owner,
     });
+    if (type === 'reply') {
+      const message = `Someone replied to your post: ${mainPost.title}! Click here to see what they said.`;
+      Notifications.define({
+        dateCreated: date,
+        message: message,
+        collectionType: 'forum',
+        seen: false,
+        forumID: mainPost._id,
+        owner: mainPost.owner,
+      });
+    }
     return docID;
   }
 
