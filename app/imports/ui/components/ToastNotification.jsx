@@ -17,18 +17,19 @@ const ToastNotification = ({ page }) => {
 
   const handleHide = () => setShowToast(false);
 
-  Notifications.subscribe();
+  Notifications.subscribeNotification();
   const current_date = new Date();
   const cursor = Notifications.find({});
-  console.log(cursor.fetch())
+  // console.log(cursor.fetch())
   cursor.observeChanges({
     added(id, doc) {
       setMessage(doc.message);
       setType(doc.type);
       setForumId(doc.forumID);
-      console.log(doc);
+      // console.log(doc);
       if (doc.dateCreated > current_date) {
         setShowToast(true);
+          console.log(doc);
       }
     },
   });
