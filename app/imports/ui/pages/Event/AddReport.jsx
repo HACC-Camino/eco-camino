@@ -14,12 +14,8 @@ import mapStyle from '../../components/map/mapStyle';
 const containerStyle = {
   width: '100%',
   height: '500px',
+  marginTop: '10px',
 };
-
-// const center = {
-//   lat: 21.500,
-//   lng: -158.0000,
-// };
 
 const options = {
   styles: mapStyle,
@@ -28,9 +24,6 @@ const options = {
 };
 
 const libraries = ['places'];
-
-// CSS Modules, react-datepicker-cssmodules.css
-// import 'react-datepicker/dist/react-datepicker-cssmodules.css';
 
 const AddReport = () => {
   const [center, setCenter] = useState({ lat: 21.500, lng: -158.0000 });
@@ -57,7 +50,7 @@ const AddReport = () => {
         panTo(lat, lng);
       }
       } >
-        <ComboboxInput value={value} onChange={(e) => {
+        <ComboboxInput id='datePicker' value={value} onChange={(e) => {
           setValue(e.target.value);
         }}
                        disabled={!ready}
@@ -138,6 +131,7 @@ const AddReport = () => {
       </InputGroup>
     <h2>Location</h2>
     <Col>
+      <Form.Label htmlFor="basic-url">Address of the Trash/Needed Assistance</Form.Label>
       <InputGroup className="mb-3">
         <FormControl placeholder='Address of the Trash/Needed Assistance'
                      value={finalLocation} onChange={e => setFinalLocation(e.target.value)} />

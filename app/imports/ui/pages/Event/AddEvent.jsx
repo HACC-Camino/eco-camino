@@ -27,9 +27,6 @@ const options = {
 
 const libraries = ['places'];
 
-// CSS Modules, react-datepicker-cssmodules.css
-// import 'react-datepicker/dist/react-datepicker-cssmodules.css';
-
 const AddEvent = () => {
   const [center, setCenter] = useState({ lat: 21.500, lng: -158.0000 });
   const [zoom, setZoom] = useState(10);
@@ -50,9 +47,7 @@ const AddEvent = () => {
       <Combobox onSelect={async (address) => {
         setValue(address, false);
         clearSuggestions();
-        console.log(address);
         const results = await getGeocode({ address });
-        console.log(results);
         const { lat, lng } = await getLatLng(results[0]);
         panTo(lat, lng);
       }
@@ -227,13 +222,13 @@ const AddEvent = () => {
       </InputGroup>
           <h2>Location</h2>
           <Col>
+            <Form.Label htmlFor="basic-url">Address of Event</Form.Label>
             <InputGroup className="mb-3">
               <FormControl placeholder='Address of Event'
                            value={finalLocation} onChange={e => setFinalLocation(e.target.value)} />
             </InputGroup>
           </Col>
           <p>Please Place a Marker For Where Your Event Will Be Held</p>
-      <br />
       { isLoaded ?
       <div>
         <Search />
