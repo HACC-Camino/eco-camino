@@ -16,6 +16,7 @@ const ReportItem = ({ report }) => {
         <Card.Body>
           <Card.Img id='imageReport' variant="top" src={GetPhoto(report.accessKey)}/>
           <Card.Title>Report: {report.title}</Card.Title>
+          <Card.Text>Date: {report.date.toLocaleDateString()}</Card.Text>
           <Card.Text>Location: {report.location}</Card.Text>
           <Card.Text>Description: {report.description}</Card.Text>
           <br/>

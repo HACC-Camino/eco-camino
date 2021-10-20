@@ -4,9 +4,12 @@ import PropTypes from 'prop-types';
 import swal from 'sweetalert';
 import Select from 'react-select';
 import { eventUpdateMethod } from '../../../api/event/EventCollection.methods';
+import { userUpdateMethod } from '../../../api/user/UserCollection.methods';
+import { Users } from '../../../api/user/UserCollection';
 
 /** Renders an Edit and Delete Button */
 const AdminApprovalButton = ({ event }) => {
+    const owner = Users.getUserDetails(event.owner);
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -21,6 +24,9 @@ const AdminApprovalButton = ({ event }) => {
       const updateData = event;
       updateData.feedback = feedback;
       updateData.status = status.value;
+      if (status.value === 'approved') {
+        userUpdateMethod.call({ _id: owner._id, points: owner.points + 200 });
+      }
       eventUpdateMethod.call(updateData, (error) => (error ?
       swal('Error', error.message, 'error') :
       swal('Success', 'Event review successfully', 'success').then(handleClose)));
@@ -39,13 +45,6 @@ const AdminApprovalButton = ({ event }) => {
       <Modal.Body>
         <Row>
         <Col>
-          <Form.Label htmlFor="basic-url">Feedback</Form.Label>
-          <InputGroup className="mb-3">
-            <FormControl placeholder='feedback'
-                         value={feedback} onChange={e => setFeedback(e.target.value)} as="textarea" rows={5}/>
-          </InputGroup>
-        </Col>
-        <Col>
           <Form.Label htmlFor="basic-url">Status Of Event</Form.Label>
           <Select
           options={typeDropdown}
@@ -54,6 +53,15 @@ const AdminApprovalButton = ({ event }) => {
           defaultValue={status}
           />
         </Col>
+        </Row>
+        <Row>
+          <Col>
+            <Form.Label htmlFor="basic-url">Feedback</Form.Label>
+            <InputGroup className="mb-3">
+              <FormControl placeholder='feedback'
+                           value={feedback} onChange={e => setFeedback(e.target.value)} as="textarea" rows={5}/>
+            </InputGroup>
+          </Col>
         </Row>
 </Modal.Body>
       <Modal.Footer>

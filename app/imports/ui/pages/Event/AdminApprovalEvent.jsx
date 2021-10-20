@@ -5,6 +5,7 @@ import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 import { Events } from '../../../api/event/EventCollection';
 import EventItem from '../../components/event/EventItem';
+import { Users } from '../../../api/user/UserCollection';
 
 /** Renders a container containing all of the Events documents. */
 const Event = ({ pendingEvents, ready }) => {
@@ -42,6 +43,7 @@ export default withTracker(() => {
   // Get access to Event documents.
   const username = Meteor.user()?.username;
   const ready = Events.subscribeEventAdmin().ready()
+  && Users.subscribeUserCommunity().ready()
   && username !== undefined;
   const pendingEvents = Events.getAllPendingEvents();
   return {

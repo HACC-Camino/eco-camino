@@ -13,7 +13,7 @@ const ConvertEvent = ({ report }) => {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  const [finalDate, setFinalDate] = useState(new Date());
+  const [finalDate, setFinalDate] = useState(new Date(moment().locale('en').add(2, 'd').format('MMM DD, YYYY HH:MM')));
   const [finalStartTime, setFinalStartTime] = useState('');
   const [finalEndTime, setFinalEndTime] = useState('');
   const [finalTitle, setFinalTitle] = useState('');
@@ -39,18 +39,10 @@ const ConvertEvent = ({ report }) => {
     definitionData.status = 'pending';
     definitionData.feedback = 'pending';
     const _id = report._id;
-    reportRemoveItMethod.call({ _id },
-    error => {
-      if (error) {
-        swal('Error', error.message, 'error');
-      } else {
-        swal('Success', 'Report Deleted Successfully', 'success');
-      }
-    });
     eventDefineMethod.call(definitionData, (error) => (error ?
     swal('Error', error.message, 'error') :
     swal('Success', 'Added Event Successfully', 'success').then(handleClose)));
-
+    reportRemoveItMethod.call({ _id });
   };
 
   return (
@@ -76,15 +68,17 @@ const ConvertEvent = ({ report }) => {
             <Row>
               <Form.Label htmlFor="basic-url">Date of Event</Form.Label>
               <DatePicker
+              id='datePicker'
               name='Date of Event'
               selected={finalDate}
-              minDate={moment().toDate()}
+              minDate={new Date(moment().locale('en').add(2, 'd').format('MMM DD, YYYY HH:MM'))}
               onChange={(date) => setFinalDate(date)}
               /></Row>
             <Row>
               <Col>
                 <Form.Label htmlFor="basic-url">Start Time</Form.Label>
                 <DatePicker
+                id='datePicker'
                 selected={finalStartTime}
                 onChange={(date) => setFinalStartTime(date)}
                 showTimeSelect
@@ -98,6 +92,7 @@ const ConvertEvent = ({ report }) => {
               <Col>
                 <Form.Label htmlFor="basic-url">End Time</Form.Label>
                 <DatePicker
+                id='datePicker'
                 selected={finalEndTime}
                 onChange={(date) => setFinalEndTime(date)}
                 showTimeSelect

@@ -4,7 +4,8 @@ import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
 import { withRouter } from 'react-router-dom';
 import { Roles } from 'meteor/alanning:roles';
-import { Navbar, Nav, Dropdown, NavDropdown } from 'react-bootstrap';
+import { Navbar, Nav, Dropdown, NavDropdown, Col, Row } from 'react-bootstrap';
+import OffCanvas from '../components/OffCanvas';
 
 /** The NavBar appears at the top of every page. Rendered by the App Layout component. */
 class NavBar1 extends React.Component {
@@ -48,8 +49,7 @@ class NavBar1 extends React.Component {
                   ]
             ) : ''}
             {this.props.currentUser && Roles.userIsInRole(Meteor.userId(), 'admin') ? (
-                [<Nav.Link href="#profile" key='profile'>Dashboard</Nav.Link>,
-                  <Nav.Link href="#admin-list" key='admin-list'>Admin List</Nav.Link>,
+                [<Nav.Link href="#admin-list" key='admin-list'>Admin List</Nav.Link>,
                   <NavDropdown key='eventdropdown' title='Events' id="nav-dropdown">
                     <NavDropdown.Item href="#approvalEvent"
                                       eventKey='approvalEvent'
@@ -88,15 +88,21 @@ class NavBar1 extends React.Component {
                 </Dropdown>
             ) : (
                 <Dropdown>
+                  <Row>
+                    <Col style={{ padding: '5px' }} className="me-2">
+                      <OffCanvas />
+                    </Col>
+                  <Col>
                   <Dropdown.Toggle id="dropdown-button-dark-example1" variant="outline-dark">
                     {this.props.currentUser}
                   </Dropdown.Toggle>
-
                   <Dropdown.Menu variant="dark">
                     <Dropdown.Item href="#/Signout" active variant='outline-dark'>
                       Signout
                     </Dropdown.Item>
                   </Dropdown.Menu>
+                  </Col>
+                  </Row>
                 </Dropdown>
             )}
           </Nav>

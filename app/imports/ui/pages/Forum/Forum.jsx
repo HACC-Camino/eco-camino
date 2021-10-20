@@ -33,13 +33,13 @@ const Forum = ({ username, ready, forumPosts }) => {
             <Col sm={3}>
               <Nav variant="pills" className="flex-column">
                 <Nav.Item>
-                  <Nav.Link eventKey={0}>All Forums</Nav.Link>
+                  <Nav.Link eventKey={0} style={{ cursor: 'pointer' }}>All Forums</Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
-                  <Nav.Link eventKey={1}>Your Posts</Nav.Link>
+                  <Nav.Link eventKey={1} style={{ cursor: 'pointer' }}>Your Posts</Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
-                  <Nav.Link eventKey={2}>Subscribed Posts</Nav.Link>
+                  <Nav.Link eventKey={2} style={{ cursor: 'pointer' }}>Subscribed Posts</Nav.Link>
                 </Nav.Item>
               </Nav>
             </Col>
