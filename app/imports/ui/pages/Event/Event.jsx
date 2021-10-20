@@ -21,19 +21,19 @@ const Event = ({ currentEvents, currentCleanups, currentWorkshops, joinedEvents,
           <Col sm={3}>
             <Nav variant="pills" className="flex-column">
               <Nav.Item>
-                <Nav.Link eventKey="first">All Events</Nav.Link>
+                <Nav.Link eventKey="first" style={{ cursor: 'pointer' }}>All Events</Nav.Link>
               </Nav.Item>
               <Nav.Item>
-                <Nav.Link eventKey="second">Only Cleanups</Nav.Link>
+                <Nav.Link eventKey="second" style={{ cursor: 'pointer' }}>Only Cleanups</Nav.Link>
               </Nav.Item>
               <Nav.Item>
-                <Nav.Link eventKey="third">Only Workshops</Nav.Link>
+                <Nav.Link eventKey="third" style={{ cursor: 'pointer' }}>Only Workshops</Nav.Link>
               </Nav.Item>
               <Nav.Item>
-                <Nav.Link eventKey="fourth">Owned Events</Nav.Link>
+                <Nav.Link eventKey="fourth" style={{ cursor: 'pointer' }}>Owned Events</Nav.Link>
               </Nav.Item>
               <Nav.Item>
-                <Nav.Link eventKey="fifth">Joined Events</Nav.Link>
+                <Nav.Link eventKey="fifth" style={{ cursor: 'pointer' }}>Joined Events</Nav.Link>
               </Nav.Item>
             </Nav>
           </Col>
