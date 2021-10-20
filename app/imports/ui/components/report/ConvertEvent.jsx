@@ -36,6 +36,8 @@ const ConvertEvent = ({ report }) => {
     definitionData.lat = report.lat;
     definitionData.lng = report.lng;
     definitionData.owner = Meteor.user().username;
+    definitionData.status = 'pending';
+    definitionData.feedback = 'pending';
     const _id = report._id;
     reportRemoveItMethod.call({ _id },
     error => {

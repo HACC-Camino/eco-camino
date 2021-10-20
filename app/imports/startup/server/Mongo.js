@@ -59,6 +59,14 @@ if (ForumPosts.count() === 0) {
       reply.title = `Re: ${mainPost.title}`;
       reply.content = faker.lorem.paragraph(faker.datatype.number({ min: 1, max: 5 })) || '';
       reply.owner = faker.random.arrayElement(userEmails);
+      if (mainPost.owner !== reply.owner) {
+        // get mainpost owner obj, give 2
+        const mainPostOwner = Users.getUserDetails(mainPost.owner);
+        Users.update(mainPostOwner._id, { points: mainPostOwner.points + 2 });
+        // get replier owner obj, give .5
+        const currentUser = Users.getUserDetails(reply.owner);
+        Users.update(currentUser._id, { points: currentUser.points + 0.5 });
+      }
       ForumPosts.define(reply);
     }
   });
@@ -68,7 +76,11 @@ if (ForumPosts.count() === 0) {
 if (Events.count() === 0) {
   if (Meteor.settings.defaultEvent) {
     console.log('Creating default events.');
-    Meteor.settings.defaultEvent.map(data => Events.define(data));
+    Meteor.settings.defaultEvent.forEach(data => {
+      Events.define(data);
+      const owner = Users.getUserDetails(data.owner);
+      Users.update(owner._id, { points: owner.points + 100 });
+    });
     console.log(`EventCollection: ${Events.count()}`);
   }
 }
@@ -86,6 +98,13 @@ if (UserEvents.count() === 0) {
         userEvent.owner = email;
         userEvent.eventID = event._id;
         UserEvents.define(userEvent);
+        const current_date = new Date().getTime();
+        const userEventOwner = Users.getUserDetails(userEvent.owner);
+        const usedCodes = [...userEventOwner.usedCodes];
+        if (new Date(event.date).getTime() < current_date) {
+          usedCodes.push(event._id);
+          Users.update(userEventOwner._id, { points: userEventOwner.points + 20, usedCodes });
+        }
       }
       temp.splice(temp.includes(email), 1);
     }
