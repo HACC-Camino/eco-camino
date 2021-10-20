@@ -11,7 +11,7 @@ export const userPublications = {
 
 class UserCollection extends BaseCollection {
   constructor() {
-    super('User', new SimpleSchema({
+    super('Users', new SimpleSchema({
       dateJoined: Date,
       photoAWSKey: {
         type: String,

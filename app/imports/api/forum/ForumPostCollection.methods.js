@@ -4,7 +4,7 @@ import { CallPromiseMixin } from 'meteor/didericis:callpromise-mixin';
 import { ForumPosts } from './ForumPostCollection';
 
 export const forumPostDefineMethod = new ValidatedMethod({
-  name: 'ForumPostCollection.define',
+  name: 'ForumPostsCollection.define',
   mixins: [CallPromiseMixin],
   validate: null,
   run(definitionData) {
@@ -17,7 +17,7 @@ export const forumPostDefineMethod = new ValidatedMethod({
 });
 
 export const forumPostUpdateMethod = new ValidatedMethod({
-  name: 'ForumPostCollection.update',
+  name: 'ForumPostsCollection.update',
   mixins: [CallPromiseMixin],
   validate: null,
   run(updateData) {
@@ -27,7 +27,7 @@ export const forumPostUpdateMethod = new ValidatedMethod({
 });
 
 export const forumPostRemoveItMethod = new ValidatedMethod({
-  name: 'ForumPostCollection.removeIt',
+  name: 'ForumPostsCollection.removeIt',
   mixins: [CallPromiseMixin],
   validate: null,
   run(instance) {

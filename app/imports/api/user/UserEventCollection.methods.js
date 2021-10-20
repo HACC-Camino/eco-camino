@@ -4,7 +4,7 @@ import { CallPromiseMixin } from 'meteor/didericis:callpromise-mixin';
 import { UserEvents } from './UserEventCollection';
 
 export const userEventDefineMethod = new ValidatedMethod({
-  name: 'UserEventCollection.define',
+  name: 'UsersEventCollection.define',
   mixins: [CallPromiseMixin],
   validate: null,
   run(definitionData) {
@@ -17,7 +17,7 @@ export const userEventDefineMethod = new ValidatedMethod({
 });
 
 export const userEventRemoveItMethod = new ValidatedMethod({
-  name: 'UserEventCollection.removeIt',
+  name: 'UsersEventCollection.removeIt',
   mixins: [CallPromiseMixin],
   validate: null,
   run(instance) {

@@ -4,7 +4,7 @@ import { CallPromiseMixin } from 'meteor/didericis:callpromise-mixin';
 import { Notifications } from './NotificationCollection';
 
 export const notificationDefineMethod = new ValidatedMethod({
-  name: 'NotificationCollection.define',
+  name: 'NotificationsCollection.define',
   mixins: [CallPromiseMixin],
   validate: null,
   run(definitionData) {
@@ -18,7 +18,7 @@ export const notificationDefineMethod = new ValidatedMethod({
 });
 
 export const notificationUpdateMethod = new ValidatedMethod({
-  name: 'NotificationCollection.update',
+  name: 'NotificationsCollection.update',
   mixins: [CallPromiseMixin],
   validate: null,
   run(updateData) {
@@ -28,7 +28,7 @@ export const notificationUpdateMethod = new ValidatedMethod({
 });
 
 export const notificationRemoveItMethod = new ValidatedMethod({
-  name: 'NotificationCollection.removeIt',
+  name: 'NotificationsCollection.removeIt',
   mixins: [CallPromiseMixin],
   validate: null,
   run(instance) {

@@ -10,7 +10,7 @@ export const userEventPublications = {
 
 class UserEventCollection extends BaseCollection {
   constructor() {
-    super('UserEvent', new SimpleSchema({
+    super('UsersEvent', new SimpleSchema({
       dateJoined: Date,
       owner: String,
       eventID: String,

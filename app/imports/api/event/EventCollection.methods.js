@@ -10,7 +10,7 @@ import { Events } from './EventCollection';
  * @memberOf api/base
  */
 export const eventDefineMethod = new ValidatedMethod({
-  name: 'EventCollection.define',
+  name: 'EventsCollection.define',
   mixins: [CallPromiseMixin],
   validate: null,
   run(definitionData) {
@@ -25,7 +25,7 @@ export const eventDefineMethod = new ValidatedMethod({
 });
 
 export const eventUpdateMethod = new ValidatedMethod({
-  name: 'EventCollection.update',
+  name: 'EventsCollection.update',
   mixins: [CallPromiseMixin],
   validate: null,
   run(updateData) {
@@ -35,7 +35,7 @@ export const eventUpdateMethod = new ValidatedMethod({
 });
 
 export const eventRemoveItMethod = new ValidatedMethod({
-  name: 'EventCollection.removeIt',
+  name: 'EventsCollection.removeIt',
   mixins: [CallPromiseMixin],
   validate: null,
   run(instance) {
