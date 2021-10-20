@@ -80,7 +80,7 @@ if (Events.count() === 0) {
       const userObj = Users.getUserDetails(userEmail);
       Events.define({
         title: data.title,
-        date: faker.date.recent(),
+        date: faker.date.between(new Date(2021, 9, 1), today),
         startTime: data.startTime,
         endTime: data.endTime,
         location: data.location,
