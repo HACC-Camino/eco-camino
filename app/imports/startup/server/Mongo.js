@@ -43,15 +43,15 @@ if (ForumPosts.count() === 0) {
     });
 
     if (Meteor.settings.defaultForumReplies) {
-      const mainPostsReal = ForumPosts.getForumPostsSortedByDate();
+      const mainPosts = ForumPosts.getForumPostsSortedByDate();
       Meteor.settings.defaultForumReplies.forEach(postArray => {
-        const mainPost = mainPostsReal.find(post => post.title === postArray.title);
+        const mainPost = mainPosts.find(post => post.title === postArray.title);
         postArray.replies.forEach(reply => {
           const owner = faker.random.arrayElement(userEmails);
           ForumPosts.define({
             date: faker.date.between(mainPost.date, today),
             type: 'reply',
-            mainThread: mainPost.thread,
+            mainThread: mainPost._id,
             title: `Re: ${mainPost.title}`,
             content: reply,
             owner: owner,
@@ -69,7 +69,7 @@ if (ForumPosts.count() === 0) {
       });
     }
   }
-  console.log(`ReportsCollection: ${ForumPosts.count()}`);
+  console.log(`ForumPostCollection: ${ForumPosts.count()}`);
 }
 
 if (Events.count() === 0) {
