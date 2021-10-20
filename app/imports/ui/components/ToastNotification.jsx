@@ -1,3 +1,4 @@
+import { Meteor } from 'meteor/meteor';
 import React, { useState } from 'react';
 import { Toast } from 'react-bootstrap';
 import PropTypes from 'prop-types';
@@ -19,13 +20,14 @@ const ToastNotification = ({ page }) => {
     const current_date = new Date();
     const ready = useTracker(() => {
         Notifications.subscribeNotification();
+        const user = Meteor.user()?.username;
         Notifications.find({}).observeChanges({
             added: (id, item) => {
                 setMessage(item.message);
                 setType(item.collectionType);
                 setForumId(item.forumID);
                 // console.log(doc);
-                if (item.dateCreated > current_date) {
+                if (item.dateCreated > current_date && item.owner === user) {
                     setShowToast(true);
                     console.log(item);
                     return true;
@@ -115,8 +117,7 @@ const ToastNotification = ({ page }) => {
         return null;
     };
 
-    return (ready ? getContent()
-            : null);
+    return (ready ? getContent() : null);
 };
 
 ToastNotification.propTypes = {
