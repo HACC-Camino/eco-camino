@@ -10,13 +10,6 @@ const ToastNotification = ({ page }) => {
 
   const handleHide = () => setShowToast(false);
 
-  // get currentDateTime when the app was opened
-  // Notifications.subscribe
-  // observechanges
-  //        added (id, doc)
-  //        if (doc.dateCreated > currentDateTime)
-  //          setState(show)
-  //          setMessage(show)
   Notifications.subscribe();
   let message = '';
   let type = '';
@@ -71,7 +64,6 @@ const ToastNotification = ({ page }) => {
           </Toast>
         </ToastContainer>
     );
-
 };
 
 ToastNotification.propTypes = {

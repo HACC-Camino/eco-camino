@@ -4,6 +4,7 @@ import { ForumPosts } from '../../api/forum/ForumPostCollection';
 import { Users } from '../../api/user/UserCollection';
 import { UserEvents } from '../../api/user/UserEventCollection';
 import { Reports } from '../../api/report/ReportCollection';
+import { Notifications } from '../../api/notification/NotificationCollection';
 
 const collections = [
   ForumPosts,
@@ -11,6 +12,7 @@ const collections = [
   Events,
   UserEvents,
   Reports,
+  Notifications,
 ];
 
 collections.forEach(collection => collection.publish());

@@ -110,6 +110,17 @@ class ForumPostCollection extends BaseCollection {
   getForumPostReplies(postID) {
     return this._collection.find({ mainThread: postID }, { sort: { date: -1 } }).fetch();
   }
+
+  getSubscriberEmailList(postID) {
+    const replies = this.getForumPostReplies(postID);
+    const emailList = [];
+    replies.forEach(reply => {
+      if (!emailList.includes(reply.owner)) {
+        emailList.push(reply.owner);
+      }
+    });
+    return emailList;
+  }
 }
 
 export const ForumPosts = new ForumPostCollection();
