@@ -16,6 +16,7 @@ import mapStyle from '../../components/map/mapStyle';
 const containerStyle = {
   width: '100%',
   height: '500px',
+  marginTop: '10px',
 };
 
 const options = {
@@ -49,12 +50,14 @@ const AddEvent = () => {
       <Combobox onSelect={async (address) => {
         setValue(address, false);
         clearSuggestions();
+        console.log(address);
         const results = await getGeocode({ address });
+        console.log(results);
         const { lat, lng } = await getLatLng(results[0]);
         panTo(lat, lng);
       }
       } >
-        <ComboboxInput value={value} onChange={(e) => {
+        <ComboboxInput id='datePicker' value={value} onChange={(e) => {
           setValue(e.target.value);
         }}
                        disabled={!ready}
@@ -161,6 +164,7 @@ const AddEvent = () => {
             <Form.Label htmlFor="basic-url">Date of Event</Form.Label>
             <DatePicker
           name='Date of Event'
+          id='datePicker'
           minDate={moment().toDate()}
           selected={finalDate}
           onChange={(date) => setFinalDate(date)}
@@ -173,6 +177,7 @@ const AddEvent = () => {
             <Col>
               <Form.Label htmlFor="basic-url">Start Time</Form.Label>
               <DatePicker
+              id='datePicker'
               selected={finalStartTime}
               onChange={(date) => setFinalStartTime(date)}
               showTimeSelect
@@ -185,6 +190,7 @@ const AddEvent = () => {
             <Col>
               <Form.Label htmlFor="basic-url">End Time</Form.Label>
               <DatePicker
+              id='datePicker'
               selected={finalEndTime}
               onChange={(date) => setFinalEndTime(date)}
               showTimeSelect

@@ -76,6 +76,7 @@ const ConvertEvent = ({ report }) => {
             <Row>
               <Form.Label htmlFor="basic-url">Date of Event</Form.Label>
               <DatePicker
+              id='datePicker'
               name='Date of Event'
               selected={finalDate}
               minDate={moment().toDate()}
@@ -85,6 +86,7 @@ const ConvertEvent = ({ report }) => {
               <Col>
                 <Form.Label htmlFor="basic-url">Start Time</Form.Label>
                 <DatePicker
+                id='datePicker'
                 selected={finalStartTime}
                 onChange={(date) => setFinalStartTime(date)}
                 showTimeSelect
@@ -98,6 +100,7 @@ const ConvertEvent = ({ report }) => {
               <Col>
                 <Form.Label htmlFor="basic-url">End Time</Form.Label>
                 <DatePicker
+                id='datePicker'
                 selected={finalEndTime}
                 onChange={(date) => setFinalEndTime(date)}
                 showTimeSelect
