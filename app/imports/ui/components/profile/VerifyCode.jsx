@@ -8,6 +8,7 @@ import { userUpdateMethod } from '../../../api/user/UserCollection.methods';
 const VerifyCode = ({ eventIds, userDetail }) => {
     const [code, setCode] = useState('');
     const [show, setShow] = useState(false);
+    console.log(eventIds);
     const handleClose = () => {
         setShow(false);
     };
