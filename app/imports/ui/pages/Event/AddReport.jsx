@@ -195,7 +195,7 @@ const AddReport = ({ ready1, currentUser }) => {
 
 AddReport.propTypes = {
   currentUser: PropTypes.object,
-  ready: PropTypes.bool,
+  ready1: PropTypes.bool,
 };
 
 export default withTracker(() => {
