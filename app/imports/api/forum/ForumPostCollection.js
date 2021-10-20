@@ -46,7 +46,7 @@ class ForumPostCollection extends BaseCollection {
       owner,
     });
     if (type === 'reply') {
-      const message = `Someone replied to your post: ${mainPost.title}! Click here to see what they said.`;
+      const message = `Someone replied to your post: ${mainPost.title}!`;
       Notifications.define({
         dateCreated: date,
         message: message,

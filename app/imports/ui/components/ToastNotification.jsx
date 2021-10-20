@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Toast } from 'react-bootstrap';
 import PropTypes from 'prop-types';
+import { useTracker } from 'meteor/react-meteor-data';
+import { Link, useHistory } from 'react-router-dom';
 import { Notifications } from '../../api/notification/NotificationCollection';
 
 const seconds = 7;
@@ -11,115 +13,110 @@ const ToastNotification = ({ page }) => {
   const [message, setMessage] = useState('');
   const [type, setType] = useState('');
   const [forumId, setForumId] = useState('');
-  // const [createdDate, setCreatedDate] = useState(new Date());
 
   const handleHide = () => setShowToast(false);
 
-  Notifications.subscribeNotification();
-  const current_date = new Date();
-  const cursor = Notifications.find({});
-  // console.log(cursor.fetch())
-  cursor.observeChanges({
-    added(id, doc) {
-      setMessage(doc.message);
-      setType(doc.type);
-      setForumId(doc.forumID);
-      // console.log(doc);
-      if (doc.dateCreated > current_date) {
-        setShowToast(true);
-        console.log(doc);
-      }
-    },
-  });
+    const current_date = new Date();
+    const ready = useTracker(() => {
+        Notifications.subscribeNotification();
+        Notifications.find({}).observeChanges({
+            added: (id, item) => {
+                setMessage(item.message);
+                setType(item.collectionType);
+                setForumId(item.forumID);
+                // console.log(doc);
+                if (item.dateCreated > current_date) {
+                    setShowToast(true);
+                    console.log(item);
+                    return true;
+                }
+                return false;
+            },
+        });
+        return true;
+    }, []);
+    const hrefForForum = `/forum/post/${forumId}`;
+    const history = useHistory();
+    const goToPage = () => {
+        const pageLink = `#/forum/post/${forumId}`;
+        history.push(pageLink);
+    };
+    const getContent = () => {
+        if (page === 'app') {
+            if (type === 'event') {
+                console.log('event here');
+                // this will render if the type is equal to event and we are on the app page
+                return (
+                    <Toast show={showToast} onClose={handleHide} delay={seconds * secToMs} autohide>
+                        <Toast.Header>
+                            <img src={'images/camino_logo.png'}
+                                 className="rounded me-2"
+                                 alt=""
+                                 width="30"
+                                 height="30"/>
+                            <strong className="me-auto">EcoCamino: Event</strong>
+                            <small className="text-muted">{new Date().toLocaleTimeString()}</small>
+                        </Toast.Header>
+                        <Toast.Body>{message}</Toast.Body>
+                    </Toast>
+                );
+            }
+            if (type === 'forum') {
+                // this will render if the type is equal to forum and we are on the app page
+                return (
+                    <Toast show={showToast} onClose={handleHide} delay={seconds * secToMs} autohide onClick={goToPage}>
+                        <Toast.Header>
+                            <img src={'images/camino_logo.png'}
+                                 className="rounded me-2"
+                                 alt=""
+                                 width="30"
+                                 height="30"/>
+                            <strong className="me-auto">EcoCamino: Forum</strong>
+                            <small className="text-muted">{new Date().toLocaleTimeString()}</small>
+                        </Toast.Header>
+                        <Toast.Body>
+                            <h6>{message}</h6>
+                            <Link to={hrefForForum} replace>Click here to go to post.</Link>
+                        </Toast.Body>
+                    </Toast>
+                );
+            }
+        }
+        // this will be returned if the page is not the app (this will be the offcanvas)
+        if (page === 'offcanvas') {
+            if (type === 'event') {
+                // this will render if the type is equal to event and we are on the offcanvas
+                return (
+                    <Toast show={showToast} onClose={handleHide} delay={seconds * secToMs} autohide>
+                        <Toast.Header>
+                            <strong className="me-auto">Event</strong>
+                            <small className="text-muted">{new Date().toLocaleTimeString()}</small>
+                        </Toast.Header>
+                        <Toast.Body>{message}</Toast.Body>
+                    </Toast>
+                );
+            }
+            if (type === 'forum') {
+                // this will render if the type is equal to forum and we are on the offcanvas
+                return (
+                    <Toast show={showToast} onClose={handleHide} delay={seconds * secToMs} autohide>
+                        <Toast.Header>
+                            <strong className="me-auto">Forum</strong>
+                            <small className="text-muted">{new Date().toLocaleTimeString()}</small>
+                        </Toast.Header>
+                        <Toast.Body>
+                            <h6>{message}</h6>
+                            <Link to={hrefForForum}>Link to Forum</Link>
+                        </Toast.Body>
+                    </Toast>
+                );
+            }
+        }
+        return null;
+    };
 
-    // let count = 0;
-    // Events.subscribe();
-    // const cursor2 = Events.find({});
-    // console.log(cursor2.fetch())
-    // cursor2.observeChanges({
-    //     added(id, event) {
-    //         count += 1;
-    //         console.log('this event was added');
-    //         console.log(event);
-    //         console.log(count);
-    //     },
-    // });
-
-  const hrefForForum = `/forum/post/${forumId}`;
-
-  if (page === 'app') {
-    if (type === 'event') {
-      // this will render if the type is equal to event and we are on the app page
-      return (
-          <Toast show={showToast} onClose={handleHide} delay={seconds * secToMs} autohide>
-            <Toast.Header>
-              <img src={'images/camino_logo.png'}
-                   className="rounded me-2"
-                   alt=""
-                   width="30"
-                   height="30"/>
-              <strong className="me-auto">EcoCamino: Event</strong>
-              <small className="text-muted">{new Date().toLocaleTimeString()}</small>
-            </Toast.Header>
-            <Toast.Body>{message}</Toast.Body>
-          </Toast>
-      );
-    }
-    if (type === 'forum') {
-      // this will render if the type is equal to forum and we are on the app page
-      return (
-          <Toast show={showToast} onClose={handleHide} delay={seconds * secToMs} autohide>
-            <Toast.Header>
-              <img src={'images/camino_logo.png'}
-                   className="rounded me-2"
-                   alt=""
-                   width="30"
-                   height="30"/>
-              <strong className="me-auto">EcoCamino: Forum</strong>
-              <small className="text-muted">{new Date().toLocaleTimeString()}</small>
-            </Toast.Header>
-            <Toast.Body>
-                <h6>{message}</h6>
-                <a href={hrefForForum}>Link to Forum</a>
-            </Toast.Body>
-          </Toast>
-      );
-    }
-  }
-
-    // this will be returned if the page is not the app (this will be the offcanvas)
-  if (page === 'offcanvas') {
-    if (type === 'event') {
-      // this will render if the type is equal to event and we are on the offcanvas
-      return (
-          <Toast show={showToast} onClose={handleHide} delay={seconds * secToMs} autohide>
-            <Toast.Header>
-              <strong className="me-auto">Event</strong>
-              <small className="text-muted">{new Date().toLocaleTimeString()}</small>
-            </Toast.Header>
-            <Toast.Body>{message}</Toast.Body>
-          </Toast>
-      );
-    }
-    if (type === 'forum') {
-      // this will render if the type is equal to forum and we are on the offcanvas
-      return (
-          <Toast show={showToast} onClose={handleHide} delay={seconds * secToMs} autohide>
-            <Toast.Header>
-              <strong className="me-auto">Forum</strong>
-              <small className="text-muted">{new Date().toLocaleTimeString()}</small>
-            </Toast.Header>
-            <Toast.Body>
-                <h6>{message}</h6>
-                <a href={hrefForForum}>Link to Forum</a>
-            </Toast.Body>
-          </Toast>
-      );
-    }
-  }
-
-  // if its none of the cases above return null.
-  return null;
+    return (ready ? getContent()
+            : null);
 };
 
 ToastNotification.propTypes = {
