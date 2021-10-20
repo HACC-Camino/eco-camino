@@ -92,7 +92,7 @@ if (Events.count() === 0) {
         email: userEmail,
         description: data.description,
         typeOfEvent: data.typeOfEvent,
-        status: 'pending',
+        status: 'approved',
         feedback: 'none',
       });
       Users.update(userObj._id, { points: userObj.points + 100 });
