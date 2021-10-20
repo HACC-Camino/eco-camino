@@ -80,6 +80,10 @@ class NotificationCollection extends BaseCollection {
   getAllNotification() {
     return this._collection.find({}, { sort: { dateCreated: 1 } }).fetch();
   }
+
+  getNotifications(username) {
+    return this._collection.find({ owner: username }, { sort: { dateCreated: 1 } }).fetch();
+  }
 }
 
 export const Notifications = new NotificationCollection();
