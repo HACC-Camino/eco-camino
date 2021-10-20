@@ -6,6 +6,7 @@ import { Meteor } from 'meteor/meteor';
 import swal from 'sweetalert';
 import { forumPostDefineMethod } from '../../../api/forum/ForumPostCollection.methods';
 import { userUpdateMethod } from '../../../api/user/UserCollection.methods';
+import { Notifications } from '../../../api/notification/NotificationCollection';
 
 const ReplyToPostModal = ({ mainPost, mainPostOwner, currentUser }) => {
   const [content, setContent] = useState('');
@@ -24,10 +25,6 @@ const ReplyToPostModal = ({ mainPost, mainPostOwner, currentUser }) => {
       const mainThread = mainPost._id;
       const title = `Re: ${mainPost.title}`;
       const owner = Meteor.user().username;
-      if (mainPostOwner._id !== currentUser._id) {
-        userUpdateMethod.call({ _id: mainPostOwner._id, points: mainPostOwner.points + 2 });
-        userUpdateMethod.call({ _id: currentUser._id, points: currentUser.points + 0.5 });
-      }
       forumPostDefineMethod.call({ date, type, title, content, owner, mainThread },
         (error) => {
           if (error) {
@@ -35,11 +32,26 @@ const ReplyToPostModal = ({ mainPost, mainPostOwner, currentUser }) => {
           } else {
             swal('Success', 'Reply Sent Successfully', 'success').then(() => {
               handleModalClose();
-              // eslint-disable-next-line no-undef
-              window.location.reload();
+              if (mainPostOwner._id !== currentUser._id) {
+                userUpdateMethod.call({ _id: mainPostOwner._id, points: mainPostOwner.points + 2 });
+                userUpdateMethod.call({ _id: currentUser._id, points: currentUser.points + 0.5 });
+                // send notification to owner
+              }
+              // put in line 38
+              const message = `Someone replied to your post: ${mainPost.title}! Click here to see what they said.`;
+              Notifications.define({
+                dateCreated: date,
+                message: message,
+                collectionType: 'forum',
+                seen: false,
+                forumID: mainPost._id,
+                owner: mainPost.owner,
+              });
             });
           }
         });
+      // eslint-disable-next-line no-undef
+      window.location.reload();
     }
   };
 
