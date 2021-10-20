@@ -10,6 +10,14 @@ const ToastNotification = ({ show, message }) => {
 
   const handleHide = () => setShowToast(false);
 
+  // get currentDateTime when the app was opened
+  // Notifications.subscribe
+  // observechanges
+  //        added (id, doc)
+  //        if (doc.dateCreated > currentDateTime)
+  //          setState(show)
+  //          setMessage(show)
+
   return (
     <ToastContainer position="top-end" className="p-3">
       <Toast show={showToast} onClose={handleHide} delay={seconds * secToMs} autohide>

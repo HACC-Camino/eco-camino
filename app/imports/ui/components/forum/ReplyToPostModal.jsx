@@ -24,10 +24,6 @@ const ReplyToPostModal = ({ mainPost, mainPostOwner, currentUser }) => {
       const mainThread = mainPost._id;
       const title = `Re: ${mainPost.title}`;
       const owner = Meteor.user().username;
-      if (mainPostOwner._id !== currentUser._id) {
-        userUpdateMethod.call({ _id: mainPostOwner._id, points: mainPostOwner.points + 2 });
-        userUpdateMethod.call({ _id: currentUser._id, points: currentUser.points + 0.5 });
-      }
       forumPostDefineMethod.call({ date, type, title, content, owner, mainThread },
         (error) => {
           if (error) {
@@ -35,12 +31,18 @@ const ReplyToPostModal = ({ mainPost, mainPostOwner, currentUser }) => {
           } else {
             swal('Success', 'Reply Sent Successfully', 'success').then(() => {
               handleModalClose();
-              // eslint-disable-next-line no-undef
-              window.location.reload();
+              if (mainPostOwner._id !== currentUser._id) {
+                userUpdateMethod.call({ _id: mainPostOwner._id, points: mainPostOwner.points + 2 });
+                userUpdateMethod.call({ _id: currentUser._id, points: currentUser.points + 0.5 });
+              }
+              // string = someone replied to post: {title}
+              // notificationDefineMethod.call({ date, message: someone replied })
             });
           }
         });
     }
+    // eslint-disable-next-line no-undef
+    window.location.reload();
   };
 
   return (
