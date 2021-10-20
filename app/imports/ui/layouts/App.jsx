@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { Meteor } from 'meteor/meteor';
 import 'semantic-ui-css/semantic.css';
@@ -54,33 +54,6 @@ const App = () => (
             </div>
         </Router>
 );
-
-// const ToastNotification = () => {
-//     const [message, setMessage] = useState('');
-//     const [type, setType] = useState('');
-//     const [forumId, setForumId] = useState('');
-//
-//     const current_date = new Date();
-//     useTracker(() => {
-//         Notifications.subscribeNotification();
-//         Notifications.find({}).observeChanges({
-//             added: (id, item) => {
-//                 setMessage(item.message);
-//                 setType(item.type);
-//                 setForumId(item.forumID);
-//                 // console.log(doc);
-//                 if (item.dateCreated > current_date) {
-//                     setShowToast(true);
-//                     console.log(item);
-//                 }
-//             },
-//         });
-//     }, []);
-//
-//     return (
-//
-//     );
-// };
 
 /**
  * ProtectedRoute (see React Router v4 sample)

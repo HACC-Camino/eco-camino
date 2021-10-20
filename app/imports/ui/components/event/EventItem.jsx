@@ -2,7 +2,6 @@ import React from 'react';
 import { Meteor } from 'meteor/meteor';
 import { Card, Container, Row, Col } from 'react-bootstrap';
 import PropTypes from 'prop-types';
-import { Users } from '../../../api/user/UserCollection';
 import EditandDeleteButtons from './EditAndDeleteButtons';
 import JoinButton from './JoinButton';
 import LeaveButton from './LeaveButton';

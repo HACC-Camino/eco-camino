@@ -6,8 +6,6 @@ import { Meteor } from 'meteor/meteor';
 import swal from 'sweetalert';
 import { forumPostDefineMethod } from '../../../api/forum/ForumPostCollection.methods';
 import { userUpdateMethod } from '../../../api/user/UserCollection.methods';
-import { Notifications } from '../../../api/notification/NotificationCollection';
-import { notificationDefineMethod } from '../../../api/notification/NotificationCollection.methods';
 
 const ReplyToPostModal = ({ mainPost, mainPostOwner, currentUser }) => {
   const [content, setContent] = useState('');

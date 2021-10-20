@@ -4,13 +4,11 @@ import { Events } from '../../api/event/EventCollection';
 import { ForumPosts } from '../../api/forum/ForumPostCollection';
 import { Users } from '../../api/user/UserCollection';
 import { UserEvents } from '../../api/user/UserEventCollection';
-import { Notifications } from '../../api/notification/NotificationCollection';
+import { Reports } from '../../api/report/ReportCollection';
 
 /* eslint-disable no-console */
 const maxFakers = {
   forumPosts: 10,
-  events: 0,
-  reports: 0,
 };
 
 const today = new Date();
@@ -73,15 +71,70 @@ if (ForumPosts.count() === 0) {
     }
   });
   console.log(`ForumPostCollection with replies: ${ForumPosts.count()}`);
+
+  if (Meteor.settings.defaultForums && Meteor.settings.defaultForumReplies) {
+    Meteor.settings.defaultForums.forEach(post => {
+      ForumPosts.define({
+        date: '10/20/2021',
+        type: 'main_post',
+        title: post.title,
+        content: post.content,
+        tags: post.tags.split(', '),
+        owner: faker.random.arrayElement(userEmails),
+      });
+    });
+
+    const mainPostsReal = ForumPosts.getForumPostsSortedByDate();
+    Meteor.settings.defaultForumReplies.forEach(postArray => {
+      const mainPost = mainPostsReal.find(post => post.title === postArray.title);
+      postArray.replies.forEach(reply => {
+        const owner = faker.random.arrayElement(userEmails);
+        ForumPosts.define({
+          date: faker.date.between(mainPost.date, today),
+          type: 'reply',
+          mainThread: mainPost.thread,
+          title: `Re: ${mainPost.title}`,
+          content: reply,
+          owner: owner,
+          mainPost: mainPost,
+        });
+        if (mainPost.owner !== owner) {
+          // get mainpost owner obj, give 2
+          const mainPostOwner = Users.getUserDetails(mainPost.owner);
+          Users.update(mainPostOwner._id, { points: mainPostOwner.points + 2 });
+          // get replier owner obj, give .5
+          const currentUser = Users.getUserDetails(reply.owner);
+          Users.update(currentUser._id, { points: currentUser.points + 0.5 });
+        }
+      });
+    });
+  }
 }
 
 if (Events.count() === 0) {
   if (Meteor.settings.defaultEvent) {
     console.log('Creating default events.');
     Meteor.settings.defaultEvent.forEach(data => {
-      Events.define(data);
-      const owner = Users.getUserDetails(data.owner);
-      Users.update(owner._id, { points: owner.points + 100 });
+      const userEmail = faker.random.arrayElement(userEmails);
+      const userObj = Users.getUserDetails(userEmail);
+      Events.define({
+        title: data.title,
+        date: faker.date.recent(),
+        startTime: data.startTime,
+        endTime: data.endTime,
+        location: data.location,
+        owner: userEmail,
+        participants: 1,
+        lat: data.lat,
+        lng: data.lng,
+        name: `${userObj.firstName} ${userObj.lastName}`,
+        email: userEmail,
+        description: data.description,
+        typeOfEvent: data.typeOfEvent,
+        status: 'approved',
+        feedback: 'none',
+      });
+      Users.update(userObj._id, { points: userObj.points + 100 });
     });
     console.log(`EventCollection: ${Events.count()}`);
   }
@@ -94,7 +147,7 @@ if (UserEvents.count() === 0) {
     const temp = [...userEmails];
     for (let iter = 0; iter < numParticipants; iter++) {
       const email = faker.random.arrayElement(temp);
-      if (event.owner !== email) {
+      if (event.owner !== email && event.status === 'approved') {
         const userEvent = {};
         userEvent.dateJoined = faker.date.between(event.date, today);
         userEvent.owner = email;
@@ -115,9 +168,20 @@ if (UserEvents.count() === 0) {
   console.log(`UserEventCollection: ${UserEvents.count()}`);
 }
 
-// notification for post owners: if someone replies
-console.log(`NotificationCollection: ${Notifications.count()}`);
-
-// notification for other people who replied:
-
-// notification for event owners, if someone join
+if (Reports.count() === 0) {
+  if (Meteor.settings.defaultReports) {
+    Meteor.settings.defaultReports.forEach(report => {
+      Reports.define({
+        title: report.title,
+        date: faker.date.recent(),
+        location: report.location,
+        owner: faker.random.arrayElement(userEmails),
+        lat: report.lat,
+        lng: report.lng,
+        description: report.description,
+        accessKey: report.accessKey,
+      });
+    });
+  }
+  console.log(`ReportsCollection: ${Reports.count()}`);
+}

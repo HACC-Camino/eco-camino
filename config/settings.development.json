@@ -5,14 +5,172 @@
   ],
 
   "defaultEvent": [
-    { "title": "Magic Island Cleanup", "date": "10/15/2021", "startTime": "10:30 pm", "endTime": "11:30 pm", "location": "Magic Island 1201 Ala Moana Blvd Honolulu", "participants": 1, "owner": "john@foo.com", "lat": 21.364907375706697, "lng": -157.8618922247979, "name": "John Foo", "email": "john@foo.com", "description": "Cleaning up Magic Island, park near the harbor side, please bring your own supplies. Thank you!", "typeOfEvent": "Cleanup",
-      "status": "approved", "feedback": "none"
+    {
+      "title": "Magic Island Cleanup",
+      "startTime": "10:30 PM",
+      "endTime": "11:30 PM",
+      "location": "Magic Island 1201 Ala Moana Blvd Honolulu",
+      "lat": 21.36490738,
+      "lng": -157.8618922,
+      "description": "Cleaning up Magic Island, park near the harbor side, please bring your own supplies. Thank you!",
+      "typeOfEvent": "Cleanup"
     },
-    { "title": "Ala Moana Cleanup", "date": "10/20/2021", "startTime": "10:30 pm", "endTime": "11:30 pm", "location": "Magic Island 1201 Ala Moana Blvd Honolulu", "participants": 1, "owner": "john@foo.com", "lat": 21.31899566027989, "lng": -157.83087087305813, "name": "John Foo", "email": "john@foo.com", "description": "Cleaning up Magic Island, park near the harbor side, please bring your own supplies. Thank you!", "typeOfEvent": "Cleanup",
-      "status": "approved", "feedback": "none"
+    {
+      "title": "Ala Moana Cleanup",
+      "startTime": "10:30 PM",
+      "endTime": "11:30 PM",
+      "location": "Magic Island 1201 Ala Moana Blvd Honolulu",
+      "lat": 21.31899566,
+      "lng": -157.8308709,
+      "description": "Cleaning up Ala Moana Beach Park, park near the harbor side, please bring your own supplies. Thank you!",
+      "typeOfEvent": "Cleanup"
     },
-    { "title": "How To Care For The Environment While Hiking", "date": "10/10/2021",  "startTime": "10:30 pm", "endTime": "11:30 pm", "location": "Virtual Over Zoom", "participants": 1, "owner": "john@foo.com", "lat": 21.364907375706697, "lng": -157.83087087305813, "name": "John Foo", "email": "john@foo.com", "description": "Learning the do's and don'ts when hiking to protect the habitats.", "typeOfEvent": "Workshop",
-      "status": "approved", "feedback": "none"
+    {
+      "title": "How To Care For The Environment While Hiking",
+      "startTime": "10:30 PM",
+      "endTime": "11:30 PM",
+      "location": "Virtual Over Zoom",
+      "lat": 21.438911,
+      "lng": -158.000061,
+      "description": "Learning the do's and don'ts when hiking to protect the habitats.",
+      "typeOfEvent": "Workshop"
+    },
+    {
+      "title": "How To Reuse Your Cosmetic Bottles",
+      "startTime": "9:30 PM",
+      "endTime": "10:30 PM",
+      "location": "Virtual Over Zoom",
+      "lat": 21.438911,
+      "lng": -158.000061,
+      "description": "Learn how to reuse bottles from cosmetic products to use in your everyday life.",
+      "typeOfEvent": "Workshop"
+    },
+    {
+      "title": "Kapi'olani Beach Park",
+      "startTime": "9:30 PM",
+      "endTime": "10:30 PM",
+      "location": "3840 Paki Ave Honolulu ",
+      "lat": 21.26603,
+      "lng": -157.81666,
+      "description": "Cleaning up Kapi'olani Park, park near the beach, please bring your own supplies. Thank you!",
+      "typeOfEvent": "Cleanup"
+    },
+    {
+      "title": "Diamond Head Beach Park",
+      "startTime": "9:30 PM",
+      "endTime": "10:30 PM",
+      "location": "3300 Diamond Head Rd Honolulu",
+      "lat": 21.25642,
+      "lng": -157.81204,
+      "description": "Cleaning up Diamond Head Beach Park where we will focus on the top of the park by the road and down to the beach.",
+      "typeOfEvent": "Cleanup"
+    },
+    {
+      "title": "How To Grow a Garden",
+      "startTime": "12:30 PM",
+      "endTime": "1:30 PM",
+      "location": "Kuaola Ranch",
+      "lat": 21.5207,
+      "lng": -157.837234,
+      "description": "Learn how to plant, grow and harvest your own food.",
+      "typeOfEvent": "Workshop"
+    },
+    {
+      "title": "All Things On Native Plants And Birds",
+      "startTime": "12:30 PM",
+      "endTime": "1:30 PM",
+      "location": "Virtual Over Zoom",
+      "lat": 21.438911,
+      "lng": -158.000061,
+      "description": "Learn about the native plants and birds around the island.",
+      "typeOfEvent": "Workshop"
+    },
+    {
+      "title": "Waimanalo Beach Clean Up",
+      "startTime": "12:30 PM",
+      "endTime": "1:30 PM",
+      "location": "Waimanalo Beach Honolulu",
+      "lat": 21.3308,
+      "lng": -157.6871,
+      "description": "Cleaning up Waimanalo Beach, please bring your own supplies. Thank you!",
+      "typeOfEvent": "Cleanup"
+    },
+    {
+      "title": "How To Reduce Your Carbon Footprint",
+      "startTime": "12:30 PM",
+      "endTime": "1:30 PM",
+      "location": "Virtual Over Zoom",
+      "lat": 21.438911,
+      "lng": -158.000061,
+      "description": "Learn how to reduce your carbon footprint.",
+      "typeOfEvent": "Workshop"
+    }
+  ],
+
+  "defaultForums" : [
+    {
+      "title": "Aloha Friday",
+      "content": "Aloha Friday everyone, I challenge you to pick up 5 pieces of trash this weekend! ",
+      "tags": "trash, aloha, greeting"
+    },
+    {
+      "title": "Newbie",
+      "content": "Aloha, I am new here. Where do I see my points? Mahalo",
+      "tags": "new, profile, points"
+    },
+    {
+      "title": "Organic Gardening Products",
+      "content": "Which organic products do you use for your garden? I want to use the healthiest products.",
+      "tags": "gardening, organic"
+    },
+    {
+      "title": "Lost Event Code",
+      "content": "I forgot the code from the clean up the other day. Can someone please send the code?",
+      "tags": "code, cleanup"
+    },
+    {
+      "title": "Carpooling to cleanup",
+      "content": "Hi, I was wondering if anyone would like to carpool to the cleanup so we can reduce our CO2 emissions?",
+      "tags": "carbon, cleanup, event, carpool"
+    }
+  ],
+  "defaultForumReplies": [{
+    "title": "Aloha Friday",
+    "replies": ["Aloha, I will pick up 5 pieces this weekend!", "Aloha, I picked up 10 pieces this weekend"]
+  }, {
+    "title" : "Newbie",
+    "replies" : ["It is on your profile.", "Your profile should show your points!", "Profile"]
+  }, {
+    "title" : "Organic Gardening Products",
+    "replies" : ["Alfalfa pellets as fertilizer", "Worm casting and greensand", "Worm casting and greensand are my favorite fertilizer"]
+  }, {
+    "title" : "Carpooling to cleanup",
+    "replies" : ["I would love to!", "I love that idea! I want to carpool.", "I would like to Carpool with the 3 of you!", "I will carpool if anyone else wants to. "]
+  }],
+  "defaultReports": [
+    {
+      "title": "Broken furniture left on the road",
+      "location": "University of Hawaiʻi at Mānoa, Campus Road, Honolulu, HI, USA",
+      "description": "There is bunch of furniture on the street abandoned by the dorms",
+      "lat": 21.296939,
+      "lng": -157.8171118,
+      "accessKey": "trash1.png"
+    },
+    {
+      "title": "Bag of trash in Ala Moana Parking lot ",
+      "location": "Ala Moana Center, Ala Moana Boulevard, Honolulu, HI, USA",
+      "description": "White trash baga abandoned in parking lot across from Spectrum",
+      "lat": 21.2910619,
+      "lng": -157.843481,
+      "accessKey": "trash2.png"
+    },
+    {
+      "title": "A dumpster of trash sitting at the trail",
+      "location": "Ka'au Crater Trail, 10th Avenue, Honolulu, HI, USA",
+      "description": "Many bags of trash left at he trail ",
+      "lat": 21.3108622,
+      "lng": -157.7818509,
+      "accessKey": "trash3.png"
     }
   ]
 }
