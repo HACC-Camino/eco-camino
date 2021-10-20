@@ -112,10 +112,11 @@ class ForumPostCollection extends BaseCollection {
   }
 
   getSubscriberEmailList(postID) {
+    const post = this.getForumPost(postID);
     const replies = this.getForumPostReplies(postID);
     const emailList = [];
     replies.forEach(reply => {
-      if (!emailList.includes(reply.owner)) {
+      if (!emailList.includes(reply.owner) && reply.owner !== post.owner) {
         emailList.push(reply.owner);
       }
     });
