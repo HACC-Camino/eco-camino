@@ -7,9 +7,6 @@ import { UserEvents } from '../../api/user/UserEventCollection';
 import { Reports } from '../../api/report/ReportCollection';
 
 /* eslint-disable no-console */
-const maxFakers = {
-  forumPosts: 10,
-};
 
 const today = new Date();
 
@@ -33,44 +30,7 @@ if (Users.count() === 0) {
 
 if (ForumPosts.count() === 0) {
   // for faker sample forums
-  if (Meteor.settings.defaultForums && Meteor.settings.defaultForumReplies) {
-    for (let iter = 0; iter < maxFakers.forumPosts; iter++) {
-      const post = {};
-      post.date = faker.date.recent();
-      post.type = 'main_post';
-      post.title = faker.lorem.sentence().replace(/\.$/, '');
-      post.content = faker.lorem.paragraph(faker.datatype.number({ min: 1, max: 10 })) || '';
-      post.tags = faker.lorem.words(faker.datatype.number({ max: 5 })).split(' ');
-      post.owner = faker.random.arrayElement(userEmails);
-      ForumPosts.define(post);
-    }
-
-    // for faker replies on forums
-    const mainPosts = ForumPosts.getForumPostsSortedByDate();
-
-    mainPosts.forEach(mainPost => {
-      const numReplies = faker.datatype.number({ max: 5 });
-      for (let iter = 0; iter < numReplies; iter++) {
-        const reply = {};
-        reply.date = faker.date.between(mainPost.date, today);
-        reply.type = 'reply';
-        reply.mainThread = mainPost._id;
-        reply.title = `Re: ${mainPost.title}`;
-        reply.content = faker.lorem.paragraph(faker.datatype.number({ min: 1, max: 5 })) || '';
-        reply.owner = faker.random.arrayElement(userEmails);
-        if (mainPost.owner !== reply.owner) {
-          // get mainpost owner obj, give 2
-          const mainPostOwner = Users.getUserDetails(mainPost.owner);
-          Users.update(mainPostOwner._id, { points: mainPostOwner.points + 2 });
-          // get replier owner obj, give .5
-          const currentUser = Users.getUserDetails(reply.owner);
-          Users.update(currentUser._id, { points: currentUser.points + 0.5 });
-        }
-        reply.mainPost = mainPost;
-        ForumPosts.define(reply);
-      }
-    });
-
+  if (Meteor.settings.defaultForums) {
     Meteor.settings.defaultForums.forEach(post => {
       ForumPosts.define({
         date: '10/20/2021',
@@ -82,31 +42,34 @@ if (ForumPosts.count() === 0) {
       });
     });
 
-    const mainPostsReal = ForumPosts.getForumPostsSortedByDate();
-    Meteor.settings.defaultForumReplies.forEach(postArray => {
-      const mainPost = mainPostsReal.find(post => post.title === postArray.title);
-      postArray.replies.forEach(reply => {
-        const owner = faker.random.arrayElement(userEmails);
-        ForumPosts.define({
-          date: faker.date.between(mainPost.date, today),
-          type: 'reply',
-          mainThread: mainPost.thread,
-          title: `Re: ${mainPost.title}`,
-          content: reply,
-          owner: owner,
-          mainPost: mainPost,
+    if (Meteor.settings.defaultForumReplies) {
+      const mainPostsReal = ForumPosts.getForumPostsSortedByDate();
+      Meteor.settings.defaultForumReplies.forEach(postArray => {
+        const mainPost = mainPostsReal.find(post => post.title === postArray.title);
+        postArray.replies.forEach(reply => {
+          const owner = faker.random.arrayElement(userEmails);
+          ForumPosts.define({
+            date: faker.date.between(mainPost.date, today),
+            type: 'reply',
+            mainThread: mainPost.thread,
+            title: `Re: ${mainPost.title}`,
+            content: reply,
+            owner: owner,
+            mainPost: mainPost,
+          });
+          if (mainPost.owner !== owner) {
+            // get mainpost owner obj, give 2
+            const mainPostOwner = Users.getUserDetails(mainPost.owner);
+            Users.update(mainPostOwner._id, { points: mainPostOwner.points + 2 });
+            // get replier owner obj, give .5
+            const currentUser = Users.getUserDetails(reply.owner);
+            Users.update(currentUser._id, { points: currentUser.points + 0.5 });
+          }
         });
-        if (mainPost.owner !== owner) {
-          // get mainpost owner obj, give 2
-          const mainPostOwner = Users.getUserDetails(mainPost.owner);
-          Users.update(mainPostOwner._id, { points: mainPostOwner.points + 2 });
-          // get replier owner obj, give .5
-          const currentUser = Users.getUserDetails(reply.owner);
-          Users.update(currentUser._id, { points: currentUser.points + 0.5 });
-        }
       });
-    });
+    }
   }
+  console.log(`ReportsCollection: ${ForumPosts.count()}`);
 }
 
 if (Events.count() === 0) {
