@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Offcanvas, ToastContainer } from 'react-bootstrap';
+import { Offcanvas } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import { BsFillBellFill } from 'react-icons/bs';
 import { withTracker } from 'meteor/react-meteor-data';

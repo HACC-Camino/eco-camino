@@ -6,7 +6,7 @@ import { useTracker } from 'meteor/react-meteor-data';
 import { Link, useHistory } from 'react-router-dom';
 import { Notifications } from '../../api/notification/NotificationCollection';
 
-const seconds = 7;
+const seconds = 10;
 const secToMs = 1000;
 
 const ToastNotification = ({ page }) => {
@@ -14,8 +14,6 @@ const ToastNotification = ({ page }) => {
   const [message, setMessage] = useState('');
   const [type, setType] = useState('');
   const [forumId, setForumId] = useState('');
-
-  const handleHide = () => setShowToast(false);
 
     const current_date = new Date();
     const ready = useTracker(() => {
@@ -29,7 +27,6 @@ const ToastNotification = ({ page }) => {
                 // console.log(doc);
                 if (item.dateCreated > current_date && item.owner === user) {
                     setShowToast(true);
-                    console.log(item);
                     return true;
                 }
                 return false;
@@ -43,10 +40,12 @@ const ToastNotification = ({ page }) => {
         const pageLink = `#/forum/post/${forumId}`;
         history.push(pageLink);
     };
+    const handleHide = () => {
+        setShowToast(false);
+    };
     const getContent = () => {
         if (page === 'app') {
             if (type === 'event') {
-                console.log('event here');
                 // this will render if the type is equal to event and we are on the app page
                 return (
                     <Toast show={showToast} onClose={handleHide} delay={seconds * secToMs} autohide>
@@ -60,6 +59,7 @@ const ToastNotification = ({ page }) => {
                             <small className="text-muted">{new Date().toLocaleTimeString()}</small>
                         </Toast.Header>
                         <Toast.Body>{message}</Toast.Body>
+                        <Link to={'/events'} replace>Click here to go to Events.</Link>
                     </Toast>
                 );
             }
