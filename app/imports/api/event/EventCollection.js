@@ -4,6 +4,7 @@ import { check } from 'meteor/check';
 import { _ } from 'meteor/underscore';
 import BaseCollection from '../base/BaseCollection';
 import { Notifications } from '../notification/NotificationCollection';
+import { UserEvents } from '../user/UserEventCollection';
 
 export const eventPublications = {
   event: 'Event',
@@ -129,7 +130,7 @@ class EventCollection extends BaseCollection {
     if (_.isNumber(lng)) {
       updateData.lng = lng;
     }
-    if (eventOwner) {
+    if (eventOwner && eventOwner === owner) {
       const message = `Your event, ${title}, has been updated!`;
       Notifications.define({
         dateCreated: new Date(),
@@ -139,6 +140,16 @@ class EventCollection extends BaseCollection {
         owner: eventOwner,
       });
     }
+    UserEvents.getParticipants(docID).forEach(user => {
+      const message = 'An event you\'re participating in has been updated!';
+      Notifications.define({
+        dateCreated: new Date(),
+        message: message,
+        collectionType: 'event',
+        seen: false,
+        owner: user,
+      });
+    });
     this._collection.update(docID, { $set: updateData });
   }
 

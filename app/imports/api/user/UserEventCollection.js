@@ -83,6 +83,12 @@ class UserEventCollection extends BaseCollection {
     const userEventID = userEvents.map(event => event.eventID);
     return EventCollection.filter(event => userEventID.includes(event._id));
   }
+
+  getParticipants(id) {
+    const userEvents = this.getAllUserEvent();
+    const events = userEvents.filter(event => event._id === id);
+    return events.map(event => event.owner);
+  }
 }
 
 export const UserEvents = new UserEventCollection();

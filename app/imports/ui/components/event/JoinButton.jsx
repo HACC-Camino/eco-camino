@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import swal from 'sweetalert';
 import { userEventDefineMethod } from '../../../api/user/UserEventCollection.methods';
 import { eventUpdateMethod } from '../../../api/event/EventCollection.methods';
+import { notificationDefineMethod } from '../../../api/notification/NotificationCollection.methods';
 
 /** Renders an Edit and Delete Button */
 const JoinButton = ({ event, username, check }) => {
@@ -23,6 +24,14 @@ const JoinButton = ({ event, username, check }) => {
         swal('Error', error.message, 'error');
       } else {
         swal('Success', 'Event Added Successfully', 'success');
+        const message = 'A new participant has joined your event!';
+        notificationDefineMethod.call({
+          dateCreated: dateJoined,
+          message: message,
+          collectionType: 'event',
+          seen: false,
+          owner: event.owner,
+        });
       }
     });
   };
