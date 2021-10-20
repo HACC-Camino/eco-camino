@@ -46,7 +46,7 @@ const App = () => (
         <ProtectedRoute path="/signout" component={Signout}/>
         <Route component={NotFound}/>
       </Switch>
-      {/* <ToastNotification show={true} message={'this kinda works'}/> */}
+       {/*<ToastNotification show={true} message={'this kinda works'} page={'app'}/>*/}
       <Footer/>
     </div>
   </Router>);

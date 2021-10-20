@@ -1,37 +1,40 @@
 import React, { useState } from 'react';
-import { Toast, ToastContainer } from 'react-bootstrap';
+import { Toast } from 'react-bootstrap';
 import PropTypes from 'prop-types';
+import { Notifications } from '../../api/notification/NotificationCollection';
 
 const seconds = 7;
 const secToMs = 1000;
 
 const ToastNotification = ({ page }) => {
   const [showToast, setShowToast] = useState(false);
+  const [message, setMessage] = useState('');
+  const [type, setType] = useState('');
+  const [forumId, setForumId] = useState('');
+  // const [createdDate, setCreatedDate] = useState(new Date());
 
   const handleHide = () => setShowToast(false);
 
   Notifications.subscribe();
-  let message = '';
-  let type = '';
-  let seen = true;
-  let forumId = '';
-  const current_date = new Date.getTime();
+  const current_date = new Date();
   const cursor = Notifications.find({});
   cursor.observeChanges({
     added(id, doc) {
-      message = doc.message;
-      type = doc.type;
-      seen = doc.seen;
-      forumId = doc.forumID;
-      if (doc.dateCreated.getTime() > current_date) {
+      setMessage(doc.message);
+      setType(doc.type);
+      setForumId(doc.forumID);
+      if (doc.dateCreated > current_date) {
         setShowToast(true);
       }
     },
   });
 
+  const hrefForForum = `/forum/post/${forumId}`;
+
   if (page === 'app') {
-    return (
-        <ToastContainer position="top-end" className="p-3">
+    if (type === 'event') {
+      // this will render if the type is equal to event and we are on the app page
+      return (
           <Toast show={showToast} onClose={handleHide} delay={seconds * secToMs} autohide>
             <Toast.Header>
               <img src={'images/camino_logo.png'}
@@ -39,31 +42,68 @@ const ToastNotification = ({ page }) => {
                    alt=""
                    width="30"
                    height="30"/>
-              <strong className="me-auto">EcoCamino</strong>
+              <strong className="me-auto">EcoCamino: Event</strong>
               <small className="text-muted">{new Date().toLocaleTimeString()}</small>
             </Toast.Header>
             <Toast.Body>{message}</Toast.Body>
           </Toast>
-        </ToastContainer>
-    );
+      );
+    }
+    if (type === 'forum') {
+      // this will render if the type is equal to forum and we are on the app page
+      return (
+          <Toast show={showToast} onClose={handleHide} delay={seconds * secToMs} autohide>
+            <Toast.Header>
+              <img src={'images/camino_logo.png'}
+                   className="rounded me-2"
+                   alt=""
+                   width="30"
+                   height="30"/>
+              <strong className="me-auto">EcoCamino: Forum</strong>
+              <small className="text-muted">{new Date().toLocaleTimeString()}</small>
+            </Toast.Header>
+            <Toast.Body>
+                <h6>{message}</h6>
+                <a href={hrefForForum}>Link to Forum</a>
+            </Toast.Body>
+          </Toast>
+      );
+    }
   }
+
     // this will be returned if the page is not the app (this will be the offcanvas)
-    return (
-        <ToastContainer className="p-3">
+  if (page === 'offcanvas') {
+    if (type === 'event') {
+      // this will render if the type is equal to event and we are on the offcanvas
+      return (
           <Toast show={showToast} onClose={handleHide} delay={seconds * secToMs} autohide>
             <Toast.Header>
-              <img src={'images/camino_logo.png'}
-                   className="rounded me-2"
-                   alt=""
-                   width="30"
-                   height="30"/>
-              <strong className="me-auto">EcoCamino</strong>
+              <strong className="me-auto">Event</strong>
               <small className="text-muted">{new Date().toLocaleTimeString()}</small>
             </Toast.Header>
             <Toast.Body>{message}</Toast.Body>
           </Toast>
-        </ToastContainer>
-    );
+      );
+    }
+    if (type === 'forum') {
+      // this will render if the type is equal to forum and we are on the offcanvas
+      return (
+          <Toast show={showToast} onClose={handleHide} delay={seconds * secToMs} autohide>
+            <Toast.Header>
+              <strong className="me-auto">Forum</strong>
+              <small className="text-muted">{new Date().toLocaleTimeString()}</small>
+            </Toast.Header>
+            <Toast.Body>
+                <h6>{message}</h6>
+                <a href={hrefForForum}>Link to Forum</a>
+            </Toast.Body>
+          </Toast>
+      );
+    }
+  }
+
+  // if its none of the cases above return null.
+  return null;
 };
 
 ToastNotification.propTypes = {
