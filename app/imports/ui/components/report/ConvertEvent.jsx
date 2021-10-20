@@ -13,7 +13,7 @@ const ConvertEvent = ({ report }) => {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  const [finalDate, setFinalDate] = useState(new Date());
+  const [finalDate, setFinalDate] = useState(new Date(moment().locale('en').add(2, 'd').format('MMM DD, YYYY HH:MM')));
   const [finalStartTime, setFinalStartTime] = useState('');
   const [finalEndTime, setFinalEndTime] = useState('');
   const [finalTitle, setFinalTitle] = useState('');
@@ -71,7 +71,7 @@ const ConvertEvent = ({ report }) => {
               id='datePicker'
               name='Date of Event'
               selected={finalDate}
-              minDate={moment().toDate()}
+              minDate={new Date(moment().locale('en').add(2, 'd').format('MMM DD, YYYY HH:MM'))}
               onChange={(date) => setFinalDate(date)}
               /></Row>
             <Row>

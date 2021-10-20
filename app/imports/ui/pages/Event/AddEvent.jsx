@@ -73,7 +73,7 @@ const AddEvent = () => {
   });
   // Form Hooks
   const [finalType, setFinalType] = useState(() => '');
-  const [finalDate, setFinalDate] = useState(new Date());
+  const [finalDate, setFinalDate] = useState(new Date(moment().locale('en').add(2, 'd').format('MMM DD, YYYY HH:MM')));
   const [finalStartTime, setFinalStartTime] = useState('');
   const [finalEndTime, setFinalEndTime] = useState('');
   const [finalTitle, setFinalTitle] = useState(() => '');
@@ -160,7 +160,7 @@ const AddEvent = () => {
             <DatePicker
           name='Date of Event'
           id='datePicker'
-          minDate={moment().toDate()}
+          minDate={new Date(moment().locale('en').add(2, 'd').format('MMM DD, YYYY HH:MM'))}
           selected={finalDate}
           onChange={(date) => setFinalDate(date)}
           />

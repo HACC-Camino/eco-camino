@@ -198,8 +198,6 @@ export default withTracker(() => {
   const username = Meteor.user()?.username;
   const ready1 = Users.subscribeUser().ready();
   const currentUser = Users.getUserDetails(username);
-  console.log(currentUser);
-  console.log(username);
   return {
     currentUser,
     ready1,
