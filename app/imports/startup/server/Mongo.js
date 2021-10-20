@@ -33,46 +33,44 @@ if (Users.count() === 0) {
 
 if (ForumPosts.count() === 0) {
   // for faker sample forums
-  for (let iter = 0; iter < maxFakers.forumPosts; iter++) {
-    const post = {};
-    post.date = faker.date.recent();
-    post.type = 'main_post';
-    post.title = faker.lorem.sentence().replace(/\.$/, '');
-    post.content = faker.lorem.paragraph(faker.datatype.number({ min: 1, max: 10 })) || '';
-    post.tags = faker.lorem.words(faker.datatype.number({ max: 5 })).split(' ');
-    post.owner = faker.random.arrayElement(userEmails);
-    ForumPosts.define(post);
-  }
-
-  // for faker replies on forums
-  const mainPosts = ForumPosts.getForumPostsSortedByDate();
-  console.log(`ForumPostCollection: ${ForumPosts.count()}`);
-
-  mainPosts.forEach(mainPost => {
-    const numReplies = faker.datatype.number({ max: 5 });
-    for (let iter = 0; iter < numReplies; iter++) {
-      const reply = {};
-      reply.date = faker.date.between(mainPost.date, today);
-      reply.type = 'reply';
-      reply.mainThread = mainPost._id;
-      reply.title = `Re: ${mainPost.title}`;
-      reply.content = faker.lorem.paragraph(faker.datatype.number({ min: 1, max: 5 })) || '';
-      reply.owner = faker.random.arrayElement(userEmails);
-      if (mainPost.owner !== reply.owner) {
-        // get mainpost owner obj, give 2
-        const mainPostOwner = Users.getUserDetails(mainPost.owner);
-        Users.update(mainPostOwner._id, { points: mainPostOwner.points + 2 });
-        // get replier owner obj, give .5
-        const currentUser = Users.getUserDetails(reply.owner);
-        Users.update(currentUser._id, { points: currentUser.points + 0.5 });
-      }
-      reply.mainPost = mainPost;
-      ForumPosts.define(reply);
-    }
-  });
-  console.log(`ForumPostCollection with replies: ${ForumPosts.count()}`);
-
   if (Meteor.settings.defaultForums && Meteor.settings.defaultForumReplies) {
+    for (let iter = 0; iter < maxFakers.forumPosts; iter++) {
+      const post = {};
+      post.date = faker.date.recent();
+      post.type = 'main_post';
+      post.title = faker.lorem.sentence().replace(/\.$/, '');
+      post.content = faker.lorem.paragraph(faker.datatype.number({ min: 1, max: 10 })) || '';
+      post.tags = faker.lorem.words(faker.datatype.number({ max: 5 })).split(' ');
+      post.owner = faker.random.arrayElement(userEmails);
+      ForumPosts.define(post);
+    }
+
+    // for faker replies on forums
+    const mainPosts = ForumPosts.getForumPostsSortedByDate();
+
+    mainPosts.forEach(mainPost => {
+      const numReplies = faker.datatype.number({ max: 5 });
+      for (let iter = 0; iter < numReplies; iter++) {
+        const reply = {};
+        reply.date = faker.date.between(mainPost.date, today);
+        reply.type = 'reply';
+        reply.mainThread = mainPost._id;
+        reply.title = `Re: ${mainPost.title}`;
+        reply.content = faker.lorem.paragraph(faker.datatype.number({ min: 1, max: 5 })) || '';
+        reply.owner = faker.random.arrayElement(userEmails);
+        if (mainPost.owner !== reply.owner) {
+          // get mainpost owner obj, give 2
+          const mainPostOwner = Users.getUserDetails(mainPost.owner);
+          Users.update(mainPostOwner._id, { points: mainPostOwner.points + 2 });
+          // get replier owner obj, give .5
+          const currentUser = Users.getUserDetails(reply.owner);
+          Users.update(currentUser._id, { points: currentUser.points + 0.5 });
+        }
+        reply.mainPost = mainPost;
+        ForumPosts.define(reply);
+      }
+    });
+
     Meteor.settings.defaultForums.forEach(post => {
       ForumPosts.define({
         date: '10/20/2021',
@@ -131,11 +129,13 @@ if (Events.count() === 0) {
         email: userEmail,
         description: data.description,
         typeOfEvent: data.typeOfEvent,
-        status: 'approved',
+        status: 'pending',
         feedback: 'none',
       });
       Users.update(userObj._id, { points: userObj.points + 100 });
     });
+    const events = Events.getEvenList();
+    events.map(event => Events.update(event._id, { status: 'approved', eventOwner: event.owner }));
     console.log(`EventCollection: ${Events.count()}`);
   }
 }

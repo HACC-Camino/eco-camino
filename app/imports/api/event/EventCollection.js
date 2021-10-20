@@ -3,6 +3,7 @@ import SimpleSchema from 'simpl-schema';
 import { check } from 'meteor/check';
 import { _ } from 'meteor/underscore';
 import BaseCollection from '../base/BaseCollection';
+import { Notifications } from '../notification/NotificationCollection';
 
 export const eventPublications = {
   event: 'Event',
@@ -59,6 +60,14 @@ class EventCollection extends BaseCollection {
       endTime,
       participants,
     });
+    const message = 'An event has been created and is waiting for review.';
+    Notifications.define({
+      dateCreated: new Date(),
+      message: message,
+      collectionType: 'event',
+      seen: false,
+      owner: 'admin@foo',
+    });
     return docID;
   }
 
@@ -70,7 +79,7 @@ class EventCollection extends BaseCollection {
    * @param condition the new condition (optional).
    */
   update(docID, { title, date, name, location, owner, lat, lng, email,
-    description, startTime, endTime, typeOfEvent, reportLink, participants, status, feedback }) {
+    description, startTime, endTime, typeOfEvent, reportLink, participants, status, feedback, eventOwner }) {
     const updateData = {};
     if (title) {
       updateData.title = title;
@@ -119,6 +128,16 @@ class EventCollection extends BaseCollection {
     }
     if (_.isNumber(lng)) {
       updateData.lng = lng;
+    }
+    if (eventOwner) {
+      const message = `Your event, ${title}, has been updated!`;
+      Notifications.define({
+        dateCreated: new Date(),
+        message: message,
+        collectionType: 'event',
+        seen: false,
+        owner: eventOwner,
+      });
     }
     this._collection.update(docID, { $set: updateData });
   }

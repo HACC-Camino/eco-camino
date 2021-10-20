@@ -24,12 +24,15 @@ const AdminApprovalButton = ({ event }) => {
       const updateData = event;
       updateData.feedback = feedback;
       updateData.status = status.value;
-      if (status.value === 'approved') {
-        userUpdateMethod.call({ _id: owner._id, points: owner.points + 200 });
-      }
+      updateData.eventOwner = event.owner;
       eventUpdateMethod.call(updateData, (error) => (error ?
       swal('Error', error.message, 'error') :
-      swal('Success', 'Event review successfully', 'success').then(handleClose)));
+      swal('Success', 'Event review successfully', 'success').then(() => {
+        handleClose();
+        if (status.value === 'approved') {
+          userUpdateMethod.call({ _id: owner._id, points: owner.points + 200 });
+        }
+      })));
     };
 
   return (

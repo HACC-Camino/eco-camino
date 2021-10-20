@@ -12,7 +12,7 @@ export const forumPostPublications = {
 
 class ForumPostCollection extends BaseCollection {
   constructor() {
-    super('ForumPost', new SimpleSchema({
+    super('ForumPosts', new SimpleSchema({
       date: Date,
       type: {
         type: String,
