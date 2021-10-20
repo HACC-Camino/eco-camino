@@ -7,9 +7,9 @@ class Footer extends React.Component {
   render() {
     const popover = (
         <Popover id="popover-basic">
-          <Popover.Content>
+          <Popover.Body>
             Hey there, I am under construction!
-          </Popover.Content>
+          </Popover.Body>
         </Popover>
     );
     return (

@@ -12,7 +12,7 @@ class NavBar1 extends React.Component {
     return (
         <Navbar bg="primary" variant="dark" expand="lg" className='px-3'>
           <Navbar.Brand href="#"> <img alt=""
-                                       src="/images/camino_logo.png"
+                                       src={'/images/camino_logo.png'}
                                        width="30"
                                        height="30"
                                        className="d-inline-block align-top"/>{''} EcoCamino
