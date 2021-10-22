@@ -13,40 +13,40 @@ ECOCamino is a web application designed to help users organize events such as cl
 ![Sign In](/doc/haccscreenshots/login.png)
 
 ### Profile
-![Profile](../doc/haccscreenshots/profile.png)
+![Profile](/doc/haccscreenshots/profile.png)
 
 ### Points
-![Points](../doc/haccscreenshots/points.png)
+![Points](/doc/haccscreenshots/points.png)
 
 ### Events 
-![Events](../doc/haccscreenshots/events.png)
+![Events](/doc/haccscreenshots/events.png)
 
 ### Add Event
-![Add Event](../doc/haccscreenshots/addevent.png)
+![Add Event](/doc/haccscreenshots/addevent.png)
 
 ### Event On Map 
-![Event On Map](../doc/haccscreenshots/events.png)
+![Event On Map](/doc/haccscreenshots/events.png)
 
 ### Report Trash
-![Report Trash](../doc/haccscreenshots/report-trash.png)
+![Report Trash](/doc/haccscreenshots/report-trash.png)
 
 ### Forums 
-![Forums](../doc/haccscreenshots/all-forums.png)
+![Forums](/doc/haccscreenshots/all-forums.png)
 
 ### Create Forum Post
-![Create Forum Post](../doc/haccscreenshots/create-forum.png)
+![Create Forum Post](/doc/haccscreenshots/create-forum.png)
 
 ### Notfications
-![Notfications](../doc/haccscreenshots/notifications.png)
+![Notfications](/doc/haccscreenshots/notifications.png)
 
 ### Admin 
-![Admin](../doc/haccscreenshots/listuser-admin.png)
+![Admin](/doc/haccscreenshots/listuser-admin.png)
 
 ### Event Approval
-![Event Approval](../doc/haccscreenshots/eventapproval.png)
+![Event Approval](/doc/haccscreenshots/eventapproval.png)
 
 ### Resources
-![Resources](../doc/haccscreenshots/resources.png)
+![Resources](/doc/haccscreenshots/resources.png)
 
 ## Our Team
 - [Anna Campainha](https://github.com/annacampainha)
