@@ -19,7 +19,7 @@ ECOCamino is a web application designed to help users organize events such as cl
 ![Points](/doc/haccscreenshots/points.png)
 
 ### Events 
-![Events](/doc/haccscreenshots/events.png)
+![Events](/doc/haccscreenshots/all-events.png)
 
 ### Add Event
 ![Add Event](/doc/haccscreenshots/addevent.png)
