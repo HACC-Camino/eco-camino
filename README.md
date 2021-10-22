@@ -4,13 +4,13 @@ Deployed Site: [ECOCamino](https://eco-camino.meteorapp.com/#/)
 ECOCamino is a web application designed to help users organize events such as cleanups and workshops, report trash or cleanup, as well as promoting other non-profit organizations around the area. 
 
 ### Landing Page
-![Landing Page](../doc/haccscreenshots/landing.png)
+![Landing Page](/doc/haccscreenshots/landing.png)
 
 ### Sign Up
-![Sign Up](../doc/haccscreenshots/signup.png)
+![Sign Up](/doc/haccscreenshots/signup.png)
 
 ### Sign In
-![Sign In](../doc/haccscreenshots/login.png)
+![Sign In](/doc/haccscreenshots/login.png)
 
 ### Profile
 ![Profile](../doc/haccscreenshots/profile.png)
