@@ -136,7 +136,7 @@ npm install --save-dev @types/googlemaps
 [Combobox](https://reach.tech/combobox/)
 ```npm install @reach/combobox```
 
-[Map Template](https://snazzymaps.com/style/8097/wy)
+The template of our map [Map Template](https://snazzymaps.com/style/8097/wy)
 
 ### Running The System
 Once everything is installed, to run the app use the following command in the app directory:
@@ -148,11 +148,11 @@ If all goes well then the template application will appear at [http://localhost:
 ### Deployment 
 EcoCamino can be deployed to [Galaxy](https://galaxy.meteor.com/)
 To successfully deploy to Galaxy, invoke the following caommand in the /app/ directory:
-# Mac/Linux 
+#### Mac/Linux 
 ```
 $DEPLOY_HOSTNAME=galaxy.meteor.com meteor deploy eco-camino.meteorapp.com --settings ../config/settings.production.json --free
 ```
-# Windows
+#### Windows
 ```
 $ SET DEPLOY_HOSTNAME=eco-camino.meteor.com
 $ meteor deploy eco-camino.meteorapp.com --settings C:\path\to\config\settings.production.json --free
