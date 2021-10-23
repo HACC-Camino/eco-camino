@@ -152,7 +152,7 @@ If all goes well then the template application will appear at [http://localhost:
 UI Bootstrap Template [Bootswatch: Minty](https://bootswatch.com/)
 
 ## Background of EcoCamino
-EcoCamino was developed for the [2021 Meteor Hackathon](https://impact.meteor.com/hackathon). It was developed in five days by the team members listed below. The team consists of University of Hawai'i students majoring in Computer Science. The team is students of Dr. Johnson's ICS 491 class. It won first prize out of all the teams who competed.
+EcoCamino was developed for the [2021 Meteor Hackathon](https://impact.meteor.com/hackathon). It was developed in five days by the team members listed below. The team consists of University of Hawai'i students majoring in Computer Science. The team is composed of students from Dr. Johnson's ICS 491 class. It won first prize out of all the teams who competed.
 Please find our personal contact in the links of **Our Team** for any further questions. 
 
 ## Our Team
