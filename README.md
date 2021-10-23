@@ -100,7 +100,11 @@ Install the latest version of [Bootstrap](https://react-bootstrap.github.io/gett
 ```
 meteor npm install react-bootstrap bootstrap 
 ```
-
+#### AWS 
+AWS [AWS](https://www.npmjs.com/package/aws-sdk)
+```
+npm install aws-sdk
+```
 [React Icons](https://www.npmjs.com/package/react-icons)
 ```
 meteor npm install --save react-icons
@@ -117,16 +121,10 @@ meteor npm install --save react-smart-data-table
 ```
 yarn add react-select
 ```
-[Generate Fake Data](https://faker.readthedocs.io/en/master/)
-```
-meteor npm install --save faker
-```
+[Generate Fake Data](https://www.npmjs.com/package/faker/)
 
 # Google Maps
 [React Google Maps/API](https://www.npmjs.com/package/@react-google-maps/api)
-```
-npm i -S @react-google-maps/api
-```
 
 [Google Maps Places API](https://www.npmjs.com/package/use-places-autocomplete)
 ```
