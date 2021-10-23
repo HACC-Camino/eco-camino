@@ -100,8 +100,8 @@ Install the latest version of [Bootstrap](https://react-bootstrap.github.io/gett
 ```
 meteor npm install react-bootstrap bootstrap 
 ```
-#### AWS 
-AWS [AWS](https://www.npmjs.com/package/aws-sdk)
+#### Amazon Web Services
+[AWS](https://www.npmjs.com/package/aws-sdk)
 ```
 npm install aws-sdk
 ```
