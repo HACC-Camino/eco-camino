@@ -73,7 +73,7 @@ To create a forum, users can click on the tab that will redirect them to fill ou
 
 ![Create Forum Post](/doc/haccscreenshots/create-forum.png)
 
-### Notfications
+### Notifications
 Notifcations appears in real time when a member interacts with another members report, event or forum. The notifications from being online and offline are viewable in the top right when the user clicks on the bell.
 
 ![Notfications](/doc/haccscreenshots/notifications.png)
