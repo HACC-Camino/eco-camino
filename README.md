@@ -123,7 +123,7 @@ yarn add react-select
 ```
 [Generate Fake Data](https://www.npmjs.com/package/faker/)
 
-# Google Maps
+#### Google Maps
 [React Google Maps/API](https://www.npmjs.com/package/@react-google-maps/api)
 
 [Google Maps Places API](https://www.npmjs.com/package/use-places-autocomplete)
