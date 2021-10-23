@@ -5,6 +5,8 @@ Deployed Site: [ECOCamino](https://eco-camino.meteorapp.com/#/)
 ## Overview 
 ECOCamino is a web application designed to help registered users organize events such as cleanups and workshops, report trash or needed assistance, as well as promoting other non-profit organizations around the area. Our goal is to become a one way stop for people who want to contribute, but not know where to start. ECOCamino is designed to help communities team together to educate and address real threats to our ecosystems and increase environmental awareness among the public! Our application's goal is to build a community, host and attend events, connect with people through forums and accumulate points for participating. Registered users will be notified through real time notifications and can view their notifications when they sign into the application.
 
+Disclaimer: On the link above, you will only be seeing the "built in 5 days" version of the web application. The team is still deciding on how we should proceed from here. We will be posting updates as soon as we can. Thank you very much.
+
 ## Preview 
 Below are some screenshots of the web application using a sample user account and data.
 
@@ -86,6 +88,8 @@ Admin can approve or deny events and add feedback.
 ### Resources
 Users can view and visit helpful links, and non profit organizations around their area. Users are able to learn more about these organizations and try to find what best fits their interests.
 
+Disclaimer: We are not affiliated with any of the organizations seen on our page. We simply added them for demo purposes. Although we are open to working with them and other environmental organizations in the future.
+
 ![Resources](/doc/haccscreenshots/resources.png)
 
 ## Installation
@@ -93,7 +97,6 @@ Download and install the latest version of [Meteor](https://www.meteor.com/devel
 Bring up a shell, cd into the app directory and run the following commands locally:
 ```
 meteor npm install
-meteor
 ```
 ### Packages and Plug-ins
 Install the latest version of [Bootstrap](https://react-bootstrap.github.io/getting-started/introduction/).
@@ -105,6 +108,18 @@ meteor npm install react-bootstrap bootstrap
 ```
 npm install aws-sdk
 ```
+
+#### Google Maps
+[React Google Maps/API](https://www.npmjs.com/package/@react-google-maps/api)
+
+[Google Maps Places API](https://www.npmjs.com/package/use-places-autocomplete)
+```
+npm install --save use-places-autocomplete
+npm install --save-dev @types/googlemaps
+``` 
+The template of our map [Map Template](https://snazzymaps.com/style/8097/wy)
+
+#### Others
 [React Icons](https://www.npmjs.com/package/react-icons)
 ```
 meteor npm install --save react-icons
@@ -123,19 +138,8 @@ yarn add react-select
 ```
 [Generate Fake Data](https://www.npmjs.com/package/faker/)
 
-#### Google Maps
-[React Google Maps/API](https://www.npmjs.com/package/@react-google-maps/api)
-
-[Google Maps Places API](https://www.npmjs.com/package/use-places-autocomplete)
-```
-npm install --save use-places-autocomplete
-npm install --save-dev @types/googlemaps
-``` 
-
 [Combobox](https://reach.tech/combobox/)
 ```npm install @reach/combobox```
-
-The template of our map [Map Template](https://snazzymaps.com/style/8097/wy)
 
 ### Running The System
 Once everything is installed, to run the app use the following command in the app directory:
@@ -147,14 +151,14 @@ If all goes well then the template application will appear at [http://localhost:
 ### UI Template
 UI Bootstrap Template [Bootswatch: Minty](https://bootswatch.com/)
 
-### Background of EcoCamino
-EcoCamino was developed for the [2021 Meteor Hackathon](https://impact.meteor.com/hackathon). It was developed in five days by the team members listed below. The team consists of University of Hawai'i students majoring in Computer Science. The team is students of Dr. Johson's ICS 491 class. It won first prize out of all the teams who competed.
+## Background of EcoCamino
+EcoCamino was developed for the [2021 Meteor Hackathon](https://impact.meteor.com/hackathon). It was developed in five days by the team members listed below. The team consists of University of Hawai'i students majoring in Computer Science. The team is students of Dr. Johnson's ICS 491 class. It won first prize out of all the teams who competed.
 Please find our personal contact in the links of **Our Team** for any further questions. 
 
 ## Our Team
 - [Anna Campainha](https://annacampainha.github.io)
 - [Daphne Marie Estacio](https://dmtapia.github.io)
-- [Jerome Gallego](https://github.com/alohajerome)
+- [Jerome Gallego](https://alohajerome.github.io/)
 - [Michael Gainey](https://github.com/micgainey)
 - [Timothy Huo](https://github.com/timothyhuo1)
 
