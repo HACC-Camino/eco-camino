@@ -9,22 +9,27 @@ Below are some screenshots of the web application using a sample user account an
 
 ### Landing Page
 Upon entering the site, the user is greeted by the landing page. The landing page provides visitors a background of the app and the ability to sign in or create an account by clicking on the dropdown in the right corner.
+
 ![Landing Page](/doc/haccscreenshots/landing.png)
 
 ### Sign Up
 New users can fill out the necessary fields to create an account. The zipcode connects them to their community.
+
 ![Sign Up](/doc/haccscreenshots/signup.png)
 
 ### Sign In
 Returning users can log in via the Sign In button on the landing page.
+
 ![Sign In](/doc/haccscreenshots/login.png)
 
 ### Profile
 Upon logging in, the user is taken to their profile. On the profile page, regsitered users are able to customize their information. They can view their upcoming events, past events attended and it is where their incentive points are displayed. 
+
 ![Profile](/doc/haccscreenshots/profile.png)
 
 ### Points
 As registered users participate, they will redeem points for the following participation. To redeem points for events, members who attend the event will be given a unique code to verify through the **Verify Code** button.
+
 ![Points](/doc/haccscreenshots/points.png)
 
 ### Events 
@@ -39,42 +44,51 @@ Registered users can organize events and workshops around their community by add
   * Lists the events created by the user.
 * Joined Events
   * Lists the events the user has joined. 
+ 
 ![Events](/doc/haccscreenshots/all-events.png)
 
 ### Add Event
 Registered users can add an event by selecting *Add Event Page*. The user will provide the title, type of your event, date including start and end time, name, contact email, description, the address of the event, and marker on the google map. The events must be approved by admin before they are live. Once they are approved, the events can be joined by other users. Users can also leave events. 
+
 ![Add Event](/doc/haccscreenshots/addevent.png)
 
 ### Report Trash
 Users can report trash or assistance. Similar to adding events, users will need a title, description, location, a marker and upload an image of the trash or needed assistance. Other users can adopt the report and clean up where its needed assistance.
+
 ![Report Trash](/doc/haccscreenshots/report-trash.png)
 
 ### Events and Reports On Map 
 The location of the events and reports are marked on the map with a card displaying the information and its location.
+
 ![Event On Map](/doc/haccscreenshots/events.png)
 
 ### Forums 
 Users can communicate with other members by creating and replying through forums.
+
 ![Forums](/doc/haccscreenshots/all-forums.png)
 
 ### Create Forum Post
 To create a forum, users can click on the tab that will redirect them to fill out the Title, Content and Tags. The user can view all forums within the community and respond to them. They can also see their posts in its own tab.
+
 ![Create Forum Post](/doc/haccscreenshots/create-forum.png)
 
 ### Notfications
 Notifcations appears in real time when a member interacts with another members report, event or forum. The notifications from being online and offline are viewable in the top right when the user clicks on the bell.
+
 ![Notfications](/doc/haccscreenshots/notifications.png)
 
 ### Admin Event Approval and Denial
 Admin can approve or deny events and add feedback.
+
 ![Event Approval](/doc/haccscreenshots/eventapproval.png)
 
 ### Resources
 Users can view and visit helpful links, and non profit organizations around their area. Users are able to learn more about these organizations and try to find what best fits their interests.
+
 ![Resources](/doc/haccscreenshots/resources.png)
 
 ## Installation
-Download and install the latest version of Meteor.
+Download and install the latest version of [Meteor](https://www.meteor.com/developers/install).
 Bring up a shell, cd into the app directory and run the following commands locally:
 ```
 meteor npm install
