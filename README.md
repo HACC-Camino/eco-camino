@@ -161,7 +161,7 @@ $ meteor deploy eco-camino.meteorapp.com --settings C:\path\to\config\settings.p
 ### UI Template
 UI Bootstrap Template [Bootswatch: Minty](https://bootswatch.com/)
 
-### Background EcoCamino
+### Background of EcoCamino
 EcoCamino was developed for the [2021 Meteor Hackathon](https://impact.meteor.com/hackathon). It was developed in five days by the team members listed below. The team consists of University of Hawai'i students majoring in Computer Science. The team is students of Dr. Johson's ICS 491 class. It won first prize out of all the teams who competed.
 Please find our personal contact in the links of **Our Team** for any further questions. 
 
