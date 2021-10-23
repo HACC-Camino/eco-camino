@@ -144,19 +144,6 @@ meteor npm run start
 ```
 If all goes well then the template application will appear at [http://localhost:3000](http://localhost:3000)
 
-### Deployment 
-EcoCamino can be deployed to [Galaxy](https://galaxy.meteor.com/)
-To successfully deploy to Galaxy, invoke the following caommand in the /app/ directory:
-#### Mac/Linux 
-```
-$DEPLOY_HOSTNAME=galaxy.meteor.com meteor deploy eco-camino.meteorapp.com --settings ../config/settings.production.json --free
-```
-#### Windows
-```
-$ SET DEPLOY_HOSTNAME=eco-camino.meteor.com
-$ meteor deploy eco-camino.meteorapp.com --settings C:\path\to\config\settings.production.json --free
-```
-
 ### UI Template
 UI Bootstrap Template [Bootswatch: Minty](https://bootswatch.com/)
 
