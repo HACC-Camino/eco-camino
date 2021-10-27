@@ -1,8 +1,8 @@
 import AWS from 'aws-sdk';
 
 AWS.config.update({
-    accessKeyId: 'AKIAXQXJQCACSUOOK7NL',
-    secretAccessKey: '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',
+    accessKeyId: '',
+    secretAccessKey: '',
 });
 
 const S3_BUCKET = 'eco-camino-main';

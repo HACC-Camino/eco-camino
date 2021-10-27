@@ -8,8 +8,8 @@ const BUCKET_NAME = 'eco-camino-main';
 const REGION_NAME = 'us-west-1';
 
 AWS.config.update({
-   accessKeyId: 'AKIAXQXJQCACSUOOK7NL',
-   secretAccessKey: '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',
+   accessKeyId: '',
+   secretAccessKey: '',
 });
 
 const my_s3_bucket = new AWS.S3({
