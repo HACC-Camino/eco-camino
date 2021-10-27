@@ -68,7 +68,7 @@ const AddEvent = () => {
   };
   // Loading Google Maps
   const { isLoaded } = useLoadScript({
-    googleMapsApiKey: 'AIzaSyAH_N3x9evBavZrOJAb2RWdBquCoonshcE',
+    googleMapsApiKey: 'keyhere',
     libraries,
   });
   // Form Hooks

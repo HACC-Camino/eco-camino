@@ -72,7 +72,7 @@ const AddReport = ({ ready1, currentUser }) => {
   };
   // Loading Google Maps
   const { isLoaded, loadError } = useLoadScript({
-    googleMapsApiKey: 'AIzaSyAH_N3x9evBavZrOJAb2RWdBquCoonshcE',
+    googleMapsApiKey: 'keyhere',
     libraries,
   });
   // Google Map Hooks
