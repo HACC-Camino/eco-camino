@@ -157,7 +157,7 @@ Please find our personal contact in the links of **Our Team** for any further qu
 
 ## Our Team
 - [Anna Campainha](https://annacampainha.github.io)
-- [Daphne Marie Estacio](https://dmtapia.github.io)
+- [Daphne Marie Estacio](https://github.com/dmestacio)
 - [Jerome Gallego](https://alohajerome.github.io/)
 - [Michael Gainey](https://github.com/micgainey)
 - [Timothy Huo](https://github.com/timothyhuo1)
